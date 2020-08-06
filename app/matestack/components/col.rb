@@ -15,12 +15,13 @@ class Components::Col < Matestack::Ui::StaticComponent
       @col_classes << "#{offset}-#{options[offset]}".gsub('_', '-') if options[offset].present?
     end
 
+    @col_classes << "align-self-#{options[:align_self]}" if options[:align_self].present?
     @col_classes << "#{options[:option]}" if options[:option].present?
     @col_classes << "col" if @col_classes.blank?
   end
 
   def response 
-    div class: "#{@col_classes.join(' ')}" do
+    div id: "#{options[:id]}", class: "#{@col_classes.join(' ')}" do
       yield_components
     end
   end

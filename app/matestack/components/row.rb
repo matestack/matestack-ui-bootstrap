@@ -8,7 +8,7 @@ class Components::Row < Matestack::Ui::StaticComponent
   end
 
   def response 
-    div class: "row #{@row_classes.join(' ')}" do
+    div id: "#{options[:id]}", class: "row #{@row_classes.join(' ')}" do
       yield_components
     end
   end

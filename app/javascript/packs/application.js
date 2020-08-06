@@ -8,7 +8,13 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
-import MatestackUiCore from 'matestack-ui-core'
+import MatestackUiCore from 'matestack-ui-core';
+
+import "./stylesheets/application.scss";
+
+// document.addEventListener("turbolinks:load", () => {
+//   $('[data-toggle="tooltip"]').tooltip()
+// })
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
