@@ -27,16 +27,20 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
           paragraph text: "Second Row, Col 3"
         end
       end
+    end
+    container size: :fluid, class: "py-3 mb-3" do
       row do
-        col md: 4 do
-          card title: "Card Title",
-            header: "Card header", header_class: "h2 text-center",
-            img_path: image_url("matestack-data.png"),
-            footer: "2 days", footer_class: "text-muted",
-            slots: { title: my_card_title, actions: my_card_actions, lists: my_card_lists } do
-              paragraph text: "Some quick example text to build"
-              link class: 'btn btn-primary', text: "crazy action", path: "#"
-            end
+        3.times do
+          col md: 4 do
+            card title: "Card Title",
+              header: "Card header", header_class: "h2 text-center",
+              img_path: image_url("matestack-data.png"),
+              footer: "2 days", footer_class: "text-muted",
+              slots: { title: my_card_title, actions: my_card_actions, lists: my_card_lists } do
+                paragraph text: "Some quick example text to build"
+                link class: 'btn btn-primary', text: "crazy action", path: "#"
+              end
+          end
         end
       end
     end
