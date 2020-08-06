@@ -1,4 +1,4 @@
-class Bootstrap::Pages::Home < Matestack::Ui:Page
+class Bootstrap::Pages::Home < Matestack::Ui::Page
 
   def response
     5.times do
