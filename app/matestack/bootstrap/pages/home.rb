@@ -1,8 +1,8 @@
 class Bootstrap::Pages::Home < Matestack::Ui::Page
 
   def response
-    5.times do
-      paragraph text: 'Hello, first page!'
+    container size: "fluid", option: "bg-primary" do
+      paragraph text: "Test"
     end
   end
 end

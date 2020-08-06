@@ -1,0 +1,15 @@
+class Components::Container < Matestack::Ui::StaticComponent
+
+  def prepare
+    @container_classes = []
+
+    options[:size].present? ? @container_classes << "container-#{options[:size]}" : @container_classes << "container"
+    @container_classes << "#{options[:option]}" if options[:option].present?
+  end
+
+  def response 
+    div class: "#{@container_classes.join(' ')}" do
+      yield_components
+    end
+  end
+end
