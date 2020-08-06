@@ -4,7 +4,8 @@ module Components::Registry
 
     container: Components::Container,
     row: Components::Row,
-    col: Components::Col
+    col: Components::Col,
+    card: Components::Card
   
   )
 
