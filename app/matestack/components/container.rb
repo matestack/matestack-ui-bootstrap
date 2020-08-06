@@ -4,7 +4,7 @@ class Components::Container < Matestack::Ui::StaticComponent
     @container_classes = []
 
     options[:size].present? ? @container_classes << "container-#{options[:size]}" : @container_classes << "container"
-    @container_classes << "#{options[:option]}" if options[:option].present?
+    @container_classes << "#{options[:class]}" if options[:class].present?
   end
 
   def response 

@@ -16,7 +16,8 @@ class Components::Col < Matestack::Ui::StaticComponent
     end
 
     @col_classes << "align-self-#{options[:align_self]}" if options[:align_self].present?
-    @col_classes << "#{options[:option]}" if options[:option].present?
+    # for others option
+    @col_classes << "#{options[:class]}" if options[:class].present?
     @col_classes << "col" if @col_classes.blank?
   end
 
