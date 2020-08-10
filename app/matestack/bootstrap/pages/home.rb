@@ -31,7 +31,13 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     container size: :lg, class: "bg-dark py-4" do
       row do
         col do
-          btn text: "Custom Button", size: 2
+          btn text: "Button", size: 2, style: :outline_primary
+          btn text: "Button with Badge" do
+            badge text: "primary", color: :success, class: "text-dark"
+          end
+          link path: "https://matestack.io" do
+            btn text: "Matestack", style: :link
+          end
         end
       end
     end
@@ -51,6 +57,12 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         end
       end
     end
+  end
+
+  def badge_element
+    slot {
+      badge text: "2"
+    }
   end
 
   def my_card_title 

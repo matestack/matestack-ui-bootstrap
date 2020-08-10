@@ -6,7 +6,8 @@ module Components::Registry
     row: Components::Row,
     col: Components::Col,
     card: Components::Card,
-    btn: Components::Btn
+    btn: Components::Btn,
+    badge: Components::Badge
   )
 
 end
