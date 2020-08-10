@@ -31,12 +31,14 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     container size: :lg, class: "bg-dark py-4" do
       row do
         col do
+          
           btn text: "Button", size: 2, style: :outline_primary
           btn text: "Button with Badge" do
             badge text: "primary", color: :success, class: "text-dark"
           end
           link path: "https://matestack.io" do
-            btn text: "Matestack", style: :link
+            # btn text: "Matestack", style: :link
+            close
           end
         end
       end
