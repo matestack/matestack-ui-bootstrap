@@ -1,10 +1,11 @@
 class Components::Btn < Matestack::Ui::StaticComponent
 
   def response 
-    button id: "#{options[:id]}", text: "#{options[:text]}", disabled: @options[:disabled],
+    button id: "#{options[:id]}", disabled: @options[:disabled],
             data: button_data, attributes: button_attributes,
             class: "btn #{button_classes}" do
-      yield_components
+        plain  options[:text]
+        yield_components
     end
   end
 
