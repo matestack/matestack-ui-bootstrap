@@ -8,6 +8,7 @@ module Components::Registry
     card: Components::Card,
     btn: Components::Btn,
     close: Components::Close,
+    btn_group: Components::BtnGroup,
     badge: Components::Badge
   )
 

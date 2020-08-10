@@ -31,7 +31,25 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     container size: :lg, class: "bg-dark py-4" do
       row do
         col do
-          
+          btn_group size: 1, label: "Basic Example 2" do 
+            btn text: "Tab 4"
+            btn text: "Tab 5"
+            btn text: "Tab 6"
+          end
+
+          btn_group type: :toolbar, class: "justify-content-between my-2", label: "Toolbar" do            
+            btn_group type: :group, vertical: true, label: "Basic Example" do 
+              btn text: "Tab 1"
+              btn text: "Tab 2"
+              btn text: "Tab 3"
+            end
+            btn_group type: :group, size: 3, label: "Basic Example 2" do 
+              btn text: "Tab 4"
+              btn text: "Tab 5"
+              btn text: "Tab 6"
+            end
+          end
+
           btn text: "Button", size: 2, style: :outline_primary
           btn text: "Button with Badge" do
             badge text: "primary", color: :success, class: "text-dark"
