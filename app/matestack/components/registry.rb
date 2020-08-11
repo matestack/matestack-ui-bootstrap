@@ -12,6 +12,7 @@ module Components::Registry
     badge: Components::Badge,
     progress: Components::Progress,
     spinner: Components::Spinner,
+    pagination: Components::Pagination,
   )
 
 end

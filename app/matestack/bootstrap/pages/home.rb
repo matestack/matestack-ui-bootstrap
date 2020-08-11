@@ -1,6 +1,38 @@
 class Bootstrap::Pages::Home < Matestack::Ui::Page
 
+  def prepare
+    @page_item_2 = {
+      "<<": "#",
+      "1": "#",
+      "2": "#",
+      ">>": "#"
+    }
+    @page_item = {
+      "1": "#",
+      "2": "#",
+      "3": "#"
+    }
+  end
+
   def response
+
+    container size: :lg, class: "bg-warning py-3 my-3" do
+      row do
+        col do
+          pagination items: @page_item_2, active_item: 1, size: 2
+          pagination class: "justify-content-center" do
+            @page_item.each do |text, path|
+              li class: "page-item" do
+                link class: "page-link", path: path do
+                  plain text
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+
     container size: :xl, class: "bg-light py-5" do
 
       heading size: 2, text: "Addon Testing"
