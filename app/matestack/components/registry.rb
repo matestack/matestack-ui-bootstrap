@@ -9,7 +9,8 @@ module Components::Registry
     btn: Components::Btn,
     close: Components::Close,
     btn_group: Components::BtnGroup,
-    badge: Components::Badge
+    badge: Components::Badge,
+    progress: Components::Progress
   )
 
 end

@@ -61,6 +61,13 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         end
       end
     end
+
+    container size: :lg, class: "bg-dark py-4 my-4" do
+      row do
+        progress height: 40, value: 80, text: "50%", color: "success", striped: true, animated: true 
+      end
+    end
+
     container size: :fluid, class: "py-3 mb-3" do
       row do
         3.times do
@@ -77,6 +84,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         end
       end
     end
+
   end
 
   def badge_element

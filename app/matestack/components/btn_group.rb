@@ -27,6 +27,7 @@ class Components::BtnGroup < Matestack::Ui::StaticComponent
     attrs
   end
 
+  
   def button_sizes
     [:sm, :md, :lg]
   end
