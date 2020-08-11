@@ -67,6 +67,18 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         progress height: 40, value: 80, text: "50%", color: :success, striped: true, animated: true
         progress height: 30, slots: { custom_bar: my_progress_bars }
       end
+      row do
+        spinner color: :primary
+        col md: 6 do
+          btn style: :secondary, size: 2, class: "text-center p-4" do
+            spinner type: :grow, small: true, color: :success
+            plain "Loading..."
+          end
+          btn style: :success do
+            plain "Second"
+          end
+        end
+      end
     end
 
     container size: :fluid, class: "py-3 mb-3" do
