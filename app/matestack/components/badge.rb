@@ -8,10 +8,12 @@ class Components::Badge < Matestack::Ui::StaticComponent
 
   def badge_classes
     badge_classes = []
-    badge_classes << options[:class]
 
-    options[:color].present? ? badge_classes << "bg-#{options[:color]}" : badge_classes << "bg-primary"
+    bg_color = @options[:color].present? ? "bg-#{@options[:color]}" : "bg-primary"
+    badge_classes << bg_color
+
     badge_classes << "rounded-pill" if @options[:type] == :round
+    badge_classes << @options[:class]
     badge_classes.join(' ')
   end
 end
