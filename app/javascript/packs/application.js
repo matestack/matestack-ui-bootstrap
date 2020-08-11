@@ -12,6 +12,8 @@ import MatestackUiCore from 'matestack-ui-core';
 
 import "./stylesheets/application.scss";
 
+import '../../matestack/components/dynamic/alert'
+
 // document.addEventListener("turbolinks:load", () => {
 //   $('[data-toggle="tooltip"]').tooltip()
 // })

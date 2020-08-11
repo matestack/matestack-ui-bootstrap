@@ -1,7 +1,7 @@
 class Components::Btn < Matestack::Ui::StaticComponent
 
   def response 
-    button id: "#{options[:id]}", disabled: @options[:disabled],
+    button id: "#{@options[:id]}", disabled: @options[:disabled],
             data: button_data, attributes: button_attributes,
             class: "btn #{button_classes}" do
         plain  options[:text]

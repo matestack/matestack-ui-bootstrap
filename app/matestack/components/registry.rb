@@ -13,6 +13,8 @@ module Components::Registry
     progress: Components::Progress,
     spinner: Components::Spinner,
     pagination: Components::Pagination,
+    alert: Components::Dynamic::Alert,
+    
   )
 
 end
