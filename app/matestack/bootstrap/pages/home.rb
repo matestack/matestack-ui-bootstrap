@@ -64,7 +64,8 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
 
     container size: :lg, class: "bg-dark py-4 my-4" do
       row do
-        progress height: 40, value: 80, text: "50%", color: "success", striped: true, animated: true 
+        progress height: 40, value: 80, text: "50%", color: :success, striped: true, animated: true
+        progress height: 30, slots: { custom_bar: my_progress_bars }
       end
     end
 
@@ -85,6 +86,18 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
       end
     end
 
+  end
+
+  def my_progress_bars
+    slot {
+      div class: "progress-bar bg-success", attributes: { 'role':"progressbar", 'style':"width: 15%" } do
+        plain "15%"
+      end
+      div class: "progress-bar bg-info", attributes: { 'role':"progressbar", 'style':"width: 30%" } do
+        plain "35%"
+      end
+      div class: "progress-bar bg-warning", attributes: { 'role':"progressbar", 'style':"width: 20%" }
+    }
   end
 
   def badge_element
