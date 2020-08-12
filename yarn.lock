@@ -4289,7 +4289,7 @@ map-visit@^1.0.0:
 
 "matestack-ui-core@https://github.com/matestack/matestack-ui-core#next-release":
   version "1.0.0-rc1"
-  resolved "https://github.com/matestack/matestack-ui-core#015c434b8d0cf6b6b982a07ce5f6de6eaa9ad670"
+  resolved "https://github.com/matestack/matestack-ui-core#93651a7bef1da6d89b487ed838184f85c918854c"
   dependencies:
     axios "^0.18.1"
     link-module-alias "^1.2.0"

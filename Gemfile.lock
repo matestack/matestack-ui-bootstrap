@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/matestack/matestack-ui-core.git
-  revision: 015c434b8d0cf6b6b982a07ce5f6de6eaa9ad670
+  revision: 72f4ebe77f7aa0c5270fc4c727562ad7a1d76fae
   branch: next-release
   specs:
     matestack-ui-core (0.7.6)
@@ -95,7 +95,7 @@ GEM
       actionpack (>= 5.0)
       cells (>= 4.1.6, < 5.0.0)
     childprocess (3.0.0)
-    concurrent-ruby (1.1.6)
+    concurrent-ruby (1.1.7)
     crass (1.0.6)
     declarative-builder (0.1.0)
       declarative-option (< 0.2.0)
