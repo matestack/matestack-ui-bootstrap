@@ -1,4 +1,4 @@
-# Matestack Bootstrap Component: Button
+# Matestack Bootstrap Component: Navbar
 
 The Bootstrap `navbar` component, implemented in Ruby.
 
