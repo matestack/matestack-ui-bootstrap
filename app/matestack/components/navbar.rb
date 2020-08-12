@@ -16,7 +16,7 @@ class Components::Navbar < Matestack::Ui::StaticComponent
               link class: "navbar-brand", path: "#{path}" do plain content end
             end
           end
-          
+
           toggle_button if !@options[:toggle_pos].present? || @options[:toggle_pos] == :right
           
           div class: "collapse navbar-collapse", id: 'matestackNavbarContent' do
