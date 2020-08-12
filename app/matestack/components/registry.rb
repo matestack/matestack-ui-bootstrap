@@ -14,7 +14,7 @@ module Components::Registry
     spinner: Components::Spinner,
     pagination: Components::Pagination,
     alert: Components::Dynamic::Alert,
-    
+    navbar: Components::Navbar,
   )
 
 end

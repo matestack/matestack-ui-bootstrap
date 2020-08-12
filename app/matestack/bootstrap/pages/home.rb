@@ -12,9 +12,31 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
       "2": "#",
       "3": "#"
     }
+    @nav_items = {
+      home: {
+        type: :transition,
+        path: "/",
+        text: "Home"
+      },
+      team: {
+        type: :transition,
+        path: "#",
+        text: "Team"
+      },
+    }
   end
 
   def response
+
+    navbar list: @nav_items, color: :primary, hide_at: :lg, theme: :dark, toggle_pos: :left, list_align: :right, sticky_top: true do
+      btn text: "About"
+    end
+
+    navbar slots: { custom_items: my_navbar }, color: :secondary, hide_at: :lg, theme: :dark
+
+    # navbar list: @nav_items, color: :primary, hide_at: :lg, theme: :dark, list_class: "align-items-center", list_align: :right do
+    #   link class: "navbar-brand", path: "" do plain "Custom" end
+    # end
 
     container size: :fluid, class: "bg-warning py-3 my-3" do
 
@@ -143,6 +165,24 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
       end
     end
 
+  end
+
+  def my_navbar
+    slot {
+      button class: "navbar-toggler", attributes: { 'data-toggle': 'collapse', 'data-target': '#myNavbarContent', 'aria-controls': 'myNavbarContent', 'aria-expanded': 'false', 'aria-label': 'Toggle navigation' } do
+        span class: "navbar-toggler-icon"
+      end
+      div id: "myNavbarContent", class: "collapse navbar-collapse" do
+        ul class: "navbar-nav" do
+          li class: "nav-item" do
+            transition class: "nav-link", path: "/", text: "Home"
+          end
+          li class: "nav-item" do
+            btn text: "About"
+          end
+        end
+      end
+    }
   end
 
   def my_progress_bars
