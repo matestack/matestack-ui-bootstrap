@@ -44,9 +44,17 @@ class Components::Navbar < Matestack::Ui::StaticComponent
   protected
 
   def toggle_button
-    button class: "navbar-toggler", attributes: { 'data-toggle': 'collapse', 'data-target': '#matestackNavbarContent', 'aria-controls': 'matestackNavbarContent', 'aria-expanded': 'false', 'aria-label': 'Toggle navigation' } do
+    button class: "navbar-toggler #{toggle_classes}", attributes: { 'data-toggle': 'collapse', 'data-target': '#matestackNavbarContent', 'aria-controls': 'matestackNavbarContent', 'aria-expanded': 'false', 'aria-label': 'Toggle navigation' } do
       span class: "navbar-toggler-icon"
     end
+  end
+
+  def toggle_classes
+    classes = []
+    classes << "ml-auto" if @options[:toggle_pos] == :right
+    classes << "mr-auto" if @options[:toggle_pos] == :left
+    classes << @options[:toggle_class]
+    classes.join(' ') 
   end
 
   def navbar_classes
@@ -55,7 +63,8 @@ class Components::Navbar < Matestack::Ui::StaticComponent
     [:fixed_top, :fixed_bottom, :sticky_top].each do |pos| 
       classes << "#{pos}".gsub('_','-') if @options[pos].present? && @options[pos]
     end
-    classes << "navbar-expand-#{@options[:hide_at]}" if @options[:hide_at].present?
+    breakpoint = @options[:hide_at].present? ? @options[:hide_at] : "lg"
+    classes << "navbar-expand-#{breakpoint}"
     classes << "navbar-#{@options[:theme]}" if  @options[:theme].present?
     @options[:color].present? ? classes << "bg-#{@options[:color]}" : classes << "bg-#{@options[:theme]}"
     classes << @options[:class]
@@ -64,10 +73,8 @@ class Components::Navbar < Matestack::Ui::StaticComponent
 
   def list_classes
     classes = []
-    classes << "mr-auto" if @options[:list_align].present? && @options[:list_align] == :left
-    classes << "ml-auto" if @options[:list_align].present? && @options[:list_align] == :right
     classes << @options[:list_class]
-    classes << "align-items-center" unless @options[:list_class].present?
+    classes << "align-items-center ml-auto" unless @options[:list_class].present?
     classes.join(' ') 
   end
 

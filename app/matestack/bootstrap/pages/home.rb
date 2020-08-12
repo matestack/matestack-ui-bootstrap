@@ -27,12 +27,22 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
   end
 
   def response
-
-    navbar list: @nav_items, color: :primary, hide_at: :lg, theme: :dark, toggle_pos: :left, list_align: :right, sticky_top: true do
-      btn text: "About"
+    navbar list: {
+      home: {type: :transition, path: "#", text: "Home"},
+      link: {type: :transition, path: "#", text: "Link"},
+    }, color: :light, theme: :light, list_class: "mr-auto mb-2 mb-lg-0", brand: {"#": "Navbar"} do
+      # yield a link component 
+      btn style: :outline_success, class: "justify-content-end", text: "Main button"
     end
+    # navbar list: {
+    #   home: {type: :transition, path: "#", text: "Home"},
+    #   link: {type: :transition, path: "#", text: "Link"},
+    # }, color: :light, theme: :light, list_class: "mr-auto mb-2 mb-lg-0", brand: {"#": "Navbar"} 
+    # navbar list: @nav_items, color: :primary, theme: :dark, brand: {"/": "brand"}, toggle_pos: :right, sticky_top: true do
+    #   btn text: "About"
+    # end
 
-    navbar slots: { custom_items: my_navbar }, color: :secondary, hide_at: :lg, theme: :dark
+    # navbar slots: { custom_items: my_navbar }, color: :secondary, hide_at: :lg, theme: :dark
 
     # navbar list: @nav_items, color: :primary, hide_at: :lg, theme: :dark, list_class: "align-items-center", list_align: :right do
     #   link class: "navbar-brand", path: "" do plain "Custom" end
