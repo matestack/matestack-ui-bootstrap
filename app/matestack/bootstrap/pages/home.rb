@@ -17,13 +17,15 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
   def response
 
     container size: :fluid, class: "bg-warning py-3 my-3" do
-      div class: "alert alert-success alert-dismissible fade show" do
-        plain "This alert box could indicate a successful or positive action."
-        close dismiss: "alert"
+
+      alert text: "Alert test....", animated: true, dismissible: true
+
+      toggle show_on: "myEvent" do        
+        alert heading: "Alert Heading", text: "This is an alert", 
+                animated: true, dismissible: true
       end
-      alert heading: "Alert Heading", text: "This is an alert", attributes: { 'role': "alert", "v-show": "show == true"},
-              animated: true, dismissible: true do
-        close dismiss: "alert"
+      onclick emit: "myEvent" do
+        btn text: "Show Alert"
       end
     end
 

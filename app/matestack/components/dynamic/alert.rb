@@ -1,10 +1,25 @@
-class Components::Dynamic::Alert < Matestack::Ui::DynamicComponent
+class Components::Dynamic::Alert < Matestack::Ui::VueJsComponent
+  vue_js_component_name "matestack-ui-bootstrap-alert" 
+
+  def setup
+    @alert_id = "matestack-alert-#{SecureRandom.hex}"
+    @component_config["alert-id"] = @alert_id
+  end
+
   def response
-    div class: "alert #{alert_classes}", attributes: alert_attributes do
+    div id: @alert_id, class: "alert #{alert_classes}", attributes: { 'role': 'alert' } do
       if @options[:heading]
         heading size: heading_size, class: 'alert-heading', text: @options[:heading]
       end
-      paragraph text: @options[:text] if @options[:alert].present?
+      plain @options[:text] if @options[:text].present?
+      if @options[:dismissible]
+        button class: "close", data: { dismiss: "alert" },
+                attributes: { 'aria-label':'Close', 'type':'button', '@click': 'alertInstance.close()' } do
+          span attributes: { 'aria-hidden':'true' } do
+            plain "&times;".html_safe
+          end
+        end
+      end
       yield_components
     end
   end
@@ -14,10 +29,11 @@ class Components::Dynamic::Alert < Matestack::Ui::DynamicComponent
   def alert_classes
     classes = []
 
-    classes << "alert-#{@options[:color]}" if @options[:color].present?
+    color = @options[:color].present? ? @options[:color] : "primary"
+    classes << "alert-#{color}"
 
-    classes << "alert-dismissible" if @options[:dismissible].present? && @options[:dismissible].present? == true
-    classes << "fade show" if @options[:animated].present? && @options[:animated].present? == true
+    classes << "alert-dismissible" if @options[:dismissible].present? && @options[:dismissible]
+    classes << "fade show" if @options[:animated].present? && @options[:animated]
     classes << @options[:class]
     classes.join(' ') 
   end
