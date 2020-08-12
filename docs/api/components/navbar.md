@@ -159,7 +159,7 @@ end
 returns
 
 ```html
-<nav class="navbar navbar-dard bg-primary sticky-top">
+<nav class="navbar navbar-dark bg-primary sticky-top">
   <div class="container-fluid">
     <span class="navbar-text">
       Navbar text with an inline element
