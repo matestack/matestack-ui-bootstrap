@@ -33,7 +33,7 @@ This option allows for more customization.
 ### fixed_top, fixed_bottom, sticky_top - optional
 Expects `true`. By setting this parameter to `true` the related functionality will be activated. If not set, it will simple keep deactivated and you don't have to do anything in addition 
 
-### hide_at
+### hide_at - optional
 Expects a breakpoints `:xs, :sm, :md, :lg, :xl, :xxl`. By default it's set as :lg
 
 ### theme & color - optional
