@@ -42,20 +42,21 @@ Although for theme parameter better use :light or :dark
 **Point of attention:** If color parameter is not set, the backgroud color will be the same as theme 
 
 ### container_size - optional
-The container inside the navbar is set as :fluid by default and can be set with any bootstrap breakpoints option 
+The container inside the navbar is set as `:fluid` by default and can be set with any bootstrap breakpoints option 
 
 ### HMTL attributes - optional
 This component accepts all the canonical [HTML global attributes](https://www.w3schools.com/tags/ref_standardattributes.asp) like `id` or `class`.
 
 ## Examples
 
-### Example 1: Render options[:text] param
+### Example 1: Basic navbar with collapse functionality 
 
 ```ruby
-navbar list: {
-      home: {type: :transition, path: "#", text: "Home"},
-      link: {type: :transition, path: "#", text: "Link"},
-    }, color: :light, theme: :light, list_class: "mr-auto mb-2 mb-lg-0", brand: {"#": "Navbar"} 
+navbar color: :light, theme: :light, brand: {"#": "Navbar"},
+        list: {
+          home: {type: :transition, path: "#", text: "Home"}, 
+          link: {type: :transition, path: "#", text: "Link"},
+          }, list_class: "mr-auto mb-2 mb-lg-0"
 ```
 
 returns
@@ -84,11 +85,12 @@ returns
 ### Example 2: Yield a given block
 
 ```ruby
-navbar list: {
-  home: {type: :transition, path: "#", text: "Home"},
-  link: {type: :transition, path: "#", text: "Link"},
-}, color: :light, theme: :light, list_class: "mr-auto mb-2 mb-lg-0", brand: {"#": "Navbar"} do
-  # yield a link component 
+navbar color: :light, theme: :light, brand: {"#": "Navbar"},
+        list: {
+          home: {type: :transition, path: "#", text: "Home"}, 
+          link: {type: :transition, path: "#", text: "Link"},
+          }, list_class: "mr-auto mb-2 mb-lg-0" do
+  # yield a button component 
   btn style: :outline_success, class: "justify-content-end", text: "Main button"
 end
 ```
@@ -117,14 +119,51 @@ returns
 </nav>
 ```
 
-### Example 3: Using the options[:disabled] configuration
+### Example 3: Using slots configuration
+This configuration allows customization inside the navbar container
 
 ```ruby
+navbar slots: { custom_items: my_navbar }, color: :primary, theme: :dark
 
+def my_navbar
+  slot {
+    span class: "navbar-text", text: "Navbar text with an inline element"
+  }
+end
 ```
 
 returns
 
 ```html
+<nav class="navbar navbar-dard bg-primary">
+  <div class="container-fluid">
+    <span class="navbar-text">
+      Navbar text with an inline element
+    </span>
+  </div>
+</nav>
+```
+### Example 4: Render options[:fixed-top], options[fixed-bottom], options[sticky-top] param
+Using the same navbar as example 3 but adding sticky-top option
 
+```ruby
+navbar slots: { custom_items: my_navbar }, color: :primary, theme: :dark, stick_top: true
+
+def my_navbar
+  slot {
+    span class: "navbar-text", text: "Navbar text with an inline element"
+  }
+end
+```
+
+returns
+
+```html
+<nav class="navbar navbar-dard bg-primary sticky-top">
+  <div class="container-fluid">
+    <span class="navbar-text">
+      Navbar text with an inline element
+    </span>
+  </div>
+</nav>
 ```
