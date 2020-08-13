@@ -13,6 +13,7 @@ class Components::Btn < Matestack::Ui::StaticComponent
 
   def button_attributes
     attrs = @options[:attributes] || {}
+    attrs[:type] = @options[:type].present? ? @options[:type] : 'button' 
     attrs
   end
 
