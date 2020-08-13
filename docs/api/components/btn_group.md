@@ -1,6 +1,6 @@
-# Matestack Bootstrap Component: Btn
+# Matestack Bootstrap Component: BtnGroup
 
-The Bootstrap `button` component, implemented in Ruby.
+The Bootstrap `button group` component, implemented in Ruby.
 
 ## Parameters
 This component can handle various optional configuration params and can yield content
