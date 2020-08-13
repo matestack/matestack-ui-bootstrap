@@ -46,6 +46,8 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
 
     container size: :fluid, class: "bg-warning py-3 my-3" do
 
+      btn text: "Test Button Type", type: :submit
+
       alert text: "Alert test....", animated: true, dismissible: true
 
       toggle show_on: "myEvent" do        
@@ -128,7 +130,6 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
             badge text: "primary", color: :success, class: "text-dark"
           end
           link path: "https://matestack.io" do
-            # btn text: "Matestack", style: :link
             close
           end
         end

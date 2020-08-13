@@ -1,6 +1,6 @@
 # Matestack Bootstrap Component: Row
 
-The Bootstrap `` component, implemented in Ruby.
+The Bootstrap `row` component, implemented in Ruby.
 
 ## Parameters
 This component can handle various optional configuration params and can yield content
