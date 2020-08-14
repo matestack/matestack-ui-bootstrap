@@ -187,7 +187,6 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         end
       end
     end
-
   end
 
   def my_card_header
@@ -242,28 +241,6 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
   def badge_element
     slot {
       badge text: "2"
-    }
-  end
-
-  def my_card_title 
-    slot {
-      span text: "crazy header"
-    }
-  end
-
-  def my_card_lists
-    slot {
-      ul class: 'list-group list-group-flush' do
-        li class: "list-group-item" do plain "Item 1" end
-        li class: "list-group-item" do plain "Item 2" end
-        li class: "list-group-item" do plain "Item 3" end
-      end
-    }
-  end
-
-  def my_card_actions 
-    slot {
-      link class: 'btn btn-primary', text: "crazy action", path: "#"
     }
   end
 end
