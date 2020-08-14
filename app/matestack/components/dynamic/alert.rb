@@ -8,11 +8,12 @@ class Components::Dynamic::Alert < Matestack::Ui::VueJsComponent
 
   def response
     div id: @alert_id, class: "alert #{alert_classes}", attributes: { 'role': 'alert' } do
-      if @options[:heading]
-        heading size: heading_size, class: 'alert-heading', text: @options[:heading]
-      end
-      plain @options[:text] if @options[:text].present?
-      if @options[:dismissible]
+      
+      heading size: heading_size, class: 'alert-heading', text: @options[:heading] if @options[:heading].present?
+      
+      paragraph text: @options[:text] if @options[:text].present?
+
+      if @options[:dismissible].present? && @options[:dismissible]
         button class: "close", data: { dismiss: "alert" },
                 attributes: { 'aria-label':'Close', 'type':'button', '@click': 'alertInstance.close()' } do
           span attributes: { 'aria-hidden':'true' } do

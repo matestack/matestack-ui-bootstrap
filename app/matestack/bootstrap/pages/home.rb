@@ -27,20 +27,6 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
   end
 
   def response
-    # navbar list: {
-    #   home: {type: :transition, path: "#", text: "Home"},
-    #   link: {type: :transition, path: "#", text: "Link"},
-    # }, color: :light, theme: :light, list_class: "mr-auto mb-2 mb-lg-0", brand: {"#": "Navbar"} do
-    #   # yield a link component 
-    #   btn style: :outline_success, class: "justify-content-end", text: "Main button"
-    # end
-    # navbar list: {
-    #   home: {type: :transition, path: "#", text: "Home"},
-    #   link: {type: :transition, path: "#", text: "Link"},
-    # }, color: :light, theme: :light, list_class: "mr-auto mb-2 mb-lg-0", brand: {"#": "Navbar"} 
-    # navbar list: @nav_items, color: :primary, theme: :dark, brand: {"/": "brand"}, toggle_pos: :right, sticky_top: true do
-    #   btn text: "About"
-    # end
 
     navbar slots: { custom_items: my_navbar }, color: :primary, theme: :dark, sticky_top: true
 
@@ -48,7 +34,12 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
 
       btn text: "Test Button Type", type: :submit
 
-      alert text: "Alert test....", animated: true, dismissible: true
+      alert color: :success, heading: "Well done!", text: "Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content."
+      
+      alert color: :warning, animated: true, dismissible: true do
+        strong text: "Holy guacamole!"
+        plain "You should check in on some of those fields below."
+      end
 
       toggle show_on: "myEvent" do        
         alert heading: "Alert Heading", text: "This is an alert", 
