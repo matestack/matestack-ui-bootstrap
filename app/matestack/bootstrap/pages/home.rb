@@ -24,18 +24,25 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         text: "Team"
       },
     }
+    @carousel_items = [image_url("matestack-data.png"), image_url("matestack-data.png"), image_url("matestack-data.png")]
   end
 
   def response
 
     navbar slots: { custom_items: my_navbar }, color: :primary, theme: :dark, sticky_top: true
 
+    container size: :fluid, class: "py-4 bg-dark" do
+      col md: 8 do          
+        carousel items: @carousel_items, with_control: true, with_indicator: true
+      end
+    end
+
     container size: :fluid, class: "bg-warning py-3 my-3" do
 
       btn text: "Test Button Type", type: :submit
 
       alert color: :success, heading: "Well done!", text: "Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content."
-      
+
       alert color: :warning, animated: true, dismissible: true do
         strong text: "Holy guacamole!"
         plain "You should check in on some of those fields below."

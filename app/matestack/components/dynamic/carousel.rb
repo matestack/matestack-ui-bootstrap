@@ -12,23 +12,25 @@ class Components::Dynamic::Carousel < Matestack::Ui::VueJsComponent
   end
 
   def response
-    div id: @carousel_id, class: "#{container_classes}", data: carousel_data, attributes: carousel_attributes, do
+    div id: @carousel_id, class: "#{carousel_classes}", data: carousel_data, attributes: carousel_attributes do
 
-      if @options[:with_indicator].present? && @options[:with_indicator]
+      if @options[:with_indicator]
         ol class: "carousel-indicators" do
           @items.each_with_index do |item, index|
             li attributes: { 'data-target':"#{@carousel_id}", 'data-slide-to':"#{index}" }, class: "#{'active' if index == 0 }"
+          end
         end
       end
 
       div class: "carousel-inner" do
-        @items.each do |path|
-          div class: "carousel-item" do
+        @items.each_with_index do |path, index|
+          div class: "carousel-item #{'active' if index == 0 }" do
             img class: "d-block w-100", path: path
           end
         end
       end
-      if @options[:with_control].present? && @options[:with_control]
+
+      if @options[:with_control]
         link class: "carousel-control-prev", path: "##{@carousel_id}", attributes: { 'role':"button", 'data-slide':"prev" } do
           span class: "carousel-control-prev-icon", attributes: { 'aria-hidden':"true" }
           span class: "sr-only", text: "Previous"
@@ -45,8 +47,8 @@ class Components::Dynamic::Carousel < Matestack::Ui::VueJsComponent
   protected
 
   def carousel_attributes
-    attrs = @options[:attributes] || {}
-    attrs[:ride] = 'carousel'
+    attrs = {'data-ride':"carousel"}
+    # attrs[:] = 'carousel'
     attrs
   end
 
@@ -62,4 +64,5 @@ class Components::Dynamic::Carousel < Matestack::Ui::VueJsComponent
     classes << @options[:class]
     classes.join(' ')
   end
+
 end
