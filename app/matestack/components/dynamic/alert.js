@@ -8,8 +8,5 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-alert', {
   mounted() {
     var myAlert = document.getElementById(this.componentConfig["alert-id"])
     this.alertInstance = new bootstrap.Alert(myAlert)
-    // var alertNode = document.querySelector('.alert')
-    // var alert = bootstrap.Alert.getInstance(alertNode)
-    // alert.close()
   }
 });
