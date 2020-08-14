@@ -1,15 +1,20 @@
 class Components::Container < Matestack::Ui::StaticComponent
 
-  def prepare
-    @container_classes = []
-
-    options[:size].present? ? @container_classes << "container-#{options[:size]}" : @container_classes << "container"
-    @container_classes << "#{options[:class]}" if options[:class].present?
-  end
-
   def response 
-    div id: "#{options[:id]}", class: "#{@container_classes.join(' ')}" do
+    div id: "#{options[:id]}", class: "#{container_classes}" do
       yield_components
     end
+  end
+
+  protected
+  
+  def container_classes
+    classes = []
+
+    @options[:size].present? ? classes << "container-#{@options[:size]}" : classes << "container"
+
+    #optional classes
+    classes << @options[:class]
+    classes.join(' ') 
   end
 end
