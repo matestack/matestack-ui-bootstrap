@@ -144,7 +144,7 @@ returns
 </nav>
 ```
 ### Example 4: Render options[:fixed-top], options[fixed-bottom], options[sticky-top] param
-Using the same navbar as example 3 but adding sticky-top option
+Using the same navbar as example 3 but adding `sticky-top` option
 
 ```ruby
 navbar slots: { custom_items: my_navbar }, color: :primary, theme: :dark, stick_top: true

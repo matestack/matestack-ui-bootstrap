@@ -158,24 +158,67 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         end
       end
     end
-
+    container class: "my-5 py-3 wrapper bg-warning" do
+      row horizontal: :center do
+        col md: 6 do
+          # card img_path: image_url("matestack-data.png"), title: "Card title", 
+          #     text: "Some quick example text to build on the card title and make up the bulk of the card's content." do
+          #   div class: "p-3" do
+          #     btn text: "Card Button"
+          #     btn text: "Another Button"
+          #   end
+          # end
+          card text: "With supporting text below as a natural lead-in to additional content.", 
+                title: "Special title treatment", 
+                slots: { header: my_card_header, footer: my_card_footer }, 
+                footer_class: "text-muted", class: "text-center"
+        end
+      end
+    end
     container size: :fluid, class: "py-3 mb-3" do
       row do
-        3.times do
+    #     3.times do
           col md: 4 do
-            card title: "Card Title",
-              header: "Card header", header_class: "h2 text-center",
-              img_path: image_url("matestack-data.png"),
-              footer: "2 days", footer_class: "text-muted",
-              slots: { title: my_card_title, actions: my_card_actions, lists: my_card_lists } do
-                paragraph text: "Some quick example text to build"
-                link class: 'btn btn-primary', text: "crazy action", path: "#"
-              end
-          end
+    #         card img_path: image_url("matestack-data.png"), text: "Some quick example text to build on the card title and make up the bulk of the card's content.",
+    #             slots: { body: my_card_body } do
+    #               plain "Yield Content"
+    #             end
+    #       end
         end
       end
     end
 
+  end
+
+  def my_card_header
+    slot {
+      ul class: "nav nav-tabs card-header-tabs" do
+        li class: "nav-item" do 
+          link class: "nav-link", path: "#", text: "Tab 1"  
+        end
+        li class: "nav-item" do 
+          link class: "nav-link", path: "#", text: "Tab 2"  
+        end
+      end
+    }
+  end
+
+  def my_card_footer
+    slot {
+      plain "2 days ago"
+    }
+  end
+
+  def my_card_body
+    slot {
+      ul class: 'list-group list-group-flush' do
+        li class: "list-group-item" do plain "Item 1" end
+        li class: "list-group-item" do plain "Item 2" end
+        li class: "list-group-item" do plain "Item 3" end
+      end
+      link class: 'btn btn-link', text: "Card link", path: "#"
+      link class: 'btn btn-link', text: "Another link", path: "#"
+    }
   end
 
   def my_navbar
