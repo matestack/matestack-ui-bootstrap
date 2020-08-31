@@ -24,7 +24,24 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         text: "Team"
       },
     }
-    @carousel_items = [image_url("matestack-data.png"), image_url("matestack-data.png"), image_url("matestack-data.png")]
+    @carousel_items = {
+      first: {
+        path: image_url("matestack-data.png"),
+        title: "First slide label",
+        text: "Nulla vitae elit libero, a pharetra augue mollis interdum.",
+        interval: 10000
+      },
+      second: {
+        path: image_url("matestack-data.png"),
+        title: "Second slide label",
+        text: "Nulla vitae elit libero, a pharetra augue mollis interdum."
+      },
+      third: {
+        path: image_url("matestack-data.png"),
+        title: "Third slide label",
+        interval: 2000
+      }
+    }
   end
 
   def response
@@ -33,7 +50,18 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
 
     container size: :fluid, class: "py-4 bg-dark" do
       col md: 8 do          
-        carousel items: @carousel_items, with_control: true, with_indicator: true
+        # carousel items: @carousel_items, control: true, indicator: true
+        carousel control: true, indicator: @carousel_items do
+          @carousel_items.each_with_index do |(key, item), index|
+            div class: "carousel-item #{'active' if index == 0 }", data: { interval:"#{item[:interval]}" } do
+              img class: "d-block w-100", path: item[:path]
+              div class: "carousel-caption d-none d-md-block" do
+                heading size: 3, text: item[:title]
+                paragraph text: item[:text], class: "text-primary"
+              end
+            end
+          end
+        end
       end
     end
 
