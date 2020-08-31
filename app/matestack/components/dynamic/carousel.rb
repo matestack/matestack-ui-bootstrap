@@ -9,7 +9,7 @@ class Components::Dynamic::Carousel < Matestack::Ui::VueJsComponent
   end
   
   def prepare
-    # Expecting an array with image paths
+    # Expecting an array with image paths, title, text & intervals int
     @items = items
     @indicator = indicator
   end
