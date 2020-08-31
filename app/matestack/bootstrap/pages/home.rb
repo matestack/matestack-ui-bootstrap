@@ -48,6 +48,36 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
 
     navbar slots: { custom_items: my_navbar }, color: :primary, theme: :dark, sticky_top: true
 
+    container size: :lg, class: "bg-warning py-3 my-3" do
+      row do
+        col do
+          paragraph do
+            btn text: "Collapse Btn", data: { toggle:"collapse", target:"#collapseExample" }, attributes: { "aria-expanded":"false", "aria-controls":"collapseExample" }
+          end
+
+          collapse id: "collapseExample", text: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident."
+        end
+      end
+      div class: "accordion", id: "accordionExample" do
+        div class: "card" do
+          div class: "card-header", id: "headingOne" do
+            heading size: 2, class: "mb-0" do
+              btn style: :link, size: :block, class: "text-left", text: "Collapsible Group Item #1", data: { toggle:"collapse", target:"#collapseOne" }, attributes: { "aria-expanded":"true", "aria-controls":"collapseOne" }
+            end
+          end
+          collapse id: "collapseOne", card_class: "card-body",labelledby: "headingOne", parent: "#accordionExample", text: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident."
+        end
+
+        div class: "card" do
+          div class: "card-header", id: "headingTwo" do
+            heading size: 2, class: "mb-0" do
+              btn style: :link, size: :block, class: "text-left", text: "Collapsible Group Item #2", data: { toggle:"collapse", target:"#collapseTwo" }, attributes: { "aria-expanded":"false", "aria-controls":"collapseTwo" }
+            end
+          end
+          collapse id: "collapseTwo", card_class: "card-body",labelledby: "headingTwo", parent: "#accordionExample", text: "#2 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident."
+        end
+      end
+    end
     container size: :fluid, class: "py-4 bg-dark" do
       col md: 8 do          
         # carousel items: @carousel_items, control: true, indicator: true

@@ -14,6 +14,7 @@ import "./stylesheets/application.scss";
 
 import '../../matestack/components/dynamic/alert'
 import '../../matestack/components/dynamic/carousel'
+import '../../matestack/components/dynamic/collapse'
 
 // document.addEventListener("turbolinks:load", () => {
 //   $('[data-toggle="tooltip"]').tooltip()
