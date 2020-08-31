@@ -20,9 +20,10 @@ class Components::Button < Matestack::Ui::StaticComponent
 
 
   def button_classes
-    [].tap do |classes|
+    foo = [].tap do |classes|
+      classes << 'btn'
       # btn styles
-      classes << style ? "btn-#{style.gsub('_', '-')}" : 'btn-primary'
+      classes << (style ? "btn-#{style.to_s.gsub('_', '-')}" : 'btn-primary')
       # btn size
       classes << "btn-#{size}" if size
       # custom classes
