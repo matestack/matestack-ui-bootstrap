@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
-gem 'matestack-ui-core', git: 'https://github.com/matestack/matestack-ui-core.git', branch: 'next-release'
+gem 'matestack-ui-core', git: 'https://github.com/matestack/matestack-ui-core.git', branch: '20200824_update-essential-guides'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -42,6 +42,10 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'rspec-rails', '~> 4.0.1'
+  gem 'byebug'
+  gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 group :test do
@@ -50,6 +54,7 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  gem "generator_spec"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
