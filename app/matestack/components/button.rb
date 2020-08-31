@@ -13,11 +13,10 @@ class Components::Button < Matestack::Ui::StaticComponent
 
   def button_attributes
     html_attributes.merge(
-      type: type || :button,
+      type: type || 'button',
       class: button_classes
     )
   end
-
 
   def button_classes
     foo = [].tap do |classes|
@@ -28,6 +27,6 @@ class Components::Button < Matestack::Ui::StaticComponent
       classes << "btn-#{size}" if size
       # custom classes
       classes << bs_class
-    end.join(' ')
+    end.join(' ').strip
   end
 end

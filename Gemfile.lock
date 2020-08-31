@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/matestack/matestack-ui-core.git
-  revision: bc3ff3bab5a8ab8971a3bdd5d61809944ea3eab8
-  branch: 20200824_update-essential-guides
+  revision: 0d0651dd0a6d83843c25720ce1698761c476b764
+  branch: 20200824_use-html-attributes-and-properties-everywhere
   specs:
     matestack-ui-core (1.0.0.rc.1)
       cells-haml
