@@ -17,6 +17,8 @@ module Components::Registry
     alert: Components::Dynamic::Alert,
     carousel: Components::Dynamic::Carousel,
     collapse: Components::Dynamic::Collapse,
+    dropdown: Components::Dynamic::Dropdown,
+
   )
 
 end

@@ -42,11 +42,38 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         interval: 2000
       }
     }
+    @drowdown_items = {
+      first: {
+        type: :link,
+        path: "#",
+        text: "Nulla vitae elit libero",
+      },
+      second: {
+        type: :button,
+        text: "Action"
+      },
+      divider: {
+        type: :divider,
+      }, 
+      third: {
+        type: :link,
+        path: "#",
+        text: "Separated link"
+      }
+    }
   end
 
   def response
 
     navbar slots: { custom_items: my_navbar }, color: :primary, theme: :dark, sticky_top: true
+
+    container size: :lg, class: "bg-warning py-3 my-3" do
+      row horizontal: :center, vertical: :center do
+        col md: 4 do
+          dropdown id: "dropdrop", offset: "10,22", align: :center, menu_items: @drowdown_items, text: "Dropdown"
+        end
+      end
+    end
 
     container size: :lg, class: "bg-warning py-3 my-3" do
       row do

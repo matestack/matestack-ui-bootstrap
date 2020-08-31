@@ -1,31 +1,117 @@
-class Components::Dynamic::dropdown < Matestack::Ui::VueJsComponent
+class Components::Dynamic::Dropdown < Matestack::Ui::VueJsComponent
   vue_js_component_name "matestack-ui-bootstrap-dropdown" 
   
-  optional class: { as: :bs_class }, id: { as: :bs_id }
+  optional :style, :split, :text, :direction, :align, :offset, :reference,
+            :btn_class, :menu_items, :menu_class,
+            class: { as: :bs_class }, id: { as: :bs_id }
 
   def setup
     @component_config["dropdown-id"] = bs_id
   end
 
+  def prepare 
+    @dropdown_html = html_attributes
+    @btn_html = html_attributes
+    @menu_html = html_attributes
+    @menu = menu_items
+  end
+
   def response 
     div dropdown_attributes do
-      yield_components 
+      if split 
+        if options[:slots] && options[:slots][:split_btn]
+          slot options[:slots][:split_btn]
+        else
+          btn style: style, text: text
+        end
+
+        btn btn_attributes do
+          span class:"sr-only" do plain "Toggle Dropdown" end
+        end
+      else
+        btn btn_attributes
+      end
+
+      ul menu_attributes do
+        if @menu.blank?
+          yield_components 
+        else
+          @menu.each_with_index do |(key, item), index|
+            case item[:type]
+            when :button 
+              li do btn class: "dropdown-item", text: item[:text] end
+            when :divider
+              li do hr class: "dropdown-divider" end
+            when :link
+              li do link class: "dropdown-item", path: item[:path], text: item[:text] end
+            else
+              span class: "dropdown-item-text" do plain item[:text] end
+            end
+          end
+        end
+      end
     end
   end
 
   protected
 
   def dropdown_attributes
-    html_attributes.merge(
+    @dropdown_html.merge(
       class: dropdown_classes
     )
   end
 
   def dropdown_classes
     [].tap do |classes|
-      classes << 'dropdown'
+      classes << (split ? 'btn-group' : 'dropdown')
+      classes << "drop#{direction}" if direction.present?      
       #custom classes 
       classes << bs_class
     end.join(' ').strip
   end
+
+  def btn_attributes
+    @btn_html.merge(
+      id: bs_id,
+      text: "#{text if !split}",
+      style: style, 
+      class: btn_classes,
+      # data: { toggle:"dropdown", offset:"#{offset if offset.present?}" },
+      data: btn_data,
+      attributes: { 'aria-expanded':"false" }
+    )
+  end
+# ToDo
+  def btn_data
+    data = { toggle:"dropdown" }
+    data.merge({ offset:"#{offset}" }) if offset.present?
+    data
+  end
+
+  def btn_classes
+    [].tap do |classes|
+      classes << 'dropdown-toggle'
+      classes << 'dropdown-toggle-split' if split
+      #custom classes 
+      classes << btn_class
+    end.join(' ').strip
+  end
+
+  def menu_attributes
+    @menu_html.merge(
+      class: menu_classes,
+      data: { toggle:"dropdown" },
+      attributes: { 'aria-labelledby':"#{bs_id}" }
+    )
+  end
+
+  def menu_classes
+    [].tap do |classes|
+      classes << 'dropdown-menu'
+      classes << "dropdown-menu-#{align}" if align.present? 
+      #custom classes 
+      classes << menu_class
+    end.join(' ').strip
+  end
+  
 end
