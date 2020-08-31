@@ -16,6 +16,7 @@ module Components::Registry
     navbar: Components::Navbar,
     alert: Components::Dynamic::Alert,
     carousel: Components::Dynamic::Carousel,
+    collapse: Components::Dynamic::Collapse,
   )
 
 end
