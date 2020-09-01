@@ -3,14 +3,14 @@ class Components::Dynamic::Dropdown < Matestack::Ui::VueJsComponent
   
   optional :style, :split, :text, :direction, :align, :offset, :reference,
             :btn_class, :menu_items, :menu_class,
-            class: { as: :bs_class }, id: { as: :bs_id }
+            class: { as: :bs_class }, id: { as: :bs_id },
+            data: { as: :bs_data }
 
   def setup
     @component_config["dropdown-id"] = bs_id
   end
 
   def prepare 
-    @dropdown_html = html_attributes
     @btn_html = html_attributes
     @menu_html = html_attributes
     @menu = menu_items
@@ -56,7 +56,7 @@ class Components::Dynamic::Dropdown < Matestack::Ui::VueJsComponent
   protected
 
   def dropdown_attributes
-    @dropdown_html.merge(
+    html_attributes.merge(
       class: dropdown_classes
     )
   end
@@ -71,7 +71,7 @@ class Components::Dynamic::Dropdown < Matestack::Ui::VueJsComponent
   end
 
   def btn_attributes
-    @btn_html.merge(
+    {
       id: bs_id,
       text: "#{text if !split}",
       style: style, 
@@ -79,13 +79,14 @@ class Components::Dynamic::Dropdown < Matestack::Ui::VueJsComponent
       # data: { toggle:"dropdown", offset:"#{offset if offset.present?}" },
       data: btn_data,
       attributes: { 'aria-expanded':"false" }
-    )
+    }
   end
 # ToDo
   def btn_data
-    data = { toggle:"dropdown" }
-    data.merge({ offset:"#{offset}" }) if offset.present?
-    data
+    (bs_data || {}).tap do |hash|
+      hash[:toggle] = 'dropdown'
+      hash[:offset] = offset if offset.present?
+    end
   end
 
   def btn_classes

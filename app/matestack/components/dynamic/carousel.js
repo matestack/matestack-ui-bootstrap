@@ -7,6 +7,6 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-carousel', {
   },
   mounted() {
     var myCarousel = document.getElementById(this.componentConfig["carousel-id"])
-    this.carouselInstance = new bootstrap.Carousel(myCarousel)
+    // this.carouselInstance = new bootstrap.Carousel(myCarousel)
   }
 });
