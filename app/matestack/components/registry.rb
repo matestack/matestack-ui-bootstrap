@@ -14,11 +14,12 @@ module Components::Registry
     spinner: Components::Spinner,
     pagination: Components::Pagination,
     navbar: Components::Navbar,
+    toast: Components::Toasts,
+
     alert: Components::Dynamic::Alert,
     carousel: Components::Dynamic::Carousel,
     collapse: Components::Dynamic::Collapse,
     dropdown: Components::Dynamic::Dropdown,
-
   )
 
 end
