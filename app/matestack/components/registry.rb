@@ -15,6 +15,7 @@ module Components::Registry
     pagination: Components::Pagination,
     navbar: Components::Navbar,
     toast: Components::Toasts,
+    listgroup: Components::Listgroup,
 
     alert: Components::Dynamic::Alert,
     carousel: Components::Dynamic::Carousel,

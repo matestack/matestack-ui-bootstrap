@@ -61,11 +61,39 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         text: "Separated link"
       }
     }
+    @listgroup_items = {
+      first: {
+        type: :link,
+        path: "#",
+        content: "Nulla vitae elit libero",
+        color: :primary
+      },
+      second: {
+        type: :button,
+        content: "Action",
+        color: :primary
+      },
+      textonly: {
+        content: "Text content",
+        color: :secondary
+      }, 
+      third: {
+        type: :link,
+        path: "#",
+        content: "Separated link",
+      }
+    }
   end
 
   def response
 
     navbar slots: { custom_items: my_navbar }, color: :primary, theme: :dark, sticky_top: true
+
+    container size: :lg, class: "bg-light py-3 my-3" do
+      row horizontal: :center, vertical: :center do
+        listgroup items: @listgroup_items
+      end
+    end
 
     container size: :lg, class: "bg-warning py-3 my-3" do
       row horizontal: :center, vertical: :center do
