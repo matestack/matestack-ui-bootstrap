@@ -7,7 +7,7 @@ class Components::Dynamic::Dropdown < Matestack::Ui::VueJsComponent
             data: { as: :bs_data }
 
   def setup
-    @component_config["dropdown-id"] = bs_id
+    # @component_config["dropdown-id"] = bs_id
   end
 
   def response 
