@@ -10,50 +10,45 @@ class Components::Dynamic::Dropdown < Matestack::Ui::VueJsComponent
     @component_config["dropdown-id"] = bs_id
   end
 
-  def prepare 
-    @btn_html = html_attributes
-    @menu_html = html_attributes
-    @menu = menu_items
-  end
-
   def response 
     div dropdown_attributes do
-      if split 
-        if options[:slots] && options[:slots][:split_btn]
-          slot options[:slots][:split_btn]
-        else
-          btn style: style, text: text
-        end
-
-        btn btn_attributes do
-          span class:"sr-only" do plain "Toggle Dropdown" end
-        end
-      else
-        btn btn_attributes
-      end
+      split_btn_partial if split 
+      btn btn_attributes if !split
 
       ul menu_attributes do
-        if @menu.blank?
-          yield_components 
-        else
-          @menu.each_with_index do |(key, item), index|
-            case item[:type]
-            when :button 
-              li do btn class: "dropdown-item", text: item[:text] end
-            when :divider
-              li do hr class: "dropdown-divider" end
-            when :link
-              li do link class: "dropdown-item", path: item[:path], text: item[:text] end
-            else
-              span class: "dropdown-item-text" do plain item[:text] end
-            end
-          end
-        end
+        yield_components if menu_items.blank?
+        menu_partial if !menu_items.blank?
       end
     end
   end
 
   protected
+
+  def split_btn_partial
+    if options[:slots] && options[:slots][:split_btn]
+      slot options[:slots][:split_btn]
+    else
+      btn style: style, text: text
+    end
+    btn btn_attributes do
+      span class:"sr-only" do plain "Toggle Dropdown" end
+    end
+  end
+
+  def menu_partial
+    menu_items.each_with_index do |(key, item), index|
+      case item[:type]
+      when :button 
+        li do btn class: "dropdown-item", text: item[:text] end
+      when :divider
+        li do hr class: "dropdown-divider" end
+      when :link
+        li do link class: "dropdown-item", path: item[:path], text: item[:text] end
+      else
+        span class: "dropdown-item-text" do plain item[:text] end
+      end
+    end
+  end
 
   def dropdown_attributes
     html_attributes.merge(
@@ -76,16 +71,16 @@ class Components::Dynamic::Dropdown < Matestack::Ui::VueJsComponent
       text: "#{text if !split}",
       style: style, 
       class: btn_classes,
-      # data: { toggle:"dropdown", offset:"#{offset if offset.present?}" },
       data: btn_data,
-      attributes: { 'aria-expanded':"false" }
+      attributes: { 'aria-expanded': "false" }
     }
   end
-# ToDo
+  
   def btn_data
     (bs_data || {}).tap do |hash|
       hash[:toggle] = 'dropdown'
       hash[:offset] = offset if offset.present?
+      hash[:reference] = reference if reference.present?
     end
   end
 
@@ -99,11 +94,11 @@ class Components::Dynamic::Dropdown < Matestack::Ui::VueJsComponent
   end
 
   def menu_attributes
-    @menu_html.merge(
+    {
       class: menu_classes,
       data: { toggle:"dropdown" },
-      attributes: { 'aria-labelledby':"#{bs_id}" }
-    )
+      attributes: { 'aria-labelledby': bs_id }
+    }
   end
 
   def menu_classes

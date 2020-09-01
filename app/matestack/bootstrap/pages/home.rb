@@ -70,7 +70,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     container size: :lg, class: "bg-warning py-3 my-3" do
       row horizontal: :center, vertical: :center do
         col md: 4 do
-          dropdown id: "dropdrop", offset: "10,22", align: :center, menu_items: @drowdown_items, text: "Dropdown"
+          dropdown id: "dropdrop", offset: "10,22", reference: :parent, align: :center, menu_items: @drowdown_items, text: "Dropdown"
         end
       end
     end

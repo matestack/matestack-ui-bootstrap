@@ -7,6 +7,6 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-dropdown', {
   },
   mounted() {
     var mydropdown = document.getElementById(this.componentConfig["dropdown-id"])
-    // this.dropdownInstance = new bootstrap.dropdown(mydropdown)
+    // this.dropdownInstance = new bootstrap.Dropdown(mydropdown)
   }
 });
