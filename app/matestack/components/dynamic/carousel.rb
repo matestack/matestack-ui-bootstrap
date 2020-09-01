@@ -34,7 +34,7 @@ class Components::Dynamic::Carousel < Matestack::Ui::VueJsComponent
 
   def carousel_partial
     items.each_with_index do |(key, item), index|
-      div class: "carousel-item #{'active' if index == 0 }", data: { interval: "#{item[:interval]}" } do
+      div class: "carousel-item #{'active' if index == 0 }", data: { interval: item[:interval] } do
         img class: "d-block w-100", path: item[:path]
         div class: "carousel-caption d-none d-md-block" do
           heading size: 5, text: item[:title]
