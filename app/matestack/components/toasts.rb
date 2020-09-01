@@ -5,7 +5,7 @@ class Components::Toasts < Matestack::Ui::StaticComponent
             class: { as: :bs_class }, attributes: { as: :bs_attrs }, data: { as: :bs_data }
 
   # TODO: How to trigger show methods?
-  
+
   def response 
     div toast_attributes do
       div class: "toast-header" do
@@ -44,7 +44,6 @@ class Components::Toasts < Matestack::Ui::StaticComponent
 
   def toast_attributes
     html_attributes.merge(
-      role: 'alert',
       class: toast_classes,
       attributes: toast_attrs,
       data: toast_data 
@@ -61,7 +60,9 @@ class Components::Toasts < Matestack::Ui::StaticComponent
 
   def toast_attrs 
     (bs_attrs || {}).tap do |hash|
-      hash[:'aria-live'] = (important ? 'assertive' : 'polite') if !t_style.present?
+      hash[:role] = 'alert'
+      hash[:'aria-live'] = (important ? 'assertive' : 'polite') if !t_style.present? && important.present?
+      hash[:'aria-live'] = 'assertive' if !t_style.present? && !important.present?
       hash[:'aria-atomic'] = 'true' if !t_style.present?
       hash[:style] = t_style if t_style.present?
     end
