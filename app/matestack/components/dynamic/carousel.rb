@@ -14,19 +14,8 @@ class Components::Dynamic::Carousel < Matestack::Ui::VueJsComponent
 
       # carousel content
       div class: "carousel-inner" do
-        if items.blank?
-          yield_components 
-        else
-          items.each_with_index do |(key, item), index|
-            div class: "carousel-item #{'active' if index == 0 }", data: { interval:"#{item[:interval]}" } do
-              img class: "d-block w-100", path: item[:path]
-              div class: "carousel-caption d-none d-md-block" do
-                heading size: 5, text: item[:title]
-                paragraph text: item[:text]
-              end
-            end
-          end
-        end
+        yield_components if items.blank?
+        carousel_partial if !items.blank?
       end
 
       controls_partial if control
@@ -39,6 +28,18 @@ class Components::Dynamic::Carousel < Matestack::Ui::VueJsComponent
     ol class: "carousel-indicators" do
       indicator.each_with_index do |item, index|
         li data: { target: carousel_id, 'slide-to': index }, class: "#{'active' if index == 0 }"
+      end
+    end
+  end
+
+  def carousel_partial
+    items.each_with_index do |(key, item), index|
+      div class: "carousel-item #{'active' if index == 0 }", data: { interval: "#{item[:interval]}" } do
+        img class: "d-block w-100", path: item[:path]
+        div class: "carousel-caption d-none d-md-block" do
+          heading size: 5, text: item[:title]
+          paragraph text: item[:text]
+        end
       end
     end
   end
@@ -59,7 +60,6 @@ class Components::Dynamic::Carousel < Matestack::Ui::VueJsComponent
       id: carousel_id,
       class: carousel_classes,
       data: { ride: 'carousel' }
-      # attributes: { 'data-ride':"carousel" }
     )
   end
 
@@ -72,9 +72,6 @@ class Components::Dynamic::Carousel < Matestack::Ui::VueJsComponent
     end.join(' ').strip
   end
 
-  #NOTE für Vererbung sinnvoller, falls erbende Klasse Setup überschreibt
-  # auserdem offensichtlicher bei Verwendung, wo der Wert herkommt, ne Instanzvariable kann überall geändert werden,
-  # was Fehler schwerer zu finden macht
   def carousel_id
     @carousel_id ||= "matestack-carousel-#{SecureRandom.hex}"
   end
