@@ -36,7 +36,7 @@ class Components::Dynamic::Dropdown < Matestack::Ui::VueJsComponent
   end
 
   def menu_partial
-    menu_items.each_with_index do |(key, item), index|
+    menu_items.each do |key, item|
       case item[:type]
       when :button 
         li do btn class: "dropdown-item", text: item[:text] end
@@ -96,7 +96,7 @@ class Components::Dynamic::Dropdown < Matestack::Ui::VueJsComponent
   def menu_attributes
     {
       class: menu_classes,
-      data: { toggle:"dropdown" },
+      data: { toggle: 'dropdown' },
       attributes: { 'aria-labelledby': bs_id }
     }
   end
