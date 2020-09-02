@@ -69,7 +69,7 @@ class Components::Dynamic::Toast < Matestack::Ui::VueJsComponent
 
   def toast_classes
     [].tap do |classes|
-      classes << 'toast'
+      classes << 'toast p-0'
       # custom classes
       classes << bs_class
     end.join(' ').strip
