@@ -13,6 +13,7 @@ module Components::Registry
     progress: Components::Progress,
     spinner: Components::Spinner,
     pagination: Components::Pagination,
+    nav: Components::Nav,
     navbar: Components::Navbar,
     listgroup: Components::Listgroup,
     modal: Components::Modal,

@@ -18,8 +18,13 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         path: "/",
         text: "Home"
       },
-      team: {
+      product: {
         type: :transition,
+        path: "#",
+        text: "Product"
+      },
+      team: {
+        type: :link,
         path: "#",
         text: "Team"
       },
@@ -89,7 +94,8 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
   end
 
   def response
-    navbar slots: { custom_items: my_navbar }, color: :primary, theme: :dark, sticky_top: true
+    # navbar slots: { custom_items: my_navbar }, color: :primary, theme: :dark, sticky_top: true
+    nav items: @nav_items, horizontal: :center, pills: true
 
     container size: :lg, class: "bg-light py-3 my-3" do
       row horizontal: :center, vertical: :center do
