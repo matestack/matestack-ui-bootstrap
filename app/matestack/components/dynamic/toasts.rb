@@ -6,9 +6,6 @@ class Components::Dynamic::Toasts < Matestack::Ui::VueJsComponent
             class: { as: :bs_class }, attributes: { as: :bs_attrs }, data: { as: :bs_data }
 
   # TODO: How to trigger show methods?
-  def setup
-    @component_config["toasts-id"] = toasts_id
-  end
 
   def response 
     div toast_attributes do
@@ -50,15 +47,15 @@ class Components::Dynamic::Toasts < Matestack::Ui::VueJsComponent
     html_attributes.merge(
       class: toast_classes,
       attributes: toast_attrs,
-      data: toast_data 
+      data: toast_data
     )
   end
 
   def toast_data
     (bs_data || {}).tap do |hash|
-      hash[:delay] = delay if delay.present?
-      hash[:autohide] = autohide if autohide.present?
-      hash[:animation] = animation if animation.present?
+      hash[:delay] = delay.nil? ? 500 : delay
+      hash[:autohide] = autohide.nil? ? "true" : "#{autohide}"
+      hash[:animation] = animation.nil? ? "true" : "#{animation}"
     end
   end
 
@@ -85,9 +82,5 @@ class Components::Dynamic::Toasts < Matestack::Ui::VueJsComponent
       classes << 'rounded mr-2' if !icon_class.present?
       classes << icon_class if icon_class.present?
     end.join(' ').strip
-  end
-
-  def toasts_id
-    @toast_id ||= "matestack-alert-#{SecureRandom.hex}"
   end
 end

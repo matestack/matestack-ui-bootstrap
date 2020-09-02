@@ -10,20 +10,21 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-toasts', {
       hide_after_timeout: null
     };
   },
-  mounted() {
-    // var myToasts = document.getElementById(this.componentConfig["toasts-id"])
-    // this.toastsInstance = new bootstrap.Toast(myToasts, toast.show())
-    
-  },
   methods: {
     show: function(){
-      
-      var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-      var toastList = toastElList.map(function (toastEl) {
-        return new bootstrap.Toast(toastEl, toast.show())
-      })
-      return toastList
+      const self = this;
+      self.toastsInstance.show()
+      // var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+      // var toastList = toastElList.map(function (toastEl) {
+      //   return new bootstrap.Toast(toastEl, toast.show())
+      // })
+      // return toastList
     }
+  },
+  mounted: function() {
+    const self = this;
+    var myToasts = self.$el
+    self.toastsInstance = new bootstrap.Toast(myToasts)
   },
   created: function() {
     const self = this
