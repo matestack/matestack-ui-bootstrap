@@ -1,25 +1,15 @@
 class Components::Dynamic::Alert < Matestack::Ui::VueJsComponent
   vue_js_component_name "matestack-ui-bootstrap-alert" 
 
-  def setup
-    @alert_id = "matestack-alert-#{SecureRandom.hex}"
-    @component_config["alert-id"] = @alert_id
-  end
-
   def response
-    div id: @alert_id, class: "alert #{alert_classes}", attributes: { 'role': 'alert' } do
+    div class: "alert #{alert_classes}", attributes: { 'role': 'alert' } do
       
       heading size: heading_size, class: 'alert-heading', text: @options[:heading] if @options[:heading].present?
       
       paragraph text: @options[:text] if @options[:text].present?
 
       if @options[:dismissible].present? && @options[:dismissible]
-        button class: "close", data: { dismiss: "alert" },
-                attributes: { 'aria-label':'Close', 'type':'button', '@click': 'alertInstance.close()' } do
-          span attributes: { 'aria-hidden':'true' } do
-            plain "&times;".html_safe
-          end
-        end
+        close dismiss: "alert"
       end
       yield_components
     end
