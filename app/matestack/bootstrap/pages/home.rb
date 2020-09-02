@@ -98,10 +98,16 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     container size: :lg, class: "bg-warning py-3 my-3" do
       row horizontal: :center, vertical: :center do
         
-        toast show_on: "myToasts", t_title: "Bootstrap", t_text: "11 mins ago", message: "Hello, world! This is a toast message."
-        
-        onclick emit: "myToasts" do
-          btn text: "Show Toasts"
+        toast show_on: "myToasts", dispose_on: "hideToasts", t_title: "Bootstrap", t_text: "11 mins ago", message: "Hello, world! This is a toast message.", autohide: false
+        col do          
+          onclick emit: "myToasts" do
+            btn text: "Show Toasts"
+          end
+        end
+        col do
+          onclick emit: "hideToasts" do
+            btn text: "Hide Toasts"
+          end
         end
       end
     end
