@@ -1,10 +1,14 @@
-class Components::Toasts < Matestack::Ui::StaticComponent
+class Components::Dynamic::Toasts < Matestack::Ui::VueJsComponent
+  vue_js_component_name "matestack-ui-bootstrap-toasts" 
 
   optional :icon_class, :icon_path, :t_title, :t_text, :message, :t_style, 
             :important, :delay, :autohide, :animation,
             class: { as: :bs_class }, attributes: { as: :bs_attrs }, data: { as: :bs_data }
 
   # TODO: How to trigger show methods?
+  def setup
+    @component_config["toasts-id"] = toasts_id
+  end
 
   def response 
     div toast_attributes do
@@ -81,5 +85,9 @@ class Components::Toasts < Matestack::Ui::StaticComponent
       classes << 'rounded mr-2' if !icon_class.present?
       classes << icon_class if icon_class.present?
     end.join(' ').strip
+  end
+
+  def toasts_id
+    @toast_id ||= "matestack-alert-#{SecureRandom.hex}"
   end
 end

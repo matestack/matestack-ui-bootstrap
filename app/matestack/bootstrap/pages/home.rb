@@ -97,7 +97,12 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
 
     container size: :lg, class: "bg-warning py-3 my-3" do
       row horizontal: :center, vertical: :center do
-        toast t_title: "Bootstrap", t_text: "11 mins ago", message: "Hello, world! This is a toast message."
+        
+        toast show_on: "myToasts", t_title: "Bootstrap", t_text: "11 mins ago", message: "Hello, world! This is a toast message."
+        
+        onclick emit: "myToasts" do
+          btn text: "Show Toasts"
+        end
       end
     end
 

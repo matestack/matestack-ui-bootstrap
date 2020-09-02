@@ -16,6 +16,7 @@ import '../../matestack/components/dynamic/alert'
 import '../../matestack/components/dynamic/carousel'
 import '../../matestack/components/dynamic/collapse'
 import '../../matestack/components/dynamic/dropdown'
+import '../../matestack/components/dynamic/toasts'
 
 // document.addEventListener("turbolinks:load", () => {
 //   $('[data-toggle="tooltip"]').tooltip()

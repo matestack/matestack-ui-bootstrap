@@ -14,7 +14,7 @@ module Components::Registry
     spinner: Components::Spinner,
     pagination: Components::Pagination,
     navbar: Components::Navbar,
-    toast: Components::Toasts,
+    toast: Components::Dynamic::Toasts,
     listgroup: Components::Listgroup,
 
     alert: Components::Dynamic::Alert,

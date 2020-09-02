@@ -27,7 +27,6 @@ RSpec.describe "Components::Toasts" do
         </div>
       </div>
     HTML
-    byebug
     expect(stripped(toasts)).to eq(stripped(expected_toasts))
   end
 
