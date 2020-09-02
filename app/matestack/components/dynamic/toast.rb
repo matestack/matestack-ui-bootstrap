@@ -28,10 +28,7 @@ class Components::Dynamic::Toast < Matestack::Ui::VueJsComponent
     img class: icon_classes, path: icon_path if icon_path.present?
     strong class: "mr-auto", text: t_title if t_title.present?
     small text: t_text if t_text.present?
-    button class: "ml-2 mb-1 close", data: { dismiss: "toast" },
-            attributes: { 'aria-label':'Close', 'type':'button' } do
-      span attributes: { 'aria-hidden':'true' } do plain "&times;".html_safe end
-    end
+    close dismiss: 'toast', class: "ml-2 mb-1"
   end
 
   def body_partial
