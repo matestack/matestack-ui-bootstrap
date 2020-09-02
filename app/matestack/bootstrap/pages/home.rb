@@ -91,7 +91,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
 
     container size: :lg, class: "bg-light py-3 my-3" do
       row horizontal: :center, vertical: :center do
-        listgroup items: @listgroup_items
+        listgroup items: @listgroup_items, tablist: true
       end
     end
 

@@ -7,21 +7,27 @@ RSpec.describe "Components::Toasts" do
   end
 
   it 'renders basic toasts' do
-    toasts = matestack_component(:toast, t_title: "Bootstrap", t_text: "11 mins ago", message: "Hello, world! This is a toast message.").show.to_s
+    toasts = matestack_component(:toast, 
+      t_title: "Bootstrap", t_text: "11 mins ago", 
+      message: "Hello, world! This is a toast message."
+    ).show.to_s
     expected_toasts = <<~HTML
       <div aria-atomic='true' aria-live='assertive' class='toast' role='alert'>
         <div class='toast-header'>
           <strong class='mr-auto'>Bootstrap</strong>
           <small>11 mins ago</small>
-          <button type='button' class='ml-2 mb-1 close' data-dismiss='toast' aria-label='Close'>
+          <button aria-label='Close' class='ml-2 mb-1 close' data-dismiss='toast' type='button'>
             <span aria-hidden='true'>&times;</span>
           </button>
+        </div>
+        <div class='toast-body'>
+          <p>
+            Hello, world! This is a toast message.
+          </p>
+        </div>
       </div>
-      <div class='toast-body'>
-        Hello, world! This is a toast message.
-      </div>
-    </div>
     HTML
+    byebug
     expect(stripped(toasts)).to eq(stripped(expected_toasts))
   end
 

@@ -1,6 +1,7 @@
 class Components::Listgroup < Matestack::Ui::StaticComponent
+  html_attributes :role
 
-  optional :items, :item_class, :horizonal, :h_size, :flush, :tablist, class: { as: :bs_class }
+  optional :id, :items, :item_class, :checkbox, :horizontal, :h_size, :flush, :tablist, class: { as: :bs_class }
 
   def response 
     ul lg_attributes do
@@ -37,29 +38,32 @@ class Components::Listgroup < Matestack::Ui::StaticComponent
   end
 
   def lg_attributes
+    attributes = {}.tap do |hash|
+      hash[:class] = lg_classes
+      hash[:attributes] = { role: "tablist" } if tablist
+    end
     html_attributes.merge(
-      class: lg_classes,
-      attributes: { 'role': "tablist" } if tablist
+      attributes
     )
   end
 
   def lg_classes
     [].tap do |classes|
       classes << 'list-group'
-      classes << (h_size.present? ? "list-group-horizontal-#{h_size}": "list-group-horizontal") if horizonal
+      classes << (h_size.present? ? "list-group-horizontal-#{h_size}": "list-group-horizontal") if horizontal
       classes << 'list-group-flush' if flush
       classes << bs_class
     end.join(' ').strip
   end
 
   def link_attrs l_id, color, path
-    {
-      id: l_id,
-      class: "#{list_classes color, true}",
-      data: { toggle: "list" } if tablist, 
-      attributes: { 'aria-controls': "#{id}", 'role': "tab" } if tablist,
-      path: path
-    }
+    {}.tap do |hash|
+      hash[:id] = l_id
+      hash[:class] = "#{list_classes color, true}"
+      hash[:data] = { toggle: "list" } if tablist
+      hash[:attributes] = { 'aria-controls': "#{id}", role: "tab" } if tablist
+      hash[:path] = path
+    end
   end
 
   def list_classes color, action

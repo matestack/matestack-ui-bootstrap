@@ -4,6 +4,7 @@ module Utils
     html_string
       .gsub(/>\s+</, "><")
       .gsub("\n", "")
+      .gsub(/\s+/, "")
   end
 
 end

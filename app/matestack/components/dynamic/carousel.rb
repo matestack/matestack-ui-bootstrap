@@ -6,7 +6,7 @@ class Components::Dynamic::Carousel < Matestack::Ui::VueJsComponent
   def setup
     @component_config["carousel-id"] = carousel_id
   end
-
+  
   def response
     div carousel_attributes do
       # carousel indicator
