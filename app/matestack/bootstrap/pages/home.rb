@@ -77,6 +77,9 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         content: "Text content",
         color: :secondary
       }, 
+      text: {
+        content: "Text Badge"
+      }, 
       third: {
         type: :link,
         path: "#",
@@ -91,7 +94,10 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
 
     container size: :lg, class: "bg-light py-3 my-3" do
       row horizontal: :center, vertical: :center do
-        listgroup items: @listgroup_items, tablist: true
+        # listgroup items: @listgroup_items, checkbox: true
+        listgroup items: {
+          first: {type: :button, content: "Button1"},
+          second: {type: :button, content: "Button2"} }
       end
     end
 

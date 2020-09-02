@@ -3,6 +3,8 @@ class Components::Listgroup < Matestack::Ui::StaticComponent
 
   optional :id, :items, :item_class, :checkbox, :horizontal, :h_size, :flush, :tablist, class: { as: :bs_class }
 
+  # TODO: Set list items acitve
+
   def response 
     ul lg_attributes do
       yield_components if !items.present?
@@ -20,7 +22,7 @@ class Components::Listgroup < Matestack::Ui::StaticComponent
           plain item[:content]
         end
       when :button 
-        button id: item[:id], class: "#{list_classes item[:color], true}", attributes: { 'type': "button" } do
+        button id: item[:id], class: "#{list_classes item[:color], true} #{"active" if item[:active]}", attributes: { type: "button" } do
           plain item[:content]
         end
       when :label 
@@ -31,6 +33,7 @@ class Components::Listgroup < Matestack::Ui::StaticComponent
       else
         li id: item[:id], class: "#{list_classes item[:color], false}" do
           input class: "form-check-input mr-1", attributes: { 'type': "checkbox", 'value': "", 'aria-label': "#{item[:content]}" } if checkbox
+          # span class: "badge bg-primary rounded-pill", text: item[:badge]
           plain item[:content]
         end
       end
@@ -70,7 +73,7 @@ class Components::Listgroup < Matestack::Ui::StaticComponent
     [].tap do |classes|
       classes << 'list-group-item'
       classes << 'list-group-item-action' if action
-      classes << "list-group-item-#{color}"
+      classes << "list-group-item-#{color}" if color.present?
       classes << item_class
     end.join(' ').strip
   end
