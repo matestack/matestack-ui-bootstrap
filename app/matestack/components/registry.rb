@@ -14,13 +14,14 @@ module Components::Registry
     spinner: Components::Spinner,
     pagination: Components::Pagination,
     navbar: Components::Navbar,
-    toast: Components::Dynamic::Toast,
     listgroup: Components::Listgroup,
-
+    modal: Components::Modal,
+    # Dynamic Components
     alert: Components::Dynamic::Alert,
     carousel: Components::Dynamic::Carousel,
     collapse: Components::Dynamic::Collapse,
     dropdown: Components::Dynamic::Dropdown,
+    toast: Components::Dynamic::Toast,
   )
 
 end
