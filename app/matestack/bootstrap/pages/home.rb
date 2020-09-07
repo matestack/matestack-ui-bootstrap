@@ -118,13 +118,23 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     container size: :lg, class: "bg-light py-3 my-3" do
       row horizontal: :center, vertical: :center do
         # listgroup items: @listgroup_items, checkbox: true
-        listgroup items: {
-          first: {type: :button, content: "Button1"},
-          second: {type: :button, content: "Button2"} }
+        listgroup id: "list-example3", items: {
+          first: { type: :link, path: "#list-item1", content: "Item 1" },
+          second: { type: :link, path: "#list-item2", content: "Item 2" } }
+        
+          scrollspy target: "#list-example3" do
+          # div data: { spy: "scroll", target: "#list-example3" } do
+            
+            heading size: 2, id: "list-item1", text: "Item 1"
+            paragraph text: "Quis anim sit do amet fugiat dolor velit sit ea ea do reprehenderit culpa duis. Nostrud aliqua ipsum fugiat minim proident occaecat excepteur aliquip culpa aute tempor reprehenderit. Deserunt tempor mollit elit ex pariatur dolore velit fugiat mollit culpa irure ullamco est ex ullamco excepteur."
+            heading size: 2, id: "list-item2", text: "Item 2"
+            paragraph text: "Quis anim sit do amet fugiat dolor velit sit ea ea do reprehenderit culpa duis. Nostrud aliqua ipsum fugiat minim proident occaecat excepteur aliquip culpa aute tempor reprehenderit. Deserunt tempor mollit elit ex pariatur dolore velit fugiat mollit culpa irure ullamco est ex ullamco excepteur."
+        end
       end
     end
     breadcrumb items: @breadcrumb_items
-    
+
+
     container size: :lg, class: "bg-warning py-3 my-3" do
       row do
         btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }

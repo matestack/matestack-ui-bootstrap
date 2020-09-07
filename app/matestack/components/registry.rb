@@ -7,7 +7,7 @@ module Components::Registry
     col: Components::Col,
     card: Components::Card,
     btn: Components::Button,
-    breadcrump: Components::Breadcrumb,
+    breadcrumb: Components::Breadcrumb,
     close: Components::Close,
     btn_group: Components::BtnGroup,
     badge: Components::Badge,
