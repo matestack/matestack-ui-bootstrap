@@ -7,6 +7,7 @@ module Components::Registry
     col: Components::Col,
     card: Components::Card,
     btn: Components::Button,
+    breadcrump: Components::Breadcrumb,
     close: Components::Close,
     btn_group: Components::BtnGroup,
     badge: Components::Badge,
@@ -17,6 +18,7 @@ module Components::Registry
     navbar: Components::Navbar,
     listgroup: Components::Listgroup,
     modal: Components::Modal,
+    scrollspy: Components::Scrollspy,
     # Dynamic Components
     alert: Components::Dynamic::Alert,
     carousel: Components::Dynamic::Carousel,
