@@ -1,6 +1,7 @@
 class Components::Nav < Matestack::Ui::StaticComponent
 
-  optional :items, :tabs, :pills, :fill, :justified, :vertical, :horizontal, class: { as: :bs_class }
+  optional :items, :tabs, :pills, :fill, :justified, :vertical, :horizontal, 
+            class: { as: :bs_class }, attributes: { as: :bs_attrs}
 
   def response 
     ul nav_attributes do
@@ -40,7 +41,8 @@ class Components::Nav < Matestack::Ui::StaticComponent
 
   def nav_attributes
     html_attributes.merge(
-      class: nav_classes
+      class: nav_classes,
+      attributes: bs_attrs
     )
   end
 
