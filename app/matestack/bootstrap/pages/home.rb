@@ -91,11 +91,29 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         content: "Separated link",
       }
     }
+    @breadcrumb_items = {
+      first: {
+        type: :link,
+        path: "#",
+        text: "Libero",
+      },
+      second: {
+        type: :transition,
+        path: "#",
+        text: "Transition",
+      },
+      third: {
+        type: :link,
+        path: "#",
+        text: "Separated link"
+      }
+    }
   end
 
   def response
     # navbar slots: { custom_items: my_navbar }, color: :primary, theme: :dark, sticky_top: true
-    nav items: @nav_items, horizontal: :center, pills: true
+    # nav items: @nav_items, horizontal: :center, pills: true
+
 
     container size: :lg, class: "bg-light py-3 my-3" do
       row horizontal: :center, vertical: :center do
@@ -105,7 +123,8 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
           second: {type: :button, content: "Button2"} }
       end
     end
-
+    breadcrumb items: @breadcrumb_items
+    
     container size: :lg, class: "bg-warning py-3 my-3" do
       row do
         btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
