@@ -27,8 +27,12 @@ class Components::Nav < Matestack::Ui::StaticComponent
   def link_attrs path, text, index, disabled
     {}.tap do |hash|
       hash[:class] = "nav-link #{'active' if index == 0 } #{'disabled' if disabled}"
+      hash[:attributes] = index == 0 ? { 'aria-selected': "true" } : { 'aria-selected': "false" } # TODO: not sure how to implement active state
       hash[:attributes] = { 'aria-current': "page" } if index == 0
       hash[:attributes] = { 'aria-disabled': "true" } if disabled
+      hash[:attributes] = { role: "tab", 'aria-controls': "#{path.gsub('#','')}" } if toggle.present?
+      hash[:data] = { toggle: "pill" } if toggle == :pill 
+      hash[:data] = { toggle: "tab" } if toggle == :tab
       hash[:text] = text
       hash[:path] = path
     end
