@@ -25,6 +25,7 @@ module Components::Registry
     collapse: Components::Dynamic::Collapse,
     dropdown: Components::Dynamic::Dropdown,
     toast: Components::Dynamic::Toast,
+    popover: Components::Dynamic::Popover
   )
 
 end
