@@ -95,4 +95,11 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+  config.before :all, type: :feature do
+    Rails.application.routes.append do
+      get '/example', to: 'example#example', as: :example
+    end
+    Rails.application.reload_routes!
+  end
 end
