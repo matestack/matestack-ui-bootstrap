@@ -82,6 +82,12 @@ class Components::Dynamic::Popover < Matestack::Ui::VueJsComponent
       # hash[:data] = { container: "#{container}"} if container.present?
       hash[:text] = text if text.present?
 
+      hash[:data] = {}.tap do |hash|
+        DATA_ATTRIBUTES.each do |attribute|
+          hash[attribute] = self.send(:"bs_#{attribute}") if self.send(:"bs_#{attribute}")
+        end
+      end
+
     end
     html_attributes.merge(
       attributes
