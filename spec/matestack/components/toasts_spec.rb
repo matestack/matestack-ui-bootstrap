@@ -7,7 +7,7 @@ RSpec.describe "Components::Toasts", type: :feature, js: true do
     matestack_render do
       toast t_title: 'Bootstrap Toast', t_text: '11 mins ago', message: 'I`m a toast'
     end
-    visit '/example'
+    visit example_path
     expect(page).not_to have_content 'Bootstrap Toast'
     expect(page).not_to have_content '11 mins ago'
     expect(page).not_to have_content 'I`m a toast'
@@ -24,5 +24,5 @@ RSpec.describe "Components::Toasts", type: :feature, js: true do
     page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_toast")')
     expect(page).to have_content 'Bootstrap Toast'
   end
-  
+
 end
