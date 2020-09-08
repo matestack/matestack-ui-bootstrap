@@ -17,9 +17,11 @@ class Components::Scrollspy < Matestack::Ui::StaticComponent
     attributes = {}.tap do |hash|
       hash[:class] = scrollspy_classes
       hash[:data] = { spy: "scroll", target: "#{target}" }
-      hash.merge!(:data => { offset: "#{offset}" } )
+      hash[:data].merge!(offset: offset)
+
+      # hash.merge!(:data => { offset: "#{offset}" } )
       # hash[:data].merge! { offset: "#{offset}" } if offset.present?
-      hash[:data] << { method: "#{bs_method}" } if bs_method.present?
+      # hash[:data] << { method: "#{bs_method}" } if bs_method.present?
     end
     html_attributes.merge(
       attributes
