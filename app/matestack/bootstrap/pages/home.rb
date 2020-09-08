@@ -14,19 +14,19 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     }
     @nav_items = {
       home: {
-        type: :transition,
-        path: "/",
+        type: :link,
+        path: "#home",
         text: "Home"
       },
       product: {
-        type: :transition,
-        path: "#",
-        text: "Product"
+        type: :link,
+        path: "#profile",
+        text: "Profile"
       },
       team: {
         type: :link,
-        path: "#",
-        text: "Team"
+        path: "#messages",
+        text: "Message"
       },
     }
     @carousel_items = {
@@ -111,9 +111,19 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
   end
 
   def response
-    # navbar slots: { custom_items: my_navbar }, color: :primary, theme: :dark, sticky_top: true
-    # nav items: @nav_items, horizontal: :center, pills: true
+    nav items: @nav_items, horizontal: :center, tabs: true
 
+    div class: "tab-content" do
+      div class: "tab-pane active", id: "home", attributes: { role: "tabpanel", 'aria-labelledby':  "home-tab" } do
+        plain "Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
+      end
+      div class: "tab-pane", id: "profile", attributes: { role: "tabpanel", 'aria-labelledby': "profile-tab" } do
+        plain "..........ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
+      end
+      div class: "tab-pane", id: "messages", attributes: {  role: "tabpanel", 'aria-labelledby': "messages-tab" } do
+        plain "do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
+      end
+    end
 
     container size: :lg, class: "bg-light py-3 my-3" do
       row horizontal: :center, vertical: :center do
