@@ -1,7 +1,7 @@
 class Components::Scrollspy < Matestack::Ui::StaticComponent
 
   optional :offset # pixel to offset from top, by default 10
-  optional :method # find which section, by default auto
+  optional method: { as: :bs_method} # find which section, by default auto
   optional :target # scroll target id
   optional class: { as: :bs_class} # adding custom class to scrollspy 
 
@@ -14,9 +14,15 @@ class Components::Scrollspy < Matestack::Ui::StaticComponent
   protected
 
   def scrollspy_attributes
+    attributes = {}.tap do |hash|
+      hash[:class] = scrollspy_classes
+      hash[:data] = { spy: "scroll", target: "#{target}" }
+      hash.merge!(:data => { offset: "#{offset}" } )
+      # hash[:data].merge! { offset: "#{offset}" } if offset.present?
+      hash[:data] << { method: "#{bs_method}" } if bs_method.present?
+    end
     html_attributes.merge(
-      class: scrollspy_classes,
-      data: scrollspy_data
+      attributes
     )
   end
 
@@ -24,14 +30,5 @@ class Components::Scrollspy < Matestack::Ui::StaticComponent
     [].tap do |classes|
       classes << bs_class
     end.join(' ').strip
-  end
-
-  def scrollspy_data
-    {}.tap do |hash|
-      hash[:data] = { spy: "scroll"}
-      hash[:data] = { target: "#{target}" }
-      hash[:data] = { offset: "#{offset}" } if offset.present?
-      hash[:data] = { method: "#{method}" } if method.present?
-    end
   end
 end
