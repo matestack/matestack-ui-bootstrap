@@ -1,34 +1,28 @@
-RSpec.describe "Components::Toasts" do
-  include Matestack::Ui::Core::ApplicationHelper
+require 'rails_helper'
+
+RSpec.describe "Components::Toasts", type: :feature, js: true do
   include Utils
 
-  class Matestack::Ui::Core::Component::Base
-    include Components::Registry
+  it 'toast is not shown on initial page load' do
+    matestack_render do
+      toast t_title: 'Bootstrap Toast', t_text: '11 mins ago', message: 'I`m a toast'
+    end
+    visit example_path
+    expect(page).not_to have_content 'Bootstrap Toast'
+    expect(page).not_to have_content '11 mins ago'
+    expect(page).not_to have_content 'I`m a toast'
+  end
+  
+  it 'reveals toast when show_on event is triggered' do
+    matestack_render do
+      toast t_title: 'Bootstrap Toast', t_text: '11 mins ago', message: 'I`m a toast',
+        show_on: 'show_toast'
+    end
+    visit '/example'
+    expect(page).not_to have_content 'Bootstrap Toast'
+    
+    page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_toast")')
+    expect(page).to have_content 'Bootstrap Toast'
   end
 
-  it 'renders basic toasts' do
-    toasts = matestack_component(:toast, 
-      t_title: "Bootstrap", t_text: "11 mins ago", 
-      message: "Hello, world! This is a toast message."
-    ).show.to_s
-    expected_toasts = <<~HTML
-      <div aria-atomic='true' aria-live='assertive' class='toast' role='alert'>
-        <div class='toast-header'>
-          <strong class='mr-auto'>Bootstrap</strong>
-          <small>11 mins ago</small>
-          <button aria-label='Close' class='ml-2 mb-1 close' data-dismiss='toast' type='button'>
-            <span aria-hidden='true'>&times;</span>
-          </button>
-        </div>
-        <div class='toast-body'>
-          <p>
-            Hello, world! This is a toast message.
-          </p>
-        </div>
-      </div>
-    HTML
-    expect(stripped(toasts)).to eq(stripped(expected_toasts))
-  end
-
-  # TODO: Test for show method & delay timeout
 end
