@@ -274,7 +274,6 @@ DEPENDENCIES
   rails (~> 6.0.3, >= 6.0.3.2)
   rspec-rails (~> 4.0.1)
   sass-rails (>= 6)
-  selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3 (~> 1.4)

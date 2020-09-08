@@ -14,6 +14,8 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
+require 'capybara/rspec'
+
 require File.expand_path('config/environment.rb')
 
 Dir[File.expand_path 'spec/support/**/*.rb'].each { |f| require f }
@@ -21,7 +23,8 @@ Dir[File.expand_path 'spec/support/**/*.rb'].each { |f| require f }
 require 'pry'
 
 RSpec.configure do |config|
-  # config.include Capybara::DSL
+  config.include Capybara::DSL
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

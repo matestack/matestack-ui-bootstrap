@@ -7,4 +7,8 @@ module Utils
       .gsub(/\s+/, "")
   end
 
+  def matestack_render(&block)
+    ExamplePage.define_method(:response, block)
+  end
+
 end
