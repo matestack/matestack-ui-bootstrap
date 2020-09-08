@@ -1,27 +1,6 @@
 class Components::Dynamic::Tooltip < Matestack::Ui::VueJsComponent
   vue_js_component_name "matestack-ui-bootstrap-tooltip" 
 
-  # How i imagine using a popover
-  #
-  # popover content: 'A popover' do
-  #   button text: 'Popover'
-  # end
-  # => <span data-toggle="popover" data-content="A Popover"><button>Popover</button></span>
-  #
-  # popover content: 'A popover', type: :div do
-  #   button text: 'Popover'
-  # end
-  # => <div data-toggle="popover" data-content="A Popover"><button>Popover</button></div>
-  #
-  # popover text: 'Popover', content: 'A popover', tag: :button # should be default
-  # => <button data-toggle="popover" data-content="A Popover">Popover</button>
-  #
-  # popover text: 'Popover', content: 'A popover', dismissible: true, tabindex: 2
-  # => <a tabindex="2" data-toggle="popover" data-content="A Popover" data-trigger="focus" role="button">Popover</a>
-  #
-  # popover text: 'Popover', content: 'A popover', tag: :a
-  # => <a data-toggle="popover" data-content="A Popover">Popover</a>
-
   DATA_ALIAS_ATTRIBUTES = %i[container delay selector html template fallback_placement]
 
   DATA_ALIAS_ATTRIBUTES.each do |attribute|
@@ -31,10 +10,10 @@ class Components::Dynamic::Tooltip < Matestack::Ui::VueJsComponent
   # TODO:
   # for security reasons the sanitize, sanitizeFn and whiteList options cannot be supplied using data attributes.
   # sanitize sanitize_fn white_list
-
+  optional :content
   optional class: { as: :bs_class }
   optional id: { as: :bs_id }
-  DATA_ATTRIBUTES = %i[type content title text style animation placement tabindex trigger boundary offset popper_config]
+  DATA_ATTRIBUTES = %i[type title text style animation placement tabindex trigger boundary offset popper_config]
   optional *DATA_ATTRIBUTES
 
 
@@ -82,6 +61,7 @@ class Components::Dynamic::Tooltip < Matestack::Ui::VueJsComponent
           hash[attribute] = self.send(:"#{attribute}") if self.send(:"#{attribute}")
         end
         hash[:toggle] = "tooltip"
+        hash[:'original-title'] = content
       end        
     end
     html_attributes.merge(
