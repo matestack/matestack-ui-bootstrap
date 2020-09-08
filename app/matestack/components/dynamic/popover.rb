@@ -22,6 +22,14 @@ class Components::Dynamic::Popover < Matestack::Ui::VueJsComponent
   # popover text: 'Popover', content: 'A popover', tag: :a
   # => <a data-toggle="popover" data-content="A Popover">Popover</a>
 
+
+  DATA_ATTRIBUTES = %i[animation container content delay html]
+  optional *DATA_ATTRIBUTES
+
+  DATA_ATTRIBUTES.each do |attribute|
+    optional "#{attribute}": { as: :"bs_#{attribute}"}
+  end
+
   optional :type # different element to apply 
   optional :content, :title # popover title and content strings
   optional :animation # boolean, default true
