@@ -4,6 +4,7 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-popover', {
   data() {
     return {
       popoverInstance: undefined
+
     };
   },
   methods: {
@@ -12,15 +13,7 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-popover', {
   mounted: function() {
     const self = this;
     var popover = self.$el
-    if(this.componentConfig['dismissible'] == true){
-      // initialize with dismissible settings
-      self.popoverInstance = new bootstrap.Popover(
-        
-      )
-    }
-    else {
-      // initialize normally
-    }
+    self.popoverInstance = new bootstrap.Popover(popover, {})
   },
   created: function() {
   },

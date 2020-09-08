@@ -133,10 +133,15 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     end
     # breadcrumb items: @breadcrumb_items
 
-
     container size: :lg, class: "bg-warning py-3 my-3" do
       row do
-        # popover text: "Popover"
+        col do          
+          popover text: "Popover", content: "Popover Content"
+        end
+        col do          
+          # <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="">Dismissible popover</a>
+          popover type: :link, placement: :top, tabindex: "0", style: :danger, trigger: "focus", title: "Dismissible popover", content: "And here's some amazing content. It's very engaging. Right?", text: "Dismissible Popover"
+        end
       end
       row do
         btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
