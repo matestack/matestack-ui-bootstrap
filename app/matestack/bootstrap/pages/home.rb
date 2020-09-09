@@ -142,6 +142,18 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
       end
     end
     # breadcrumb items: @breadcrumb_items
+    breadcrumb items: {
+      first: {
+        type: :link,
+        path: "/",
+        text: "Item 1",
+      },
+      second: {
+        type: :link,
+        path: "#",
+        text: "Item 1",
+      }
+    }
     br 
     container size: :lg, class: "bg-warning py-3 my-3" do
       row do
