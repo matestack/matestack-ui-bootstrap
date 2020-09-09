@@ -15,7 +15,7 @@ class Components::ButtonGroup < Matestack::Ui::StaticComponent
   def buttongroup_attributes
     attributes = {}.tap do |hash|
       hash[:class] = buttongroup_classes
-      hash[:attributes] = { role: "#{type}", 'aria-label': bs_label } if type.present?
+      hash[:attributes] = { role: "#{type.present? ? type : 'group'}", 'aria-label': bs_label } 
     end
     html_attributes.merge(
       attributes
@@ -24,9 +24,12 @@ class Components::ButtonGroup < Matestack::Ui::StaticComponent
 
   def buttongroup_classes
     [].tap do |classes|
-      classes << (type.present? ? "btn-#{type}#{"-vertical" if vertical}" : "btn-group")
+      classes << (type.present? ? "btn-#{type}#{verti}" : "btn-group#{verti}")
       classes << "btn-group-#{size}" if size.present?
       classes << bs_class
     end.join(' ').strip
+  end
+  def verti 
+    attrs = "-vertical" if vertical
   end
 end

@@ -300,12 +300,12 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     container size: :lg, class: "bg-dark py-4" do
       row do
         col do
-          btn_group label: "Basic Example 2" do 
-            btn text: "Tab 4"
-            btn text: "Tab 5"
-            btn text: "Tab 6"
+          btn_group vertical: true, label: "Vertical Example" do 
+            btn text: "V_Tab 4"
+            btn text: "V_Tab 5"
+            btn text: "V_Tab 6"
           end
-          btn_group size: 2, label: "Basic Example 2" do 
+          btn_group size: :sm, label: "Basic Example 2" do 
             btn text: "Tab 4"
             btn text: "Tab 5"
             btn text: "Tab 6"
@@ -316,7 +316,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
               btn text: "Tab 2"
               btn text: "Tab 3"
             end
-            btn_group type: :group, size: 3, label: "Basic Example 2" do 
+            btn_group type: :group, label: "Basic Example 2" do 
               btn text: "Tab 4"
               btn text: "Tab 5"
               btn text: "Tab 6"
