@@ -366,29 +366,27 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     container class: "my-5 py-3 wrapper bg-warning" do
       row horizontal: :center do
         col md: 6 do
-          # card img_path: image_url("matestack-data.png"), title: "Card title", 
-          #     text: "Some quick example text to build on the card title and make up the bulk of the card's content." do
-          #   div class: "p-3" do
-          #     btn text: "Card Button"
-          #     btn text: "Another Button"
-          #   end
-          # end
-          card text: "With supporting text below as a natural lead-in to additional content.", 
-                title: "Special title treatment", 
-                slots: { header: my_card_header, footer: my_card_footer }, 
-                footer_class: "text-muted", class: "text-center"
+          card text: "Some quick example text to build on the card title and make up the bulk of the card's content.",
+          title: "Card title", header_text: "Card Header", hide_footer: true do
+            div class: "p-3" do
+              btn text: "Card Button"
+              btn text: "Another Button"
+            end
+          end
         end
+          # card text: "With supporting text below as a natural lead-in to additional content.", 
+          #       title: "Special title treatment", 
+          #       slots: { header: my_card_header, footer: my_card_footer }, 
+          #       footer_class: "text-muted", class: "text-center"
       end
     end
     container size: :fluid, class: "py-3 mb-3" do
       row do
-    #     3.times do
-          col md: 4 do
-    #         card img_path: image_url("matestack-data.png"), text: "Some quick example text to build on the card title and make up the bulk of the card's content.",
-    #             slots: { body: my_card_body } do
-    #               plain "Yield Content"
-    #             end
-    #       end
+        col md: 4 do
+          card img_path: image_url("matestack-data.png"), text: "Some quick example text to build on the card title and make up the bulk of the card's content.",
+              slots: { body: my_card_body }, hide_footer: true, hide_header: true do
+                plain "Yield Content"
+          end
         end
       end
     end
@@ -396,14 +394,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
 
   def my_card_header
     slot {
-      ul class: "nav nav-tabs card-header-tabs" do
-        li class: "nav-item" do 
-          link class: "nav-link", path: "#", text: "Tab 1"  
-        end
-        li class: "nav-item" do 
-          link class: "nav-link", path: "#", text: "Tab 2"  
-        end
-      end
+      nav items: @nav_items, horizontal: :center, tabs: true
     }
   end
 

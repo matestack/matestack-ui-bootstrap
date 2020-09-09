@@ -1,21 +1,21 @@
 class Components::Card < Matestack::Ui::StaticComponent
 
   optional class: { as: :bs_class }
-  optional :header_class, :header # header attributes
+  optional :header_class, :header_text, :hide_header # header attributes
   optional :title, :text, :img_path, :img_pos, :alt_text # body attributes
-  optional :footer_class, :footer # footer attributes
-  
+  optional :footer_class, :footer_text, :hide_footer # footer attributes
+
   def response
     div card_attributes do
-      header_partial
+      header_partial if !hide_header
 
-      img_partial img_pos if img_pos == :top
+      img_partial :top if img_pos != :bottom
       body_partial
       # custom body components
       yield_components
-      img_partial img_pos if img_pos == :bottom
+      img_partial :bottom if img_pos == :bottom
 
-      footer_partial
+      footer_partial if !hide_footer
     end
   end
 
@@ -24,7 +24,7 @@ class Components::Card < Matestack::Ui::StaticComponent
   def header_partial
     div class: "card-header #{header_class}" do
       slot options[:slots][:header] if options[:slots] && options[:slots][:header]
-      plain header if header.present?
+      plain header_text if header_text.present?
     end
   end
 
@@ -39,7 +39,7 @@ class Components::Card < Matestack::Ui::StaticComponent
   def footer_partial
     div class: "card-footer #{footer_class}" do
       slot options[:slots][:footer] if options[:slots] && options[:slots][:footer]
-      plain footer if footer.present?
+      plain footer_text if footer_text.present?
     end
   end
 
