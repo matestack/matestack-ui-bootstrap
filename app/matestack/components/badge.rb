@@ -1,20 +1,28 @@
 class Components::Badge < Matestack::Ui::StaticComponent
   
+  optional class: { as: :bs_class }
+  optional :text, :color, :rounded
   def response
-    span id: "#{options[:id]}", class: "badge #{badge_classes}" do
-      plain @options[:text] 
+    span badge_attributes do
+      plain text if text
       yield_components
     end
   end
 
+  protected
+
+  def badge_attributes
+    html_attributes.merge(
+      class: badge_classes
+    )
+  end
+
   def badge_classes
-    badge_classes = []
-
-    bg_color = @options[:color].present? ? "bg-#{@options[:color]}" : "bg-primary"
-    badge_classes << bg_color
-
-    badge_classes << "rounded-pill" if @options[:rounded].present? && @options[:rounded]
-    badge_classes << @options[:class]
-    badge_classes.join(' ')
+    [].tap do |classes|
+      classes << 'badge'
+      classes << (color.present? ? "bg-#{color}" : "bg-primary")
+      classes << "rounded-pill" if rounded
+      classes << bs_class
+    end.join(' ').strip
   end
 end
