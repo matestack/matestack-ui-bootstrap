@@ -1,58 +1,63 @@
 class Components::Card < Matestack::Ui::StaticComponent
 
+  optional class: { as: :bs_class }
+  optional :header_class, :header # header attributes
+  optional :title, :text, :img_path, :img_pos, :alt_text # body attributes
+  optional :footer_class, :footer # footer attributes
+  
   def response
-    div id: "#{options[:id]}", class: "card #{options[:class]}" do
-      
-      # ---start card header----
-      if options[:slots] && options[:slots][:header]
-        div class: "card-header #{options[:header_class]}" do
-          slot options[:slots][:header]
-        end
-      else
-        if options[:header].present?
-          div class: "card-header #{options[:header_class]}" do
-            plain options[:header]
-          end
-        end
-      end
-      # ---end card header----
+    div card_attributes do
+      header_partial
 
-      if @options[:img_path].present? && @options[:img_pos] != :bottom
-        img class: "card-img-top", path: @options[:img_path], alt: @options[:alt_text]
-      end
-
-      # ---start card body---
-      div class: "card-body" do
-        if options[:slots] && options[:slots][:body]
-          slot options[:slots][:body]
-        else
-          heading size: title_size, class: 'card-title', text: @options[:title] if @options[:title].present?
-          paragraph class: "card-text", text: options[:text] if options[:text].present?
-        end
-      end
-
+      img_partial img_pos if img_pos == :top
+      body_partial
       # custom body components
       yield_components
-      
-      if @options[:img_path].present? && @options[:img_pos] == :bottom
-        img class: "card-img-bottom", path: @options[:img_path], alt: @options[:alt_text]
-      end
-      # ---end card body----
+      img_partial img_pos if img_pos == :bottom
 
-      # ---start card footer----
-      if options[:slots] && options[:slots][:footer]
-        div class: "card-footer #{options[:footer_class]}" do
-          slot options[:slots][:footer]
-        end
-      else
-        if options[:header].present?
-          div class: "card-footer #{options[:footer_class]}" do
-            plain options[:footer]
-          end
-        end
-      end
-      # ---end card footer----
+      footer_partial
     end
+  end
+
+  protected
+
+  def header_partial
+    div class: "card-header #{header_class}" do
+      slot options[:slots][:header] if options[:slots] && options[:slots][:header]
+      plain header if header.present?
+    end
+  end
+
+  def body_partial
+    div class: "card-body" do
+      heading size: title_size, class: 'card-title', text: title if title.present?
+      paragraph class: "card-text", text: text if text.present?
+      slot options[:slots][:body] if options[:slots] && options[:slots][:body]
+    end
+  end
+
+  def footer_partial
+    div class: "card-footer #{footer_class}" do
+      slot options[:slots][:footer] if options[:slots] && options[:slots][:footer]
+      plain footer if footer.present?
+    end
+  end
+
+  def img_partial pos
+    img class: "card-img-#{pos}", path: img_path, alt: alt_text if img_path.present?
+  end
+
+  def card_attributes
+    html_attributes.merge(
+      class: card_classes
+    )
+  end
+
+  def card_classes
+    [].tap do |classes|
+      classes << 'card'
+      classes << bs_class
+    end.join(' ').strip
   end
 
   def title_size
