@@ -3,7 +3,6 @@ class Components::Close < Matestack::Ui::StaticComponent
   optional :dismiss, class: { as: :bs_class }
 
   def response
-    # could not test it fully, need modal component 
     button close_attributes do
       span attributes: { 'aria-hidden': 'true' } do
         plain "&times;".html_safe
