@@ -9,7 +9,7 @@ module Components::Registry
     btn: Components::Button,
     breadcrumb: Components::Breadcrumb,
     close: Components::Close,
-    btn_group: Components::BtnGroup,
+    btn_group: Components::ButtonGroup,
     badge: Components::Badge,
     progress: Components::Progress,
     spinner: Components::Spinner,
