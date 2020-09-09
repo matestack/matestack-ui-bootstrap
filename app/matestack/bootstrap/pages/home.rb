@@ -323,9 +323,8 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
             end
           end
           badge text: "9 - warning", color: :warning
-          btn text: "Button", size: 2, style: :outline_primary
-          btn text: "Button with Badge" do
-            badge text: "primary", color: :success, class: "text-dark"
+          btn text: "Button" do
+            badge text: "2", color: :secondary, sr_only: "unread message"
           end
           link path: "https://matestack.io" do
             close
