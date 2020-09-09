@@ -5,7 +5,7 @@ class Components::Button < Matestack::Ui::StaticComponent
   def response 
     button button_attributes do
       plain text if text
-      yield_components if !text
+      yield_components
     end
   end
 
