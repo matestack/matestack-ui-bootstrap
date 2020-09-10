@@ -278,7 +278,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     container size: :lg, class: "bg-warning py-3 my-3" do
       row do
         col do
-          pagination items: @page_item_2, active_item: 1, size: 2
+          pagination items: @page_item_2, size: :sm
           pagination class: "justify-content-center" do
             @page_item.each do |text, path|
               li class: "page-item" do

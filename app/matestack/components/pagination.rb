@@ -1,15 +1,14 @@
 class Components::Pagination < Matestack::Ui::StaticComponent
-
-  def prepare
-    @page_items = @options[:items] 
-  end
+  
+  optional class: { as: :bs_class }, label: { as: :bs_label }
+  optional :items, :size, :items_id, :items_class, :text
 
   def response 
-    nav attributes: { 'aria-label':"#{@options[:label]}" } do
-      ul id: "#{@options[:id]}", class: "pagination #{ul_classes}" do
-        if @options[:items].present? && @options[:items].length() >= 1
-          @page_items.each_with_index do |(text, path), index|
-            li class: "page-item #{"active" if @options[:active_item] == index}" do
+    nav pagination_attributes do
+      ul ul_attributes do
+        if items.present? && items.length() >= 1
+          items.each_with_index do |(text, path), index|
+            li class: "page-item #{'active' if path == request.fullpath }" do
               link class: "page-link", path: path do
                 plain text
               end
@@ -25,15 +24,32 @@ class Components::Pagination < Matestack::Ui::StaticComponent
 
   protected
 
-  def ul_classes
-    classes = []
-    classes << "pagination-#{pagination_sizes.at(@options[:size] - 1)}" if @options[:size].present? && @options[:size].between?(1, 2) 
-    classes << @options[:class]
-    classes.join(' ')
+  def pagination_attributes
+    html_attributes.merge(
+      class: pagination_classes,
+      attributes: { 'aria-label': "#{bs_label}" }
+    )
   end
 
-  def pagination_sizes
-    [:sm, :lg]
+  def pagination_classes
+    [].tap do |classes|
+      classes << bs_class
+    end.join(' ').strip
+  end
+
+  def ul_attributes
+    {}.tap do |hash| 
+      hash[:id] = items_id
+      hash[:class] = ul_classes
+    end
+  end
+
+  def ul_classes
+    [].tap do |classes|
+      classes << "pagination"
+      classes << "pagination-#{size}" if size.present? 
+      classes << items_class
+    end.join(' ').strip
   end
 
 end
