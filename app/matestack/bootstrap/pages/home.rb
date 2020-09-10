@@ -293,7 +293,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         col sm: 12, md: 4, lg: 4, order_lg: 5, class: "bg-info" do          
           paragraph text: "Test 2"
         end
-        col md: 4, order_lg: 1, class: "bg-primary" do
+        col md: 4, order_lg: 1, class: "bg-primary", offset: 2 do
           paragraph text: "Test 3"
         end
       end
