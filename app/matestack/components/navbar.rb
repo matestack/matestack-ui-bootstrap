@@ -6,7 +6,7 @@ class Components::Navbar < Matestack::Ui::StaticComponent
   optional class: { as: :bs_class }
   optional :items, :toggle_pos, :theme, :hide_at, :color
   optional :brand_img, :brand_path, :brand_text
-  optional :list_class, :toggle_class, :container_size
+  optional :items_class, :toggle_class, :container_size
 
   def response 
     nav navbar_attributes do
@@ -36,7 +36,7 @@ class Components::Navbar < Matestack::Ui::StaticComponent
 
   def navbar_content_partial
     div class: "collapse navbar-collapse", id: 'matestackNavbarContent' do
-      ul class: list_classes do
+      ul class: items_classes do
         items.each do |key, item|
           li class: "nav-item" do
             if item[:type] == :transition
@@ -93,11 +93,11 @@ class Components::Navbar < Matestack::Ui::StaticComponent
     end
   end
 
-  def list_classes
+  def items_classes
     [].tap do |classes|
       classes << 'navbar-nav'
-      classes << list_class
-      classes << "align-items-center ml-auto" unless list_class.present?
+      classes << items_class
+      classes << "align-items-center ml-auto" unless items_class.present?
     end.join(' ').strip
   end
 end

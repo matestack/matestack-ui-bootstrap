@@ -113,10 +113,12 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
   def response
     # nav items: @nav_items, horizontal: :center, tabs: true
 
-    navbar brand_text: "BRAND TEXT", brand_path: "#", theme: :light, sticky_top: true,
+    navbar brand_text: "BRAND TEXT", brand_path: "#", theme: :dark, sticky_top: true, items_class: "mr-auto ml-auto",
             items: { home: {type: :transition, path: "/", text: "Home"}, 
                     product: {type: :transition, path: "/", text: "Product"}, 
-                    contact: {type: :transition, path: "/", text: "Contact"}, }
+                    contact: {type: :transition, path: "/", text: "Contact"}, } do
+                      btn text: "Login"
+                    end
 
     div class: "tab-content" do
       div class: "tab-pane active", id: "home", attributes: { role: "tabpanel", 'aria-labelledby':  "home-tab" } do
