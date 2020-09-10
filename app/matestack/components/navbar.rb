@@ -1,41 +1,25 @@
 class Components::Navbar < Matestack::Ui::StaticComponent
-  def prepare
-    @list_items = @options[:list] 
-  end
+
+  POS_ATTRIBUTES = %i[fixed_top fixed_bottom sticky_top]
+  optional *POS_ATTRIBUTES
+
+  optional class: { as: :bs_class }
+  optional :items, :toggle_pos, :theme, :hide_at, :color
+  optional :brand_img, :brand_path, :brand_text
+  optional :list_class, :toggle_class, :container_size
+
   def response 
-    nav id: @options[:id], class: navbar_classes do
-      container size: container_classes do
+    nav navbar_attributes do
+      container size: "#{container_size.present? ? container_size : "fluid" }" do
         # custom elements for navbar
         if options[:slots] && options[:slots][:custom_items]
           slot options[:slots][:custom_items]
         else
-        # pre-define standard element: brand, link list
-          toggle_button if @options[:toggle_pos].present? && @options[:toggle_pos] == :left
-          if @options[:brand].present?            
-            @options[:brand].each do |path, content|
-              link class: "navbar-brand", path: "#{path}" do plain content end
-            end
-          end
-
-          toggle_button if !@options[:toggle_pos].present? || @options[:toggle_pos] == :right
+          toggle_button if toggle_pos == :left
+          brand_partial if brand_text || brand_img
+          toggle_button if !toggle_pos.present? || toggle_pos == :right
           
-          div class: "collapse navbar-collapse", id: 'matestackNavbarContent' do
-            if @options[:list].present?
-              ul class: "navbar-nav #{list_classes}" do
-                @list_items.each do |key, item|
-                  li class: "nav-item" do
-                    if item[:type] == :transition
-                      transition class: "nav-link", path: item[:path], text: item[:text]
-                    end
-                    if item[:type] == :link
-                      link class: "nav-link", path: item[:path], text: item[:text]
-                    end
-                  end
-                end
-              end
-            end
-            yield_components
-          end
+          navbar_content_partial
         end
       end
     end
@@ -43,43 +27,77 @@ class Components::Navbar < Matestack::Ui::StaticComponent
 
   protected
 
+  def brand_partial
+    link class: "navbar-brand", path: brand_path do 
+      plain brand_text if brand_text.present?
+      img path: brand_img, attributes: { loading: "lazy" } if brand_img.present?
+    end
+  end
+
+  def navbar_content_partial
+    div class: "collapse navbar-collapse", id: 'matestackNavbarContent' do
+      ul class: list_classes do
+        items.each do |key, item|
+          li class: "nav-item" do
+            if item[:type] == :transition
+              transition class: "nav-link", path: item[:path], text: item[:text]
+            end
+            if item[:type] == :link
+              link class: "nav-link", path: item[:path], text: item[:text]
+            end
+          end
+        end
+      end
+      yield_components
+    end
+  end
+
+  def navbar_attributes
+    html_attributes.merge(
+      class: navbar_classes
+    )
+  end
+
+  def navbar_classes
+    [].tap do |classes|
+      classes << "navbar"
+      POS_ATTRIBUTES.each do |pos| 
+        
+        classes << "#{pos}".gsub('_','-') if self.send("#{pos}")
+      end
+      classes << "navbar-expand-#{ (hide_at.present? ? hide_at : "lg") }"
+      classes << "navbar-#{theme}" if  theme.present?
+      classes << (color.present? ? "bg-#{color}" : "bg-#{theme}")
+      classes << bs_class
+    end.join(' ').strip
+  end
+
   def toggle_button
-    button class: "navbar-toggler #{toggle_classes}", attributes: { 'data-toggle': 'collapse', 'data-target': '#matestackNavbarContent', 'aria-controls': 'matestackNavbarContent', 'aria-expanded': 'false', 'aria-label': 'Toggle navigation' } do
+    button toggle_attributes do
       span class: "navbar-toggler-icon"
     end
   end
 
-  def toggle_classes
-    classes = []
-    classes << "ml-auto" if @options[:toggle_pos] == :right
-    classes << "mr-auto" if @options[:toggle_pos] == :left
-    classes << @options[:toggle_class]
-    classes.join(' ') 
-  end
+  def toggle_attributes
+    toggle_classes = [].tap do |classes|
+      classes << 'navbar-toggler'
+      classes << "ml-auto" if toggle_pos == :right
+      classes << "mr-auto" if toggle_pos == :left
+      classes << toggle_class
+    end.join(' ').strip
 
-  def navbar_classes
-    classes = []
-    classes << "navbar"
-    [:fixed_top, :fixed_bottom, :sticky_top].each do |pos| 
-      classes << "#{pos}".gsub('_','-') if @options[pos].present? && @options[pos]
+    {}.tap do |hash|
+      hash[:class] = toggle_classes
+      hash[:data] = { toggle: 'collapse', target: '#matestackNavbarContent' }
+      hash[:attributes] = { 'aria-controls': 'matestackNavbarContent', 'aria-expanded': 'false', 'aria-label': 'Toggle navigation' }
     end
-    breakpoint = @options[:hide_at].present? ? @options[:hide_at] : "lg"
-    classes << "navbar-expand-#{breakpoint}"
-    classes << "navbar-#{@options[:theme]}" if  @options[:theme].present?
-    @options[:color].present? ? classes << "bg-#{@options[:color]}" : classes << "bg-#{@options[:theme]}"
-    classes << @options[:class]
-    classes.join(' ') 
   end
 
   def list_classes
-    classes = []
-    classes << @options[:list_class]
-    classes << "align-items-center ml-auto" unless @options[:list_class].present?
-    classes.join(' ') 
-  end
-
-  def container_classes
-    attrs = @options[:container_size].present? ? "#{@options[:container_size]}" : "fluid"
-    attrs 
+    [].tap do |classes|
+      classes << 'navbar-nav'
+      classes << list_class
+      classes << "align-items-center ml-auto" unless list_class.present?
+    end.join(' ').strip
   end
 end

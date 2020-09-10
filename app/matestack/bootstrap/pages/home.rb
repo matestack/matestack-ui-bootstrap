@@ -111,7 +111,12 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
   end
 
   def response
-    nav items: @nav_items, horizontal: :center, tabs: true
+    # nav items: @nav_items, horizontal: :center, tabs: true
+
+    navbar brand_text: "BRAND TEXT", brand_path: "#", theme: :light, sticky_top: true,
+            items: { home: {type: :transition, path: "/", text: "Home"}, 
+                    product: {type: :transition, path: "/", text: "Product"}, 
+                    contact: {type: :transition, path: "/", text: "Contact"}, }
 
     div class: "tab-content" do
       div class: "tab-pane active", id: "home", attributes: { role: "tabpanel", 'aria-labelledby':  "home-tab" } do
@@ -204,7 +209,6 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
           paragraph do
             btn text: "Collapse Btn", data: { toggle:"collapse", target:"#collapseExample" }, attributes: { "aria-expanded":"false", "aria-controls":"collapseExample" }
           end
-
           collapse id: "collapseExample", text: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident."
         end
       end
