@@ -111,7 +111,6 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
   end
 
   def response
-    # nav items: @nav_items, horizontal: :center, tabs: true
 
     navbar brand_text: "BRAND TEXT", brand_path: "#", theme: :dark, sticky_top: true, items_class: "mr-auto ml-auto",
             items: { home: {type: :transition, path: "/", text: "Home"}, 
@@ -119,7 +118,12 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
                     contact: {type: :transition, path: "/", text: "Contact"}, } do
                       btn text: "Login"
                     end
-
+    nav items: {
+      home: { type: :link, path: "#home", text: "Home" },
+      product: { type: :link, path: "#profile", text: "Profile" },
+      team: { type: :link, path: "#messages", text: "Message" },
+    }, pills: true, vertical: true
+    nav items: @nav_items, horizontal: :center, tabs: true
     div class: "tab-content" do
       div class: "tab-pane active", id: "home", attributes: { role: "tabpanel", 'aria-labelledby':  "home-tab" } do
         plain "Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
