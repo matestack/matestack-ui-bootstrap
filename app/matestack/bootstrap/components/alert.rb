@@ -6,7 +6,7 @@ class Bootstrap::Components::Alert < Matestack::Ui::VueJsComponent
 
   def response
     div alert_attributes do
-      heading size: (title_size || 4), class: 'alert-heading', title if title
+      heading size: (title_size || 4), class: 'alert-heading', text: title if title
       paragraph text: text if text
       close dismiss: "alert" if dismissible
       yield_components
