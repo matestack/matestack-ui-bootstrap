@@ -1,10 +1,7 @@
-RSpec.describe 'Bootstrap::Components::Listgroup' do
-  include Matestack::Ui::Core::ApplicationHelper
-  include Utils
+require 'rails_helper'
 
-  class Matestack::Ui::Core::Component::Base
-    include Components::Registry
-  end
+RSpec.describe 'Bootstrap::Components::Listgroup' do
+  include Utils
   
   it 'renders basic listgroup' do
     listgroup = matestack_component(:listgroup, items: {

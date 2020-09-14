@@ -97,9 +97,11 @@ RSpec.configure do |config|
 =end
 
   config.before :all, type: :feature do
-    Rails.application.routes.append do
-      get '/example', to: 'example#example', as: :example
+    unless Rails.application.routes.url_helpers.method_defined?(:example_path)
+      Rails.application.routes.append do
+        get '/example', to: 'example#example', as: :example 
+      end
+      Rails.application.reload_routes!
     end
-    Rails.application.reload_routes!
   end
 end

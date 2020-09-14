@@ -1,7 +1,7 @@
 class Bootstrap::Components::Badge < Matestack::Ui::Component
   
   optional class: { as: :bs_class }
-  optional :text, :color, :rounded, :sr_only
+  optional :text, :variant, :rounded, :sr_only
 
   def response
     span badge_attributes do
@@ -22,7 +22,7 @@ class Bootstrap::Components::Badge < Matestack::Ui::Component
   def badge_classes
     [].tap do |classes|
       classes << 'badge'
-      classes << (color.present? ? "bg-#{color}" : "bg-primary")
+      classes << (variant.present? ? "bg-#{variant}" : "bg-primary")
       classes << "rounded-pill" if rounded
       classes << bs_class
     end.join(' ').strip

@@ -20,7 +20,6 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
     end
     visit '/example'
     expect(page).not_to have_content 'Bootstrap Toast'
-    
     page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_toast")')
     expect(page).to have_content 'Bootstrap Toast'
   end
