@@ -1,25 +1,31 @@
 class Bootstrap::Components::Spinner < Matestack::Ui::Component
+
+  optional class: { as: :bs_class }
+  optional :type, :color, :smaller
+
   def response 
-    div id: "#{@options[:id]}", class: "#{spinner_class}", attributes: { 'role':"status" } do
+    div spinner_attributes do
       span class: "sr-only", text: "Loading..."
     end
   end
 
   protected
 
-  def spinner_class
-    classes = []
-
-    type = @options[:type].present? ? @options[:type].to_s : "border"
-    classes << "spinner-#{type}" 
-
-    color = @options[:color].to_s if @options[:color].present?
-    classes << "text-#{color}" 
-
-    classes << "spinner-#{type}-sm" if @options[:small].present? && @options[:small] == true
-    #optional classes
-    classes << @options[:class]
-    classes.join(' ') 
+  def spinner_attributes
+    html_attributes.merge(
+      class: spinner_class,
+      attributes: { 'role': "status" }
+    )
   end
 
+  def spinner_class
+    [].tap do |classes|
+      spinner_type = (type.present? ? type : 'border')
+      classes << "spinner-#{spinner_type}" 
+      classes << "text-#{color}"  if color.present?
+      classes << "spinner-#{spinner_type}-sm" if smaller
+      #optional classes
+      classes << bs_class
+    end.join(' ').strip
+  end
 end

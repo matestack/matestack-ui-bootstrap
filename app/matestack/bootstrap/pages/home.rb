@@ -364,7 +364,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         spinner color: :primary
         col md: 6 do
           btn style: :secondary, size: 2, class: "text-center p-4" do
-            spinner type: :grow, small: true, color: :success
+            spinner type: :grow, smaller: true, color: :success
             plain "Loading..."
           end
           btn style: :success do
