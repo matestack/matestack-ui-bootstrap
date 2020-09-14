@@ -66,7 +66,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         text: "Separated link"
       }
     }
-    @listgroup_items = {
+    @list_group_items = {
       first: {
         type: :link,
         path: "#",
@@ -138,8 +138,8 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
 
     container size: :lg, class: "bg-light py-3 my-3" do
       row horizontal: :center, vertical: :center do
-        # listgroup items: @listgroup_items, checkbox: true
-        listgroup id: "list-example3", items: {
+        # list_group items: @list_group_items, checkbox: true
+        list_group id: "list-example3", items: {
           first: { type: :link, path: "#list-item1", content: "Item 1" },
           second: { type: :link, path: "#list-item2", content: "Item 2" } }
         

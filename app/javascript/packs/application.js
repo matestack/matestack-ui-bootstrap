@@ -12,13 +12,13 @@ import MatestackUiCore from 'matestack-ui-core';
 
 import "./stylesheets/application.scss";
 
-import '../../matestack/components/dynamic/alert'
-import '../../matestack/components/dynamic/carousel'
-import '../../matestack/components/dynamic/collapse'
-import '../../matestack/components/dynamic/dropdown'
-import '../../matestack/components/dynamic/toast'
-import '../../matestack/components/dynamic/popover'
-import '../../matestack/components/dynamic/tooltip'
+import '../../matestack/bootstrap/components/alert'
+import '../../matestack/bootstrap/components/carousel'
+import '../../matestack/bootstrap/components/collapse'
+import '../../matestack/bootstrap/components/dropdown'
+import '../../matestack/bootstrap/components/toast'
+import '../../matestack/bootstrap/components/popover'
+import '../../matestack/bootstrap/components/tooltip'
 
 
 // document.addEventListener("turbolinks:load", () => {
