@@ -1,11 +1,11 @@
 class Bootstrap::Components::Spinner < Matestack::Ui::Component
 
   optional class: { as: :bs_class }
-  optional :type, :color, :smaller
+  optional :kind, :color, :size, :sr_only
 
   def response 
     div spinner_attributes do
-      span class: "sr-only", text: "Loading..."
+      span class: "sr-only", text: sr_only || "Loading..."
     end
   end
 
@@ -20,10 +20,10 @@ class Bootstrap::Components::Spinner < Matestack::Ui::Component
 
   def spinner_class
     [].tap do |classes|
-      spinner_type = (type.present? ? type : 'border')
-      classes << "spinner-#{spinner_type}" 
+      spinner_kind = (kind.present? ? kind : 'border')
+      classes << "spinner-#{spinner_kind}" 
       classes << "text-#{color}"  if color.present?
-      classes << "spinner-#{spinner_type}-sm" if smaller
+      classes << "spinner-#{spinner_kind}-sm" if size
       #optional classes
       classes << bs_class
     end.join(' ').strip
