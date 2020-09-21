@@ -110,7 +110,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     }
   end
 
-  def response
+  def response 
     navbar brand_text: "BRAND TEXT", brand_path: "#", theme: :dark, sticky_top: true, items_class: "mr-auto ml-auto",
             items: { home: {type: :transition, path: "/", text: "Home"}, 
                     product: {type: :transition, path: "/", text: "Product"}, 
@@ -134,6 +134,8 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         plain "do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
       end
     end
+    
+    badge
 
     container size: :lg, class: "bg-light py-3 my-3" do
       row horizontal: :center, vertical: :center do
