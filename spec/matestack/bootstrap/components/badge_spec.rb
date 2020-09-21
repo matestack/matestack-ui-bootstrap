@@ -3,6 +3,12 @@ require 'rails_helper'
 describe 'Bootstrap::Components::Badge', type: :feature, js: true do
   include Utils
 
+  it 'renders a secondary badge as default' do
+    matestack_render {badge}
+    pending
+    fail
+  end
+
   it 'renders simple badge with variant' do
     matestack_render do
       badge variant: :warning, text: "warning"
@@ -22,4 +28,5 @@ describe 'Bootstrap::Components::Badge', type: :feature, js: true do
     expect(page).to have_selector('span.badge.bg-secondary')
     expect(page).to have_selector('span.sr-only')
   end
+  
 end
