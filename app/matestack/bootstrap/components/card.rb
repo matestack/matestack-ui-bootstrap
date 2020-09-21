@@ -28,7 +28,7 @@ class Bootstrap::Components::Card < Matestack::Ui::Component
 
       img_partial :bottom if img_pos == :bottom
 
-      footer_partial if !hide_footer
+      footer_partial if footer || slots && slots[:footer]
     end
   end
 

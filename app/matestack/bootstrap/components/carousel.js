@@ -8,5 +8,6 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-carousel', {
   mounted() {
     var myCarousel = document.getElementById(this.componentConfig["carousel-id"])
     // this.carouselInstance = new bootstrap.Carousel(myCarousel)
+    // TODO we should implement the methods with event based options like toast, alert etc.
   }
 });

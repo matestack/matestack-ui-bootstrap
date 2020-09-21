@@ -1,7 +1,9 @@
 class Bootstrap::Components::Carousel < Matestack::Ui::VueJsComponent
   vue_js_component_name "matestack-ui-bootstrap-carousel" 
   
-  optional :items, :indicator, :control, :fade, class: { as: :bs_class }
+  optional :items 
+  optional :controls, :indicators, :fade, class: { as: :bs_class }
+  optional :start
 
   def setup
     @component_config["carousel-id"] = carousel_id
@@ -10,15 +12,13 @@ class Bootstrap::Components::Carousel < Matestack::Ui::VueJsComponent
   def response
     div carousel_attributes do
       # carousel indicator
-      indicator_partial if indicator.present?
-
+      indicator_partial if indicators.present?
       # carousel content
       div class: "carousel-inner" do
-        yield_components if items.blank?
-        carousel_partial if !items.blank?
+        yield_components unless items
+        carousel_partial if items
       end
-
-      controls_partial if control
+      controls_partial if controls
     end
   end
 
@@ -26,19 +26,23 @@ class Bootstrap::Components::Carousel < Matestack::Ui::VueJsComponent
 
   def indicator_partial
     ol class: "carousel-indicators" do
-      indicator.each_with_index do |item, index|
-        li data: { target: carousel_id, 'slide-to': index }, class: "#{'active' if index == 0 }"
+      items.size.times do |index|
+        li data: { target: carousel_id, 'slide-to': index }, 
+          class: "#{'active' if index == (start || 0) }"
       end
     end
   end
 
   def carousel_partial
-    items.each_with_index do |(key, item), index|
-      div class: "carousel-item #{'active' if index == 0 }", data: { interval: item[:interval] } do
+    items.each_with_index do |item, index|
+      div class: "carousel-item #{'active' if index == (start || 0) }", 
+        data: { interval: item[:interval] } do
         img class: "d-block w-100", path: item[:path]
-        div class: "carousel-caption d-none d-md-block" do
-          heading size: 5, text: item[:title]
-          paragraph text: item[:text]
+        if item[:title] || item[:text]
+          div class: "carousel-caption d-none d-md-block" do
+            heading size: 5, text: item[:title]
+            paragraph text: item[:text]
+          end
         end
       end
     end
