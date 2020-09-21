@@ -4287,9 +4287,9 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-"matestack-ui-core@https://github.com/matestack/matestack-ui-core#next-release":
-  version "1.0.0-rc1"
-  resolved "https://github.com/matestack/matestack-ui-core#93651a7bef1da6d89b487ed838184f85c918854c"
+"matestack-ui-core@https://github.com/matestack/matestack-ui-core#v1.0.0":
+  version "1.0.0"
+  resolved "https://github.com/matestack/matestack-ui-core#4849d221a5f9effa239570dc404047586948066f"
   dependencies:
     axios "^0.18.1"
     link-module-alias "^1.2.0"
@@ -7294,9 +7294,9 @@ vue-turbolinks@^2.1.0:
     vue "^2.2.4"
 
 vue@^2.2.4, vue@^2.5.17:
-  version "2.6.11"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
-  integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
+  version "2.6.12"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
+  integrity sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
 
 vuex@^3.0.1:
   version "3.5.1"
@@ -7576,6 +7576,6 @@ yargs@^13.3.2:
     yargs-parser "^13.1.2"
 
 yarn@^1.22.0:
-  version "1.22.4"
-  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.22.4.tgz#01c1197ca5b27f21edc8bc472cd4c8ce0e5a470e"
-  integrity sha512-oYM7hi/lIWm9bCoDMEWgffW8aiNZXCWeZ1/tGy0DWrN6vmzjCXIKu2Y21o8DYVBUtiktwKcNoxyGl/2iKLUNGA==
+  version "1.22.5"
+  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.22.5.tgz#1933b7635429ca00847222dd9d38f05646e2df23"
+  integrity sha512-5uzKXwdMc++mYktXqkfpNYT9tY8ViWegU58Hgbo+KXzrzzhEyP1Ip+BTtXloLrXNcNlxFJbLiFKGaS9vK9ym6Q==

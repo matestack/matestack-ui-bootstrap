@@ -24,6 +24,10 @@ module Bootstrap::Registry
     tooltip: Bootstrap::Components::Tooltip,
   }
 
+  FORMS = {
+    bootstrap_checkbox: Bootstrap::Form::Checkbox
+  }
+
   CONTENT = {
     figure: Bootstrap::Content::Figure,
     table: Bootstrap::Content::Table,
@@ -37,6 +41,7 @@ module Bootstrap::Registry
 
   Matestack::Ui::Core::Component::Registry.register_components(
     **COMPONENTS,
+    **FORMS,
     **LAYOUTS
   )
 
