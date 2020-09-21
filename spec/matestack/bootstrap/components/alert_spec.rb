@@ -38,7 +38,7 @@ describe 'Bootstrap::Components::Alert', type: :feature, js: true do
   it 'gets correct classes for animation' do
     matestack_render { alert animate: true }
     visit example_path
-    expect(page).to have_selector('div.alert.alert-primary.alert-dismissible.fade.show[role=alert]')
+    expect(page).to have_selector('div.alert.alert-primary.fade.show[role=alert]')
   end
 
   it 'can receive custom css classes' do
@@ -48,15 +48,29 @@ describe 'Bootstrap::Components::Alert', type: :feature, js: true do
   end
   
   it 'can be closed per event' do
-    matestack_render { alert close_on: 'closeAlert' }
+    matestack_render { 
+      alert close_on: 'closeAlert', text: "Close Alert Test"
+      onclick emit: "closeAlert" do
+        btn text: "Close"
+      end
+    }
     visit example_path
-    expect(page).to have_selector('div.alert.alert-primary.custom.classes[role=alert]')
+    click_button('Close')
+    expect(page).to_not have_content('Close Alert Test')
   end
   
   it 'can be disposed per event' do
-    matestack_render { alert dispose_on: 'disposeAlert'}
+    pending "dispose JS code not working yet"
+    
+    matestack_render { 
+      alert dispose_on: 'disposeAlert', text: "Dispose Alert Test"
+      onclick emit: "disposeAlert" do
+        btn text: "Dispose"
+      end
+    }
     visit example_path
-    expect(page).to have_selector('div.alert.alert-primary.custom.classes[role=alert]')
+    click_button('Dispose')
+    expect(page).to_not have_content('Dispose Alert Test')
   end
 
 end
