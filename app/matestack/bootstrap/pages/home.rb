@@ -135,7 +135,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
       end
     end
     
-    badge
+    btn size: :md
 
     container size: :lg, class: "bg-light py-3 my-3" do
       row horizontal: :center, vertical: :center do

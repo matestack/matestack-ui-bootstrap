@@ -1,6 +1,6 @@
 class Bootstrap::Components::Button < Matestack::Ui::Component
 
-  optional :text, :type, :style, :size, class: { as: :bs_class }
+  optional :text, :kind, :variant, :size, class: { as: :bs_class }
 
   def response 
     button button_attributes do
@@ -13,7 +13,7 @@ class Bootstrap::Components::Button < Matestack::Ui::Component
 
   def button_attributes
     html_attributes.merge(
-      type: type || 'button',
+      type: kind || 'button',
       class: button_classes
     )
   end
@@ -21,8 +21,8 @@ class Bootstrap::Components::Button < Matestack::Ui::Component
   def button_classes
     foo = [].tap do |classes|
       classes << 'btn'
-      # btn styles
-      classes << (style ? "btn-#{style.to_s.gsub('_', '-')}" : 'btn-primary')
+      # btn variants
+      classes << (variant ? "btn-#{variant.to_s.gsub('_', '-')}" : 'btn-primary')
       # btn size
       classes << "btn-#{size}" if size
       # custom classes
