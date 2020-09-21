@@ -256,19 +256,21 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     end
 
     container size: :fluid, class: "bg-warning py-3 my-3" do
+      
+      alert dispose_on: 'disposeAlert', text: "Closing Alert test"  
+      onclick emit: "disposeAlert" do
+        btn text: "cloce alert"
+      end
+      alert color: :success, title: "Well done!", title_size: 2, text: "Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content."
 
-      btn text: "Test Button Type", type: :submit
-
-      alert color: :success, heading: "Well done!", text: "Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content."
-
-      alert color: :warning, animated: true, dismissible: true do
+      alert color: :warning, animate: true, dismissible: true do
         strong text: "Holy guacamole!"
         plain "You should check in on some of those fields below."
       end
 
       toggle show_on: "myEvent" do        
         alert heading: "Alert Heading", text: "This is an alert", 
-                animated: true, dismissible: true
+                animate: true, dismissible: true
       end
       onclick emit: "myEvent" do
         btn text: "Show Alert"
@@ -369,7 +371,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
       row do
         spinner color: :primary
         col md: 6 do
-          btn style: :secondary, size: 2, class: "text-center p-4" do
+          btn style: :secoπndary, size: 2, class: "text-center p-4" do
             spinner type: :grow, smaller: true, color: :success
             plain "Loading..."
           end

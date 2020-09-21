@@ -1,31 +1,24 @@
 # Matestack Bootstrap Component: Alert
 
-The Bootstrap `alert` component, implemented in Ruby.
+The Bootstrap `alert` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## Parameters
-This component can handle various optional configuration params and can yield content
+## `alert(*args, &block)`
+----
 
-### heading - optional
-Expects a string with the text that should go inside the `<h>` tag.
+Returns a bootstrap alert containing text or content specified by a block. Also the alert is customizable with the following options. 
 
-### heading_size - optional
-By default it is set as 4 -> `h4`. 
+**Optional options**
 
-### text - optional
-Expects a string with the text that should go inside the `<p>` tag.
+* `:variant` - Specify a variant for the spinner. Variant represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class. The default is `:primary`
 
-### dismissible - optional
-Expects a boolean value. If set as `true`, close button for dismiss the alert will appear
+* `title` - Expects a string with the text that should go inside the `<h>` tag.
+* `title_size`- By default it is set as 4 -> `h4`. 
 
-### color - optional
-Expects bootrap predefined styles: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `light`, `dark`, `link`
-By default, it is set as `primary`
+* `dismissible` - Expects a boolean value. If set as `true`, close button for dismiss the alert will appear
 
-### animated - optional
-Expects a boolean value. By default, it is set as `false`
+* `animated` - Expects a boolean value. By default, it is set as `false`
 
-### HMTL attributes - optional
-This component accepts all the canonical [HTML global attributes](https://www.w3schools.com/tags/ref_standardattributes.asp) like `class`.
+* Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding spinner div.
 
 ## Examples
 

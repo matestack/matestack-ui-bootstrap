@@ -13,12 +13,14 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-alert', {
     },
     dispose: function (){
       this.alertInstance.dispose()
+      this.alertInstance = new bootstrap.Alert(self.$el)
     }
   },
 
   mounted: function() {
+    const self = this
     var alert = self.$el
-    this.alertInstance = new bootstrap.Alert(alert)
+    self.alertInstance = new bootstrap.Alert(alert)
   },
 
   created: function() {
@@ -37,6 +39,8 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-alert', {
 
   beforeDestroy: function() {
     const self = this
+    MatestackUiCore.matestackEventHub.$off(this.componentConfig["close_on"], self.close);
+    MatestackUiCore.matestackEventHub.$off(this.componentConfig["dispose_on"], self.dispose);
     if(self.componentConfig["close_on"] != undefined){
       var closen_events = self.componentConfig["close_on"].split(",")
       closen_events.forEach(close_event => MatestackUiCore.matestackEventHub.$off(close_event.trim(), self.close));
