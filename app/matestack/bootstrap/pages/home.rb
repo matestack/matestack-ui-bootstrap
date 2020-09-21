@@ -118,12 +118,12 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
                     contact: {type: :transition, path: "/", text: "Contact"}, } do
                       btn text: "Login"
                     end
-    nav items: {
+    navigation items: {
       home: { type: :link, path: "#home", text: "Home" },
       product: { type: :link, path: "#profile", text: "Profile" },
       team: { type: :link, path: "#messages", text: "Message" },
     }, pills: true, vertical: true
-    nav items: @nav_items, horizontal: :center, tabs: true
+    navigation items: @nav_items, horizontal: :center, tabs: true
     div class: "tab-content" do
       div class: "tab-pane active", id: "home", attributes: { role: "tabpanel", 'aria-labelledby':  "home-tab" } do
         plain "Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
@@ -153,18 +153,18 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
       end
     end
     # breadcrumb items: @breadcrumb_items
-    breadcrumb items: {
-      first: {
+    breadcrumb items: [
+      {
         type: :link,
         path: "/",
         text: "Item 1",
       },
-      second: {
+      {
         type: :link,
         path: "#",
-        text: "Item 1",
+        text: "Item 2",
       }
-    }
+    ]
     br 
     container size: :lg, class: "bg-warning py-3 my-3" do
       row do
@@ -273,6 +273,12 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
       onclick emit: "myEvent" do
         btn text: "Show Alert"
       end
+      
+      onclick emit: 'dispose-alert' do
+        btn text: 'Dispose'
+      end
+      alert heading: "Dipose alert", text: "This is an alert", 
+        animated: true, dismissible: true, dispose_on: 'dispose-alert'
     end
 
     container size: :lg, class: "bg-warning py-3 my-3" do
@@ -404,7 +410,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
 
   def my_card_header
     slot {
-      nav items: @nav_items, horizontal: :center, tabs: true
+      navigation items: @nav_items, horizontal: :center, tabs: true
     }
   end
 

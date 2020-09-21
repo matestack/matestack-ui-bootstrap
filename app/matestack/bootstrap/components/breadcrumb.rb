@@ -7,8 +7,8 @@ class Bootstrap::Components::Breadcrumb < Matestack::Ui::Component
     nav attributes: { 'aria-label': "breadcrumb" } do
       ol breadcrumb_attributes do    
         if items.present?
-          items.each_with_index do |(key, item), index|
-            li link_attrs index, items.length() do
+          items.each_with_index do |item, index|
+            li link_attrs((items.size - 1) == index) do
               case item[:type]
               when :link
                 link path: item[:path], text: item[:text]
@@ -26,10 +26,10 @@ class Bootstrap::Components::Breadcrumb < Matestack::Ui::Component
 
   protected
 
-  def link_attrs index, length
+  def link_attrs(last = false)
     {}.tap do |hash|
-      hash[:class] = "breadcrumb-item #{'active' if (index + 1) == length}"
-      hash[:attributes] = { 'aria-current': "page" } if (index + 1) == length
+      hash[:class] = "breadcrumb-item #{'active' if last}"
+      hash[:attributes] = { 'aria-current': "page" } if last
     end
   end
 
