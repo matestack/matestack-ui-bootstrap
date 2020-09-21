@@ -14,7 +14,7 @@ Returns a bootstrap button containing text or content specified by a block. Also
 
 * `:size` - Use `:block, :sm, :md or :lg` to change the size of the button. The default is `nil`.
 
-* `:kind` - This parameter let you set the btn tags. By default is set as `button`. You can set is for example as `submit`, `reset`, etc.
+* `:type` - This parameter let you set the button tags. By default is set as `button`. You can set is for example as `submit`, `reset`, etc.
 
 * Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding spinner div.
 
