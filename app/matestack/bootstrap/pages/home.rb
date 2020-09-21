@@ -257,7 +257,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
 
     container size: :fluid, class: "bg-warning py-3 my-3" do
       
-      alert close_on: 'closeAlert', text: "Closing Alert test"  
+      alert dispose_on: 'closeAlert', text: "Closing Alert test"  
       onclick emit: "closeAlert" do
         btn text: "cloce alert"
       end

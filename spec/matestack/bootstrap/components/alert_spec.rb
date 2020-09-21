@@ -48,16 +48,15 @@ describe 'Bootstrap::Components::Alert', type: :feature, js: true do
   end
   
   it 'can be closed per event' do
-    pending 'implement and remove this message and the below fail'
-    fail
-    matestack_render { alert close_on: 'closeAlert'}
-    
+    matestack_render { alert close_on: 'closeAlert' }
+    visit example_path
+    expect(page).to have_selector('div.alert.alert-primary.custom.classes[role=alert]')
   end
   
   it 'can be disposed per event' do
-    pending 'implement and remove this message and the below fail'
-    fail
     matestack_render { alert dispose_on: 'disposeAlert'}
+    visit example_path
+    expect(page).to have_selector('div.alert.alert-primary.custom.classes[role=alert]')
   end
 
 end
