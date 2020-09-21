@@ -10,7 +10,7 @@ Returns a bootstrap button containing text or content specified by a block. Also
 **Optional options**
 
 * `:variant` - Specify a variant for the spinner. Variant represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class. The default is `:primary`
-For outline btn style: add `outline_`: `variant: :outline_primary` --> `btn-outline-primary`
+* `:outline` - Set `true` for outline button styling
 
 * `:size` - Use `:block, :sm, :md or :lg` to change the size of the button. The default is `nil`.
 
@@ -34,8 +34,8 @@ btn variant: :light, text: "Light"
 btn variant: :dark, text: "Dark"
 btn variant: :link, text: "Link"
 
-btn variant: :outline_primary, text: "Outline Primary"
-btn variant: :outline_secondary, text: "Outline Secondary"
+btn variant: :primary, outline: true, text: "Outline Primary"
+btn variant: :secondary, outline: true, text: "Outline Secondary"
 ...
 ```
 

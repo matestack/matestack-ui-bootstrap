@@ -13,7 +13,7 @@ module Bootstrap::Registry
     dropdown: Bootstrap::Components::Dropdown,
     list_group: Bootstrap::Components::ListGroup,
     modal: Bootstrap::Components::Modal,
-    nav: Bootstrap::Components::Nav,
+    navigation: Bootstrap::Components::Nav,
     navbar: Bootstrap::Components::Navbar,
     pagination: Bootstrap::Components::Pagination,
     popover: Bootstrap::Components::Popover,

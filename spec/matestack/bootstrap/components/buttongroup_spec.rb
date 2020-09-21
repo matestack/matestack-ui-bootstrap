@@ -3,20 +3,32 @@ require 'rails_helper'
 describe 'Bootstrap::Components::ButtonGroup', type: :feature, js: true do
   include Utils
 
-  it 'renders simple button group' do
+  it 'renders a button group as default' do
+    matestack_render { btn_group }
+    pending
+    fail
+  end
+
+  it 'is possible to add a custom class' do
+    matestack_render { btn_group class: :foobar }
+    pending
+    fail
+  end
+
+  it 'is possible to change its size and aria label' do
     matestack_render do
       btn_group size: :sm, label: "Basic Example" do 
         btn text: "Tab 4"
-        btn text: "Tab 5"
-        btn text: "Tab 6"
       end
     end
     visit example_path
     expect(page).to have_selector('div.btn-group.btn-group-sm')
     expect(page).to have_selector('button.btn.btn-primary')
+    pending
+    fail # test for aria label working ;) check out the breadcrumb test as hint
   end
 
-  it 'renders simple button group vertical' do
+  it 'can render a button group vertical' do
     matestack_render do
       btn_group vertical: true, label: "Vertical Example" do 
         btn text: "Tab 4"
@@ -29,17 +41,13 @@ describe 'Bootstrap::Components::ButtonGroup', type: :feature, js: true do
     expect(page).to have_selector('button.btn.btn-primary')
   end
 
-  it 'renders button group toolbar' do
+  it 'is possible to render a toolbar' do
     matestack_render do
-      btn_group type: :toolbar, label: "Toolbar" do            
-        btn_group type: :group, label: "Basic Example" do 
-          btn text: "Tab 1"
-          btn text: "Tab 2"
+      btn_group toolbar: true, label: "Toolbar" do            
+        btn_group label: "Basic Example" do
           btn text: "Tab 3"
         end
-        btn_group type: :group, label: "Basic Example 2" do 
-          btn text: "Tab 4"
-          btn text: "Tab 5"
+        btn_group label: "Basic Example 2" do
           btn text: "Tab 6"
         end
       end

@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
   include Utils
 
-  it 'renders nav tabs' do
+  it 'renders navigation tabs' do
     matestack_render do
-      nav items: {
+      navigation items: {
         home: { type: :link, path: "#home", text: "Home" },
         product: { type: :link, path: "#profile", text: "Profile" },
         team: { type: :link, path: "#messages", text: "Message" },
@@ -28,9 +28,9 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
     expect(page).to have_selector('div.tab-content')
   end
   
-  it 'renders nav pills vertical' do
+  it 'renders navigation pills vertical' do
     matestack_render do
-      nav items: {
+      navigation items: {
         home: { type: :link, path: "#home", text: "Home" },
         product: { type: :link, path: "#profile", text: "Profile" },
         team: { type: :link, path: "#messages", text: "Message" },
