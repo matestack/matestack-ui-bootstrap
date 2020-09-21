@@ -3,22 +3,22 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-alert', {
 
   data() {
     return {
-      modalInstance: undefined,
+      alertInstance: undefined,
     };
   },
 
   methods: {
     close: function (){
-      this.modalInstance.close()
+      this.alertInstance.close()
     },
     dispose: function (){
-      this.modalInstance.dispose()
+      this.alertInstance.dispose()
     }
   },
 
   mounted: function() {
-    var modal = self.$el
-    this.modalInstance = new bootstrap.Toast(modal)
+    var alert = self.$el
+    this.alertInstance = new bootstrap.Alert(alert)
   },
 
   created: function() {
