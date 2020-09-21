@@ -135,7 +135,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
       end
     end
     
-    btn size: :md
+    btn_group
 
     container size: :lg, class: "bg-light py-3 my-3" do
       row horizontal: :center, vertical: :center do
@@ -162,12 +162,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
       },
       {
         type: :link,
-<<<<<<< HEAD
         text: "Data",
-=======
-        path: "#",
-        text: "Item 2",
->>>>>>> 4563431faffa3d12c728ca79edeccff39e321676
       }
     ]
     br 
