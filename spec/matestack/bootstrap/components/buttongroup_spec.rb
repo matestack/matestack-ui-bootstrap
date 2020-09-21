@@ -4,28 +4,26 @@ describe 'Bootstrap::Components::ButtonGroup', type: :feature, js: true do
   include Utils
 
   it 'renders a button group as default' do
-    matestack_render { btn_group }
-    pending
-    fail
+    matestack_render { btn_group do btn end }
+    visit example_path
+    expect(page).to have_selector('div.btn-group')
   end
 
   it 'is possible to add a custom class' do
-    matestack_render { btn_group class: :foobar }
-    pending
-    fail
+    matestack_render { btn_group class: :foobar do btn end }
+    visit example_path
+    expect(page).to have_selector('div.btn-group.foobar')
   end
 
   it 'is possible to change its size and aria label' do
     matestack_render do
-      btn_group size: :sm, label: "Basic Example" do 
+      btn_group size: :sm, label: "buttongroup" do 
         btn text: "Tab 4"
       end
     end
     visit example_path
-    expect(page).to have_selector('div.btn-group.btn-group-sm')
+    expect(page).to have_selector('div.btn-group.btn-group-sm[aria-label=buttongroup]')
     expect(page).to have_selector('button.btn.btn-primary')
-    pending
-    fail # test for aria label working ;) check out the breadcrumb test as hint
   end
 
   it 'can render a button group vertical' do
