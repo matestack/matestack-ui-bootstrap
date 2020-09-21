@@ -22,7 +22,7 @@ class Bootstrap::Components::Badge < Matestack::Ui::Component
   def badge_classes
     [].tap do |classes|
       classes << 'badge'
-      classes << (variant.present? ? "bg-#{variant}" : "bg-secondary")
+      classes << (variant.present? ? "bg-#{variant}" : "bg-primary")
       classes << "rounded-pill" if rounded
       classes << bs_class
     end.join(' ').strip

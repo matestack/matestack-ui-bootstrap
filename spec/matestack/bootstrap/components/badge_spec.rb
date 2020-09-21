@@ -4,9 +4,9 @@ describe 'Bootstrap::Components::Badge', type: :feature, js: true do
   include Utils
 
   it 'renders a secondary badge as default' do
-    matestack_render {badge}
-    pending
-    fail
+    matestack_render {badge text: "2"}
+    visit example_path
+    expect(page).to have_selector('span.badge.bg-primary')
   end
 
   it 'renders simple badge with variant' do
