@@ -111,7 +111,6 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
   end
 
   def response
-
     navbar brand_text: "BRAND TEXT", brand_path: "#", theme: :dark, sticky_top: true, items_class: "mr-auto ml-auto",
             items: { home: {type: :transition, path: "/", text: "Home"}, 
                     product: {type: :transition, path: "/", text: "Product"}, 
@@ -156,13 +155,12 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     breadcrumb items: {
       first: {
         type: :link,
-        path: "/",
-        text: "Item 1",
+        path: "#",
+        text: "Home",
       },
       second: {
         type: :link,
-        path: "#",
-        text: "Item 1",
+        text: "Data",
       }
     }
     br 
