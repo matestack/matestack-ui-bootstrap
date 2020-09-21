@@ -1,18 +1,31 @@
 class Bootstrap::Components::Card < Matestack::Ui::Component
 
   optional class: { as: :bs_class }
-  optional :header_class, :header_text, :hide_header # header attributes
-  optional :title, :text, :img_path, :img_pos, :alt_text # body attributes
-  optional :footer_class, :footer_text, :hide_footer # footer attributes
+  
+  # header attributes, expects a hash or string
+  # possible keys `:class, :text`
+  optional :header 
+  # footer attributes, expects a hash or string
+  # possible keys `:class, :text`
+  optional :footer 
+
+  optional :title, :body, :subtitle # body attributes 
+  optional :img_path, :img_pos, :alt_text # image attributes
+
+  optional :slots # passed in slots for card header or footer
 
   def response
     div card_attributes do
-      header_partial if !hide_header
+      if header || slots && slots[:header]
+        header_partial 
+      end
 
-      img_partial :top if img_pos != :bottom
-      body_partial
+      img_partial :top unless img_pos == :bottom
+      body_partial if body || slots && slots[:body]
+
       # custom body components
       yield_components
+
       img_partial :bottom if img_pos == :bottom
 
       footer_partial if !hide_footer
@@ -22,24 +35,34 @@ class Bootstrap::Components::Card < Matestack::Ui::Component
   protected
 
   def header_partial
-    div class: "card-header #{header_class}" do
-      slot options[:slots][:header] if options[:slots] && options[:slots][:header]
-      plain header_text if header_text.present?
+    header = self.header.is_a?(Hash) ? self.header : { text: self.header }
+    div class: "card-header #{header[:class]}" do
+      plain header[:text] if header[:text].present?
+      slot slots[:header] if slots && slots[:header]
     end
   end
 
   def body_partial
     div class: "card-body" do
-      heading size: title_size, class: 'card-title', text: title if title.present?
-      paragraph class: "card-text", text: text if text.present?
-      slot options[:slots][:body] if options[:slots] && options[:slots][:body]
+      # title
+      card_title(title)
+      # subtitle
+      card_title(subtitle, 6)
+      # body
+      if body.is_a? Hash
+        paragraph class: "card-text #{text[:class]}", text: body[:text]
+      elsif body
+        paragraph class: "card-text", text: body
+      end
+      slot slots[:body] if slots && slots[:body]
     end
   end
 
   def footer_partial
-    div class: "card-footer #{footer_class}" do
-      slot options[:slots][:footer] if options[:slots] && options[:slots][:footer]
-      plain footer_text if footer_text.present?
+    footer = self.footer.is_a?(Hash) ? self.footer : { text: self.footer }
+    div class: "card-footer #{footer[:class]}" do
+      plain footer[:text] if footer[:text].present?
+      slot slots[:footer] if slots && slots[:footer]
     end
   end
 
@@ -60,8 +83,13 @@ class Bootstrap::Components::Card < Matestack::Ui::Component
     end.join(' ').strip
   end
 
-  def title_size
-    attrs = options[:title_size].present? ? options[:title_size] : 5
-    attrs
+  def card_title(options, default_size = 5)
+    if options.is_a? Hash
+      heading size: (options[:size] || default_size), class: "#{options[:class]} card-title",
+        text: options[:text]
+    elsif options
+      heading size: default_size, class: 'card-title', text: options
+    end
   end
+
 end
