@@ -2,7 +2,7 @@ class Bootstrap::Components::ButtonGroup < Matestack::Ui::Component
 
   optional class: { as: :bs_class }
   optional label: { as: :bs_label }
-  optional :type, :size, :vertical
+  optional :toolbar, :size, :vertical
 
   def response 
     div buttongroup_attributes do
@@ -15,7 +15,10 @@ class Bootstrap::Components::ButtonGroup < Matestack::Ui::Component
   def buttongroup_attributes
     attributes = {}.tap do |hash|
       hash[:class] = buttongroup_classes
-      hash[:attributes] = { role: "#{type.present? ? type : 'group'}", 'aria-label': bs_label } 
+      hash[:attributes] = { 
+        role: "#{toolbar ? :toolbar : :group}", 
+        'aria-label': bs_label 
+      } 
     end
     html_attributes.merge(
       attributes
@@ -24,12 +27,10 @@ class Bootstrap::Components::ButtonGroup < Matestack::Ui::Component
 
   def buttongroup_classes
     [].tap do |classes|
-      classes << (type.present? ? "btn-#{type}#{verti}" : "btn-group#{verti}")
+      classes << ("btn-#{toolbar ? :toolbar : :group}#{'-vertical' if vertical}")
       classes << "btn-group-#{size}" if size.present?
       classes << bs_class
     end.join(' ').strip
   end
-  def verti 
-    attrs = "-vertical" if vertical
-  end
+
 end
