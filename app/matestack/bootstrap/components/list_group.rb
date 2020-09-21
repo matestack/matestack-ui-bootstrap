@@ -1,48 +1,47 @@
 class Bootstrap::Components::ListGroup < Matestack::Ui::Component
   html_attributes :role
 
-  optional :id, :items, :item_class, :checkbox, :horizontal, :h_size, :flush, :tablist, class: { as: :bs_class }
+  optional :id, :items, :horizontal, :horizontal_size, :checkbox
+  optional :flush, :tablist, class: { as: :bs_class }
 
-  # TODO: Set list items acitve
 
   def response 
-    ul lg_attributes do
-      yield_components if !items.present?
-      list_partial if items.present?
+    ul list_group_attributes do
+      yield_components unless items
+      list_partial if items
     end
   end
 
   protected
 
   def list_partial
-    items.each do |key, item|
+    items.each do |item|
       case item[:type]        
       when :link 
-        link link_attrs item[:id], item[:color], item[:path]  do
-          plain item[:content]
+        link link_attrs(item)  do
+          plain item[:text]
         end
-      when :button 
-        button id: item[:id], class: "#{list_classes item[:color], true} #{"active" if item[:active]}", attributes: { type: "button" } do
-          plain item[:content]
+      when :transition 
+        link link_attrs(item)  do
+          plain item[:text]
         end
       when :label 
-        label id: item[:id], class: "#{list_classes item[:color], false}" do
+        label id: item[:id], class: "#{list_classes item, false}" do
           input class: "form-check-input mr-1", attributes: { 'type': "checkbox", 'value': "" } if checkbox
-          plain item[:content]
+          plain item[:text]
         end
       else
-        li id: item[:id], class: "#{list_classes item[:color], false}" do
-          input class: "form-check-input mr-1", attributes: { 'type': "checkbox", 'value': "", 'aria-label': "#{item[:content]}" } if checkbox
-          # span class: "badge bg-primary rounded-pill", text: item[:badge]
-          plain item[:content]
+        li id: item[:id], class: "#{list_classes item, false}" do
+          input class: "form-check-input mr-1", attributes: { 'type': "checkbox", 'value': "", 'aria-label': "#{item[:text]}" } if checkbox
+          plain item[:text]
         end
       end
     end
   end
 
-  def lg_attributes
+  def list_group_attributes
     attributes = {}.tap do |hash|
-      hash[:class] = lg_classes
+      hash[:class] = list_group_classes
       hash[:attributes] = { role: "tablist" } if tablist
     end
     html_attributes.merge(
@@ -50,31 +49,33 @@ class Bootstrap::Components::ListGroup < Matestack::Ui::Component
     )
   end
 
-  def lg_classes
+  def list_group_classes
     [].tap do |classes|
       classes << 'list-group'
-      classes << (h_size.present? ? "list-group-horizontal-#{h_size}": "list-group-horizontal") if horizontal
+      classes << (horizontal_size.present? ? "list-group-horizontal-#{horizontal_size}": "list-group-horizontal") if horizontal
       classes << 'list-group-flush' if flush
       classes << bs_class
     end.join(' ').strip
   end
 
-  def link_attrs l_id, color, path
+  def link_attrs(item)
     {}.tap do |hash|
-      hash[:id] = l_id
-      hash[:class] = "#{list_classes color, true}"
+      hash[:id] = item[:id]
+      hash[:class] = "#{list_classes item, true}"
       hash[:data] = { toggle: "list" } if tablist
       hash[:attributes] = { 'aria-controls': "#{id}", role: "tab" } if tablist
-      hash[:path] = path
+      hash[:path] = item[:path]
     end
   end
 
-  def list_classes color, action
+  def list_classes(item, action)
     [].tap do |classes|
       classes << 'list-group-item'
       classes << 'list-group-item-action' if action
-      classes << "list-group-item-#{color}" if color.present?
-      classes << item_class
+      classes << "list-group-item-#{item[:variant]}" if item[:variant].present?
+      classes << 'active' if item[:active]
+      classes << item[:class]
     end.join(' ').strip
   end
+
 end

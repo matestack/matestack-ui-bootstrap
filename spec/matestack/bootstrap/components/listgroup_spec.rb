@@ -4,28 +4,53 @@ RSpec.describe 'Bootstrap::Components::Listgroup' do
   include Utils
   
   it 'renders basic listgroup' do
-    listgroup = matestack_component(:listgroup, items: {
-      first: {content: "Item1"},
-      second: {content: "Item2"} }).show.to_s
-    expected_listgroup = <<~HTML
-    <ul class='list-group'>
-      <li class='list-group-item'>Item1</li>
-      <li class='list-group-item'>Item2</li>
-    </ul>
-    HTML
-    expect(stripped(listgroup)).to eq(stripped(expected_listgroup))
+    pending
+    fail
   end
 
-  it 'renders listgroup with button el' do
-    listgroup = matestack_component(:listgroup, items: {
-      first: {type: :button, content: "Button1"},
-      second: {type: :button, content: "Button2"} }).show.to_s
-    expected_listgroup = <<~HTML
-    <ul class='list-group'>
-      <button class='list-group-item list-group-item-action' type='button'>Button1</button>
-      <button class='list-group-item list-group-item-action' type='button'>Button2</button>
-    </ul>
-    HTML
-    expect(stripped(listgroup)).to eq(stripped(expected_listgroup))
+  it 'renders listgroup with buttons' do
+    pending
+    fail
   end
+
+  it 'renders listgroup with links' do
+    pending
+    fail
+  end
+
+  it 'renders listgroup with transitions' do
+    pending
+    fail
+  end
+
+  it 'renders listgroup with labels' do
+    pending
+    fail
+  end
+
+  it 'can be displayed horozintally with a different size' do
+    pending
+    fail
+  end
+
+  it 'is possible to display it flush' do
+    pending
+    fail
+  end
+
+  it 'is possible to display as tablist' do
+    pending
+    fail
+  end
+
+  it 'is possible to activate checkboxes' do
+    pending
+    fail
+  end
+
+  it 'is possible to add custom class for list group and individual list items' do
+    pending
+    fail
+  end
+
 end

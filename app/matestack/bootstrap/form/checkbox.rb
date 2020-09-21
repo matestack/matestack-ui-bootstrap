@@ -31,7 +31,6 @@ class Bootstrap::Form::Checkbox < Matestack::Ui::Core::Form::Checkbox::Checkbox
         class: 'form-check-input',
         attributes: vue_attributes.merge(
           ref: "input.#{attr_key}",
-          'value-type': nil,
         )
       )
       bootstrap_label text: input_label, for_input: id_for_item(value)
@@ -52,16 +51,6 @@ class Bootstrap::Form::Checkbox < Matestack::Ui::Core::Form::Checkbox::Checkbox
         )
         bootstrap_label text: item_name(item), for_input: id_for_item(item_value(item))
         render_errors if checkbox_options.to_a.last == item
-      end
-    end
-  end
-
-  def render_multi_errors
-    unless @included_config[:errors] == false && (errors == false || errors.nil?) || errors == false
-      checkbox_wrapper attributes: { 'v-if': "#{error_key}" } do
-        div class: 'invalid-feedback', attributes: { 'v-for': "error in #{error_key}" } do
-          plain '{{ error }}'
-        end
       end
     end
   end
