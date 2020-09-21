@@ -14,7 +14,8 @@ class Bootstrap::Components::Close < Matestack::Ui::Component
     html_attributes.merge(
       class: close_classes,
       data: { dismiss: "#{dismiss}" },
-      attributes: { 'aria-label': 'Close', type: 'button' }
+      type: 'button',
+      attributes: { 'aria-label': 'Close' }
     )
   end
 
