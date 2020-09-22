@@ -12,7 +12,7 @@ Returns a bootstrap carousel containing a hash of `items` with `path`, `title`, 
 * `:controls` - If set `true`, the previous and next arrows will be visible
 * `:indicators` - If set `true`, the bottom indicators will be visible
 * `:fade` - If set `true`, the animation when switching between items will be faded animation instead of sliding animation
-* `:start` - Set the active item for carousel at the beginning
+* `:start` - Set the active item for carousel at the beginning. Counting start at 0.
 
 * `:cycle_on` - Cycles through the carousel items from left to right.
 * `:pause_on` - Stops the carousel from cycling through items.
@@ -22,50 +22,123 @@ Returns a bootstrap carousel containing a hash of `items` with `path`, `title`, 
 * Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding carousel div.
 
 **Further explanation**
-* `:items` array: each item can include a hash with `path`, `title`, `text` and `interval` where `path` is the image-url, `interval` is the amount of time to delay between automatically cycling to the next item, `title` and `text` is the description of the item
+* `:items` array: each item can include a hash with `path`, `title`, `text` and `interval` where `path` is the image-url, `interval` is the amount of time to delay between automatically cycling to the next item, `title` and `text` is the caption of the item
 
 * `:cycle_on`, `:pause_on`, `:prev_on`, `:next_on` are JavaScript triggers which can be trigger for example by an onclick method
 
 ## Examples
 
-### Example 1: Basic Carousel with 3 items
+### Example 1: Basic Carousel with 2 items
 
 ```ruby
-
+carousel items: [
+          { path: image_url("matestack-data.png") },
+          { path: image_url("matestack-data.png") }
+        ]
 ```
 
 returns
 
 ```html
-<div class="">
-  
+<div id="..." class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="matestack-data.png" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="matestack-data.png" class="d-block w-100" alt="...">
+    </div>
+  </div>
 </div>
 ```
 
-### Example 2: Using controls, indicators and faded animation
+### Example 2: Basic Carousel with captions and interval
 
 ```ruby
-
+carousel items: [
+    { path: image_url("matestack-data.png"), 
+      title: "First slide",
+      text: "First slide text caption",
+      interval: 20000 },
+    { path: image_url("matestack-data.png"),
+      title: "Second slide",
+      text: "Second slide text caption",
+      interval: 5000 }
+]
 ```
 
 returns
 
 ```html
-<div class="">
-  
+<div id="..." class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-interval="20000">
+      <img src="matestack-data.png" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>First slide</h5>
+        <p>First slide text caption</p>
+      </div>
+    </div>
+    <div class="carousel-item" data-interval="5000">
+      <img src="matestack-data.png" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Second slide</h5>
+        <p>Second slide text caption</p>
+      </div>
+    </div>
+  </div>
 </div>
 ```
 
-### Example 3: Trigger Carousel remotely
+### Example 3: Using controls, indicators and faded animation
 
 ```ruby
-
+carousel controls: true, indicators: true, fade: true, items: [
+          { path: image_url("matestack-data.png") },
+          { path: image_url("matestack-data.png") }
+        ]
 ```
 
 returns
 
 ```html
-<div class="">
-  
+<div id="..." class="carousel slide carousel-fade" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="matestack-data.png" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="matestack-data.png" class="d-block w-100" alt="...">
+    </div>
+  </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
+```
+
+### Example 4: Trigger Carousel remotely
+*with cycle_on, pause_on, prev_on, next_on you can trigger the JavaScript behaviors of carousel*
+
+```ruby
+carousel prev_on: "prev_carousel", next_on: "next_carousel", items: [
+          { path: image_url("matestack-data.png") },
+          { path: image_url("matestack-data.png") }
+        ]
+onclick emit: "prev_carousel" do
+  btn text: "Prev"
+end
+onclick emit: "next_carousel" do
+  btn text: "Next"
+end
 ```

@@ -197,7 +197,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     end
     container size: :fluid, class: "py-4 bg-dark" do
       col md: 8, offset: 2 do          
-        carousel prev_on: "prev_carousel", next_on: "next_carousel", items: @carousel_items, controls: true, indicators: true
+        carousel fade: true, start: 2, prev_on: "prev_carousel", next_on: "next_carousel", items: @carousel_items, controls: true, indicators: true
         onclick emit: "prev_carousel" do
           btn text: "Prev"
         end
