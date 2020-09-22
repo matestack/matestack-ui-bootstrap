@@ -11,7 +11,7 @@ Returns a bootstrap badge containing text or content specified by a block. Also 
 
 * `:variant` - Specify a variant for the spinner. Variant represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class. The default is `:primary`
 
-*`:rounded` - Expects `true` or `false`. By default is set as `false`. Set this parameter to true for `rounded-pill` 
+* `:rounded` - Expects `true` or `false`. By default is set as `false`. Set this parameter to true for `rounded-pill` 
 
 * `:sr_only` - Screen reader only text. The default is "Loading...".
 

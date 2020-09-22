@@ -9,23 +9,23 @@ Returns a bootstrap alert containing text or content specified by a block. Also 
 
 **Optional options**
 
-* `:variant` - Specify a variant for the spinner. Variant represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class. The default is `:primary`
+* `:variant` - Specify a variant for the alert. Variant represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class. The default is `:primary`
 
-* `title` - Expects a string with the text that should go inside the `<h>` tag.
-* `title_size`- By default it is set as 4 -> `h4`. 
+* `:title` - Expects a string specifying the content of the heading.
+* `:title_size`- Set a different heading size. By default it is set to 4 corresponding to a "h4". 
 
-* `dismissible` - Expects a boolean value. If set as `true`, close button for dismiss the alert will appear
+* `:dismissible` - Expects a boolean value. If set as `true`, a close button to dismiss the alert will be displayed.
 
-* `animated` - Expects a boolean value. By default, it is set as `false`
+* `:animated` - Expects a boolean value. If set to `true` the alert will be animated if dismissed. By default, it is set as `false`.
 
-* Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding spinner div.
+* Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding alert div.
 
 ## Examples
 
-### Example 1: 
+### Basic alert with title and text
 
 ```ruby
-alert color: :success, heading: "Well done!", text: "Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content."
+alert color: :success, heading: "Well done!", text: 'Some alert message'
 ```
 
 returns
@@ -33,11 +33,11 @@ returns
 ```html
 <div class="alert alert-success" role="alert">
   <h4 class="alert-heading">Well done!</h4>
-  <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+  <p>Some alert message</p>
 </div>
 ```
 
-### Example 2: Yield a custom text block 
+### Animated, dismissible alert with content specified in a block
 ```ruby
 alert color: :warning, animated: true, dismissible: true do
   strong text: "Holy guacamole!"
