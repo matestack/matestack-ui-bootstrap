@@ -17,7 +17,7 @@ describe 'Bootstrap::Components::Badge', type: :feature, js: true do
     expect(page).to have_selector('span.badge.bg-warning', text: 'warning')
   end
 
-  it 'renders button with round badge' do
+  it 'renders button with round badge and set sr_only message' do
     matestack_render do
       btn text: "Button" do
         badge text: "2", variant: :secondary, sr_only: "unread message"

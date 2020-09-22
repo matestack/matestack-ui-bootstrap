@@ -9,13 +9,15 @@ Returns a bootstrap badge containing text or content specified by a block. Also 
 
 **Optional options**
 
-* `:variant` - Specify a variant for the spinner. Variant represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class. The default is `:primary`
+* `:variant` - Specify a variant for the badge. Variant represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class. The default is `:primary`
 
-* `:rounded` - Expects `true` or `false`. By default is set as `false`. Set this parameter to true for `rounded-pill` 
+* `:rounded` - Expects `true` or `false`. By default is set as `false`. Set this parameter to true for setting bootstrap `rounded-pill` option
+
+* `:text` - Expects a string with the text that should go inside the badge
 
 * `:sr_only` - Screen reader only text. The default is "Loading...".
 
-* Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding spinner div.
+* Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding badge div.
 
 ## Examples
 

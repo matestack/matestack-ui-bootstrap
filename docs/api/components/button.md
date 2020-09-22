@@ -17,7 +17,7 @@ Returns a bootstrap button containing text or content specified by a block. Also
 
 * `:type` - Specify the type button tags. By default is set as `button`. You can set is for example as `submit`, `reset`, etc.
 
-* `text` - Expects a string with the text that should go inside the button
+* `:text` - Expects a string with the text that should go inside the button
 
 * Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding button div.
 
