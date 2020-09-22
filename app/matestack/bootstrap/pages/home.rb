@@ -66,48 +66,6 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         text: "Separated link"
       }
     }
-    @list_group_items = {
-      first: {
-        type: :link,
-        path: "#",
-        content: "Nulla vitae elit libero",
-        color: :primary
-      },
-      second: {
-        type: :button,
-        content: "Action",
-        color: :primary
-      },
-      textonly: {
-        content: "Text content",
-        color: :secondary
-      }, 
-      text: {
-        content: "Text Badge"
-      }, 
-      third: {
-        type: :link,
-        path: "#",
-        content: "Separated link",
-      }
-    }
-    @breadcrumb_items = {
-      first: {
-        type: :link,
-        path: "#",
-        text: "Libero",
-      },
-      second: {
-        type: :transition,
-        path: "#",
-        text: "Transition",
-      },
-      third: {
-        type: :link,
-        path: "#",
-        text: "Separated link"
-      }
-    }
   end
 
   def response 
@@ -139,11 +97,10 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
 
     container size: :lg, class: "bg-light py-3 my-3" do
       row horizontal: :center, vertical: :center do
-        # list_group items: @list_group_items, checkbox: true
-        list_group id: "list-example3", items: {
-          first: { type: :link, path: "#list-item1", content: "Item 1" },
-          second: { type: :link, path: "#list-item2", content: "Item 2" } }
-        
+        list_group id: "list-example3", items: [
+          { type: :link, path: "#list-item1", content: "Item 1" },
+          { type: :link, path: "#list-item2", content: "Item 2" } 
+        ]
           scrollspy target: "#list-example3" do
             
             heading size: 2, id: "list-item1", text: "Item 1"
@@ -240,18 +197,13 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     end
     container size: :fluid, class: "py-4 bg-dark" do
       col md: 8, offset: 2 do          
-        carousel items: @carousel_items, controls: true, indicators: true
-        # carousel control: true, indicator: @carousel_items do
-        #   @carousel_items.each_with_index do |(key, item), index|
-        #     div class: "carousel-item #{'active' if index == 0 }", data: { interval:"#{item[:interval]}" } do
-        #       img class: "d-block w-100", path: item[:path]
-        #       div class: "carousel-caption d-none d-md-block" do
-        #         heading size: 3, text: item[:title]
-        #         paragraph text: item[:text], class: "text-primary"
-        #       end
-        #     end
-        #   end
-        # end
+        carousel prev_on: "prev_carousel", next_on: "next_carousel", items: @carousel_items, controls: true, indicators: true
+        onclick emit: "prev_carousel" do
+          btn text: "Prev"
+        end
+        onclick emit: "next_carousel" do
+          btn text: "Next"
+        end
       end
     end
 
