@@ -4,6 +4,7 @@ class Bootstrap::Components::Carousel < Matestack::Ui::VueJsComponent
   optional :items 
   optional :controls, :indicators, :fade, class: { as: :bs_class }
   optional :start
+  optional :cycle_on, :pause_on, :prev_on, :next_on
 
   def setup
     @component_config["carousel-id"] = carousel_id
