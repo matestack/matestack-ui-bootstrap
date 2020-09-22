@@ -1,51 +1,23 @@
 # Matestack Bootstrap Component: ButtonGroup
 
-The Bootstrap `button_group` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
+The Bootstrap `button group` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## `button_group(*args, &block)`
+## `btn_group(*args, &block)`
 ----
 
-Returns a bootstrap button_group containing text or content specified by a block. Also the button_group is customizable with the following options. 
+Returns a bootstrap button-group containing content specified by a block. Also the button_group is customizable with the following options. 
 
 **Optional options**
 
-* `:variant` - Specify a variant for the spinner. Variant represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class. The default is `:primary`
+* `size` - Use `:sm` (small), `:md` (medium), `:lg` (large) to change size of the button group. The default is `nil`.
 
-*
+* `toolbar` - Set `true` for using button toolbar instead of button group
 
-* Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding spinner div.
+* `label` - Expects a String. Adding label to attributes `aria-label`
 
-## Examples
+* `vertical` - Expects `true` or `false`. By default is set as `true`. This parameter determines whether the button group should align vertically
 
-### Example 1: 
-
-```ruby
-
-```
-
-returns
-
-```html
-<div class="">
-  
-</div>
-```
-
-### size - optional
-Expects an Integer 1 or 3. By default it's medium size
-*1 -> sm (small), 2 -> (medium), 3 -> lg(large)*
-
-### type - optional
-Expects `group` or `toolbar`. By default is set as `group`
-
-### vertical - optional
-Expects `true` or `false`. By default is set as `true`. This parameter determines whether the button group should align vertically
-
-### label - optional
-Expects a String. Adding label to attributes `aria-label`
-
-### HMTL attributes - optional
-This component accepts all the canonical [HTML global attributes](https://www.w3schools.com/tags/ref_standardattributes.asp) like `id` or `class`.
+* Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding button group div.
 
 ## Examples
 
@@ -53,9 +25,9 @@ This component accepts all the canonical [HTML global attributes](https://www.w3
 
 ```ruby
 btn_group label: "Basic example" do 
-  btn style: :secondary, text: "Left"
-  btn style: :secondary, text: "Middle"
-  btn style: :secondary, text: "Right"
+  btn variant: :secondary, text: "Left"
+  btn variant: :secondary, text: "Middle"
+  btn variant: :secondary, text: "Right"
 end
 ```
 
@@ -72,9 +44,9 @@ returns
 ### Example 2: Using size
 
 ```ruby
-btn_group size: 3, label: "..." do ... end
+btn_group size: :lg, label: "..." do ... end
 btn_group label: "..." do ... end
-btn_group size: 1, label: "..." do ... end
+btn_group size: :sm, label: "..." do ... end
 ```
 
 returns
@@ -83,4 +55,38 @@ returns
 <div class="btn-group btn-group-lg" role="group" aria-label="...">...</div>
 <div class="btn-group" role="group" aria-label="...">...</div>
 <div class="btn-group btn-group-sm" role="group" aria-label="...">...</div>
+```
+
+### Example 3: Button Toolbar
+
+```ruby
+btn_group toolbar: true, label: "Toolbar with button groups" do
+  btn_group label: "First group" do 
+    btn variant: :secondary, text: "1"
+    btn variant: :secondary, text: "2"
+    btn variant: :secondary, text: "3"
+  end
+  btn_group label: "Second group" do 
+    btn variant: :secondary, text: "1"
+    btn variant: :secondary, text: "2"
+    btn variant: :secondary, text: "3"
+  end
+end
+```
+
+returns
+
+```html
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group" role="group" aria-label="First group">
+    <button type="button" class="btn btn-secondary">1</button>
+    <button type="button" class="btn btn-secondary">2</button>
+    <button type="button" class="btn btn-secondary">3</button>
+  </div>
+  <div class="btn-group" role="group" aria-label="Second group">
+    <button type="button" class="btn btn-secondary">5</button>
+    <button type="button" class="btn btn-secondary">6</button>
+    <button type="button" class="btn btn-secondary">7</button>
+  </div>
+</div>
 ```
