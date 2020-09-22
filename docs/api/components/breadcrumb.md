@@ -5,11 +5,11 @@ The Bootstrap `breadcrumb` component, implemented in Ruby. Use it like any other
 ## `breadcrumb(*args, &block)`
 ----
 
-Returns a bootstrap breadcrumb containing a hash of `items` with type, path and text. Also the breadcrumb is customizable with the following options. 
+Returns a bootstrap breadcrumb containing a hash of `items` with `type`, `path` and `text`. Also the breadcrumb is customizable with the following options. 
 
 **Optional options**
 
-* Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding spinner div.
+* Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding breadcrumb div.
 
 **Further explanation**
 type withing items hash can be either `link` or `transition`. By default it's set as `transition`
