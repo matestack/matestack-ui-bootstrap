@@ -9,11 +9,11 @@ Returns a bootstrap xxxx containing text or content specified by a block. Also t
 
 **Optional options**
 
-* `:variant` - Specify a variant for the spinner. Variant represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class. The default is `:primary`
+* `:variant` - Specify a variant for the xxxx. Variant represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class. The default is `:primary`
 
 *
 
-* Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding spinner div.
+* Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding xxxx div.
 
 ## Examples
 

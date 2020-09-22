@@ -14,10 +14,13 @@ Returns a bootstrap alert containing text or content specified by a block. Also 
 * `:title` - Expects a string specifying the content of the heading.
 * `:title_size`- Set a different heading size. By default it is set to 4 corresponding to a "h4". 
 
+* `:text` - Passing content as String for alert
 * `:dismissible` - Expects a boolean value. If set as `true`, a close button to dismiss the alert will be displayed.
 
 * `:animated` - Expects a boolean value. If set to `true` the alert will be animated if dismissed. By default, it is set as `false`.
 
+* `:close_on`, `:dispose_on` - adding custom trigger to alert. You can use `onclick` Method to remotely close or dispose the alert
+  
 * Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding alert div.
 
 ## Examples
@@ -55,8 +58,16 @@ returns
   </button>
 </div>
 ```
+### Alert close trigger
 
-### Example 3: Custom alert trigger 
+```ruby
+alert close_on: 'close_alert', text: "Closing Alert test"  
+onclick emit: "close_alert" do
+  btn text: "cloce alert"
+end
+```
+
+### Custom alert trigger 
 *Not intended by Bootstrap but you can use matestack toggle mechanism to trigger an alert*
 
 ```ruby
