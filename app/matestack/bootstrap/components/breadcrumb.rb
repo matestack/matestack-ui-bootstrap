@@ -2,24 +2,22 @@ class Bootstrap::Components::Breadcrumb < Matestack::Ui::Component
 
   optional :items # list of items  with path and text
   optional class: { as: :bs_class} # adding custom class to breadcrumb list
+  optional :nav_class
 
   def response 
-    nav attributes: { 'aria-label': "breadcrumb" } do
+    nav class: nav_class, attributes: { 'aria-label': "breadcrumb" } do
       ol breadcrumb_attributes do    
-        if items.present?
-          items.each_with_index do |item, index|
-            li link_attrs((items.size - 1) == index) do
-              case item[:type]
-              when :link
-                link path: item[:path], text: item[:text]
-              else
-                transition path: item[:path], text: item[:text]
-              end
+        items&.each_with_index do |item, index|
+          li link_attrs((items.size - 1) == index) do
+            case item[:type]
+            when :link
+              link path: item[:path], text: item[:text]
+            else
+              transition path: item[:path], text: item[:text]
             end
           end
-        else
-          yield_components 
         end
+        yield_components 
       end
     end
   end

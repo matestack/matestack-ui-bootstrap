@@ -55,6 +55,7 @@ describe 'Bootstrap::Components::Alert', type: :feature, js: true do
       end
     }
     visit example_path
+    expect(page).to have_content('Close Alert Test')
     click_button('Close')
     expect(page).to_not have_content('Close Alert Test')
   end
@@ -69,6 +70,7 @@ describe 'Bootstrap::Components::Alert', type: :feature, js: true do
       end
     }
     visit example_path
+    expect(page).to have_content('Dispose Alert Test')
     click_button('Dispose')
     expect(page).to_not have_content('Dispose Alert Test')
   end

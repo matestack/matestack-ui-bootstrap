@@ -5,7 +5,7 @@ The Bootstrap `alert` component, implemented in Ruby. Use it like any other mate
 ## `alert(*args, &block)`
 ----
 
-Returns a bootstrap alert containing text or content specified by a block. Also the alert is customizable with the following options. 
+Returns a bootstrap alert containing text and/or content specified by a block. Also the alert is customizable with the following options. 
 
 **Optional options**
 
@@ -14,12 +14,17 @@ Returns a bootstrap alert containing text or content specified by a block. Also 
 * `:title` - Expects a string specifying the content of the heading.
 * `:title_size`- Set a different heading size. By default it is set to 4 corresponding to a "h4". 
 
-* `:text` - Passing content as String for alert
-* `:dismissible` - Expects a boolean value. If set as `true`, a close button to dismiss the alert will be displayed.
+* `:text` - Passing content as String for alert. If a text and block is given, the block will be rendered below the text.
+  
+* `:dismissible` - Expects a boolean value. If set to `true`, a close button to dismiss the alert will be displayed.
 
 * `:animated` - Expects a boolean value. If set to `true` the alert will be animated if dismissed. By default, it is set as `false`.
 
-* `:close_on`, `:dispose_on` - adding custom trigger to alert. You can use `onclick` Method to remotely close or dispose the alert
+* `:close_on` - Expects an event as string on which the alert will be closed calling bootstraps `close` method. 
+  
+* `:close_on` - Expects an event as string on which the alert will be disposed calling bootstraps `close` method. 
+
+* `&block` - Use a block to create custom content/markup inside an alert. If used together with `:text` the text will be displayed before the block.
   
 * Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding alert div.
 
@@ -58,23 +63,23 @@ returns
   </button>
 </div>
 ```
-### Alert close trigger
+### Alert closing on event triggered by button click
 
 ```ruby
-alert close_on: 'close_alert', text: "Closing Alert test"  
-onclick emit: "close_alert" do
+alert close_on: 'close-alert', text: "Closing Alert test"  
+onclick emit: "close-alert" do
   btn text: "cloce alert"
 end
 ```
 
-### Custom alert trigger 
+### Showing an alert after an event is triggered 
 *Not intended by Bootstrap but you can use matestack toggle mechanism to trigger an alert*
 
 ```ruby
-toggle show_on: "myEvent" do        
+toggle show_on: "my-event" do        
   alert heading: "Alert Heading", text: "This is an alert", animated: true, dismissible: true
 end
-onclick emit: "myEvent" do
+onclick emit: "my-event" do
   btn text: "Show Alert"
 end
 ```

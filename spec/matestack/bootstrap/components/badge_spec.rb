@@ -4,15 +4,13 @@ describe 'Bootstrap::Components::Badge', type: :feature, js: true do
   include Utils
 
   it 'renders a secondary badge as default' do
-    matestack_render {badge text: "2"}
+    matestack_render { badge text: "2" }
     visit example_path
-    expect(page).to have_selector('span.badge.bg-primary')
+    expect(page).to have_selector('span.badge.bg-secondary')
   end
 
   it 'renders simple badge with variant' do
-    matestack_render do
-      badge variant: :warning, text: "warning"
-    end
+    matestack_render { badge variant: :warning, text: "warning" }
     visit example_path
     expect(page).to have_selector('span.badge.bg-warning', text: 'warning')
   end
@@ -25,8 +23,8 @@ describe 'Bootstrap::Components::Badge', type: :feature, js: true do
     end
     visit example_path
     expect(page).to have_selector('button.btn.btn-primary')
-    expect(page).to have_selector('span.badge.bg-secondary')
-    expect(page).to have_selector('span.sr-only')
+    expect(page).to have_selector('button > span.badge.bg-secondary')
+    expect(page).to have_selector('button > span.badge + span.sr-only')
   end
   
 end

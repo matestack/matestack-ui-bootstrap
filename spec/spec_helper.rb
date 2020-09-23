@@ -22,6 +22,8 @@ Dir[File.expand_path 'spec/support/**/*.rb'].each { |f| require f }
 
 require 'pry'
 
+Capybara.server_port = 33123
+
 RSpec.configure do |config|
   config.include Capybara::DSL
 

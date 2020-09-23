@@ -5,47 +5,63 @@ The Bootstrap `badge` component, implemented in Ruby. Use it like any other mate
 ## `badge(*args, &block)`
 ----
 
-Returns a bootstrap badge containing text or content specified by a block. Also the badge is customizable with the following options. 
+Returns a bootstrap badge containing text and/or content specified by a block. Also the badge is customizable with the following options. 
 
 **Optional options**
 
-* `:variant` - Specify a variant for the badge. Variant represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class. The default is `:primary`
+* `:variant` - Specify a variant for the badge. Variant represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class. The default is `:secondary`
 
-* `:rounded` - Expects `true` or `false`. By default is set as `false`. Set this parameter to true for setting bootstrap `rounded-pill` option
+* `:rounded` - Expects `true` or `false`. By default is set as `false`. Set this parameter to true to apply bootstraps "rounded-pill" class.
 
-* `:text` - Expects a string with the text that should go inside the badge
+* `:text` - Expects a string which gets displayed plain inside the badge. If a text and block is given, the text will be rendered before the block content.
 
-* `:sr_only` - Screen reader only text. The default is "Loading...".
+* `:sr_only` - Screen reader only text like bootstrap establishes it, following the badge in another "span" containing the given string. As default no screen reader only "span" and text is rendered.
 
-* Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding badge div.
+* `&block` - Use a block to create custom content/markup inside a badge. If used together with `:text` the text will be displayed before the block.
+
+* Html attributes - all w3c confirm html attributes for span's can be set via options and will be added to the surrounding badge span.
 
 ## Examples
 
-### Example 1: Yield content into the badge
+### Basic badge
 
 ```ruby
-badge variant: :secondary do
-  paragraph text: "Yield any content here"
+badge text: 'New' 
+```
+
+Result:
+
+```html
+<span class="badge bg-secondary"></span>
+```
+
+### Badge with block content
+
+```ruby
+badge variant: :warning do
+  div do
+    paragraph text: "Custom inner html"
+  end
 end
 ```
 
-returns
+Result:
 
 ```html
-<span class="badge bg-secondary">
-  <p>
-    Yield any content here
-  </p>
+<span class="badge bg-warning">
+  <div>
+    <p>Custom inner html</p>
+  </div>
 </span>
 ```
 
-### Example 2: Badge as rounded pill
+### Rounded success badge
 
 ```ruby
 badge text: "Success", variant: :success, rounded: true
 ```
 
-returns
+Result:
 
 ```html
 <span class="badge rounded-pill bg-success">Success</span>

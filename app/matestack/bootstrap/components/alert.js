@@ -13,7 +13,7 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-alert', {
     },
     dispose: function (){
       this.alertInstance.dispose()
-      this.alertInstance = new bootstrap.Alert(self.$el)
+      // this.alertInstance = new bootstrap.Alert(self.$el)
     }
   },
 

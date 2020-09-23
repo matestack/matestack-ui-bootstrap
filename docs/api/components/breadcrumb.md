@@ -5,42 +5,67 @@ The Bootstrap `breadcrumb` component, implemented in Ruby. Use it like any other
 ## `breadcrumb(*args, &block)`
 ----
 
-Returns a bootstrap breadcrumb containing a hash of `items` with `type`, `path` and `text`. Also the breadcrumb is customizable with the following options. 
+Returns a bootstrap breadcrumb containing content created from an array of `items` and/or content specified by a block. The breadcrumb is customizable with the following options. 
 
 **Optional options**
 
-* Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding breadcrumb div.
+* `:items` - Expects an array of hashes. Each hash represents an item and is required to contain at least `:path` and `:text` keys. The items will be rendered as transitions with `:path` and `:text` from the hash. In case you want links instead of transitions add a `type: :link` to the item which should be rendered as link. If items are given and a block the items are rendered before the block.
 
-**Further explanation**
-type withing items hash can be either `link` or `transition`. By default it's set as `transition`
+* `:nav_class` - Expects a string. Use `:navclass` to add custom classes to the sourrounding "nav".
+
+* `&block` - Use a block to create custom content/markup inside a breadcrumb. If used together with `:text` the text will be displayed before the block.
+
+* Html attributes - all w3c confirm html attributes for ol's can be set via options and will be added to the items and block surrounding breadcrumb ol element which is in bootstrap surrounded by a nav.
 
 ## Examples
 
-### Example 1: 
+### Simple breadcrumb with transitions
 
 ```ruby
-breadcrumb items: {
-      first: {
-        type: :link,
-        path: "#",
-        text: "Home",
-      },
-      second: {
-        type: :link,
-        text: "Data",
-      }
-    }
+items = [
+  { path: root_path, text: 'Home' },
+  { path: products_path, text: 'Products' },
+]
+breadcrumb items: items, class: 'my-breadcrumb'
 ```
 
-returns
+Result:
 
 ```html
-<div class="">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li>
-    </ol>
-  </nav>
-</div>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb my-breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="/">Home</a><!-- transition link -->
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      <a href="/products">Products</a><!-- transition link -->
+    </li>
+  </ol>
+</nav>
+```
+_Note: Attributes which are set to enable transition on "a" tags are not added for the case of simplicity._
+
+### Breadcrumb with one transition and one link 
+
+```ruby
+items = [
+  { path: root_path, text: 'Home', type: :link },
+  { path: products_path, text: 'Products' },
+]
+breadcrumb items: items, class: 'my-breadcrumb'
+```
+
+Result:
+
+```html
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb my-breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="/">Home</a><!-- link -->
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      <a href="/products">Products</a><!-- transition link -->
+    </li>
+  </ol>
+</nav>
 ```

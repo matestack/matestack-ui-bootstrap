@@ -209,9 +209,9 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
 
     container size: :fluid, class: "bg-warning py-3 my-3" do
       
-      alert dispose_on: 'disposeAlert', text: "Closing Alert test"  
-      onclick emit: "disposeAlert" do
-        btn text: "cloce alert"
+      alert close_on: 'close-alert', text: "Closing Alert test"  
+      onclick emit: "close-alert" do
+        btn text: "close alert"
       end
       alert color: :success, title: "Well done!", title_size: 2, text: "Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content."
 
