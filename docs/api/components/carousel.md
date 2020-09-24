@@ -61,6 +61,7 @@ returns
 ### Example 2: Basic Carousel with captions and different interval
 
 ```ruby
+# declare items array before using carousel component
 items = [
     { path: image_url("matestack-data.png"), 
       title: "First slide", text: "First slide text caption",
@@ -134,7 +135,9 @@ returns
 ```
 
 ### Example 4: Trigger Carousel per event
-*with cycle_on, pause_on, prev_on, next_on you can trigger the JavaScript behaviors of carousel per event*
+*with `cycle_on`, `pause_on`, `prev_on`, `next_on` you can trigger the JavaScript behaviors of carousel per event*
+
+*`cycle_on` and `pause_on` can be use similarly as the exmample with `prev_on` and `next_on` below*
 
 ```ruby
 items = [
