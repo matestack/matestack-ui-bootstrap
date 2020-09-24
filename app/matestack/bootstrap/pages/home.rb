@@ -92,11 +92,9 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         plain "do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
       end
     end
-    col md: 4, offset_md: 2 do
-      card body: "Some quick example text", 
-      header: { text: "Card header hash", class: "text-center h3" }
-    end
-
+    btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
+    modal id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close",
+    centered: true, scrollable: true, size: :lg    
     container size: :lg, class: "bg-light py-3 my-3" do
       row horizontal: :center, vertical: :center do
         list_group id: "list-example3", items: [

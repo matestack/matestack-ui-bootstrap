@@ -1,17 +1,30 @@
 class Bootstrap::Components::Modal < Matestack::Ui::Component
 
-  optional :m_title, :text, :close_btn_text, :fade,
-            :fullscreen, :fullscreen_below, :size,
-            :static, :modal_dialog_class, :scrollable, :centered,
-            class: { as: :bs_class }, id: { as: :bs_id }
+  # header attributes, expects a hash or string
+  # possible keys `:class, :text, :size`
+  optional :header 
+  # footer attributes, expects a hash or string
+  # possible keys `:class, :text`
+  optional :body
+  # footer is a dismiss button, expects a hash or string for button text
+  # possible keys `:class, :text`
+  optional :footer 
+
+  optional :fullscreen # fullscreen attribute, expects boolean or bootstrap breakpoint
+  
+  optional :fade, :size
+  optional :static, :modal_dialog_class, :scrollable, :centered
+  optional class: { as: :bs_class }, id: { as: :bs_id }
+
+  optional :slots
 
   def response 
     div modal_attributes do
       div class: dialog_classes do
         div class: "modal-content" do
-          header_partial
-          body_partial
-          footer_partial
+          header_partial if header || (slots && slots[:header])
+          body_partial 
+          footer_partial if footer || (slots && slots[:footer])
         end
       end
     end
@@ -20,27 +33,30 @@ class Bootstrap::Components::Modal < Matestack::Ui::Component
   protected
 
   def header_partial
+    header = self.header.is_a?(Hash) ? self.header : { text: self.header }
     div class: "modal-header" do
-      if options[:slots] && options[:slots][:header]
-        slot options[:slots][:header]
+      if slots && slots[:header]
+        slot slots[:header] 
       else
-        heading size: 5, class: 'modal-title', text: m_title
+        heading size: (header[:size] || 5), class: "modal-title #{header[:class]}", text: header[:text] if header[:text].present?
         close dismiss: 'modal'
       end
     end
   end
 
   def body_partial
-    div class: "modal-body" do
-      paragraph text: text if text.present?
-      yield_components if !text.present?
+    body = self.body.is_a?(Hash) ? self.body : { text: self.body }
+    div class: "modal-body #{body[:class] if body[:class].present?}" do
+      plain body[:text] if body[:text].present?
+      yield_components
     end
   end
 
   def footer_partial
+    footer = self.footer.is_a?(Hash) ? self.footer : { text: self.footer }
     div class: "modal-footer" do
-      slot options[:slots][:footer] if options[:slots] && options[:slots][:footer]
-      button class: "btn btn-secondary", data: { dismiss: 'modal' }, attributes: { type: 'button' }, text: close_btn_text if close_btn_text.present?
+      slot slots[:footer] if slots && slots[:footer]
+      button class: "btn #{footer[:class].present? ? footer[:class] : 'btn-secondary'}", data: { dismiss: 'modal' }, attributes: { type: 'button' }, text: footer[:text] if footer[:text].present?
     end
   end
 
@@ -68,9 +84,10 @@ class Bootstrap::Components::Modal < Matestack::Ui::Component
       classes << 'modal-dialog'
       classes << 'modal-dialog-centered' if centered
       classes << 'modal-dialog-scrollable' if scrollable
-      classes << "modal-#{size}" if size.present?
-      classes << 'modal-fullscreen' if fullscreen
-      classes << "modal-fullscreen-#{fullscreen_below}-down" if fullscreen_below.present?
+      classes << "modal-#{size}" if size
+      if fullscreen.present?
+        classes << (fullscreen == true ? 'modal-fullscreen' : "modal-fullscreen-#{fullscreen}-down")
+      end
       classes << modal_dialog_class
     end.join(' ').strip
   end
