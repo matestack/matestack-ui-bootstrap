@@ -24,7 +24,8 @@ class Bootstrap::Components::Card < Matestack::Ui::Component
       body_partial if body || slots && slots[:body]
 
       # custom body components
-      yield_components
+      # needed a div otherwise it will be displayed below footer
+      div do yield_components end
 
       img_partial :bottom if img_pos == :bottom
 
