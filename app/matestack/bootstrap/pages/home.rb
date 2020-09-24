@@ -93,13 +93,8 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
       end
     end
     col md: 4, offset_md: 2 do
-      card slots: { 
-        header: slot {
-          btn text: "Title Button"
-        }, 
-        footer: slot {
-          paragraph class: "text-center", text: "2 days ago"
-          } }
+      card body: "Some quick example text", 
+      header: { text: "Card header hash", class: "text-center h3" }
     end
 
     container size: :lg, class: "bg-light py-3 my-3" do

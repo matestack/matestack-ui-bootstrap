@@ -51,7 +51,7 @@ class Bootstrap::Components::Card < Matestack::Ui::Component
       card_title(subtitle, 6)
       # body
       if body.is_a? Hash
-        paragraph class: "card-text #{text[:class]}", text: body[:text]
+        paragraph class: "card-text #{body[:class]}", text: body[:text]
       elsif body
         paragraph class: "card-text", text: body
       end
