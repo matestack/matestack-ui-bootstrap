@@ -10,13 +10,19 @@ Returns a bootstrap carousel containing a hash of `items` with `path`, `title`, 
 **Optional options**
 
 * `:controls` - If set `true`, the previous and next arrows will be visible
+
 * `:indicators` - If set `true`, the bottom indicators will be visible
+
 * `:fade` - If set `true`, the animation when switching between items will be faded animation instead of sliding animation
+
 * `:start` - Set the active item for carousel at the beginning. Counting start at 0.
 
 * `:cycle_on` - Cycles through the carousel items from left to right.
+
 * `:pause_on` - Stops the carousel from cycling through items.
+
 * `:prev_on` - Cycles to the previous item. 
+
 * `:next_on` - Cycles to the next item.
 
 * Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding carousel div.
@@ -24,7 +30,7 @@ Returns a bootstrap carousel containing a hash of `items` with `path`, `title`, 
 **Further explanation**
 * `:items` array: each item can include a hash with `path`, `title`, `text` and `interval` where `path` is the image-url, `interval` is the amount of time to delay between automatically cycling to the next item, `title` and `text` is the caption of the item
 
-* `:cycle_on`, `:pause_on`, `:prev_on`, `:next_on` are JavaScript triggers which can be trigger for example by an onclick method
+* `:cycle_on`, `:pause_on`, `:prev_on`, `:next_on` are JavaScript behaviors which can be trigger for example by an onclick method
 
 ## Examples
 
@@ -52,19 +58,18 @@ returns
 </div>
 ```
 
-### Example 2: Basic Carousel with captions and interval
+### Example 2: Basic Carousel with captions and different interval
 
 ```ruby
-carousel items: [
+items = [
     { path: image_url("matestack-data.png"), 
-      title: "First slide",
-      text: "First slide text caption",
+      title: "First slide", text: "First slide text caption",
       interval: 20000 },
     { path: image_url("matestack-data.png"),
-      title: "Second slide",
-      text: "Second slide text caption",
+      title: "Second slide", text: "Second slide text caption",
       interval: 5000 }
 ]
+carousel items: items
 ```
 
 returns
@@ -93,10 +98,11 @@ returns
 ### Example 3: Using controls, indicators and faded animation
 
 ```ruby
-carousel controls: true, indicators: true, fade: true, items: [
-          { path: image_url("matestack-data.png") },
-          { path: image_url("matestack-data.png") }
-        ]
+items = [
+  { path: image_url("matestack-data.png") },
+  { path: image_url("matestack-data.png") }
+]
+carousel controls: true, indicators: true, fade: true, items: items
 ```
 
 returns
@@ -127,18 +133,20 @@ returns
 </div>
 ```
 
-### Example 4: Trigger Carousel remotely
-*with cycle_on, pause_on, prev_on, next_on you can trigger the JavaScript behaviors of carousel*
+### Example 4: Trigger Carousel per event
+*with cycle_on, pause_on, prev_on, next_on you can trigger the JavaScript behaviors of carousel per event*
 
 ```ruby
-carousel prev_on: "prev_carousel", next_on: "next_carousel", items: [
-          { path: image_url("matestack-data.png") },
-          { path: image_url("matestack-data.png") }
-        ]
-onclick emit: "prev_carousel" do
+items = [
+  { path: image_url("matestack-data.png") },
+  { path: image_url("matestack-data.png") }
+]
+carousel prev_on: "prev-carousel", next_on: "next-carousel", items: items 
+
+onclick emit: "prev-carousel" do
   btn text: "Prev"
 end
-onclick emit: "next_carousel" do
+onclick emit: "next-carousel" do
   btn text: "Next"
 end
 ```

@@ -4,11 +4,12 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
   include Utils
 
   it 'renders a carousel with slides' do
+    items = [
+      { path: image_url("matestack-data.png") },
+      { path: image_url("matestack-data.png") }
+    ]
     matestack_render do
-      carousel items: [
-          { path: image_url("matestack-data.png") },
-          { path: image_url("matestack-data.png") }
-        ]
+      carousel items: items 
     end
     visit example_path
     expect(page).to have_selector('div.carousel.slide[data-ride=carousel]')
@@ -21,15 +22,12 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
   end
 
   it 'can have caption on carousel' do
+    items = [
+      { path: image_url("matestack-data.png"), title: "First slide", text: "Carousel First Text Caption" },
+      { path: image_url("matestack-data.png"), title: "Second slide", text: "Carousel Second Text Caption" }
+    ]
     matestack_render do
-      carousel items: [
-          { path: image_url("matestack-data.png"), 
-            title: "First slide",
-            text: "Carousel First Text Caption" },
-          { path: image_url("matestack-data.png"),
-            title: "Second slide",
-            text: "Carousel Second Text Caption" }
-        ]
+      carousel items: items
     end
     visit example_path
     expect(page).to have_selector('div.carousel.slide[data-ride=carousel]')
@@ -39,16 +37,13 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
     expect(page).to_not have_content('Second slide')
   end
 
-  it 'renders a carousel with faded animation and start at item 2' do
+  it 'renders a carousel with faded animation and start at 2nd item' do
+    items = [
+      { path: image_url("matestack-data.png"), title: "First slide", text: "Carousel First Text Caption" },
+      { path: image_url("matestack-data.png"), title: "Second slide", text: "Carousel Second Text Caption" }
+    ]
     matestack_render do
-      carousel fade: true, start: 1, items: [
-          { path: image_url("matestack-data.png"), 
-            title: "First slide",
-            text: "Carousel First Text Caption" },
-          { path: image_url("matestack-data.png"),
-            title: "Second slide",
-            text: "Carousel Second Text Caption" }
-        ]
+      carousel fade: true, start: 1, items: items
     end
     visit example_path
     expect(page).to have_selector('div.carousel.slide.carousel-fade[data-ride=carousel]')
@@ -59,15 +54,12 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
   end
 
   it 'can have different interval' do
+    items = [
+      { path: image_url("matestack-data.png"), title: "First slide", interval: 20000 },
+      { path: image_url("matestack-data.png"), title: "Second slide", interval: 5000 }
+    ]
     matestack_render do
-      carousel items: [
-          { path: image_url("matestack-data.png"), 
-            title: "First slide",
-            interval: 20000 },
-          { path: image_url("matestack-data.png"),
-            title: "Second slide",
-            interval: 5000 }
-        ]
+      carousel items: items
     end
     visit example_path
     expect(page).to have_selector('div.carousel.slide[data-ride=carousel]')
@@ -78,11 +70,12 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
   end
 
   it 'renders a carousel with indicators, controls' do
+    items = [
+      { path: image_url("matestack-data.png") },
+      { path: image_url("matestack-data.png") }
+    ]
     matestack_render do
-      carousel controls: true, indicators: true, items: [
-          { path: image_url("matestack-data.png") },
-          { path: image_url("matestack-data.png") }
-        ]
+      carousel controls: true, indicators: true, items: items
     end
     visit example_path
     expect(page).to have_selector('div.carousel.slide[data-ride=carousel]')
@@ -92,18 +85,15 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
     expect(page).to have_selector('a.carousel-control-prev')
   end
 
-  it 'can have outside controls' do
+  it 'can be switch item of the carousel per event' do
+    items = [
+      { path: image_url("matestack-data.png"), title: "First slide" },
+      { path: image_url("matestack-data.png"), title: "Second slide" }
+    ]
     matestack_render do
-      carousel prev_on: "prev_carousel", next_on: "next_carousel", items: [
-        { path: image_url("matestack-data.png"), title: "First slide" },
-        { path: image_url("matestack-data.png"), title: "Second slide" }
-      ]
-      onclick emit: "prev_carousel" do
-        btn text: "Prev"
-      end
-      onclick emit: "next_carousel" do
-        btn text: "Next"
-      end
+      carousel prev_on: "prev-carousel", next_on: "next-carousel", items: items
+      onclick emit: "prev-carousel" do btn text: "Prev" end
+      onclick emit: "next-carousel" do btn text: "Next" end
     end
     visit example_path
     expect(page).to have_selector('div.carousel.slide[data-ride=carousel]')
