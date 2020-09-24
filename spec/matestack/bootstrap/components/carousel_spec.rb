@@ -4,11 +4,11 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
   include Utils
 
   it 'renders a carousel with slides' do
-    items = [
-      { path: image_url("matestack-data.png") },
-      { path: image_url("matestack-data.png") }
-    ]
     matestack_render do
+      items = [
+        { path: image_url("matestack-data.png") },
+        { path: image_url("matestack-data.png") }
+      ]
       carousel items: items 
     end
     visit example_path
@@ -22,11 +22,11 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
   end
 
   it 'can have caption on carousel' do
-    items = [
-      { path: image_url("matestack-data.png"), title: "First slide", text: "Carousel First Text Caption" },
-      { path: image_url("matestack-data.png"), title: "Second slide", text: "Carousel Second Text Caption" }
-    ]
     matestack_render do
+      items = [
+        { path: image_url("matestack-data.png"), title: "First slide", text: "Carousel First Text Caption" },
+        { path: image_url("matestack-data.png"), title: "Second slide", text: "Carousel Second Text Caption" }
+      ]
       carousel items: items
     end
     visit example_path
@@ -38,11 +38,11 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
   end
 
   it 'renders a carousel with faded animation and start at 2nd item' do
-    items = [
-      { path: image_url("matestack-data.png"), title: "First slide", text: "Carousel First Text Caption" },
-      { path: image_url("matestack-data.png"), title: "Second slide", text: "Carousel Second Text Caption" }
-    ]
     matestack_render do
+      items = [
+        { path: image_url("matestack-data.png"), title: "First slide", text: "Carousel First Text Caption" },
+        { path: image_url("matestack-data.png"), title: "Second slide", text: "Carousel Second Text Caption" }
+      ]
       carousel fade: true, start: 1, items: items
     end
     visit example_path
@@ -54,11 +54,11 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
   end
 
   it 'can have different interval' do
-    items = [
-      { path: image_url("matestack-data.png"), title: "First slide", interval: 20000 },
-      { path: image_url("matestack-data.png"), title: "Second slide", interval: 5000 }
-    ]
     matestack_render do
+      items = [
+        { path: image_url("matestack-data.png"), title: "First slide", interval: 20000 },
+        { path: image_url("matestack-data.png"), title: "Second slide", interval: 5000 }
+      ]
       carousel items: items
     end
     visit example_path
@@ -70,11 +70,11 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
   end
 
   it 'renders a carousel with indicators, controls' do
-    items = [
-      { path: image_url("matestack-data.png") },
-      { path: image_url("matestack-data.png") }
-    ]
     matestack_render do
+      items = [
+        { path: image_url("matestack-data.png") },
+        { path: image_url("matestack-data.png") }
+      ]
       carousel controls: true, indicators: true, items: items
     end
     visit example_path
@@ -86,11 +86,11 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
   end
 
   it 'can be switch item of the carousel per event' do
-    items = [
-      { path: image_url("matestack-data.png"), title: "First slide" },
-      { path: image_url("matestack-data.png"), title: "Second slide" }
-    ]
     matestack_render do
+      items = [
+        { path: image_url("matestack-data.png"), title: "First slide" },
+        { path: image_url("matestack-data.png"), title: "Second slide" }
+      ]
       carousel prev_on: "prev-carousel", next_on: "next-carousel", items: items
       onclick emit: "prev-carousel" do btn text: "Prev" end
       onclick emit: "next-carousel" do btn text: "Next" end
