@@ -92,8 +92,15 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         plain "do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
       end
     end
-    
-    close class: 'foobar'
+    col md: 4, offset_md: 2 do
+      card slots: { 
+        header: slot {
+          btn text: "Title Button"
+        }, 
+        footer: slot {
+          paragraph class: "text-center", text: "2 days ago"
+          } }
+    end
 
     container size: :lg, class: "bg-light py-3 my-3" do
       row horizontal: :center, vertical: :center do
