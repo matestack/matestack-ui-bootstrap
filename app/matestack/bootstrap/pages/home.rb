@@ -317,7 +317,12 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
 
     container size: :lg, class: "bg-dark py-4 my-4" do
       row do
-        progress height: 40, value: 80, text: "50%", color: :success, striped: true, animated: true
+        progress value: 80, text: "... | ", color: :success, striped: true, animated: true do
+          plain "50%"
+        end
+        br 
+        progress value: 50, text: "50%", valuemin: 10, valuemax: 70
+        br
         progress height: 30, slots: { custom_bar: my_progress_bars }
       end
       row do

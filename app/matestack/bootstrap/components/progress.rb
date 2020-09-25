@@ -1,61 +1,64 @@
 class Bootstrap::Components::Progress < Matestack::Ui::Component
+  
+  optional class: { as: :bs_class }
+  optional :slots
+  optional :text, :color, :striped, :animated, :bar_class, :bar_attributes
+  optional :height
+  optional :value, :valuemin, :valuemax 
+
   def response 
-    div id: "#{@options[:id]}", class: "progress p-0", attributes: { 'style':"height: #{progress_height}" } do
+    div progress_attributes do
       # slot in case of multiple bars
-      if options[:slots] && options[:slots][:custom_bar]
-        slot options[:slots][:custom_bar]
+      if slots && slots[:custom_bar]
+        slot slots[:custom_bar]
       else
-        div class: "progress-bar #{progress_classes}", 
-            attributes: { 'role':"progressbar", 'style':"width: #{progress_width}",'aria-valuenow':"#{@options[:value]}", 'aria-valuemin':"#{progress_min}", 'aria-valuemax':"#{progress_max}" } do
-              plain @options[:text];
-            end
+        div progress_bar_attributes do
+          plain text if text
+          yield_components
+        end
       end
-      yield_components
     end
   end
 
   protected
-
-  def progress_width
-    if @options[:value].present?
-      attrs = @options[:value].to_s
-      attrs << '%'
-      attrs
+  def progress_attributes
+    attributes = {}.tap do |hash|
+      hash[:class] = progress_classes
+      hash[:attributes] = { 'style': "height: #{height}px" } if height 
     end
-  end
-
-  def progress_height
-    if @options[:height].present?
-      attrs = @options[:height].to_s
-      attrs << 'px'
-      attrs
-    end
-  end
-
-  def progress_min
-    attrs = "0"
-    if @options[:valuemin].present?
-      attrs = @options[:valuemin].to_s
-    end
-    attrs
-  end
-
-  def progress_max
-    attrs = "100"
-    if @options[:valuemax].present?
-      attrs = @options[:valuemax].to_s
-    end
-    attrs
+    html_attributes.merge(
+      attributes
+    )
   end
 
   def progress_classes
-    classes = []
+    [].tap do |classes|
+      classes << 'progress p-0'
+      classes << bs_class
+    end.join(' ').strip
+  end
 
-    classes << "bg-#{@options[:color]}" if @options[:color].present? 
-    classes << "progress-bar-striped" if @options[:striped].present? && @options[:striped] == true
-    classes << "progress-bar-animated" if @options[:animated].present? && @options[:animated] == true
+  def progress_bar_attributes
+    bar_attrs = (bar_attributes || {}).tap do |hash|
+      hash[:role] = "progressbar"
+      hash[:style] = "width: #{value}%" if value > 0
+      hash[:'aria-valuenow'] = value if value
+      hash[:'aria-valuemin'] = (valuemin || '0')
+      hash[:'aria-valuemax'] = (valuemax || '100')
+    end
+    {
+      class: progress_bar_classes,
+      attributes: bar_attrs
+    }
+  end
 
-    classes << @options[:class]
-    classes.join(' ')
+  def progress_bar_classes
+    [].tap do |classes|
+      classes << 'progress-bar'
+      classes << "bg-#{(color || 'primary')}"
+      classes << "progress-bar-striped" if striped
+      classes << "progress-bar-animated" if animated
+      classes << bar_class
+    end.join(' ').strip
   end
 end
