@@ -144,7 +144,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
       end
       row horizontal: :center, vertical: :center do
         
-        toast show_on: "myToasts", dispose_on: "hideToasts", t_title: "Bootstrap", t_text: "11 mins ago", message: "Hello, world! This is a toast message.", autohide: false
+        toast show_on: "myToasts", dispose_on: "hideToasts", header: "Bootstrap", body: "Hello, world! This is a toast message.", autohide: false
         col do          
           onclick emit: "myToasts" do
             btn text: "Show Toasts"

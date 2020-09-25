@@ -1,40 +1,42 @@
 class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
   vue_js_component_name "matestack-ui-bootstrap-toast" 
 
-  optional :icon_class, :icon_path, :t_title, :t_text, :message, :t_style, 
-            :important, :delay, :autohide, :animation,
-            class: { as: :bs_class }, attributes: { as: :bs_attrs }, data: { as: :bs_data }
+  # header attributes, expects a hash or string
+  # possible keys `:icon_class, :icon, :title, :subtitle`
+  optional :header
+  # body expects a string as message inside toast
+  optional :body
+  optional :t_style
+  optional :important, :delay, :autohide, :animation
+  optional class: { as: :bs_class }, attributes: { as: :bs_attrs }, data: { as: :bs_data }
+  optional :slots
 
   def response 
     div toast_attributes do
-      div class: "toast-header" do
-        if options[:slots] && options[:slots][:header]
-          custom_header_partial
-        else
-          header_partial
-        end
-      end
+      header_partial if header || slots && slots[:header]
       body_partial
     end
   end
 
   protected
 
-  def custom_header_partial
-    slot options[:slots][:header]
-  end
-
   def header_partial
-    img class: icon_classes, path: icon_path if icon_path.present?
-    strong class: "mr-auto", text: t_title if t_title.present?
-    small text: t_text if t_text.present?
-    close dismiss: 'toast', class: "ml-2 mb-1"
+    header = self.header.is_a?(Hash) ? self.header : { text: self.header }
+    div class: "toast-header" do
+      img class: "#{'rounded mr-2' || header[:icon_class]}", path: header[:icon] if header[:icon].present?
+      strong class: "mr-auto", text: header[:title] if header[:title].present?
+      small text: header[:subtitle] if header[:subtitle].present?
+      
+      slot slots[:header] if slots && slots[:header]
+      close dismiss: 'toast', class: "ml-2 mb-1"
+    end
+
   end
 
   def body_partial
     div class: "toast-body" do
-      yield_components if !message.present?
-      paragraph text: message if message.present?
+      paragraph text: body if body
+      yield_components
     end
   end
 
@@ -67,15 +69,7 @@ class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
   def toast_classes
     [].tap do |classes|
       classes << 'toast p-0'
-      # custom classes
       classes << bs_class
-    end.join(' ').strip
-  end
-
-  def icon_classes
-    [].tap do |classes|
-      classes << 'rounded mr-2' if !icon_class.present?
-      classes << icon_class if icon_class.present?
     end.join(' ').strip
   end
 end
