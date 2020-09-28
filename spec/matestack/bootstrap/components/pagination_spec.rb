@@ -11,4 +11,13 @@ RSpec.describe "Bootstrap::Components::Pagination", type: :feature, js: true do
     expect(page).to have_selector('ul.nav.justify-content-center')
     expect(page).to have_selector('ul.pagination')
   end
+
+  it 'can render pagination from item list'
+
+  it 'can have custom content given in a block'
+  
+  it 'renders the block after the item list'
+
+  it 'can have different sizes'
+  
 end

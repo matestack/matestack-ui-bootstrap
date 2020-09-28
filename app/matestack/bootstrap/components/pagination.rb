@@ -1,23 +1,23 @@
 class Bootstrap::Components::Pagination < Matestack::Ui::Component
   
-  optional class: { as: :bs_class }, label: { as: :bs_label }
-  optional :items, :size, :items_id, :items_class, :text
+  optional :aria_label, :size, class: { as: :bs_class }
+  optional :items
 
   def response 
     nav pagination_attributes do
-      ul ul_attributes do
-        if items.present? && items.length() >= 1
-          items.each_with_index do |(text, path), index|
-            li class: "page-item #{'active' if path == request.fullpath }" do
-              link class: "page-link", path: path do
-                plain text
+      ul class: ul_classes do
+        if items.present?
+          items.each_with_index do |item, index|
+            li class: "page-item #{'active' if item[:active]}" do
+              if item[:type] == :link
+                link path: path, text: item[:text], class: 'page-link'
+              else
+                transition path: path, text: item[:text], class: 'page-link'
               end
             end
           end
-        else
-          # insert custom list
-          yield_components
         end
+        yield_components
       end
     end
   end
@@ -26,29 +26,14 @@ class Bootstrap::Components::Pagination < Matestack::Ui::Component
 
   def pagination_attributes
     html_attributes.merge(
-      class: pagination_classes,
-      attributes: { 'aria-label': "#{bs_label}" }
+      attributes: { 'aria-label': "#{bs_label || 'Page navigation'}" }
     )
-  end
-
-  def pagination_classes
-    [].tap do |classes|
-      classes << bs_class
-    end.join(' ').strip
-  end
-
-  def ul_attributes
-    {}.tap do |hash| 
-      hash[:id] = items_id
-      hash[:class] = ul_classes
-    end
   end
 
   def ul_classes
     [].tap do |classes|
       classes << "pagination"
-      classes << "pagination-#{size}" if size.present? 
-      classes << items_class
+      classes << "pagination-#{size}" if size.present?
     end.join(' ').strip
   end
 
