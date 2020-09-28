@@ -14,16 +14,11 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
   
   it 'reveals toast when show_on event is triggered' do
     matestack_render do
-      toast header: 'Bootstrap Toast', body: 'I`m a toast', show_on: 'show_toast'
-      onclick emit: "show_toast" do
-        btn text: "Show"
-      end
+      toast header: 'Bootstrap Toast', body: 'I`m a toast', show_on: 'show_toast', autohide: false
     end
     visit example_path
     expect(page).not_to have_content 'Bootstrap Toast'
-    #page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_toast")')
-    click_button('Show')
-    sleep 3
+    page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_toast")')
     expect(page).to have_content 'Bootstrap Toast'
   end
 
@@ -33,10 +28,8 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
     end
     visit example_path
     page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_toast")')
-    sleep 1
     expect(page).to have_content 'Bootstrap Toast'
     page.execute_script('MatestackUiCore.matestackEventHub.$emit("hide_toast")')
-    sleep 1
     expect(page).not_to have_content 'Bootstrap Toast'
   end
 
@@ -63,12 +56,12 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
 
   it 'is not animated' do
     matestack_render do
-      toast header: "Bootstrap Toast", body: 'I`m a toast', show_on: 'show_toast', animated: false
+      toast header: "Bootstrap Toast", body: 'I`m a toast', show_on: 'show_toast', animation: false
     end
     visit example_path
     page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_toast")')
     expect(page).to have_content 'Bootstrap Toast'
-    expect(page).to have_selector('div.toast.p-0[data-animation=false]')
+    expect(page).to have_selector('[data-animation=false]')
   end
 
   it 'is not hiding automatically' do

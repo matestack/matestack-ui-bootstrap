@@ -147,12 +147,9 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         modal id: 'staticBackdrop', static: true, m_title: "Modal Title", text: "Modal Messages", close_btn_text: "Close"
       end
       row horizontal: :center, vertical: :center do
-        toggle show_on: "my-event" do        
-          toast show_on: "myToasts", dispose_on: "hideToasts", header: "Bootstrap", body: "Hello, world! This is a toast message.", autohide: false,
-              placement: { height: "200px" }
-        end
+        toast show_on: "myToasts", dispose_on: "hideToasts", header: "Bootstrap", body: "Hello, world! This is a toast message.", autohide: false
         col do          
-          onclick emit: "my-event" do
+          onclick emit: "myToasts" do
             btn text: "Show Toasts"
           end
         end

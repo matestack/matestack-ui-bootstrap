@@ -33,7 +33,7 @@ class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
   end
 
   def header_partial
-    header = self.header.is_a?(Hash) ? self.header : { text: self.header }
+    header = self.header.is_a?(Hash) ? self.header : { title: self.header }
     div class: "toast-header" do
       img class: "#{'rounded mr-2' || header[:icon_class]}", path: header[:icon] if header[:icon].present?
       strong class: "mr-auto", text: header[:title] if header[:title].present?
