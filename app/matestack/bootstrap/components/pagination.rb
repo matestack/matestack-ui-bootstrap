@@ -8,11 +8,11 @@ class Bootstrap::Components::Pagination < Matestack::Ui::Component
       ul class: ul_classes do
         if items.present?
           items.each_with_index do |item, index|
-            li class: "page-item #{'active' if item[:active]}" do
+            li class: "page-item #{ 'active' if item[:active] }" do
               if item[:type] == :link
-                link path: path, text: item[:text], class: 'page-link'
+                link path: item[:path], text: item[:text], class: 'page-link'
               else
-                transition path: path, text: item[:text], class: 'page-link'
+                transition path: item[:path], text: item[:text], class: 'page-link'
               end
             end
           end
@@ -26,7 +26,7 @@ class Bootstrap::Components::Pagination < Matestack::Ui::Component
 
   def pagination_attributes
     html_attributes.merge(
-      attributes: { 'aria-label': "#{bs_label || 'Page navigation'}" }
+      attributes: { 'aria-label': "#{aria_label || 'Page navigation'}" }
     )
   end
 
