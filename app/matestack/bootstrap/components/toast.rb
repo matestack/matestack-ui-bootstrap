@@ -6,19 +6,31 @@ class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
   optional :header
   # body expects a string as message inside toast
   optional :body
-  optional :t_style
+  # placement attributes, expects a hash wiht possible keys: position, min-height
+  optional :placement # for adding custom css style
   optional :important, :delay, :autohide, :animation
   optional class: { as: :bs_class }, attributes: { as: :bs_attrs }, data: { as: :bs_data }
   optional :slots
 
   def response 
+    standard_placement_partial unless placement.present?
+    custom_placement_partial if placement.present?
+  end
+
+  protected
+
+  def custom_placement_partial
+    div attributes: placement_attrs do
+      standard_placement_partial
+    end
+  end
+
+  def standard_placement_partial
     div toast_attributes do
       header_partial if header || slots && slots[:header]
       body_partial
     end
   end
-
-  protected
 
   def header_partial
     header = self.header.is_a?(Hash) ? self.header : { text: self.header }
@@ -59,10 +71,10 @@ class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
   def toast_attrs 
     (bs_attrs || {}).tap do |hash|
       hash[:role] = 'alert'
-      hash[:'aria-live'] = (important ? 'assertive' : 'polite') if !t_style.present? && important.present?
-      hash[:'aria-live'] = 'assertive' if !t_style.present? && !important.present?
-      hash[:'aria-atomic'] = 'true' if !t_style.present?
-      hash[:style] = t_style if t_style.present?
+      hash[:'aria-live'] = (important ? 'assertive' : 'polite') if important.present? && !placement.present?
+      # hash[:'aria-live'] = 'assertive' unless important.present?
+      hash[:'aria-atomic'] = 'true' unless placement.present?
+      hash[:style] = "position: absolute; #{placement[:position] || 'top: 0; right: 0;' }"  if placement.present?
     end
   end
 
@@ -71,5 +83,13 @@ class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
       classes << 'toast p-0'
       classes << bs_class
     end.join(' ').strip
+  end
+
+  def placement_attrs
+    {}.tap do |hash|
+      hash[:'aria-live'] = (important ? 'assertive' : 'polite') if important.present?
+      hash[:'aria-atomic'] = 'true' 
+      hash[:style] = "position: relative; min-height: #{placement[:height]};"
+    end
   end
 end
