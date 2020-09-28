@@ -1,22 +1,26 @@
 class Bootstrap::Components::Collapse < Matestack::Ui::VueJsComponent
   vue_js_component_name "matestack-ui-bootstrap-collapse" 
   
-  optional :text, :multi, :labelledby, :parent, :card_class, class: { as: :bs_class }, id: { as: :bs_id }
-
-  def setup
-    @component_config["collapse-id"] = bs_id
-  end
+  optional :multi, :labelledby, :parent
+  optional :card, class: { as: :bs_class }
+  # event trigger
+  optional :toggle_on, :show_on, :hide_on, :dispose_on
 
   def response 
     div collapse_attributes do
-      div class: card_classes do
-        plain text if text
-        yield_components if !text
-      end
+      card_partial if card
+      yield_components
     end
   end
 
   protected
+
+  def card_partial
+    tmp_card = card.is_a?(Hash) ? card : { text: card }
+    div class: "card card-body #{card[:class]}".strip do
+      plain card[:text]
+    end
+  end
 
   def collapse_attributes
     html_attributes.merge(
@@ -28,20 +32,11 @@ class Bootstrap::Components::Collapse < Matestack::Ui::VueJsComponent
 
   def collapse_classes
     [].tap do |classes|
-      # unclear behaviour: by default is hidden when having class "show"
-      classes << 'collapse show'
+      classes << 'collapse'
       # mulit target
       classes << 'multi-collapse' if multi
       #custom classes 
       classes << bs_class
-    end.join(' ').strip
-  end
-
-  def card_classes
-    [].tap do |classes|
-      classes << 'card card-body' if !card_class.present?
-      #custom classes 
-      classes << card_class
     end.join(' ').strip
   end
 

@@ -67,6 +67,11 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
     expect(page).to have_selector('div.carousel-item', count: 2, visible: false)
     expect(page).to have_content('First slide') 
     expect(page).to_not have_content('Second slide')
+    pending 'is not testing the interval'
+    # first slide could be shown forever and second never
+    # check if first slide is shown and after eg. 200ms the second slide is shown. Remember to set the timer correctly and use have content with wait.
+    # check if first slide is shown again after second slide
+    fail
   end
 
   it 'renders a carousel with indicators, controls' do
@@ -85,14 +90,14 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
     expect(page).to have_selector('a.carousel-control-prev')
   end
 
-  it 'can be switch item of the carousel per event' do
+  it 'can show next item on event' do
     matestack_render do
       items = [
         { path: image_url("matestack-data.png"), title: "First slide" },
         { path: image_url("matestack-data.png"), title: "Second slide" }
       ]
       carousel prev_on: "prev-carousel", next_on: "next-carousel", items: items
-      onclick emit: "prev-carousel" do btn text: "Prev" end
+      onclick emit: "prev-carousel" do btn text: "Prev" end # why is there a prev button if not used in this test? Use page.execute_script instead of onclick components
       onclick emit: "next-carousel" do btn text: "Next" end
     end
     visit example_path
@@ -106,4 +111,8 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
     click_button('Next')
     expect(page).to have_content('Second slide') 
   end
+
+  it 'can show previous item on event'
+  it 'can pause on event and restarty cycling after event'
+  it 'can be disposed on event'
 end

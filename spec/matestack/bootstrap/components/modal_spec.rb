@@ -117,4 +117,10 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
     expect(page).to have_content 'Custom Body Text'
     expect(page).to have_selector('button.close[data-dismiss=modal]')
   end
+
+  it 'can be toggled via event'
+  it 'can be shown via event'
+  it 'can be hiden via event'
+  it 'can be disposed via event'
+  
 end

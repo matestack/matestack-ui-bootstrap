@@ -6,10 +6,6 @@ class Bootstrap::Components::Dropdown < Matestack::Ui::VueJsComponent
             class: { as: :bs_class }, id: { as: :bs_id },
             data: { as: :bs_data }
 
-  def setup
-    # @component_config["dropdown-id"] = bs_id
-  end
-
   def response 
     div dropdown_attributes do
       split_btn_partial if split 

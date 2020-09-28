@@ -1,4 +1,5 @@
-class Bootstrap::Components::Modal < Matestack::Ui::Component
+class Bootstrap::Components::Modal < Matestack::Ui::VueJsComponent
+  vue_js_component_name 'matestack-ui-bootstrap-modal'
 
   # header attributes, expects a hash or string
   # possible keys `:class, :text, :size`
@@ -9,12 +10,12 @@ class Bootstrap::Components::Modal < Matestack::Ui::Component
   # footer is a dismiss button, expects a hash or string for button text
   # possible keys `:class, :text`
   optional :footer 
-
-  optional :fullscreen # fullscreen attribute, expects boolean or bootstrap breakpoint
-  
   optional :fade, :size
-  optional :static, :modal_dialog_class, :scrollable, :centered
-  optional class: { as: :bs_class }, id: { as: :bs_id }
+  optional :fullscreen # fullscreen attribute, expects boolean or bootstrap breakpoint
+  optional :static, :keyboard, :scrollable, :centered
+  optional :modal_dialog_class, class: { as: :bs_class }, id: { as: :bs_id }
+  # event trigger
+  optional :toggle_on, :show_on, :hide_on, :handle_update_on, :dispose_on
 
   optional :slots
 
@@ -23,8 +24,9 @@ class Bootstrap::Components::Modal < Matestack::Ui::Component
       div class: dialog_classes do
         div class: "modal-content" do
           header_partial if header || (slots && slots[:header])
-          body_partial 
+          body_partial if body || slots && slots[:body]
           footer_partial if footer || (slots && slots[:footer])
+          yield_components
         end
       end
     end
@@ -46,9 +48,12 @@ class Bootstrap::Components::Modal < Matestack::Ui::Component
 
   def body_partial
     body = self.body.is_a?(Hash) ? self.body : { text: self.body }
-    div class: "modal-body #{body[:class] if body[:class].present?}" do
-      plain body[:text] if body[:text].present?
-      yield_components
+    div class: "modal-body #{body[:class]}".strip do
+      if slots && slots[:body]
+        slot slots[:body] 
+      else
+        plain body[:text] if body[:text].present?
+      end
     end
   end
 
@@ -56,7 +61,11 @@ class Bootstrap::Components::Modal < Matestack::Ui::Component
     footer = self.footer.is_a?(Hash) ? self.footer : { text: self.footer }
     div class: "modal-footer" do
       slot slots[:footer] if slots && slots[:footer]
-      button class: "btn #{footer[:class].present? ? footer[:class] : 'btn-secondary'}", data: { dismiss: 'modal' }, attributes: { type: 'button' }, text: footer[:text] if footer[:text].present?
+      if footer[:text].present?
+        button class: "btn #{footer[:class].present? ? footer[:class] : 'btn-secondary'}", 
+          data: { dismiss: 'modal' }, attributes: { type: 'button' }, 
+          text: footer[:text] 
+      end
     end
   end
 
@@ -64,7 +73,10 @@ class Bootstrap::Components::Modal < Matestack::Ui::Component
     attributes = {}.tap do |hash|
       hash[:class] = modal_classes
       hash[:attributes] = { 'tabindex': "-1", 'aria-labelledby': "#{bs_id}Label", 'aria-hidden': "true" }
-      hash[:data] = { backdrop: "static", keyboard: "false" } if static
+      hash[:data] = {}.tap do |data| 
+        data[:backdrop] = "static" if static
+        data[:keyboard] = "false" if keyboard
+      end
     end
     html_attributes.merge(
       attributes
