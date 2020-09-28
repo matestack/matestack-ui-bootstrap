@@ -101,20 +101,19 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         #   { type: :transition, path: "#list-item1", text: "Item 1" },
         #   { type: :transition, path: "#list-item2", text: "Item 2" } 
         # ]
-        list_group id: "list-example3", items: [
+        list_group id: "list-example3", class: "foobar",
+        items: [
           { type: :label, text: "Item 1" },
           { type: :label, text: "Item 2" } 
         ]
-          scrollspy target: "#list-example3" do
-            
-            heading size: 2, id: "list-item1", text: "Item 1"
-            paragraph text: "Quis anim sit do amet fugiat dolor velit sit ea ea do reprehenderit culpa duis. Nostrud aliqua ipsum fugiat minim proident occaecat excepteur aliquip culpa aute tempor reprehenderit. Deserunt tempor mollit elit ex pariatur dolore velit fugiat mollit culpa irure ullamco est ex ullamco excepteur."
-            heading size: 2, id: "list-item2", text: "Item 2"
-            paragraph text: "Quis anim sit do amet fugiat dolor velit sit ea ea do reprehenderit culpa duis. Nostrud aliqua ipsum fugiat minim proident occaecat excepteur aliquip culpa aute tempor reprehenderit. Deserunt tempor mollit elit ex pariatur dolore velit fugiat mollit culpa irure ullamco est ex ullamco excepteur."
+        scrollspy target: "#list-example3" do
+          heading size: 2, id: "list-item1", text: "Item 1"
+          paragraph text: "Quis anim sit do amet fugiat dolor velit sit ea ea do reprehenderit culpa duis. Nostrud aliqua ipsum fugiat minim proident occaecat excepteur aliquip culpa aute tempor reprehenderit. Deserunt tempor mollit elit ex pariatur dolore velit fugiat mollit culpa irure ullamco est ex ullamco excepteur."
+          heading size: 2, id: "list-item2", text: "Item 2"
+          paragraph text: "Quis anim sit do amet fugiat dolor velit sit ea ea do reprehenderit culpa duis. Nostrud aliqua ipsum fugiat minim proident occaecat excepteur aliquip culpa aute tempor reprehenderit. Deserunt tempor mollit elit ex pariatur dolore velit fugiat mollit culpa irure ullamco est ex ullamco excepteur."
         end
       end
     end
-    # breadcrumb items: @breadcrumb_items
     breadcrumb items: [
       {
         type: :link,
