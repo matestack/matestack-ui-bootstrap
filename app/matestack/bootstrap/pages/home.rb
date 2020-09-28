@@ -97,9 +97,13 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     centered: true, scrollable: true, size: :lg    
     container size: :lg, class: "bg-light py-3 my-3" do
       row horizontal: :center, vertical: :center do
+        # list_group id: "list-example3", items: [
+        #   { type: :transition, path: "#list-item1", text: "Item 1" },
+        #   { type: :transition, path: "#list-item2", text: "Item 2" } 
+        # ]
         list_group id: "list-example3", items: [
-          { type: :link, path: "#list-item1", content: "Item 1" },
-          { type: :link, path: "#list-item2", content: "Item 2" } 
+          { type: :label, text: "Item 1" },
+          { type: :label, text: "Item 2" } 
         ]
           scrollspy target: "#list-example3" do
             

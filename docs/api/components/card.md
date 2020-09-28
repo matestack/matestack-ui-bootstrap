@@ -168,7 +168,7 @@ returns
 ```
 
 ### Example 5: Yield a given block
-**Point of attention:** Customer Component will be yield outside of the `card-body` tag. 
+**Point of attention:** Custom Component will be yield outside of the `card-body` tag. 
 
 ```ruby
 card title: "Card title", body: "Some quick example text" do

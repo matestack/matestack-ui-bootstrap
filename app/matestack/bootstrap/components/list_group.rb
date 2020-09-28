@@ -1,7 +1,9 @@
 class Bootstrap::Components::ListGroup < Matestack::Ui::Component
   html_attributes :role
 
-  optional :id, :items, :horizontal, :horizontal_size, :checkbox
+  #  optional :id 
+  optional :items 
+  optional :horizontal, :horizontal_size, :checkbox
   optional :flush, :tablist, class: { as: :bs_class }
 
 
@@ -22,7 +24,7 @@ class Bootstrap::Components::ListGroup < Matestack::Ui::Component
           plain item[:text]
         end
       when :transition 
-        link link_attrs(item)  do
+        transition link_attrs(item)  do
           plain item[:text]
         end
       when :label 
