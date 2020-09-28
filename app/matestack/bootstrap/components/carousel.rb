@@ -3,6 +3,7 @@ class Bootstrap::Components::Carousel < Matestack::Ui::VueJsComponent
   
   optional :start, :controls, :indicators, :fade 
   optional :items, class: { as: :bs_class }
+  # possible keys for items: path, title, text, interval
   # event trigger
   optional :cycle_on, :pause_on, :prev_on, :next_on
 

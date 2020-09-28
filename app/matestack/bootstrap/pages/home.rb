@@ -1,12 +1,6 @@
 class Bootstrap::Pages::Home < Matestack::Ui::Page
 
   def prepare
-    @page_item_2 = {
-      "<<": "#",
-      "1": "#",
-      "2": "#",
-      ">>": "#"
-    }
     @page_item = {
       "1": "#",
       "2": "#",
@@ -199,9 +193,12 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     end
     container size: :fluid, class: "py-4 bg-dark" do
       col md: 8, offset: 2 do          
-        carousel fade: true, start: 2, prev_on: "prev_carousel", next_on: "next_carousel", items: @carousel_items, controls: true, indicators: true
+        carousel start: 2, prev_on: "prev_carousel", next_on: "next_carousel", pause_on: "pause", items: @carousel_items, controls: true, indicators: true
         onclick emit: "prev_carousel" do
           btn text: "Prev"
+        end
+        onclick emit: "pause" do
+          btn text: "Pause"
         end
         onclick emit: "next_carousel" do
           btn text: "Next"
@@ -240,16 +237,11 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     container size: :lg, class: "bg-warning py-3 my-3" do
       row do
         col do
-          pagination items: @page_item_2, size: :sm
-          pagination class: "justify-content-center" do
-            @page_item.each do |text, path|
-              li class: "page-item" do
-                link class: "page-link", path: path do
-                  plain text
-                end
-              end
-            end
-          end
+          pagination items: [
+            { type: :link, path: "#", text: "1", active: false },
+            { type: :link, path: "#", text: "2", active: false },
+            { type: :link, path: "#", text: "3", active: false },
+          ], size: :sm
         end
       end
     end

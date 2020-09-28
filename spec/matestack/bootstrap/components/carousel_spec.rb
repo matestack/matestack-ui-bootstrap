@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
+RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
   include Utils
 
   it 'renders a carousel with slides' do
@@ -56,8 +56,8 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
   it 'can have different interval' do
     matestack_render do
       items = [
-        { path: image_url("matestack-data.png"), title: "First slide", interval: 20000 },
-        { path: image_url("matestack-data.png"), title: "Second slide", interval: 5000 }
+        { path: image_url("matestack-data.png"), title: "First slide", interval: 5000 },
+        { path: image_url("matestack-data.png"), title: "Second slide", interval: 8000 }
       ]
       carousel items: items
     end
@@ -67,11 +67,9 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
     expect(page).to have_selector('div.carousel-item', count: 2, visible: false)
     expect(page).to have_content('First slide') 
     expect(page).to_not have_content('Second slide')
-    pending 'is not testing the interval'
-    # first slide could be shown forever and second never
-    # check if first slide is shown and after eg. 200ms the second slide is shown. Remember to set the timer correctly and use have content with wait.
-    # check if first slide is shown again after second slide
-    fail
+    expect(page).to have_content('Second slide', wait: 6)
+    expect(page).to_not have_content('First slide', wait: 6)
+    expect(page).to have_content('First slide', wait: 8)
   end
 
   it 'renders a carousel with indicators, controls' do
@@ -96,20 +94,23 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
         { path: image_url("matestack-data.png"), title: "First slide" },
         { path: image_url("matestack-data.png"), title: "Second slide" }
       ]
-      carousel prev_on: "prev-carousel", next_on: "next-carousel", items: items
-      onclick emit: "prev-carousel" do btn text: "Prev" end # why is there a prev button if not used in this test? Use page.execute_script instead of onclick components
-      onclick emit: "next-carousel" do btn text: "Next" end
+      carousel prev_on: "prev-carousel", next_on: "next-carousel", pause_on: "pause-carousel", items: items
     end
     visit example_path
     expect(page).to have_selector('div.carousel.slide[data-ride=carousel]')
     expect(page).to have_selector('div.carousel-inner')
     expect(page).to have_selector('div.carousel-item', count: 2, visible: false)
-    expect(page).to have_content('Prev') 
-    expect(page).to have_content('Next') 
+
     expect(page).to have_content('First slide') 
     expect(page).to_not have_content('Second slide')
-    click_button('Next')
-    expect(page).to have_content('Second slide') 
+    # page.execute_script('MatestackUiCore.matestackEventHub.$emit("next-carousel")')
+    page.execute_script('MatestackUiCore.matestackEventHub.$emit("pause-carousel")')
+
+    # expect(page).to have_content('Second slide') 
+    # expect(page).to_not have_content('First slide')
+    sleep
+    # page.execute_script('MatestackUiCore.matestackEventHub.$emit("prev-carousel")')
+    # expect(page).to have_content('First slide') 
   end
 
   it 'can show previous item on event'
