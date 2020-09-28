@@ -1,9 +1,9 @@
 class Bootstrap::Components::Carousel < Matestack::Ui::VueJsComponent
   vue_js_component_name "matestack-ui-bootstrap-carousel" 
   
-  optional :items 
-  optional :controls, :indicators, :fade, class: { as: :bs_class }
-  optional :start
+  optional :start, :controls, :indicators, :fade 
+  optional :items, class: { as: :bs_class }
+  # event trigger
   optional :cycle_on, :pause_on, :prev_on, :next_on
 
   def setup
@@ -16,7 +16,7 @@ class Bootstrap::Components::Carousel < Matestack::Ui::VueJsComponent
       indicator_partial if indicators.present?
       # carousel content
       div class: "carousel-inner" do
-        yield_components unless items
+        yield_components
         carousel_partial if items
       end
       controls_partial if controls

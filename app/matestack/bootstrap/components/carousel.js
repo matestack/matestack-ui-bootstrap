@@ -5,6 +5,7 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-carousel', {
       carouselInstance: undefined
     };
   },
+
   methods: {
     cycle: function(){
       const self = this;
@@ -23,10 +24,13 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-carousel', {
       self.carouselInstance.next()
     }
   },
-  mounted() {
-    var myCarousel = document.getElementById(this.componentConfig["carousel-id"])
+
+  mounted: function() {
+    const self = this;
+    var myCarousel = self.$el;
     this.carouselInstance = new bootstrap.Carousel(myCarousel)
   },
+
   created: function() {
     const self = this
     if(this.componentConfig["cycle_on"] != undefined){
@@ -49,10 +53,6 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-carousel', {
 
   beforeDestroy: function() {
     const self = this
-    MatestackUiCore.matestackEventHub.$off(this.componentConfig["cycle_on"], self.cycle);
-    MatestackUiCore.matestackEventHub.$off(this.componentConfig["pause_on"], self.pause);
-    MatestackUiCore.matestackEventHub.$off(this.componentConfig["prev_on"], self.prev);
-    MatestackUiCore.matestackEventHub.$off(this.componentConfig["next_on"], self.next);
     if(this.componentConfig["cycle_on"] != undefined){
       var cycle_events = this.componentConfig["cycle_on"].split(",")
       cycle_events.forEach(cycle_event => MatestackUiCore.matestackEventHub.$off(cycle_event.trim(), self.cycle));

@@ -39,8 +39,6 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-alert', {
 
   beforeDestroy: function() {
     const self = this
-    MatestackUiCore.matestackEventHub.$off(this.componentConfig["close_on"], self.close);
-    MatestackUiCore.matestackEventHub.$off(this.componentConfig["dispose_on"], self.dispose);
     if(self.componentConfig["close_on"] != undefined){
       var closen_events = self.componentConfig["close_on"].split(",")
       closen_events.forEach(close_event => MatestackUiCore.matestackEventHub.$off(close_event.trim(), self.close));
