@@ -16,9 +16,9 @@ class Bootstrap::Components::Collapse < Matestack::Ui::VueJsComponent
   protected
 
   def card_partial
-    tmp_card = card.is_a?(Hash) ? card : { text: card }
-    div class: "card card-body #{card[:class]}".strip do
-      plain card[:text]
+    tmp_card = card.is_a?(Hash) ? self.card : { text: self.card }
+    div class: "card card-body #{tmp_card[:class]}".strip do
+      plain tmp_card[:text]
     end
   end
 
