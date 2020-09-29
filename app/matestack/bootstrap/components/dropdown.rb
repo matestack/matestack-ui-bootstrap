@@ -1,19 +1,25 @@
 class Bootstrap::Components::Dropdown < Matestack::Ui::VueJsComponent
   vue_js_component_name "matestack-ui-bootstrap-dropdown" 
   
-  optional :style, :split, :text, :direction, :align, :offset, :reference,
-            :btn_class, :menu_items, :menu_class,
-            class: { as: :bs_class }, id: { as: :bs_id },
-            data: { as: :bs_data }
-
+  optional :variant, :text, :btn_class # button attributes
+  optional :direction, :align, :offset, :reference 
+  # dropdown menu attributes, expects an array of items with possible keys: type, path, text
+  # or hash with possible keys: items, class
+  optional :menu 
+  optional class: { as: :bs_class }, id: { as: :bs_id }, data: { as: :bs_data }
+  optional :slots
+  
+  def prepare
+    @bs_menu = self.menu.is_a?(Hash) ? self.menu : { items: self.menu }
+  end
   def response 
     div dropdown_attributes do
-      split_btn_partial if split 
-      btn btn_attributes if !split
+      split_btn_partial if slots && slots[:split_btn] 
+      btn btn_attributes unless slots && slots[:split_btn] 
 
       ul menu_attributes do
-        yield_components if menu_items.blank?
-        menu_partial if !menu_items.blank?
+        menu_partial unless @bs_menu[:items].blank?
+        yield_components
       end
     end
   end
@@ -21,18 +27,14 @@ class Bootstrap::Components::Dropdown < Matestack::Ui::VueJsComponent
   protected
 
   def split_btn_partial
-    if options[:slots] && options[:slots][:split_btn]
-      slot options[:slots][:split_btn]
-    else
-      btn style: style, text: text
-    end
+    slot slots[:split_btn]
     btn btn_attributes do
       span class:"sr-only" do plain "Toggle Dropdown" end
     end
   end
 
   def menu_partial
-    menu_items.each do |key, item|
+    @bs_menu[:items].each do |item|
       case item[:type]
       when :button 
         li do btn class: "dropdown-item", text: item[:text] end
@@ -54,9 +56,8 @@ class Bootstrap::Components::Dropdown < Matestack::Ui::VueJsComponent
 
   def dropdown_classes
     [].tap do |classes|
-      classes << (split ? 'btn-group' : 'dropdown')
-      classes << "drop#{direction}" if direction.present?      
-      #custom classes 
+      classes << ((slots && slots[:split_btn]) ? 'btn-group' : 'dropdown')
+      classes << "drop#{direction}" if direction.present?
       classes << bs_class
     end.join(' ').strip
   end
@@ -64,8 +65,8 @@ class Bootstrap::Components::Dropdown < Matestack::Ui::VueJsComponent
   def btn_attributes
     {
       id: bs_id,
-      text: "#{text if !split}",
-      style: style, 
+      text: "#{text unless (slots && slots[:split_btn])}",
+      variant: (variant || :primary), 
       class: btn_classes,
       data: btn_data,
       attributes: { 'aria-expanded': "false" }
@@ -83,7 +84,7 @@ class Bootstrap::Components::Dropdown < Matestack::Ui::VueJsComponent
   def btn_classes
     [].tap do |classes|
       classes << 'dropdown-toggle'
-      classes << 'dropdown-toggle-split' if split
+      classes << 'dropdown-toggle-split' if slots && slots[:split_btn] 
       #custom classes 
       classes << btn_class
     end.join(' ').strip
@@ -102,7 +103,7 @@ class Bootstrap::Components::Dropdown < Matestack::Ui::VueJsComponent
       classes << 'dropdown-menu'
       classes << "dropdown-menu-#{align}" if align.present? 
       #custom classes 
-      classes << menu_class
+      classes << @bs_menu[:class] if menu.is_a?(Hash)
     end.join(' ').strip
   end
   

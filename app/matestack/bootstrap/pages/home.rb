@@ -41,25 +41,25 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         interval: 2000
       }
     ]
-    @drowdown_items = {
-      first: {
+    @drowdown_items = [
+      {
         type: :link,
         path: "#",
         text: "Nulla vitae elit libero",
       },
-      second: {
+      {
         type: :button,
         text: "Action"
       },
-      divider: {
+      {
         type: :divider,
       }, 
-      third: {
+      {
         type: :link,
         path: "#",
         text: "Separated link"
       }
-    }
+    ]
   end
 
   def response 
@@ -157,7 +157,15 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     container size: :lg, class: "bg-warning py-3 my-3" do
       row horizontal: :center, vertical: :center do
         col md: 4 do
-          dropdown id: "dropdrop", offset: "10,22", reference: :parent, align: :center, menu_items: @drowdown_items, text: "Dropdown"
+          dropdown reference: :parent, direction: :right, menu: @drowdown_items, text: "Dropdown"
+          dropdown variant: :secondary, text: "Dropdown", menu: { items: @drowdown_items, class: "foobar" } 
+          dropdown slots: { split_btn: split_button }
+          dropdown text: "Dropdown", menu: [
+            { type: :link, path: "#", text: "Nulla vitae elit" },
+            { type: :button, text: "Action" }
+          ] do
+            paragraph text: "Test Block"
+          end
         end
       end
     end
@@ -408,7 +416,11 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
       div class: "progress-bar bg-warning", attributes: { 'role':"progressbar", 'style':"width: 20%" }
     }
   end
-
+  def split_button 
+    slot {
+      btn text: "Split Button"
+    }
+  end
   def badge_element
     slot {
       badge text: "2"
