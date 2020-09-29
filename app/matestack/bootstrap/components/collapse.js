@@ -8,26 +8,34 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-collapse', {
 
   methods: {
     toggle: function (){
-      this.collapseInstance.toggle();
+      const self = this;
+      self.collapseInstance.toggle();
     },
     show: function(){
-      this.collapseInstance.show();
+      const self = this;
+      self.collapseInstance.show();
     },
     hide: function(){
-      this.collapseInstance.hide();
+      const self = this;
+      self.collapseInstance.hide();
     },
     dispose: function(){
-      this.collapseInstance.dispose();
+      const self = this;
+      self.collapseInstance.hide();
+      self.collapseInstance.dispose();
+      // ToDo: Error occurs after dispose when click on the button again 
     }
   },
 
   mounted: function() {
     const self = this;
     var myCollapse = self.$el;
-    this.collapseInstance = new bootstrap.Collapse(myCollapse)
+    self.collapseInstance = new bootstrap.Collapse(myCollapse)
   },
 
   created: function() {
+    const self = this
+
     // toggle_on event registration
     if(self.componentConfig["toggle_on"] != undefined){
       var toggle_events = self.componentConfig["toggle_on"].split(",")
@@ -52,8 +60,8 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-collapse', {
 
   beforeDestroy: function(){
     const self = this
-    if(self.componentConfig["show_on"] != undefined){
-      var show_events = self.componentConfig["close_on"].split(",")
+    if(self.componentConfig["toggle_on"] != undefined){
+      var show_events = self.componentConfig["toggle_on"].split(",")
       show_events.forEach(show_event => MatestackUiCore.matestackEventHub.$off(show_event.trim(), self.show));
     }
     if(self.componentConfig["show_on"] != undefined){
