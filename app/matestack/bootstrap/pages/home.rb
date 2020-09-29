@@ -237,11 +237,17 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     container size: :lg, class: "bg-warning py-3 my-3" do
       row do
         col do
+          pagination
           pagination items: [
             { type: :link, path: "#", text: "1", active: false },
             { type: :link, path: "#", text: "2", active: false },
-            { type: :link, path: "#", text: "3", active: false },
-          ], size: :sm
+            { type: :link, path: "#", text: "3", active: true },
+          ] do
+          paragraph text: "Test Block"
+          end
+          pagination do
+            plain "Test block"
+          end
         end
       end
     end
