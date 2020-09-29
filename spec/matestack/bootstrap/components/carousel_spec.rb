@@ -89,6 +89,8 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
   end
 
   it 'can show next item on event' do
+    pending
+    
     matestack_render do
       items = [
         { path: image_url("matestack-data.png"), title: "First slide" },
@@ -113,7 +115,62 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
     # expect(page).to have_content('First slide') 
   end
 
-  it 'can show previous item on event'
-  it 'can pause on event and restarty cycling after event'
-  it 'can be disposed on event'
+  it 'can show previous item on event' do
+    pending
+
+    matestack_render do
+      items = [
+        { path: image_url("matestack-data.png"), title: "First slide" },
+        { path: image_url("matestack-data.png"), title: "Second slide" }
+      ]
+      carousel prev_on: "prev-carousel", items: items
+    end
+    visit example_path
+    expect(page).to have_selector('div.carousel.slide[data-ride=carousel]')
+    expect(page).to have_selector('div.carousel-inner')
+    expect(page).to have_selector('div.carousel-item')
+
+    expect(page).to have_content('First slide') 
+    expect(page).to_not have_content('Second slide')
+    page.execute_script('MatestackUiCore.matestackEventHub.$emit("prev-carousel")')
+    expect(page).to have_content('Second slide') 
+    expect(page).to_not have_content('First slide')
+  end
+
+  it 'can pause on event and restarty cycling after event' do
+    pending
+
+    matestack_render do
+      items = [
+        { path: image_url("matestack-data.png"), title: "First slide" },
+        { path: image_url("matestack-data.png"), title: "Second slide" }
+      ]
+      carousel cycle_on: "cycle-carousel", pause_on: "pause-carousel", items: items
+    end
+    visit example_path
+    expect(page).to have_selector('div.carousel.slide[data-ride=carousel]')
+    expect(page).to have_selector('div.carousel-inner')
+    expect(page).to have_selector('div.carousel-item')
+
+    page.execute_script('MatestackUiCore.matestackEventHub.$emit("pause-carousel")')
+
+    page.execute_script('MatestackUiCore.matestackEventHub.$emit("cycle-carousel")')
+  end
+  
+  it 'can be disposed on event' do
+    pending
+
+    matestack_render do
+      items = [
+        { path: image_url("matestack-data.png"), title: "First slide" },
+        { path: image_url("matestack-data.png"), title: "Second slide" }
+      ]
+      carousel items: items
+    end
+    visit example_path
+    expect(page).to have_selector('div.carousel.slide[data-ride=carousel]')
+    expect(page).to have_selector('div.carousel-inner')
+    expect(page).to have_selector('div.carousel-item')
+    
+  end
 end
