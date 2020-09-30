@@ -1,7 +1,7 @@
 class Bootstrap::Components::Carousel < Matestack::Ui::VueJsComponent
   vue_js_component_name "matestack-ui-bootstrap-carousel" 
   
-  optional :start, :controls, :indicators, :fade 
+  optional :start, :controls, :indicators, :fade, :interval
   optional :items, class: { as: :bs_class }
   # possible keys for items: path, title, text, interval
   # event trigger
@@ -37,11 +37,11 @@ class Bootstrap::Components::Carousel < Matestack::Ui::VueJsComponent
 
   def carousel_partial
     items.each_with_index do |item, index|
-      div class: "carousel-item #{'active' if index == (start || 0) }", 
+      div class: "carousel-item #{'active' if index == (start || 0) } #{item[:class]}".strip, 
         data: { interval: item[:interval] } do
         img class: "d-block w-100", path: item[:path]
         if item[:title] || item[:text]
-          div class: "carousel-caption d-none d-md-block" do
+          div class: "carousel-caption d-none d-md-block #{item[:title_class]}" do
             heading size: 5, text: item[:title]
             paragraph text: item[:text]
           end
@@ -65,7 +65,7 @@ class Bootstrap::Components::Carousel < Matestack::Ui::VueJsComponent
     html_attributes.merge(
       id: carousel_id,
       class: carousel_classes,
-      data: { ride: 'carousel' }
+      data: { ride: 'carousel', interval: (interval || 5000) }
     )
   end
 
