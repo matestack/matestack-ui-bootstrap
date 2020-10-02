@@ -10,15 +10,14 @@ class Bootstrap::Components::Tooltip < Matestack::Ui::VueJsComponent
   # TODO:
   # for security reasons the sanitize, sanitizeFn and whiteList options cannot be supplied using data attributes.
   # sanitize sanitize_fn white_list
-  optional :content
+  # optional :content
   optional class: { as: :bs_class }
   optional id: { as: :bs_id }
   DATA_ATTRIBUTES = %i[type title text style animation placement tabindex trigger boundary offset popper_config]
   optional *DATA_ATTRIBUTES
 
-
   def response
-    case :type
+    case type
     when :div
       div tooltip_attributes do
         element_partial
@@ -61,7 +60,7 @@ class Bootstrap::Components::Tooltip < Matestack::Ui::VueJsComponent
           hash[attribute] = self.send(:"#{attribute}") if self.send(:"#{attribute}")
         end
         hash[:toggle] = "tooltip"
-        hash[:'original-title'] = content
+        # hash[:'original-title'] = content
       end        
     end
     html_attributes.merge(
@@ -72,7 +71,7 @@ class Bootstrap::Components::Tooltip < Matestack::Ui::VueJsComponent
   def tooltip_classes
     [].tap do |classes|
       classes << "d-inline-block" if (type == :span or type == :div)
-      classes << "btn btn-#{style}" if (type == :link or type == :a)
+      classes << "btn btn-#{style || 'link'}" if (type == :link or type == :a)
 
       classes << bs_class
     end.join(' ').strip
