@@ -10,6 +10,7 @@ module Bootstrap::Registry
     carousel: Bootstrap::Components::Carousel,
     close: Bootstrap::Components::Close,
     collapse: Bootstrap::Components::Collapse,
+    accordian: Bootstrap::Components::Accordian,
     dropdown: Bootstrap::Components::Dropdown,
     list_group: Bootstrap::Components::ListGroup,
     modal: Bootstrap::Components::Modal,

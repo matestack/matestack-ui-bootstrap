@@ -192,25 +192,30 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
           # end
         end
       end
-      div class: "accordion", id: "accordionExample" do
-        div class: "card" do
-          div class: "card-header", id: "headingOne" do
-            heading size: 2, class: "mb-0" do
-              btn style: :link, size: :block, class: "text-left", text: "Collapsible Group Item #1", data: { toggle:"collapse", target:"#collapseOne" }, attributes: { "aria-expanded":"true", "aria-controls":"collapseOne" }
-            end
-          end
-          collapse id: "collapseOne", card: { class: "card-body", text: "Random Text Card No. 1"},labelledby: "headingOne", parent: "#accordionExample"
-        end
+      accordian items: [
+        { header: { id: "headingOne", text: "Group Item #1", btn_variant: :light }, body: { text: "Random Text for Collapse #1" } },
+        { header: { id: "headingTwo", text: "Group Item #2", btn_class: "p-3 rounded-0" }, body: { text: "Random Text for Collapse #2" } },
+        { header: { id: "headingThree", text: "Group Item #3" }, body: { text: "Random Text for Collapse #3" } }
+      ]
+      # div class: "accordion", id: "accordionExample" do
+      #   div class: "card" do
+      #     div class: "card-header", id: "headingOne" do
+      #       heading size: 2, class: "mb-0" do
+      #         btn style: :link, size: :block, class: "text-left", text: "Collapsible Group Item #1", data: { toggle:"collapse", target:"#collapseOne" }, attributes: { "aria-expanded":"true", "aria-controls":"collapseOne" }
+      #       end
+      #     end
+      #     collapse id: "collapseOne", card: { class: "card-body", text: "Random Text Card No. 1"},labelledby: "headingOne", parent: "#accordionExample"
+      #   end
 
-        div class: "card" do
-          div class: "card-header", id: "headingTwo" do
-            heading size: 2, class: "mb-0" do
-              btn style: :link, size: :block, class: "text-left", text: "Collapsible Group Item #2", data: { toggle:"collapse", target:"#collapseTwo" }, attributes: { "aria-expanded":"false", "aria-controls":"collapseTwo" }
-            end
-          end
-          collapse id: "collapseTwo", card: { class: "card-body", text: "Random Text Card 2"},labelledby: "headingTwo", parent: "#accordionExample"
-        end
-      end
+      #   div class: "card" do
+      #     div class: "card-header", id: "headingTwo" do
+      #       heading size: 2, class: "mb-0" do
+      #         btn style: :link, size: :block, class: "text-left", text: "Collapsible Group Item #2", data: { toggle:"collapse", target:"#collapseTwo" }, attributes: { "aria-expanded":"false", "aria-controls":"collapseTwo" }
+      #       end
+      #     end
+      #     collapse id: "collapseTwo", card: { class: "card-body", text: "Random Text Card 2"},labelledby: "headingTwo", parent: "#accordionExample"
+      #   end
+      # end
     end
     container size: :fluid, class: "py-4 bg-dark" do
       col md: 8, offset: 2 do          

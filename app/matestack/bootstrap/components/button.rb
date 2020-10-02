@@ -20,7 +20,7 @@ class Bootstrap::Components::Button < Matestack::Ui::Component
   end
 
   def button_classes
-    foo = [].tap do |classes|
+    [].tap do |classes|
       classes << 'btn'
       # btn variants outlined or solid background
       if outline
