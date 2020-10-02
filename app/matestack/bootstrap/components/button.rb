@@ -1,7 +1,7 @@
 class Bootstrap::Components::Button < Matestack::Ui::Component
 
-  optional :text, :type, :variant, :size, :outline, class: { as: :bs_class }
-
+  optional :text, :type, :variant, :size, :outline
+  optional attributes: { as: :bs_attrs }, class: { as: :bs_class }
   def response 
     button button_attributes do
       plain text if text
@@ -14,7 +14,8 @@ class Bootstrap::Components::Button < Matestack::Ui::Component
   def button_attributes
     html_attributes.merge(
       type: type || 'button',
-      class: button_classes
+      class: button_classes,
+      attributes: bs_attrs
     )
   end
 
