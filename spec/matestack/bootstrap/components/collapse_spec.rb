@@ -27,12 +27,12 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
       collapse id: "multiCollapseExample", card: "Random text for card body content", multi: true
     end
     visit example_path
-    expect(page).to_not have_content('Random text')
+    expect(page).not_to have_content('Random text')
     click_on('Button 1')
     expect(page).to have_content('Random text')
     expect(page).to have_selector('div.collapse.show')
     click_on('Button 2')
-    expect(page).to_not have_content('Random text')
+    expect(page).not_to have_content('Random text')
     expect(page).to have_selector('div.collapse', visible: false)
     click_on('Button 2')
     expect(page).to have_content('Random text')
@@ -77,12 +77,12 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
       collapse toggle_on: "toggle", card: "Random text for card body content"
     end
     visit example_path
-    expect(page).to_not have_content('Random text')
+    expect(page).not_to have_content('Random text')
     page.execute_script('MatestackUiCore.matestackEventHub.$emit("toggle")')
     expect(page).to have_content('Random text')
     expect(page).to have_selector('div.collapse.show')
     page.execute_script('MatestackUiCore.matestackEventHub.$emit("toggle")')
-    expect(page).to_not have_content('Random text')
+    expect(page).not_to have_content('Random text')
     expect(page).to have_selector('div.collapse', visible: false)
   end
   it 'can be shown on event' do
@@ -90,7 +90,7 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
       collapse show_on: "show", card: "Random text for card body content"
     end
     visit example_path
-    expect(page).to_not have_content('Random text')
+    expect(page).not_to have_content('Random text')
     expect(page).to have_selector('div.collapse', visible: false)  
     page.execute_script('MatestackUiCore.matestackEventHub.$emit("show")')
     expect(page).to have_content('Random text')
@@ -105,7 +105,7 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
     expect(page).to have_content('Random text')
     expect(page).to have_selector('div.collapse', visible: true)  
     page.execute_script('MatestackUiCore.matestackEventHub.$emit("hide")')
-    expect(page).to_not have_content('Random text')
+    expect(page).not_to have_content('Random text')
     expect(page).to have_selector('div.collapse', visible: false)  
   end
 end
