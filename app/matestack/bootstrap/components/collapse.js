@@ -30,7 +30,9 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-collapse', {
   mounted: function() {
     const self = this;
     var myCollapse = self.$el;
-    self.collapseInstance = new bootstrap.Collapse(myCollapse)
+    self.collapseInstance = new bootstrap.Collapse(myCollapse, {
+      toggle: false
+    })
   },
 
   created: function() {
