@@ -130,9 +130,8 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
           popover type: :link, placement: :top, tabindex: "0", style: :danger, trigger: "focus", title: "Dismissible popover", content: "And here's some amazing content. It's very engaging. Right?", text: "Dismissible Popover"
         end
         col do
-        tooltip text: "Tooltip", title: "Tooltip Content", placement: :top
-        # <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom">Tooltip on bottom</button>
-          btn style: :secondary, data: { toggle: "tooltip", placement: "bottom", 'original-title': 'Tooltip on bottom' }, text: "Tooltip on bottom"
+
+          tooltip text: "Tooltip", title: "Tooltip Content", animation: 'false'
         end
       end
       row do
