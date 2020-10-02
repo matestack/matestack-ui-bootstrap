@@ -176,13 +176,20 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
           paragraph do
             # btn text: "Collapse Btn", data: { toggle:"collapse", target:"#collapseExample" }, attributes: { "aria-expanded":"false", "aria-controls":"collapseExample" }
           end
-          collapse id: "collapseExample", dispose_on: "myCollapse", toggle_on: "toggleCollapse", card: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident."
-          onclick emit: "myCollapse" do
-            btn text: "Collapse"
+          paragraph do
+            btn text: "Button 1", data: { toggle: "collapse",  target: ".multi-collapse" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample1" }
+            btn text: "Button 2", data: { toggle: "collapse",  target: ".multi-collapse" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample2" }
           end
-          onclick emit: "toggleCollapse" do
-            btn text: "Toggle Collapse"
-          end
+          collapse id: "multiCollapseExample", card: "Random text for card body content", multi: true
+          br
+          collapse card: "Random text for card body content", class: "show", labelledby: "random-label"
+          # collapse id: "collapseExample", dispose_on: "myCollapse", toggle_on: "toggleCollapse", card: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident."
+          # onclick emit: "myCollapse" do
+          #   btn text: "Collapse"
+          # end
+          # onclick emit: "toggleCollapse" do
+          #   btn text: "Toggle Collapse"
+          # end
         end
       end
       div class: "accordion", id: "accordionExample" do
