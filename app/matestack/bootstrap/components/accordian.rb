@@ -10,15 +10,16 @@ class Bootstrap::Components::Accordian < Matestack::Ui::Component
   def response 
     div accordian_attributes do
       div class: "card" do
-        items.each do |item|
-          div class: "card-header p-0 #{item[:header][:class]}", id: item[:header][:id] do
+        items.each_with_index do | item, index |
+          div class: "card-header p-0 #{item[:header][:class]}", id: (item[:header][:id] || "header-#{index}") do
             heading size: (item[:header][:size] || 2), class: "mb-0" do
               btn variant: (item[:header][:btn_variant] || :link), size: :block, class: (item[:header][:btn_class] || "text-left"), text:item[:header][:text], 
-                    data: { toggle: "collapse", target: "#collapse-#{item[:header][:id]}" }, 
-                    attributes: { "aria-expanded": "false", "aria-controls": "collapse-#{item[:header][:id]}" }
+                    data: { toggle: "collapse", target: "#collapse-#{(item[:header][:id] || "header-#{index}") }" }, 
+                    attributes: { "aria-expanded": "false", "aria-controls": "collapse-#{(item[:header][:id] || "header-#{index}")}" }
             end
           end
-          collapse id: "collapse-#{item[:header][:id]}", labelledby: item[:header][:id], parent: @accordian_id, multi: (item[:body][:multi] || false) do
+          collapse id: "collapse-#{(item[:header][:id] || "header-#{index}")}", labelledby: (item[:header][:id] || "header-#{index}"), 
+                  parent: @accordian_id, multi: (item[:body][:multi] || false) do
             div class: "card-body #{item[:body][:class]}" do
               plain item[:body][:text]
             end
