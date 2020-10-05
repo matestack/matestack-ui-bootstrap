@@ -1,64 +1,64 @@
 class Bootstrap::Components::Progress < Matestack::Ui::Component
   
   optional class: { as: :bs_class }
-  optional :slots
-  optional :text, :color, :striped, :animated, :bar_class, :bar_attributes
-  optional :height
-  optional :value, :valuemin, :valuemax 
+  optional :text, :valuemin, :valuemax
+  # progress expects a number or a list containing hashes with at least a :value
+  # other options are :text, :class, :variant, :striped, :animated, :aria_valuenow
+  optional :progress, :value
+  optional :variant, :striped, :animated, :height
 
   def response 
     div progress_attributes do
-      # slot in case of multiple bars
-      if slots && slots[:custom_bar]
-        slot slots[:custom_bar]
-      else
-        div progress_bar_attributes do
-          plain text if text
-          yield_components
-        end
+      progress = self.progress.is_a?(Array) ? self.progress : [{ value: self.progress || value, text: self.text }]
+      progress.each do |prog|
+        progress_bar(prog[:value], valuemin, valuemax, 
+          text: prog[:text], klass: prog[:class], variant: prog[:variant] || variant,
+          striped: prog[:striped] || striped, animated: prog[:animated] || animated,
+          aria_valuenow: prog[:aria_valuenow]
+        )
       end
+      yield_components
     end
   end
 
   protected
+
   def progress_attributes
     attributes = {}.tap do |hash|
-      hash[:class] = progress_classes
-      hash[:attributes] = { 'style': "height: #{height}px" } if height 
+      hash[:class] = "progress #{bs_class}".strip
+      hash[:attributes] = { style: "height: #{height}px;" } if height 
     end
     html_attributes.merge(
       attributes
     )
   end
 
-  def progress_classes
-    [].tap do |classes|
-      classes << 'progress p-0'
-      classes << bs_class
-    end.join(' ').strip
+  def progress_bar(value, min, max, text: nil, klass: nil, variant: :primary, striped: false, animated: false, aria_valuenow: nil)
+    div progress_bar_attributes(value, klass, variant, striped, animated, aria_valuenow) do
+      plain text if text      
+    end
   end
 
-  def progress_bar_attributes
-    bar_attrs = (bar_attributes || {}).tap do |hash|
-      hash[:role] = "progressbar"
-      hash[:style] = "width: #{value}%" if value > 0
-      hash[:'aria-valuenow'] = value if value
-      hash[:'aria-valuemin'] = (valuemin || '0')
-      hash[:'aria-valuemax'] = (valuemax || '100')
-    end
+  def progress_bar_attributes(value, klass, variant, striped, animated, aria_valuenow)
     {
-      class: progress_bar_classes,
-      attributes: bar_attrs
+      class: progress_bar_classes(klass, variant, striped, animated),
+      attributes: {
+        role: :progressbar,
+        style: "width: #{value.to_i > 0 ? value : 0}%;",
+        'aria-valuenow': aria_valuenow || value || 0,
+        'aria-valuemin': valuemin || 0,
+        'aria-valuemax': valuemax || 100
+      }
     }
   end
 
-  def progress_bar_classes
+  def progress_bar_classes(klass, variant, striped, animated)
     [].tap do |classes|
       classes << 'progress-bar'
-      classes << "bg-#{(color || 'primary')}"
+      classes << "bg-#{variant || :primary}"
       classes << "progress-bar-striped" if striped
       classes << "progress-bar-animated" if animated
-      classes << bar_class
+      classes << klass
     end.join(' ').strip
   end
 end

@@ -29,7 +29,7 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-carousel', {
     const self = this;
     var myCarousel = self.$el;
     self.carouselInstance = new bootstrap.Carousel(myCarousel, {
-      interval: (self.componentConfig['interval'] || 5000 )
+      interval: (self.componentConfig['interval'] || 5000)
     })
   },
 
