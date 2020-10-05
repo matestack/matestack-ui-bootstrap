@@ -48,7 +48,6 @@ class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
   def body_partial
     div class: "toast-body" do
       paragraph text: body if body
-      yield_components
     end
   end
 
@@ -80,7 +79,7 @@ class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
 
   def toast_classes
     [].tap do |classes|
-      classes << 'toast p-0'
+      classes << 'toast'
       classes << bs_class
     end.join(' ').strip
   end

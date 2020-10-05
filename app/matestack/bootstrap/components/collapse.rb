@@ -1,9 +1,8 @@
 class Bootstrap::Components::Collapse < Matestack::Ui::VueJsComponent
   vue_js_component_name "matestack-ui-bootstrap-collapse" 
   
-  optional :multi, :labelledby, :parent
+  optional :multi, :labelledby, :parent, class: { as: :bs_class }
   optional :card # possible keys: class, text
-  optional class: { as: :bs_class }
   # event trigger
   optional :toggle_on, :show_on, :hide_on, :dispose_on
 

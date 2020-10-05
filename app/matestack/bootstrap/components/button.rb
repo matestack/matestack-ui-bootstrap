@@ -2,6 +2,7 @@ class Bootstrap::Components::Button < Matestack::Ui::Component
 
   optional :text, :type, :variant, :size, :outline
   optional attributes: { as: :bs_attrs }, class: { as: :bs_class }
+  
   def response 
     button button_attributes do
       plain text if text
