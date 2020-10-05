@@ -8,7 +8,7 @@ class Bootstrap::Components::Popover < Matestack::Ui::VueJsComponent
   # end
   # => <span data-toggle="popover" data-content="A Popover"><button>Popover</button></span>
   #
-  # popover content: 'A popover', type: :div do
+  # popover content: 'A popover', tag: :div do
   #   button text: 'Popover'
   # end
   # => <div data-toggle="popover" data-content="A Popover"><button>Popover</button></div>
@@ -35,59 +35,36 @@ class Bootstrap::Components::Popover < Matestack::Ui::VueJsComponent
 
   optional class: { as: :bs_class }
   optional id: { as: :bs_id }
-  DATA_ATTRIBUTES = %i[type content title text style animation placement tabindex trigger boundary offset popper_config]
+  DATA_ATTRIBUTES = %i[tag content title text variant animation placement tabindex trigger boundary offset popper_config]
   optional *DATA_ATTRIBUTES
-  # :type # different element to apply 
+  # :tag # different element to apply 
   # :content, :title # popover title and content strings
   # :animation # boolean, default true
-  # :style, :text # button styling & text
+  # :variant, :text # button styling & text
   # :placement # placement direction as string
 
   def response
-    case :type
-    when :div
-      div popover_attributes do
-        element_partial
-      end
-    when :span 
-      span popover_attributes  do
-        element_partial
-      end
-    when :link
-      link popover_attributes 
-    else
-      btn popover_attributes 
+    public_send(tag, popover_attributes) do
+      plain text if text
+      yield_components unless text
     end
   end
 
   protected
 
-  def element_partial
-    if options[:slots] && options[:slots][:element]
-      slot options[:slots][:element]
-    else 
-      btn style: style, attributes: { 'style': "pointer-events: none;" }, text: text
-    end
-  end
-
   def popover_attributes
     attributes = {}.tap do |hash|
       hash[:class] = popover_classes
-      hash[:style] = style if (type == :button or !type.present?)
-      hash[:attributes] = { role: "button", title: "#{title}", tabindex: "#{tabindex}" } if (type == :link or type == :a)
-
-      hash[:text] = text if text.present?
-
-      hash[:data] = {}.tap do |hash|
+      hash[:attributes] = { role: (text ? 'button': nil), title: "#{title}", tabindex: "#{tabindex}" }
+      hash[:data] = {}.tap do |data|
         DATA_ALIAS_ATTRIBUTES.each do |attribute|
-          hash[attribute] = self.send(:"bs_#{attribute}") if self.send(:"bs_#{attribute}")
+          data[attribute] = self.send(:"bs_#{attribute}") if self.send(:"bs_#{attribute}")
         end
-        DATA_ATTRIBUTES.each do |attribute|
-          hash[attribute] = self.send(:"#{attribute}") if self.send(:"#{attribute}")
+        DATA_ATTRIBUTES.except(:tag, :text, :variant).each do |attribute|
+          data[attribute] = self.send(:"#{attribute}") if self.send(:"#{attribute}")
         end
-        hash[:toggle] = "popover"
+        data[:toggle] = "popover"
       end
-
     end
     html_attributes.merge(
       attributes
@@ -96,9 +73,8 @@ class Bootstrap::Components::Popover < Matestack::Ui::VueJsComponent
 
   def popover_classes
     [].tap do |classes|
-      classes << "d-inline-block" if type == :span or type == :div
-      classes << "btn btn-#{style}" if type == :link or type == :a
-
+      classes << "d-inline-block" unless text
+      classes << "btn btn-#{variant}" if variant
       classes << bs_class
     end.join(' ').strip
   end
