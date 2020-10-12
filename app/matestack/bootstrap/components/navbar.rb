@@ -4,9 +4,15 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
   optional *POS_ATTRIBUTES
 
   optional class: { as: :bs_class }
-  optional :items, :toggle_pos, :theme, :hide_at, :color
-  optional :brand_img, :brand_path, :brand_text
-  optional :items_class, :toggle_class, :container_size
+  optional :items, :items_class, :theme, :hide_at, :color, :container_size
+  # brand expect hash or string, possible keys for hash: text, path, img
+  optional :brand
+  # toogle expect hash of symbol, possible keys for hash: position, class
+  optional :toggle
+
+  def prepare
+    @toggle = self.toggle.is_a?(Hash) ? self.toggle : { position: self.toggle }
+  end
 
   def response 
     nav navbar_attributes do
@@ -15,11 +21,10 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
         if options[:slots] && options[:slots][:custom_items]
           slot options[:slots][:custom_items]
         else
-          toggle_button if toggle_pos == :left
-          brand_partial if brand_text || brand_img
-          toggle_button if !toggle_pos.present? || toggle_pos == :right
-          
-          navbar_content_partial
+          toggle_button if @toggle[:position] == :left
+          brand_partial if brand.present?
+          toggle_button if !@toggle[:position].present? || @toggle[:position] == :right
+          navbar_content_partial if items.present?
         end
       end
     end
@@ -28,9 +33,11 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
   protected
 
   def brand_partial
-    link class: "navbar-brand", path: brand_path do 
-      plain brand_text if brand_text.present?
-      img path: brand_img, attributes: { loading: "lazy" } if brand_img.present?
+    brand = self.brand.is_a?(Hash) ? self.brand : { text: self.brand }
+    path = brand[:path].present? ? brand[:path] : "/"
+    link class: "navbar-brand", path: path do 
+      plain brand[:text]
+      img path: brand[:img], attributes: { loading: "lazy" } if brand[:img].present?
     end
   end
 
@@ -62,7 +69,6 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
     [].tap do |classes|
       classes << "navbar"
       POS_ATTRIBUTES.each do |pos| 
-        
         classes << "#{pos}".gsub('_','-') if self.send("#{pos}")
       end
       classes << "navbar-expand-#{ (hide_at.present? ? hide_at : "lg") }"
@@ -81,9 +87,9 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
   def toggle_attributes
     toggle_classes = [].tap do |classes|
       classes << 'navbar-toggler'
-      classes << "ml-auto" if toggle_pos == :right
-      classes << "mr-auto" if toggle_pos == :left
-      classes << toggle_class
+      classes << "ml-auto" if @toggle[:position] == :right
+      classes << "mr-auto" if @toggle[:position] == :left
+      classes << @toggle[:class]
     end.join(' ').strip
 
     {}.tap do |hash|

@@ -63,7 +63,13 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
   end
 
   def response 
-    navbar brand_text: "BRAND TEXT", brand_path: "#", theme: :dark, sticky_top: true, items_class: "mr-auto ml-auto",
+    navbar hide_at: :sm, theme: :dark, items_class: "mr-auto ml-auto", class: "text-center",
+    items: { home: {type: :transition, path: "/", text: "Home"}, 
+            contact: {type: :transition, path: "/", text: "Contact"}, } do
+              btn text: "Login"
+            end
+
+    navbar toggle: :left, brand: {text: "BRAND TEXT", path: "#"}, theme: :dark, sticky_top: true, items_class: "mr-auto ml-auto",
             items: { home: {type: :transition, path: "/", text: "Home"}, 
                     product: {type: :transition, path: "/", text: "Product"}, 
                     contact: {type: :transition, path: "/", text: "Contact"}, } do
@@ -75,7 +81,6 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
       team: { type: :link, path: "#messages", text: "Message" },
     }#, pills: true, vertical: true
     navigation items: @nav_items, horizontal: :center, tabs: true
-    navigation class: "foobar"
 
     div class: "tab-content" do
       div class: "tab-pane active", id: "home", attributes: { role: "tabpanel", 'aria-labelledby':  "home-tab" } do
@@ -93,10 +98,6 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     centered: true, scrollable: true, size: :lg    
     container size: :lg, class: "bg-light py-3 my-3" do
       row horizontal: :center, vertical: :center do
-        # list_group id: "list-example3", items: [
-        #   { type: :transition, path: "#list-item1", text: "Item 1" },
-        #   { type: :transition, path: "#list-item2", text: "Item 2" } 
-        # ]
         list_group id: "list-example3", class: "foobar",
         items: [
           { type: :label, text: "Item 1" },
