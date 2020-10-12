@@ -122,8 +122,8 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     br 
     container size: :lg, class: "bg-warning py-3 my-3" do
       row do
-        col do          
-          popover text: "Popover", content: "Popover Content"
+        col do   
+          popover text: "Popover", html: 'true', content: "<p>this paragraph in popover</p>" 
         end
         col  do          
           popover type: :link, placement: :top, tabindex: "0", style: :danger, trigger: "focus", title: "Dismissible popover", content: "And here's some amazing content. It's very engaging. Right?", text: "Dismissible Popover"
