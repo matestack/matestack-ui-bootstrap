@@ -60,7 +60,7 @@ class Bootstrap::Components::Popover < Matestack::Ui::VueJsComponent
         DATA_ALIAS_ATTRIBUTES.each do |attribute|
           data[attribute] = self.send(:"bs_#{attribute}") if self.send(:"bs_#{attribute}")
         end
-        DATA_ATTRIBUTES.except(:tag, :text, :variant).each do |attribute|
+        (DATA_ATTRIBUTES - [:tag, :text, :variant]).each do |attribute|
           data[attribute] = self.send(:"#{attribute}") if self.send(:"#{attribute}")
         end
         data[:toggle] = "popover"
