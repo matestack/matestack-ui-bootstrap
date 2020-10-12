@@ -44,9 +44,13 @@ class Bootstrap::Components::Popover < Matestack::Ui::VueJsComponent
   # :placement # placement direction as string
 
   def response
-    public_send(tag, popover_attributes) do
-      plain text if text
-      yield_components unless text
+    if tag.present? 
+      public_send(tag, popover_attributes) do
+        plain text if text
+        yield_components unless text
+      end
+    else
+      btn popover_attributes
     end
   end
 
