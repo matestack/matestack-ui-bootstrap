@@ -37,7 +37,7 @@ class Bootstrap::Components::Popover < Matestack::Ui::VueJsComponent
   optional id: { as: :bs_id }
   DATA_ATTRIBUTES = %i[tag content title text variant animation placement tabindex trigger boundary offset popper_config]
   optional *DATA_ATTRIBUTES
-  # :tag # different element to apply 
+  # :tag # different element to apply: div, span, links, button, ...
   # :content, :title # popover title and content strings
   # :animation # boolean, default true
   # :variant, :text # button styling & text
@@ -46,15 +46,21 @@ class Bootstrap::Components::Popover < Matestack::Ui::VueJsComponent
   def response
     if tag.present? 
       public_send(tag, popover_attributes) do
-        plain text if text
-        yield_components unless text
+        content_partial
       end
     else
-      btn popover_attributes
+      btn popover_attributes do
+        content_partial
+      end
     end
   end
 
   protected
+
+  def content_partial
+    plain text if text
+    yield_components unless text
+  end
 
   def popover_attributes
     attributes = {}.tap do |hash|
