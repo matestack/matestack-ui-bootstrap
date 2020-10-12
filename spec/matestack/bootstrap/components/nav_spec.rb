@@ -3,42 +3,126 @@ require 'rails_helper'
 RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
   include Utils
 
-  it 'renders navigation tabs' do
+  it 'renders basic navigation' do
+    matestack_render do
+      navigation
+    end
+    visit example_path
+    expect(page).to have_selector('ul.nav', visible: false)
+  end
+
+  it 'has basic transition' do
+    matestack_render do
+      navigation items: {
+        home: { path: "#home", text: "Home" },
+        team: { path: "#messages", text: "Message" }
+      } 
+    end
+    visit example_path
+    expect(page).to have_selector('ul.nav > li.nav-item > a.nav-link')
+    expect(page).to have_content('Home')
+    expect(page).to have_content('Message')
+  end
+  
+  it 'has basic link element' do
+    matestack_render do
+      navigation items: {
+        home: { type: :link, path: "#home", text: "Home" },
+        team: { type: :link, path: "#messages", text: "Message" }
+      } 
+    end
+    visit example_path
+    expect(page).to have_selector('ul.nav > li.nav-item > a.nav-link')
+    expect(page).to have_content('Home')
+    expect(page).to have_content('Message')
+  end
+
+  it 'can align horizontally' do
+    matestack_render do
+      navigation items: {
+        home: { type: :link, path: "#home", text: "Home" },
+        team: { type: :link, path: "#messages", text: "Message" }
+      }, horizontal: :center
+    end
+    visit example_path
+    expect(page).to have_selector('ul.nav.justify-content-center > li.nav-item > a.nav-link')
+  end
+
+  it 'can stack vertically' do
+    matestack_render do
+      navigation items: {
+        home: { type: :link, path: "#home", text: "Home" },
+        team: { type: :link, path: "#messages", text: "Message" }
+      }, vertical: true
+    end
+    visit example_path
+    expect(page).to have_selector('ul.nav.flex-column > li.nav-item > a.nav-link')
+  end
+
+  it 'has elements with equals width' do
+    matestack_render do
+      navigation items: {
+        home: { type: :link, path: "#home", text: "Home" },
+        team: { type: :link, path: "#messages", text: "Message" }
+      }, justified: true
+    end
+    visit example_path
+    expect(page).to have_selector('ul.nav.nav-justified > li.nav-item > a.nav-link')
+  end
+
+  it 'has elements that proportionately fill all available space' do
+    matestack_render do
+      navigation items: {
+        home: { type: :link, path: "#home", text: "Home" },
+        team: { type: :link, path: "#messages", text: "Message" }
+      }, fill: true
+    end
+    visit example_path
+    expect(page).to have_selector('ul.nav.nav-fill > li.nav-item > a.nav-link')
+  end
+
+  it 'renders navigation with tabs' do
     matestack_render do
       navigation items: {
         home: { type: :link, path: "#home", text: "Home" },
         product: { type: :link, path: "#profile", text: "Profile" },
-        team: { type: :link, path: "#messages", text: "Message" },
-      }, horizontal: :center, tabs: true
+      }, tabs: true
       div class: "tab-content" do
         div class: "tab-pane active", id: "home", attributes: { role: "tabpanel", 'aria-labelledby':  "home-tab" } do
-          plain "Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
+          plain "Content Tab Home"
         end
         div class: "tab-pane", id: "profile", attributes: { role: "tabpanel", 'aria-labelledby': "profile-tab" } do
-          plain "..........ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
-        end
-        div class: "tab-pane", id: "messages", attributes: {  role: "tabpanel", 'aria-labelledby': "messages-tab" } do
-          plain "do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
+          plain "Content Tab Profile"
         end
       end
     end
     visit example_path
-    expect(page).to have_content 'Home'
-    expect(page).to have_selector('ul.nav.nav-tabs.justify-content-center')
-    expect(page).to have_selector('div.tab-content')
+    expect(page).to have_selector('ul.nav.nav-tabs')
+    expect(page).to have_selector('div.tab-content > div.tab-pane')
+    expect(page).to have_content 'Content Tab Home'
+    expect(page).not_to have_content('Content Tab Profile')
+    click_on('Profile')
+    expect(page).to have_content('Content Tab Profile')
   end
   
-  it 'renders navigation pills vertical' do
+  it 'renders navigation pills' do
     matestack_render do
       navigation items: {
         home: { type: :link, path: "#home", text: "Home" },
-        product: { type: :link, path: "#profile", text: "Profile" },
         team: { type: :link, path: "#messages", text: "Message" },
-      }, pills: true, vertical: true
+      }, pills: true
     end
     visit example_path
-    expect(page).to have_content 'Home'
-    expect(page).to have_selector('ul.nav.nav-pills.flex-column')
+    expect(page).to have_content 'Message'
+    expect(page).to have_selector('ul.nav.nav-pills')
+  end
+
+  it 'can have custom class' do
+    matestack_render do
+      navigation class: "foobar"
+    end
+    visit example_path
+    expect(page).to have_selector('ul.nav.foobar', visible: false)
   end
 
 end

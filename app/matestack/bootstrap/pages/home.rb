@@ -73,8 +73,10 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
       home: { type: :link, path: "#home", text: "Home" },
       product: { type: :link, path: "#profile", text: "Profile" },
       team: { type: :link, path: "#messages", text: "Message" },
-    }, pills: true, vertical: true
+    }#, pills: true, vertical: true
     navigation items: @nav_items, horizontal: :center, tabs: true
+    navigation class: "foobar"
+
     div class: "tab-content" do
       div class: "tab-pane active", id: "home", attributes: { role: "tabpanel", 'aria-labelledby':  "home-tab" } do
         plain "Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
