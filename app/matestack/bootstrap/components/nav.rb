@@ -13,25 +13,25 @@ class Bootstrap::Components::Nav < Matestack::Ui::Component
   protected
 
   def nav_items_partial
-    items.each_with_index do |(key, item), index|
+    items.each do |item|
       li class: "nav-item" do
         case item[:type]
         when :link
-          link link_attrs item[:path], item[:text], index, item[:disabled]
+          link link_attrs item[:path], item[:text], item[:active], item[:disabled]
         else
-          transition link_attrs item[:path], item[:text], index, item[:disabled]
+          transition link_attrs item[:path], item[:text], item[:active], item[:disabled]
         end
       end
     end
   end
 
-  def link_attrs path, text, index, disabled
+  def link_attrs path, text, active, disabled
     {}.tap do |hash|
       hash[:class] = "nav-link #{'active' if path == request.fullpath } #{'disabled' if disabled}"
 
       hash[:attributes] = {}.tap do |hash|
         hash[:'aria-selected'] = path == request.fullpath ? 'true' : 'false'
-        hash[:'aria-current'] = 'page' if index == 0
+        hash[:'aria-current'] = 'page' if active == true
         hash[:'aria-disabled'] = 'true' if disabled
         hash[:role] = "tab" if toggle.present?
         hash[:'aria-controls'] = "#{path.gsub('#','')}" if toggle.present?
