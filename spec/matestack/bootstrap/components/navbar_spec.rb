@@ -45,8 +45,9 @@ RSpec.describe "Bootstrap::Components::Navbar", type: :feature, js: true do
 
   it 'has multiple items' do
     matestack_render do
-      navbar hide_at: :sm, items: { home: {type: :transition, path: "/", text: "Home"}, 
-                    contact: {type: :transition, path: "#", text: "Contact"}, }
+      navbar hide_at: :sm, items: [
+                          { type: :transition, path: "/", text: "Home" }, 
+                          { type: :transition, path: "#", text: "Contact" } ]
     end
     visit example_path
     expect(page).to have_selector('nav.navbar.navbar-expand-sm')
@@ -58,8 +59,9 @@ RSpec.describe "Bootstrap::Components::Navbar", type: :feature, js: true do
   it 'renders navbar with yield custom classes and custom component' do
     matestack_render do
       navbar hide_at: :sm, items_class: "foobar", class: "text-center",
-      items: { home: {type: :transition, path: "/", text: "Home"}, 
-              contact: {type: :transition, path: "/", text: "Contact"}, } do
+      items: [
+        { type: :transition, path: "/", text: "Home" }, 
+        { type: :transition, path: "#", text: "Contact" } ] do
                 btn text: "Login"
               end
     end
@@ -91,8 +93,9 @@ RSpec.describe "Bootstrap::Components::Navbar", type: :feature, js: true do
   
   it 'can collapse and expand' do
     matestack_render do
-      navbar toggle: :left, items: { home: {type: :transition, path: "/", text: "Home"}, 
-              contact: {type: :transition, path: "#", text: "Contact"}, } 
+      navbar toggle: :left, items: [
+        { type: :transition, path: "/", text: "Home" }, 
+        { type: :transition, path: "#", text: "Contact" } ]
     end
     visit example_path
     expect(page).not_to have_selector('.collapse.navbar-collapse')

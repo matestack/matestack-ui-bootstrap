@@ -45,7 +45,7 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
   def navbar_content_partial
     div class: "collapse navbar-collapse", id: 'matestackNavbarContent' do
       ul class: items_classes do
-        items.each do |key, item|
+        items.each do |item|
           li class: "nav-item" do
             if item[:type] == :transition
               transition class: "nav-link", path: item[:path], text: item[:text]
