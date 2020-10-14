@@ -61,7 +61,7 @@ class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
 
   def toast_data
     (bs_data || {}).tap do |hash|
-      hash[:delay] = delay.nil? ? 500 : delay
+      hash[:delay] = delay.nil? ? 5000 : delay
       hash[:autohide] = autohide.nil? ? "true" : "#{autohide}"
       hash[:animation] = animation.nil? ? "true" : "#{animation}"
     end
@@ -69,9 +69,9 @@ class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
 
   def toast_attrs 
     (bs_attrs || {}).tap do |hash|
-      hash[:role] = 'alert'
+      hash[:role] = (important == false ? 'status' : 'alert') 
       hash[:'aria-live'] = (important ? 'assertive' : 'polite') if important.present? && !placement.present?
-      # hash[:'aria-live'] = 'assertive' unless important.present?
+      hash[:'aria-live'] = 'assertive' unless important.present?
       hash[:'aria-atomic'] = 'true' unless placement.present?
       hash[:style] = "position: absolute; #{placement[:position] || 'top: 0; right: 0;' }"  if placement.present?
     end
@@ -79,7 +79,7 @@ class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
 
   def toast_classes
     [].tap do |classes|
-      classes << 'toast'
+      classes << 'toast p-0'
       classes << bs_class
     end.join(' ').strip
   end
