@@ -7,7 +7,8 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
   optional :items, :items_class, :theme, :hide_at, :color, :container_size
   # brand expect hash or string, possible keys for hash: text, path, img
   optional :brand
-  # toogle expect hash of symbol, possible keys for hash: position, class
+  # toogle expect hash of symbol (:left or :right), 
+  # possible keys for hash: position, class
   optional :toggle
 
   def prepare
@@ -73,7 +74,7 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
       end
       classes << "navbar-expand-#{ (hide_at.present? ? hide_at : "lg") }"
       classes << "navbar-#{theme}" if  theme.present?
-      classes << (color.present? ? "bg-#{color}" : "bg-#{theme}")
+      classes << (color.present? ? "bg-#{color}" : "bg-#{theme}") if theme || color
       classes << bs_class
     end.join(' ').strip
   end
@@ -89,7 +90,7 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
       classes << 'navbar-toggler'
       classes << "ml-auto" if @toggle[:position] == :right
       classes << "mr-auto" if @toggle[:position] == :left
-      classes << @toggle[:class]
+      classes << @toggle[:class] if @toggle[:class]
     end.join(' ').strip
 
     {}.tap do |hash|

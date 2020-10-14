@@ -16,7 +16,7 @@ RSpec.describe "Bootstrap::Components::Navbar", type: :feature, js: true do
       navbar brand: {text: "BRAND TEXT", path: "#"}
     end
     visit example_path
-    expect(page).to have_selector('nav.navbar > navbar-brand')
+    expect(page).to have_selector('.navbar-brand')
   end
   
   it 'can have custom toggle class' do
@@ -70,33 +70,38 @@ RSpec.describe "Bootstrap::Components::Navbar", type: :feature, js: true do
   end
 
   it 'can have fixed top, fixed bottom or sticky top' do
-    pending
-    fail
     matestack_render do
-      navbar 
+      navbar fixed_top: true
+      navbar fixed_bottom: true
+      navbar sticky_top: true
     end
     visit example_path
-    expect(page).to have_selector('')
+    expect(page).to have_selector('nav.navbar.fixed-top')
+    expect(page).to have_selector('nav.navbar.fixed-bottom')
+    expect(page).to have_selector('nav.navbar.sticky-top')
   end
   
   it 'can have different container sizes' do
-    pending
-    fail
     matestack_render do
-      navbar 
+      navbar container_size: :lg
     end
     visit example_path
-    expect(page).to have_selector('')
+    expect(page).to have_selector('nav > div.container-lg')
   end
   
   it 'can collapse and expand' do
-    pending
-    fail
     matestack_render do
-      navbar items: { home: {type: :transition, path: "/", text: "Home"}, 
+      navbar toggle: :left, items: { home: {type: :transition, path: "/", text: "Home"}, 
               contact: {type: :transition, path: "#", text: "Contact"}, } 
     end
     visit example_path
-    expect(page).to have_selector('')
+    expect(page).not_to have_selector('.collapse.navbar-collapse')
+    expect(page).not_to have_content('Home')
+    click_button
+    expect(page).to have_selector('.collapse.navbar-collapse')
+    expect(page).to have_content('Home')
+    click_button
+    expect(page).not_to have_selector('.collapse.navbar-collapse')
+    expect(page).not_to have_content('Home')
   end
 end

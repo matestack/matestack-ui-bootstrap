@@ -63,6 +63,8 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
   end
 
   def response 
+    navbar brand: {text: "BRAND TEXT", path: "#"}
+
     navbar hide_at: :sm, theme: :dark, items_class: "mr-auto ml-auto", class: "text-center",
     items: { home: {type: :transition, path: "/", text: "Home"}, 
             contact: {type: :transition, path: "/", text: "Contact"}, } do
