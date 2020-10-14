@@ -76,12 +76,11 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
                     contact: {type: :transition, path: "/", text: "Contact"}, } do
                       btn text: "Login"
                     end
-    navigation items: {
-      home: { type: :link, path: "#home", text: "Home" },
-      product: { type: :link, path: "#profile", text: "Profile" },
-      team: { type: :link, path: "#messages", text: "Message" },
-    }#, pills: true, vertical: true
-    navigation items: @nav_items, horizontal: :center, tabs: true
+    navigation items: [
+      { type: :link, path: "#home", text: "Home" },
+      { type: :link, path: "#profile", text: "Profile" },
+      { type: :link, path: "#messages", text: "Message" }
+    ]#, pills: true, vertical: true
 
     div class: "tab-content" do
       div class: "tab-pane active", id: "home", attributes: { role: "tabpanel", 'aria-labelledby':  "home-tab" } do
