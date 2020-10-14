@@ -132,8 +132,10 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
         modal id: 'staticBackdrop', static: true, m_title: "Modal Title", text: "Modal Messages", close_btn_text: "Close"
       end
+
       row horizontal: :center, vertical: :center do
-        toast show_on: "myToasts", dispose_on: "hideToasts", header: "Bootstrap", body: "Hello, world! This is a toast message.", autohide: false
+        # toast placement: { height: '200px' }
+        toast class: "bg-primary", show_on: "myToasts", dispose_on: "hideToasts", header: "Bootstrap", body: "Hello, world! This is a toast message.", autohide: false
         col do          
           onclick emit: "myToasts" do
             btn text: "Show Toasts"
@@ -176,13 +178,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
           collapse id: "multiCollapseExample", card: "Random text for card body content", multi: true
           br
           collapse card: "Random text for card body content", class: "show", labelledby: "random-label"
-          # collapse id: "collapseExample", dispose_on: "myCollapse", toggle_on: "toggleCollapse", card: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident."
-          # onclick emit: "myCollapse" do
-          #   btn text: "Collapse"
-          # end
-          # onclick emit: "toggleCollapse" do
-          #   btn text: "Toggle Collapse"
-          # end
+
         end
       end
       accordion items: [
@@ -190,25 +186,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         { header: { text: "Group Item #2", class: "p-3 rounded-0" }, body: { text: "Random Text for Collapse #2" } },
         { header: { text: "Group Item #3" }, body: { text: "Random Text for Collapse #3" } }
       ]
-      # div class: "accordion", id: "accordionExample" do
-      #   div class: "card" do
-      #     div class: "card-header", id: "headingOne" do
-      #       heading size: 2, class: "mb-0" do
-      #         btn style: :link, size: :block, class: "text-left", text: "Collapsible Group Item #1", data: { toggle:"collapse", target:"#collapseOne" }, attributes: { "aria-expanded":"true", "aria-controls":"collapseOne" }
-      #       end
-      #     end
-      #     collapse id: "collapseOne", card: { class: "card-body", text: "Random Text Card No. 1"},labelledby: "headingOne", parent: "#accordionExample"
-      #   end
 
-      #   div class: "card" do
-      #     div class: "card-header", id: "headingTwo" do
-      #       heading size: 2, class: "mb-0" do
-      #         btn style: :link, size: :block, class: "text-left", text: "Collapsible Group Item #2", data: { toggle:"collapse", target:"#collapseTwo" }, attributes: { "aria-expanded":"false", "aria-controls":"collapseTwo" }
-      #       end
-      #     end
-      #     collapse id: "collapseTwo", card: { class: "card-body", text: "Random Text Card 2"},labelledby: "headingTwo", parent: "#accordionExample"
-      #   end
-      # end
     end
     container size: :fluid, class: "py-4 bg-dark" do
       col md: 8, offset: 2 do          
