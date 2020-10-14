@@ -63,7 +63,6 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
   end
 
   def response 
-    navbar brand: {text: "BRAND TEXT", path: "#"}
 
     navbar hide_at: :sm, theme: :dark, items_class: "mr-auto ml-auto", class: "text-center",
     items: { home: {type: :transition, path: "/", text: "Home"}, 
@@ -71,7 +70,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
               btn text: "Login"
             end
 
-    navbar toggle: :left, brand: {text: "BRAND TEXT", path: "#"}, theme: :dark, sticky_top: true, items_class: "mr-auto ml-auto",
+    navbar toggle: :left, brand: {text: "BRAND TEXT", path: "#"}, theme: :dark, items_class: "mr-auto ml-auto",
             items: { home: {type: :transition, path: "/", text: "Home"}, 
                     product: {type: :transition, path: "/", text: "Product"}, 
                     contact: {type: :transition, path: "/", text: "Contact"}, } do
@@ -98,12 +97,12 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
     modal id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close",
     centered: true, scrollable: true, size: :lg    
-    container size: :lg, class: "bg-light py-3 my-3" do
+    container size: :lg, class: "bg-light py-5 my-5" do
       row horizontal: :center, vertical: :center do
-        list_group id: "list-example3", class: "foobar",
+        list_group id: "list-example3",
         items: [
-          { type: :label, text: "Item 1" },
-          { type: :label, text: "Item 2" } 
+          { type: :link, text: "Item 1", path: "#list-item1"},
+          { type: :link, text: "Item 2", path: "#list-item2" } 
         ]
         scrollspy target: "#list-example3" do
           heading size: 2, id: "list-item1", text: "Item 1"
@@ -111,20 +110,11 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
           heading size: 2, id: "list-item2", text: "Item 2"
           paragraph text: "Quis anim sit do amet fugiat dolor velit sit ea ea do reprehenderit culpa duis. Nostrud aliqua ipsum fugiat minim proident occaecat excepteur aliquip culpa aute tempor reprehenderit. Deserunt tempor mollit elit ex pariatur dolore velit fugiat mollit culpa irure ullamco est ex ullamco excepteur."
         end
+
+        scrollspy class: "foo bar"
       end
     end
-    breadcrumb items: [
-      {
-        type: :link,
-        path: "#",
-        text: "Home",
-      },
-      {
-        type: :link,
-        text: "Data",
-      }
-    ]
-    br 
+    br
     container size: :lg, class: "bg-warning py-3 my-3" do
       row do
         col do   
