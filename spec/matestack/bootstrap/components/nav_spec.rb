@@ -13,10 +13,10 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
 
   it 'has basic transition' do
     matestack_render do
-      navigation items: {
-        home: { path: "#home", text: "Home" },
-        team: { path: "#messages", text: "Message" }
-      } 
+      navigation items: [
+        { path: "#home", text: "Home" },
+        { path: "#messages", text: "Message" }
+      ]
     end
     visit example_path
     expect(page).to have_selector('ul.nav > li.nav-item > a.nav-link')
@@ -26,10 +26,10 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
   
   it 'has basic link element' do
     matestack_render do
-      navigation items: {
-        home: { type: :link, path: "#home", text: "Home" },
-        team: { type: :link, path: "#messages", text: "Message" }
-      } 
+      navigation items: [
+        { path: "#home", text: "Home" },
+        { path: "#messages", text: "Message" }
+      ]
     end
     visit example_path
     expect(page).to have_selector('ul.nav > li.nav-item > a.nav-link')
@@ -39,10 +39,10 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
 
   it 'can align horizontally' do
     matestack_render do
-      navigation items: {
-        home: { type: :link, path: "#home", text: "Home" },
-        team: { type: :link, path: "#messages", text: "Message" }
-      }, horizontal: :center
+      navigation items: [
+        { type: :link, path: "#home", text: "Home" },
+        { type: :link, path: "#messages", text: "Message" }
+      ], horizontal: :center
     end
     visit example_path
     expect(page).to have_selector('ul.nav.justify-content-center > li.nav-item > a.nav-link')
@@ -50,10 +50,10 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
 
   it 'can stack vertically' do
     matestack_render do
-      navigation items: {
-        home: { type: :link, path: "#home", text: "Home" },
-        team: { type: :link, path: "#messages", text: "Message" }
-      }, vertical: true
+      navigation items: [
+        { type: :link, path: "#home", text: "Home" },
+        { type: :link, path: "#messages", text: "Message" }
+      ], vertical: true
     end
     visit example_path
     expect(page).to have_selector('ul.nav.flex-column > li.nav-item > a.nav-link')
@@ -61,10 +61,10 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
 
   it 'has elements with equals width' do
     matestack_render do
-      navigation items: {
-        home: { type: :link, path: "#home", text: "Home" },
-        team: { type: :link, path: "#messages", text: "Message" }
-      }, justified: true
+      navigation items: [
+        { type: :link, path: "#home", text: "Home" },
+        { type: :link, path: "#messages", text: "Message" }
+      ], justified: true
     end
     visit example_path
     expect(page).to have_selector('ul.nav.nav-justified > li.nav-item > a.nav-link')
@@ -72,10 +72,10 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
 
   it 'has elements that proportionately fill all available space' do
     matestack_render do
-      navigation items: {
-        home: { type: :link, path: "#home", text: "Home" },
-        team: { type: :link, path: "#messages", text: "Message" }
-      }, fill: true
+      navigation items: [
+        { type: :link, path: "#home", text: "Home" },
+        { type: :link, path: "#messages", text: "Message" }
+      ], fill: true
     end
     visit example_path
     expect(page).to have_selector('ul.nav.nav-fill > li.nav-item > a.nav-link')
@@ -83,10 +83,10 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
 
   it 'renders navigation with tabs' do
     matestack_render do
-      navigation items: {
-        home: { type: :link, path: "#home", text: "Home" },
-        product: { type: :link, path: "#profile", text: "Profile" },
-      }, tabs: true
+      navigation items: [
+        { type: :link, path: "#home", text: "Home" },
+        { type: :link, path: "#profile", text: "Profile" },
+      ], tabs: true
       div class: "tab-content" do
         div class: "tab-pane active", id: "home", attributes: { role: "tabpanel", 'aria-labelledby':  "home-tab" } do
           plain "Content Tab Home"
@@ -107,10 +107,10 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
   
   it 'renders navigation pills' do
     matestack_render do
-      navigation items: {
-        home: { type: :link, path: "#home", text: "Home" },
-        team: { type: :link, path: "#messages", text: "Message" },
-      }, pills: true
+      navigation items: [
+        { type: :link, path: "#home", text: "Home" },
+        { type: :link, path: "#messages", text: "Message" },
+      ], pills: true
     end
     visit example_path
     expect(page).to have_content 'Message'
