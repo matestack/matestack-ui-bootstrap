@@ -22,7 +22,7 @@ Returns a bootstrap alert containing text and/or content specified by a block. A
 
 * `:close_on` - Expects an event as string on which the alert will be closed calling bootstraps `close` method. 
   
-* `:close_on` - Expects an event as string on which the alert will be disposed calling bootstraps `close` method. 
+* `:dispose_on` - Expects an event as string on which the alert will be disposed calling bootstraps `dispose` method. 
 
 * `&block` - Use a block to create custom content/markup inside an alert. If used together with `:text` the text will be displayed before the block.
   
