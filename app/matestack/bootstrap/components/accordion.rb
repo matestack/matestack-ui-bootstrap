@@ -22,7 +22,7 @@ class Bootstrap::Components::Accordion < Matestack::Ui::Component
     items.each_with_index do | item, index |
       div class: "card-header p-0 #{item[:header][:class]}", id: (item[:header][:id] || "header-#{index}") do
         heading size: (item[:header][:size] || 2), class: "mb-0" do
-          btn variant: (item[:header][:btn_variant] || :link), size: :block, class: (item[:header][:btn_class] || "text-left"), text:item[:header][:text], 
+          btn variant: (item[:header][:variant] || :link), size: :block, class: (item[:header][:class] || "text-left"), text:item[:header][:text], 
                 data: { toggle: "collapse", target: "#collapse-#{(item[:header][:id] || "header-#{index}") }" }, 
                 attributes: { "aria-expanded": "false", "aria-controls": "collapse-#{(item[:header][:id] || "header-#{index}")}" }
         end

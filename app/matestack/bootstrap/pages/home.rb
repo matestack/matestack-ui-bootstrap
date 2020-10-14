@@ -185,9 +185,9 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
           # end
         end
       end
-      accordian items: [
-        { header: { text: "Group Item #1", btn_variant: :light }, body: { text: "Random Text for Collapse #1" } },
-        { header: { text: "Group Item #2", btn_class: "p-3 rounded-0" }, body: { text: "Random Text for Collapse #2" } },
+      accordion items: [
+        { header: { text: "Group Item #1", variant: :light }, body: { text: "Random Text for Collapse #1" } },
+        { header: { text: "Group Item #2", class: "p-3 rounded-0" }, body: { text: "Random Text for Collapse #2" } },
         { header: { text: "Group Item #3" }, body: { text: "Random Text for Collapse #3" } }
       ]
       # div class: "accordion", id: "accordionExample" do
