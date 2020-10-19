@@ -63,14 +63,18 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
   end
 
   def response 
-
-    navbar hide_at: :sm, theme: :dark, items_class: "mr-auto ml-auto", class: "text-center",
+    navbar theme: :light, brand: "Navbar", class: "text-center", items: [
+      { path: "#", text: "Home"}, 
+      { path: "#", text: "Contact"} ] do
+        btn text: "Login", variant: :outline_success, horizontal: :end
+      end
+    navbar hide_at: :sm, theme: :dark, class: "text-center",
     items: [{type: :transition, path: "/", text: "Home"}, 
           {type: :transition, path: "/", text: "Contact"}] do
               btn text: "Login"
             end
 
-    navbar toggle: :left, brand: {text: "BRAND TEXT", path: "#"}, theme: :dark, items_class: "mr-auto ml-auto",
+    navbar toggle: :left, brand: {text: "BRAND TEXT", path: "#"}, theme: :dark,
             items: [{type: :transition, path: "/", text: "Home"}, 
                     {type: :transition, path: "/", text: "Product"}, 
                     {type: :transition, path: "/", text: "Contact"}]  do

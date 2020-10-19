@@ -7,7 +7,7 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
   optional :items, :items_class, :theme, :hide_at, :color, :container_size
   # brand expect hash or string, possible keys for hash: text, path, img
   optional :brand
-  # toogle expect hash of symbol (:left or :right), 
+  # toogle expect hash or a symbol (:left or :right), 
   # possible keys for hash: position, class
   optional :toggle
 
@@ -47,11 +47,10 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
       ul class: items_classes do
         items.each do |item|
           li class: "nav-item" do
-            if item[:type] == :transition
-              transition class: "nav-link", path: item[:path], text: item[:text]
-            end
             if item[:type] == :link
               link class: "nav-link", path: item[:path], text: item[:text]
+            else
+              transition class: "nav-link", path: item[:path], text: item[:text]
             end
           end
         end
@@ -103,7 +102,7 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
   def items_classes
     [].tap do |classes|
       classes << 'navbar-nav'
-      classes << items_class
+      classes << (items_class.present? ? items_class : "mr-auto mb-2 mb-lg-0")
       classes << "align-items-center ml-auto" unless items_class.present?
     end.join(' ').strip
   end
