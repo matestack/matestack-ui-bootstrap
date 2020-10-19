@@ -7,7 +7,7 @@ class Bootstrap::Components::Pagination < Matestack::Ui::Component
     nav pagination_attributes do
       ul class: ul_classes do
         if items.present?
-          items.each_with_index do |item, index|
+          items.each do |item|
             li class: "page-item #{ 'active' if item[:active] }" do
               if item[:type] == :link
                 link path: item[:path], text: item[:text], class: 'page-link'

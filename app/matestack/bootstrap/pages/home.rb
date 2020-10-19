@@ -63,16 +63,6 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
   end
 
   def response 
-    navbar theme: :light, brand: "Navbar", class: "text-center", items: [
-      { path: "#", text: "Home"}, 
-      { path: "#", text: "Contact"} ] do
-        btn text: "Login", variant: :outline_success, horizontal: :end
-      end
-    navbar hide_at: :sm, theme: :dark, class: "text-center",
-    items: [{type: :transition, path: "/", text: "Home"}, 
-          {type: :transition, path: "/", text: "Contact"}] do
-              btn text: "Login"
-            end
 
     navbar toggle: :left, brand: {text: "BRAND TEXT", path: "#"}, theme: :dark,
             items: [{type: :transition, path: "/", text: "Home"}, 
@@ -245,7 +235,11 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
           ] do
           paragraph text: "Test Block"
           end
-          pagination do
+          pagination aria_label: "page example", size: :lg, items: [
+            { path: "#", text: "1", active: true },
+            { path: "#", text: "2" },
+            { path: "#", text: "3" },
+          ] do
             plain "Test block"
           end
         end
