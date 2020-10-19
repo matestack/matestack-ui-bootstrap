@@ -229,8 +229,8 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         col do
           pagination
           pagination items: [
-            { type: :link, path: "#", text: "1", active: false },
-            { type: :link, path: "#", text: "2", active: false },
+            { type: :link, path: "#", text: "1" },
+            { type: :link, path: "#", text: "2" },
             { type: :link, path: "#", text: "3", active: true },
           ] do
           paragraph text: "Test Block"
@@ -316,12 +316,12 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
             plain "50%"
           end
           br
-          progress progress: 50, text: "50%", valuemin: 10, valuemax: 70
+          progress height: 20, variant: :success, progress: 25, text: "25%"
           br
           progress progress: [
               { value: 50, text: 50, variant: :success },
               { value: 25, text: 25, variant: :warning }
-            ], text: "50%", valuemin: 10, valuemax: 70
+          ], valuemin: 10, valuemax: 70
         end
       end
       row do
