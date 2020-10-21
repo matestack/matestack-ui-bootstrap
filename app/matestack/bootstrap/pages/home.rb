@@ -88,8 +88,13 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     #   end
     # end
     
-    smart_table base_query: Person.all
-
+    # include: [:token, 'survey.name', 'client.name', :created_at]
+    smart_table base_query: Person.all, 
+                include: [:name, :email], 
+                # pagination: 3,
+                with_index: true
+                    
+    br
     btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
     modal id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close",
     centered: true, scrollable: true, size: :lg    
