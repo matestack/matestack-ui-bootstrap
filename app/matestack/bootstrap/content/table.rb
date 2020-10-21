@@ -3,39 +3,82 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
 
   optional class: { as: :bs_class }, id: { as: :bs_id }
   # Smart Table Attributes
-  optional :include, :filter, :base_query, :pagination, :order
+  optional :include, :filter, :filter_option, :base_query, :pagination, :order
 
   # Bootstrap Table Attributes
   optional :variants, :with_index
 
   def prepare
     @collection_id = bs_id ||= "smarttable"
-    # model = base_query.model
+    model = base_query.model
     # model_name = model.model_name
 
     current_filter = get_collection_filter(@collection_id)
-    # filtered_query = base_query
-    filtered_query = base_query.where('name LIKE ?', current_filter[:name])
-    puts filtered_query
+    current_order = get_collection_order(@collection_id) 
+    
+    filtered_query = base_query
+
+    if order.present?
+      if current_order.count < 1
+        filtered_query = base_query.order(order)
+      else
+        filtered_query = base_query.order(current_order)
+      end
+    end
+
+    if filter.present?
+      filter.each do |key|
+        value = current_filter[key.to_sym]
+        # TODO: Filter with Relations
+        if value.present? && key.to_s.include?(".")
+          associated_name = key.to_s.split(".").first
+          filtered_query = filtered_query.joins(associated_name.to_sym)
+          # table_name = model.reflections[associated_name].table_name
+          # key = key.to_s.gsub(associated_name, table_name)
+        end
+        if value.present?
+          key = key.to_sym
+          case filter_option
+          when :equals
+            filtered_query = filtered_query.where("#{key}": value)
+          when :like 
+            filtered_query = filtered_query.where("lower(#{key}) LIKE ?", "%#{value.downcase}%")
+          else
+            filtered_query = filtered_query
+          end
+        end
+      end
+    end
     # Core Collection
-    @collection = set_collection(
-      id: @collection_id,
-      data: base_query,
-      init_limit: (pagination || 20),
-      base_count: base_query.count,
-      filtered_count: filtered_query.count
-    )
+    if pagination.present?
+      @collection = set_collection(
+        id: @collection_id,
+        data: filtered_query,
+        init_limit: pagination,
+        base_count: base_query.count,
+        filtered_count: filtered_query.count
+      )
+    else
+      @collection = set_collection({
+        id: @collection_id,
+        data: filtered_query,
+        base_count: base_query.count,
+        filtered_count: filtered_query.count
+      })
+
+    end
   end
 
   def response
-    filter_partial
+    filter_partial if filter.present?
+    ordering if order.present?
     # automatically generated table for a given array, hash or collection
     # needs to be evaluated how you would pass in a collection and attributes you want to display
-    async id: "smart-collection", rerender_on: "#{@collection_id}-update" do
+    async id: @collection_id, rerender_on: "#{@collection_id}-update" do
       table table_attributes do
         table_head_partial
         table_body_partial
-      #   table_footer_partial
+        table_footer_partial
       end
     end
 
@@ -45,12 +88,28 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   
   def filter_partial
     collection_filter @collection.config do
-      collection_filter_input key: :name, type: :text 
+      filter.each do |key|
+        collection_filter_input key: key, type: :text, placeholder: key.to_s
+      end
       collection_filter_submit do
         btn text: "Filter"
       end
       collection_filter_reset do
         btn text: "Reset"
+      end
+    end
+  end
+
+  def ordering
+    collection_order @collection.config do
+      plain "sort by:"
+      include.each do |key|
+        collection_order_toggle key: key do
+          btn do
+            collection_order_toggle_indicator key: key, asc: '&#8593;', desc: '&#8595;'
+            plain key.to_s
+          end
+        end
       end
     end
   end
@@ -71,7 +130,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
       collection_content @collection.config do
         @collection.paginated_data.each_with_index do |data, index|
           tr do
-            th attributes: { 'scope': 'row' }, text: index if with_index
+            th attributes: { 'scope': 'row' }, text: (index + 1) if with_index
             include.each do |_key, value|
               td text: data.instance_eval(_key.to_s) 
             end
