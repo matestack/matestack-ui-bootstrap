@@ -13,13 +13,12 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
     # model = base_query.model
     # model_name = model.model_name
 
-    my_base_query = base_query
-    # my_filtered_query = my_base_query
+    filtered_query = base_query
 
     # Core Collection
     @collection = set_collection(
       id: @collection_id,
-      data: my_base_query
+      data: base_query
     )
   end
 
@@ -38,33 +37,26 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   def table_head_partial
     thead do
       tr do
-        th attributes: { 'scope': 'col' }, text: "#"
-        th attributes: { 'scope': 'col' }, text: "First"
-        th attributes: { 'scope': 'col' }, text: "Last"
-        th attributes: { 'scope': 'col' }, text: "Handle"
+        th attributes: { 'scope': 'col' }, text: "Name"
+        th attributes: { 'scope': 'col' }, text: "Age"
+        th attributes: { 'scope': 'col' }, text: "E-Mail"
       end
     end
   end
 
   def table_body_partial
     tbody do
-      tr do
-        th attributes: { 'scope': 'row' }, text: "1"
-        td text: "Mark"
-        td text: "Otto"
-        td text: "@mdo"
-      end
-      tr do
-        th attributes: { 'scope': 'row' }, text: "2"
-        td text: "Mark"
-        td text: "Otto"
-        td text: "@mdo"
-      end
-      tr do
-        th attributes: { 'scope': 'row' }, text: "3"
-        td text: "Mark"
-        td text: "Otto"
-        td text: "@mdo"
+      async id: bs_id, rerender_on: "#{@collection_id}-update" do
+        collection_content @collection.config do
+          @collection.paginated_data.each do |data|
+            tr do
+              # th attributes: { 'scope': 'row' }, text: "1"
+              td text: data.name 
+              td text: data.age 
+              td text: data.email
+            end
+          end
+        end
       end
     end
   end
@@ -72,7 +64,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   def table_footer_partial
     tfoot do
       tr do
-        th text: "Footer"
+        # th text: "Footer"
         td text: "Footer"
         td text: "Footer"
         td text: "@Footer"

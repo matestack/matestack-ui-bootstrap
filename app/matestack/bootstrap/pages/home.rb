@@ -88,7 +88,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     #   end
     # end
     
-    smart_table 
+    smart_table base_query: Person.all
 
     btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
     modal id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close",
