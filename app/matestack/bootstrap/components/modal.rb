@@ -4,7 +4,7 @@ class Bootstrap::Components::Modal < Matestack::Ui::VueJsComponent
   # header attributes, expects a hash or string
   # possible keys `:class, :text, :size`
   optional :header 
-  # footer attributes, expects a hash or string
+  # body attributes, expects a hash or string
   # possible keys `:class, :text`
   optional :body
   # footer is a dismiss button, expects a hash or string for button text
