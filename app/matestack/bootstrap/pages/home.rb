@@ -119,7 +119,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         end
         col do
           tooltip text: "Tooltip", title: "Tooltip Content", animation: 'false'
-        end
+          tooltip tag: :link, placement: :top, tabindex: "0", variant: :danger, trigger: "focus", title: "Tooltip Title", content: "And here's some amazing content. It's very engaging. Right?", text: "Click for tooltip"        end
       end
       row do
         btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }

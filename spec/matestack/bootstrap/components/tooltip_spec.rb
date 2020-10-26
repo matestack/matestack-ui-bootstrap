@@ -76,25 +76,25 @@ RSpec.describe "Bootstrap::Components::Tooltip", type: :feature, js: true do
     expect(page).to have_selector('button.btn.btn-primary[data-animation="false"]')
   end
   
-  it 'is type span' do
+  it 'is tag span' do
     matestack_render do
-      tooltip type: :span
+      tooltip tag: :span
     end
     visit example_path
     expect(page).to have_selector('span[data-type="span"]')
   end
 
-  it 'is type div' do
+  it 'is tag div' do
     matestack_render do
-      tooltip type: :div
+      tooltip tag: :div
     end
     visit example_path
     expect(page).to have_selector('div[data-type="div"]')
   end
 
-  it 'is type link' do
+  it 'is tag link' do
     matestack_render do
-      tooltip type: :link
+      tooltip tag: :link
     end
     visit example_path
     expect(page).to have_selector('a.btn.btn-link[data-type="link"]')

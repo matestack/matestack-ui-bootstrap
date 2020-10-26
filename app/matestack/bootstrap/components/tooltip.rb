@@ -11,13 +11,14 @@ class Bootstrap::Components::Tooltip < Matestack::Ui::VueJsComponent
   # for security reasons the sanitize, sanitizeFn and whiteList options cannot be supplied using data attributes.
   # sanitize sanitize_fn white_list
   # optional :content
+  optional :tag
   optional class: { as: :bs_class }
   optional id: { as: :bs_id }
-  DATA_ATTRIBUTES = %i[type title text style animation placement tabindex trigger boundary offset popper_config]
+  DATA_ATTRIBUTES = %i[title text variant animation placement tabindex trigger boundary offset popper_config]
   optional *DATA_ATTRIBUTES
 
   def response
-    case type
+    case tag
     when :div
       div tooltip_attributes do
         element_partial
@@ -39,16 +40,16 @@ class Bootstrap::Components::Tooltip < Matestack::Ui::VueJsComponent
     if options[:slots] && options[:slots][:element]
       slot options[:slots][:element]
     else 
-      btn style: style, attributes: { 'style': "pointer-events: none;" }, text: text
+      btn variant: variant, attributes: { 'style': "pointer-events: none;" }, text: text
     end
   end
 
   def tooltip_attributes
     attributes = {}.tap do |hash|
       hash[:class] = tooltip_classes
-      hash[:style] = style if (type == :button or !type.present?)
+      hash[:style] = variant if (tag == :button or !tag.present?)
 
-      hash[:attributes] = { role: "button", title: "#{title}", tabindex: "#{tabindex}" } if (type == :link or type == :a)
+      hash[:attributes] = { role: "button", title: "#{title}", tabindex: "#{tabindex}" } if (tag == :link or tag == :a)
 
       hash[:text] = text if text.present?
 
@@ -60,6 +61,7 @@ class Bootstrap::Components::Tooltip < Matestack::Ui::VueJsComponent
           hash[attribute] = self.send(:"#{attribute}") if self.send(:"#{attribute}")
         end
         hash[:toggle] = "tooltip"
+        hash[:type] = tag
         # hash[:'original-title'] = content
       end        
     end
@@ -70,8 +72,8 @@ class Bootstrap::Components::Tooltip < Matestack::Ui::VueJsComponent
 
   def tooltip_classes
     [].tap do |classes|
-      classes << "d-inline-block" if (type == :span or type == :div)
-      classes << "btn btn-#{style || 'link'}" if (type == :link or type == :a)
+      classes << "d-inline-block" if (tag == :span or tag == :div)
+      classes << "btn btn-#{variant || 'link'}" if (tag == :link or !tag.present?)
 
       classes << bs_class
     end.join(' ').strip
