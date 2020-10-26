@@ -94,7 +94,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
                 filter: [:name, :email], filter_option: :like,
                 order: [{created_at: :desc}], 
                 # pagination: 3,
-                with_index: true
+                with_index: true, thead_class: "table-dark"
     br
     btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
     modal id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close",

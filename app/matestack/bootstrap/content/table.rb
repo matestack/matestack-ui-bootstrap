@@ -6,7 +6,9 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   optional :include, :filter, :filter_option, :base_query, :pagination, :order
 
   # Bootstrap Table Attributes
-  optional :variants, :with_index
+  optional :variant, :with_index, :striped, :hoverable, :borderless, :border_variant
+  optional :responsive
+  optional :thead_class, :tbody_class, :tfoot_class
 
   def prepare
     @collection_id = bs_id ||= "smarttable"
@@ -70,8 +72,10 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   end
 
   def response
-    filter_partial if filter.present?
-    ordering if order.present?
+    div class: "py-2" do
+      filter_partial if filter.present?
+      ordering if order.present?
+    end
     # automatically generated table for a given array, hash or collection
     # needs to be evaluated how you would pass in a collection and attributes you want to display
     async id: @collection_id, rerender_on: "#{@collection_id}-update" do
@@ -81,7 +85,6 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
         table_footer_partial
       end
     end
-
   end
 
   protected
@@ -115,7 +118,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   end
 
   def table_head_partial
-    thead do
+    thead class: thead_class do
       tr do
         th attributes: { 'scope': 'col' }, text: "#" if with_index
         include.each do |value|
@@ -126,7 +129,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   end
 
   def table_body_partial
-    tbody do
+    tbody class: tbody_class do
       collection_content @collection.config do
         @collection.paginated_data.each_with_index do |data, index|
           tr do
@@ -142,7 +145,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   end
 
   def table_footer_partial
-    tfoot do
+    tfoot class: tfoot_class do
       tr do
         th text: "Footer" if with_index
         include.each do |value| 
@@ -183,7 +186,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
     # ]
   end
 
-  # Custom Attributes 
+  # Custom Table Attributes 
   def table_attributes
     html_attributes.merge(
       id: @collection_id,
@@ -194,6 +197,12 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   def table_classes
     [].tap do |classes|
       classes << "table"
+      classes << "table-#{variant}" if variant.present?
+      classes << "table-striped" if striped
+      classes << "table-hover" if hoverable
+      classes << "table-bordered" if border_variant
+      classes << "border-#{border_variant}" if border_variant
+      classes << "table-borderless" if borderless
       classes << bs_class
     end.join(' ').strip
   end
