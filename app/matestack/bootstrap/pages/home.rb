@@ -106,8 +106,6 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
           heading size: 2, id: "list-item2", text: "Item 2"
           paragraph text: "Quis anim sit do amet fugiat dolor velit sit ea ea do reprehenderit culpa duis. Nostrud aliqua ipsum fugiat minim proident occaecat excepteur aliquip culpa aute tempor reprehenderit. Deserunt tempor mollit elit ex pariatur dolore velit fugiat mollit culpa irure ullamco est ex ullamco excepteur."
         end
-
-        scrollspy class: "foo bar"
       end
     end
     br
