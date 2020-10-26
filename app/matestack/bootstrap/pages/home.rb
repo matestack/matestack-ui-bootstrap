@@ -168,26 +168,34 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     end
 
     container size: :lg, class: "bg-warning py-3 my-3" do
+      
+      paragraph do
+        link class: "btn btn-primary", text: "Toggle first element", path: "#multiCollapseExample1", data: { toggle: "collapse" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample1", 'role': "button" }
+        btn text: "Toggle second element", data: { toggle: "collapse",  target: "#multiCollapseExample2" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample2" }
+        btn text: "Toggle both element", data: { toggle: "collapse",  target: ".multi-collapse" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample1 multiCollapseExample2" }
+      end
+      
       row do
         col do
-          paragraph do
-            # btn text: "Collapse Btn", data: { toggle:"collapse", target:"#collapseExample" }, attributes: { "aria-expanded":"false", "aria-controls":"collapseExample" }
-          end
-          paragraph do
-            btn text: "Button 1", data: { toggle: "collapse",  target: ".multi-collapse" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample1" }
-            btn text: "Button 2", data: { toggle: "collapse",  target: ".multi-collapse" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample2" }
-          end
-          collapse id: "multiCollapseExample", card: "Random text for card body content", multi: true
-          br
-          collapse card: "Random text for card body content", class: "show", labelledby: "random-label"
-
+          collapse id: "multiCollapseExample1", card: "Random text for card body content #1", multi: true
+        end
+        col do
+          collapse id: "multiCollapseExample2", card: "Random text for card body content #2", multi: true
         end
       end
-      accordion items: [
-        { header: { text: "Group Item #1", variant: :light }, body: { text: "Random Text for Collapse #1" } },
-        { header: { text: "Group Item #2", class: "p-3 rounded-0" }, body: { text: "Random Text for Collapse #2" } },
-        { header: { text: "Group Item #3" }, body: { text: "Random Text for Collapse #3" } }
-      ]
+      
+      # accordion items: [
+      #   { header: { text: "Group Item #1", variant: :light }, body: { text: "Random Text for Collapse #1" } },
+      #   { header: { text: "Group Item #2", class: "p-3 rounded-0" }, body: { text: "Random Text for Collapse #2" } },
+      #   { header: { text: "Group Item #3" }, body: { text: "Random Text for Collapse #3" } }
+      # ]
+
+      onclick emit: "toggleCollapse" do
+        btn text: "Toggle"
+      end
+
+      collapse toggle_on: "toggleCollapse", card: "Random text for card body content", multi: true
+      collapse toggle_on: "toggleCollapse", card: "Random text for collapse #2", multi: true
 
     end
     container size: :fluid, class: "py-4 bg-dark" do
