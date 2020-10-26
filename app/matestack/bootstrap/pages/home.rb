@@ -116,11 +116,10 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         col do   
           popover text: "Popover", html: 'true', content: "<p>this paragraph in popover</p>" 
         end
-        col  do          
-          popover type: :link, placement: :top, tabindex: "0", style: :danger, trigger: "focus", title: "Dismissible popover", content: "And here's some amazing content. It's very engaging. Right?", text: "Dismissible Popover"
+        col do          
+          popover tag: :link, placement: :top, tabindex: "0", variant: :danger, trigger: "focus", title: "Dismissible popover", content: "And here's some amazing content. It's very engaging. Right?", text: "Dismissible Popover"
         end
         col do
-
           tooltip text: "Tooltip", title: "Tooltip Content", animation: 'false'
         end
       end
