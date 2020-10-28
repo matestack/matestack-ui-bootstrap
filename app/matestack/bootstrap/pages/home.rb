@@ -157,7 +157,8 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
           dropdown variant: :secondary, text: "Dropdown", menu: { items: @drowdown_items, class: "foobar" } 
           dropdown slots: { split_btn: split_button }
           dropdown text: "Dropdown", menu: [
-            { type: :link, path: "#", text: "Nulla vitae elit" },
+            { type: :transition, path: root_path, text: "Transition" },
+            { type: :transition, path: "/testpage", text: "Test" },
             { type: :button, text: "Action" }
           ] do
             paragraph text: "Test Block"
