@@ -26,7 +26,7 @@ class Bootstrap::Components::Collapse < Matestack::Ui::VueJsComponent
     html_attributes.merge(
       class: collapse_classes,
       data: { parent: parent },
-      attributes: { 'aria-labelledby':"#{labelledby}" }
+      attributes: { 'aria-labelledby': "#{labelledby}" }
     )
   end
 
