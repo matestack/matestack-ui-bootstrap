@@ -3,7 +3,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
 
   optional class: { as: :bs_class }, id: { as: :bs_id }
   # Smart Table Attributes
-  optional :include, :filter, :filter_option, :base_query, :pagination, :order
+  optional :including, :filter, :filter_option, :base_query, :pagination, :order
 
   # Bootstrap Table Attributes
   optional :variant, :with_index, :striped, :hoverable, :borderless, :border_variant
@@ -82,7 +82,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
     async id: @collection_id, rerender_on: "#{@collection_id}-update" do
       div class: "#{ ((responsive == true) ? "table-responsive" : "table-responsive-#{responsive}") if responsive.present? }"  do
         table table_attributes do
-          table_head_partial
+          table_head_partial if including.present?
           table_body_partial
           table_footer_partial if footer.present?
         end
@@ -109,7 +109,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   def ordering
     collection_order @collection.config do
       plain "sort by:"
-      include.each do |key|
+      including.each do |key|
         collection_order_toggle key: key do
           btn do
             collection_order_toggle_indicator key: key, asc: '&#8593;', desc: '&#8595;'
@@ -124,7 +124,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
     thead class: thead_class do
       tr do
         th attributes: { 'scope': 'col' }, text: "#" if with_index
-        include.each do |value|
+        including.each do |value|
           th attributes: { 'scope': 'col' }, text: value.capitalize
         end
       end
@@ -137,8 +137,10 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
         @collection.paginated_data.each_with_index do |data, index|
           tr do
             th attributes: { 'scope': 'row' }, text: (index + 1) if with_index
-            include.each do |_key, value|
-              td text: data.instance_eval(_key.to_s) 
+            if including.present? 
+              including.each do |_key, value|
+                td text: data.instance_eval(_key.to_s) 
+              end
             end
           end
         end
@@ -150,7 +152,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   def table_footer_partial
     tfoot class: tfoot_class do
       tr do
-        th text: "Index" if with_index
+        th text: "#" if with_index
         footer.each do |value| 
           td text: value
         end

@@ -88,14 +88,15 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     #   end
     # end
     
-    # include: [:token, 'survey.name', 'client.name', :created_at]
+    # smart_table base_query: Person.all
     smart_table base_query: Person.all, 
-                include: [:created_at, :name, :email, :age],
+                including: [:created_at, :name, :email, :age],
                 filter: [:name, :email], filter_option: :like,
                 order: [{created_at: :desc}],
                 # pagination: 3,
                 with_index: true, thead_class: "table-dark", 
                 responsive: :md, striped: true
+                # footer: [" ", "Name Footer"]
     br
     btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
     modal id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close",
