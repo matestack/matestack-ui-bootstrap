@@ -13,8 +13,8 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
 
   def prepare
     @collection_id = bs_id ||= "smarttable"
-    model = base_query.model
-    # model_name = model.model_name
+    # model = base_query.model
+    # model_name = model.model_name.name
 
     current_filter = get_collection_filter(@collection_id)
     current_order = get_collection_order(@collection_id) 
@@ -32,22 +32,26 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
     if filter.present?
       filter.each do |key|
         value = current_filter[key.to_sym]
-        # TODO: Filter with Relations
-        if value.present? && key.to_s.include?(".")
-          associated_name = key.to_s.split(".").first
-          filtered_query = filtered_query.joins(associated_name.to_sym)
-          # table_name = model.reflections[associated_name].table_name
-          # key = key.to_s.gsub(associated_name, table_name)
-        end
-        if value.present?
-          key = key.to_sym
-          case filter_option
-          when :equals
-            filtered_query = filtered_query.where("#{key}": value)
-          when :like 
-            filtered_query = filtered_query.where("lower(#{key}) LIKE ?", "%#{value.downcase}%")
+        puts "key = #{key}"
+        if value.present? 
+          #TODO: checking for . option like person.name is not working
+          if ".".in? key.to_s # key.to_s.include? "."
+            puts "Key including . "
+            associated_name = key.to_s.split(".").first
+            filtered_query = filtered_query.joins(associated_name.to_sym)
+            table_name = model.reflections[associated_name].table_name.name
+            puts "Table Name --> #{table_name}"
+            key = key.to_s.gsub(associated_name, table_name)
           else
-            filtered_query = filtered_query
+            key = key.to_sym
+            case filter_option
+            when :equals
+              filtered_query = filtered_query.where("#{key}": value)
+            when :like 
+              filtered_query = filtered_query.where("lower(#{key}) LIKE ?", "%#{value.downcase}%")
+            else
+              filtered_query = filtered_query
+            end
           end
         end
       end
@@ -68,7 +72,6 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
         base_count: base_query.count,
         filtered_count: filtered_query.count
       })
-
     end
   end
 
@@ -125,7 +128,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
       tr do
         th attributes: { 'scope': 'col' }, text: "#" if with_index
         including.each do |value|
-          th attributes: { 'scope': 'col' }, text: value.capitalize
+          th attributes: { 'scope': 'col' }, text: value.to_s.gsub("_", " ").capitalize
         end
       end
     end
@@ -175,20 +178,6 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
     collection_content_next do
       btn text: ">" 
     end
-    # With Bootstrap
-    # pagination items: [
-    #   collection_content_previous do
-    #     { type: :link, text: "<" }
-    #   end
-    #   @collection.pages.each do |page|
-    #     collection_content_page_link page: page do
-    #       { type: :link, text: page }
-    #     end
-    #   end
-    #   collection_content_next do
-    #     { type: :link, text: ">" }
-    #   end
-    # ]
   end
 
   # Custom Table Attributes 

@@ -296,7 +296,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
           btn_group vertical: true, label: "Vertical Example" do 
             btn text: "V_Tab 4"
             btn text: "V_Tab 5"
-            btn text: "V_Tab 6"
+            transition class: "btn btn-primary", path: "/", text: "V_Tab 6"
           end
           btn_group size: :sm, label: "Basic Example 2" do 
             btn text: "Tab 4"
