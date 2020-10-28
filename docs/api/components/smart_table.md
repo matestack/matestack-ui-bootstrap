@@ -14,7 +14,7 @@ Returns a bootstrap table content by passing data models as param. Also the tabl
 * `:including` - expects an array with different property of the given model. Put in the array which property you want to display on the table
 * `:filter` - expects an array with different property of the given model. Put in the array which property you want to have filter for. Different filter will have different search field
 * `:filter_option`- expects either `:like` or `:equal`. Specify your query filter option
-* `:order`- expects an array with different hashes. 
+* `:order`- expects an array with different property which you want to sort by.  
 * `:pagination` - expects a number. set how many items per page the table should display
 <br>
 
