@@ -34,7 +34,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
         puts "key = #{key}"
         if value.present? 
           #TODO: checking for . option like person.name is not working
-          if key.to_s.include? "."
+          if ".".in? key.to_s # key.to_s.include? "."
             puts "Key including . "
             associated_name = key.to_s.split(".").first
             filtered_query = filtered_query.joins(associated_name.to_sym)
@@ -71,7 +71,6 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
         base_count: base_query.count,
         filtered_count: filtered_query.count
       })
-
     end
   end
 
