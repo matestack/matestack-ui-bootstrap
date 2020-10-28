@@ -109,7 +109,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   def ordering
     collection_order @collection.config do
       plain "sort by:"
-      including.each do |key|
+      order.each do |key|
         collection_order_toggle key: key do
           btn do
             collection_order_toggle_indicator key: key, asc: '&#8593;', desc: '&#8595;'
@@ -144,7 +144,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
             end
           end
         end
-        # pagination_partial
+        pagination_partial if pagination.present?
       end
     end
   end

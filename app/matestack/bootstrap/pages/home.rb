@@ -92,11 +92,11 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     smart_table base_query: Person.all, 
                 including: [:created_at, :name, :email, :age],
                 filter: [:name, :email], filter_option: :like,
-                order: [{created_at: :desc}],
+                order: [:name],
                 # pagination: 3,
                 with_index: true, thead_class: "table-dark", 
-                responsive: :md, striped: true
-                # footer: [" ", "Name Footer"]
+                responsive: :md, striped: true,
+                footer: [" ", "Name Footer"]
     br
     btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
     modal id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close",
