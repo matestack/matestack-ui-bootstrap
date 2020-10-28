@@ -12,8 +12,8 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
 
   def prepare
     @collection_id = bs_id ||= "smarttable"
-    model = base_query.model
-    # model_name = model.model_name
+    # model = base_query.model
+    # model_name = model.model_name.name
 
     current_filter = get_collection_filter(@collection_id)
     current_order = get_collection_order(@collection_id) 
@@ -32,10 +32,13 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
       filter.each do |key|
         value = current_filter[key.to_sym]
         # TODO: Filter with Relations
+        puts value
         if value.present? && key.to_s.include?(".")
+          puts "Key include . "
           associated_name = key.to_s.split(".").first
           filtered_query = filtered_query.joins(associated_name.to_sym)
-          # table_name = model.reflections[associated_name].table_name
+          table_name = model.reflections[associated_name].table_name.name
+          puts "Table Name --> #{table_name}"
           # key = key.to_s.gsub(associated_name, table_name)
         end
         if value.present?
@@ -121,8 +124,8 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
     thead class: thead_class do
       tr do
         th attributes: { 'scope': 'col' }, text: "#" if with_index
-        include.each do |value|
-          th attributes: { 'scope': 'col' }, text: value.capitalize
+        including.each do |value|
+          th attributes: { 'scope': 'col' }, text: value.to_s.gsub("_", " ").capitalize
         end
       end
     end
@@ -139,7 +142,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
             end
           end
         end
-        # pagination_partial
+        pagination_partial if pagination.present?
       end
     end
   end
@@ -170,20 +173,6 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
     collection_content_next do
       btn text: ">" 
     end
-    # With Bootstrap
-    # pagination items: [
-    #   collection_content_previous do
-    #     { type: :link, text: "<" }
-    #   end
-    #   @collection.pages.each do |page|
-    #     collection_content_page_link page: page do
-    #       { type: :link, text: page }
-    #     end
-    #   end
-    #   collection_content_next do
-    #     { type: :link, text: ">" }
-    #   end
-    # ]
   end
 
   # Custom Table Attributes 

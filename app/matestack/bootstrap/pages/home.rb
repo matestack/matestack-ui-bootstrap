@@ -90,9 +90,9 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     
     # include: [:token, 'survey.name', 'client.name', :created_at]
     smart_table base_query: Person.all, 
-                include: [:created_at, :name, :email, :age],
-                filter: [:name, :email], filter_option: :like,
-                order: [{created_at: :desc}], 
+                including: [:created_at, :name, :email, :age],
+                filter: [:name, :email, 'person.name'], filter_option: :like,
+                order: [{created_at: :desc}],
                 # pagination: 3,
                 with_index: true, thead_class: "table-dark"
     br
@@ -296,7 +296,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
           btn_group vertical: true, label: "Vertical Example" do 
             btn text: "V_Tab 4"
             btn text: "V_Tab 5"
-            btn text: "V_Tab 6"
+            transition class: "btn btn-primary", path: "/", text: "V_Tab 6"
           end
           btn_group size: :sm, label: "Basic Example 2" do 
             btn text: "Tab 4"
