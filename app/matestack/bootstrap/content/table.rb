@@ -8,6 +8,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   # Bootstrap Table Attributes
   optional :variant, :with_index, :striped, :hoverable, :borderless, :border_variant
   optional :responsive
+  optional :footer
   optional :thead_class, :tbody_class, :tfoot_class
 
   def prepare
@@ -79,10 +80,12 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
     # automatically generated table for a given array, hash or collection
     # needs to be evaluated how you would pass in a collection and attributes you want to display
     async id: @collection_id, rerender_on: "#{@collection_id}-update" do
-      table table_attributes do
-        table_head_partial
-        table_body_partial
-        table_footer_partial
+      div class: "#{ ((responsive == true) ? "table-responsive" : "table-responsive-#{responsive}") if responsive.present? }"  do
+        table table_attributes do
+          table_head_partial
+          table_body_partial
+          table_footer_partial if footer.present?
+        end
       end
     end
   end
@@ -147,9 +150,9 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   def table_footer_partial
     tfoot class: tfoot_class do
       tr do
-        th text: "Footer" if with_index
-        include.each do |value| 
-          td text: "Footer"
+        th text: "Index" if with_index
+        footer.each do |value| 
+          td text: value
         end
       end
     end
