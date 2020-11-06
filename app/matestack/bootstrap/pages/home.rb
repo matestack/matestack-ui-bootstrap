@@ -64,35 +64,40 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
 
   def response 
 
-    navbar hide_at: :sm, theme: :dark, items_class: "mr-auto ml-auto", class: "text-center",
-    items: [{type: :transition, path: "/", text: "Home"}, 
-          {type: :transition, path: "/", text: "Contact"}] do
-              btn text: "Login"
-            end
-
-    navbar toggle: :left, brand: {text: "BRAND TEXT", path: "#"}, theme: :dark, items_class: "mr-auto ml-auto",
+    navbar toggle: :left, brand: {text: "BRAND TEXT", path: "#"}, theme: :dark,
             items: [{type: :transition, path: "/", text: "Home"}, 
                     {type: :transition, path: "/", text: "Product"}, 
                     {type: :transition, path: "/", text: "Contact"}]  do
                       btn text: "Login"
                     end
-    navigation items: [
-      { type: :link, path: "#home", text: "Home" },
-      { type: :link, path: "#profile", text: "Profile" },
-      { type: :link, path: "#messages", text: "Message" }
-    ]#, pills: true, vertical: true
+    # navigation items: [
+    #   { type: :link, path: "#home", text: "Home" },
+    #   { type: :link, path: "#profile", text: "Profile" },
+    #   { type: :link, path: "#messages", text: "Message" }
+    # ]#, pills: true, vertical: true
 
-    div class: "tab-content" do
-      div class: "tab-pane active", id: "home", attributes: { role: "tabpanel", 'aria-labelledby':  "home-tab" } do
-        plain "Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
-      end
-      div class: "tab-pane", id: "profile", attributes: { role: "tabpanel", 'aria-labelledby': "profile-tab" } do
-        plain "..........ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
-      end
-      div class: "tab-pane", id: "messages", attributes: {  role: "tabpanel", 'aria-labelledby': "messages-tab" } do
-        plain "do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
-      end
-    end
+    # div class: "tab-content" do
+    #   div class: "tab-pane active", id: "home", attributes: { role: "tabpanel", 'aria-labelledby':  "home-tab" } do
+    #     plain "Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
+    #   end
+    #   div class: "tab-pane", id: "profile", attributes: { role: "tabpanel", 'aria-labelledby': "profile-tab" } do
+    #     plain "..........ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
+    #   end
+    #   div class: "tab-pane", id: "messages", attributes: {  role: "tabpanel", 'aria-labelledby': "messages-tab" } do
+    #     plain "do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat."
+    #   end
+    # end
+    
+    # smart_table base_query: Person.all
+    smart_table base_query: Person.all, 
+                including: [:created_at, :name, :email, :age],
+                filter: [:name, :email], filter_option: :like,
+                order: [:name],
+                # pagination: 3,
+                with_index: true, thead_class: "table-dark", 
+                responsive: :md, striped: true,
+                footer: [" ", "Name Footer"]
+    br
     btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
     modal id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close",
     centered: true, scrollable: true, size: :lg    
@@ -109,8 +114,6 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
           heading size: 2, id: "list-item2", text: "Item 2"
           paragraph text: "Quis anim sit do amet fugiat dolor velit sit ea ea do reprehenderit culpa duis. Nostrud aliqua ipsum fugiat minim proident occaecat excepteur aliquip culpa aute tempor reprehenderit. Deserunt tempor mollit elit ex pariatur dolore velit fugiat mollit culpa irure ullamco est ex ullamco excepteur."
         end
-
-        scrollspy class: "foo bar"
       end
     end
     br
@@ -119,13 +122,12 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         col do   
           popover text: "Popover", html: 'true', content: "<p>this paragraph in popover</p>" 
         end
-        col  do          
-          popover type: :link, placement: :top, tabindex: "0", style: :danger, trigger: "focus", title: "Dismissible popover", content: "And here's some amazing content. It's very engaging. Right?", text: "Dismissible Popover"
+        col do          
+          popover tag: :link, placement: :top, tabindex: "0", variant: :danger, trigger: "focus", title: "Dismissible popover", content: "And here's some amazing content. It's very engaging. Right?", text: "Dismissible Popover"
         end
         col do
-
           tooltip text: "Tooltip", title: "Tooltip Content", animation: 'false'
-        end
+          tooltip tag: :link, placement: :top, tabindex: "0", variant: :danger, trigger: "focus", title: "Tooltip Title", content: "And here's some amazing content. It's very engaging. Right?", text: "Click for tooltip"        end
       end
       row do
         btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
@@ -155,7 +157,8 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
           dropdown variant: :secondary, text: "Dropdown", menu: { items: @drowdown_items, class: "foobar" } 
           dropdown slots: { split_btn: split_button }
           dropdown text: "Dropdown", menu: [
-            { type: :link, path: "#", text: "Nulla vitae elit" },
+            { type: :transition, path: root_path, text: "Transition" },
+            { type: :transition, path: "/testpage", text: "Test" },
             { type: :button, text: "Action" }
           ] do
             paragraph text: "Test Block"
@@ -165,26 +168,34 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
     end
 
     container size: :lg, class: "bg-warning py-3 my-3" do
+      
+      paragraph do
+        link class: "btn btn-primary", text: "Toggle first element", path: "#multiCollapseExample1", data: { toggle: "collapse" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample1", 'role': "button" }
+        btn text: "Toggle second element", data: { toggle: "collapse",  target: "#multiCollapseExample2" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample2" }
+        btn text: "Toggle both element", data: { toggle: "collapse",  target: ".multi-collapse" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample1 multiCollapseExample2" }
+      end
+      
       row do
         col do
-          paragraph do
-            # btn text: "Collapse Btn", data: { toggle:"collapse", target:"#collapseExample" }, attributes: { "aria-expanded":"false", "aria-controls":"collapseExample" }
-          end
-          paragraph do
-            btn text: "Button 1", data: { toggle: "collapse",  target: ".multi-collapse" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample1" }
-            btn text: "Button 2", data: { toggle: "collapse",  target: ".multi-collapse" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample2" }
-          end
-          collapse id: "multiCollapseExample", card: "Random text for card body content", multi: true
-          br
-          collapse card: "Random text for card body content", class: "show", labelledby: "random-label"
-
+          collapse id: "multiCollapseExample1", card: "Random text for card body content #1", multi: true
+        end
+        col do
+          collapse id: "multiCollapseExample2", card: "Random text for card body content #2", multi: true
         end
       end
-      accordion items: [
-        { header: { text: "Group Item #1", variant: :light }, body: { text: "Random Text for Collapse #1" } },
-        { header: { text: "Group Item #2", class: "p-3 rounded-0" }, body: { text: "Random Text for Collapse #2" } },
-        { header: { text: "Group Item #3" }, body: { text: "Random Text for Collapse #3" } }
-      ]
+      
+      # accordion items: [
+      #   { header: { text: "Group Item #1", variant: :light }, body: { text: "Random Text for Collapse #1" } },
+      #   { header: { text: "Group Item #2", class: "p-3 rounded-0" }, body: { text: "Random Text for Collapse #2" } },
+      #   { header: { text: "Group Item #3" }, body: { text: "Random Text for Collapse #3" } }
+      # ]
+
+      onclick emit: "toggleCollapse" do
+        btn text: "Toggle"
+      end
+
+      collapse toggle_on: "toggleCollapse", card: "Random text for card body content", multi: true
+      collapse toggle_on: "toggleCollapse", card: "Random text for collapse #2", multi: true
 
     end
     container size: :fluid, class: "py-4 bg-dark" do
@@ -235,13 +246,17 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
         col do
           pagination
           pagination items: [
-            { type: :link, path: "#", text: "1", active: false },
-            { type: :link, path: "#", text: "2", active: false },
+            { type: :link, path: "#", text: "1" },
+            { type: :link, path: "#", text: "2" },
             { type: :link, path: "#", text: "3", active: true },
           ] do
           paragraph text: "Test Block"
           end
-          pagination do
+          pagination aria_label: "page example", size: :lg, items: [
+            { path: "#", text: "1", active: true },
+            { path: "#", text: "2" },
+            { path: "#", text: "3" },
+          ] do
             plain "Test block"
           end
         end
@@ -281,7 +296,7 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
           btn_group vertical: true, label: "Vertical Example" do 
             btn text: "V_Tab 4"
             btn text: "V_Tab 5"
-            btn text: "V_Tab 6"
+            transition class: "btn btn-primary", path: "/", text: "V_Tab 6"
           end
           btn_group size: :sm, label: "Basic Example 2" do 
             btn text: "Tab 4"
@@ -318,12 +333,12 @@ class Bootstrap::Pages::Home < Matestack::Ui::Page
             plain "50%"
           end
           br
-          progress progress: 50, text: "50%", valuemin: 10, valuemax: 70
+          progress height: 20, variant: :success, progress: 25, text: "25%"
           br
           progress progress: [
               { value: 50, text: 50, variant: :success },
               { value: 25, text: 25, variant: :warning }
-            ], text: "50%", valuemin: 10, valuemax: 70
+          ], valuemin: 10, valuemax: 70
         end
       end
       row do

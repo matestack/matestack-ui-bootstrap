@@ -42,6 +42,8 @@ class Bootstrap::Components::Dropdown < Matestack::Ui::VueJsComponent
         li do hr class: "dropdown-divider" end
       when :link
         li do link class: "dropdown-item", path: item[:path], text: item[:text] end
+      when :transition
+        li do transition class: "dropdown-item", path: item[:path], text: item[:text] end
       else
         span class: "dropdown-item-text" do plain item[:text] end
       end

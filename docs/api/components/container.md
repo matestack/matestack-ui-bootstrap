@@ -2,14 +2,17 @@
 
 The Bootstrap `container` component, implemented in Ruby.
 
-## Parameters
-This component can handle various optional configuration params and can yield content
 
+## `container(*args, &block)`
+----
 
-### size - optional
-Expects a breakpoints `:xs, :sm, :md, :lg, :xl, :xxl`
+Returns a bootstrap container containing content specified by a block. Also the container is customizable with the following options. 
 
-### HMTL attributes - optional
+**Optional options**
+
+* `:size` - Expects a breakpoints `:xs, :sm, :md, :lg, :xl, :xxl`
+
+**HMTL attributes**
 This component accepts all the canonical [HTML global attributes](https://www.w3schools.com/tags/ref_standardattributes.asp) like `id` or `class`.
 
 ## Examples

@@ -1,31 +1,36 @@
 # Matestack Bootstrap Component: Pagination
 
-The Bootstrap `pagination` component, implemented in Ruby.
+The Bootstrap `pagination` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## Parameters
-This component can handle various optional configuration params and can yield content
+## `pagination(*args, &block)`
+----
 
-### items - optional
-Expects a Hash with text (String) as key and link path as value `{text: path}`
+Returns a bootstrap pagination containing list of items or content specified by a block. Also the pagination is customizable with the following options. 
 
-### active_item - optional
-Expects an Integer which indicate which element is active
+**Optional options**
 
-### size - optional
-There are 3 different sizes. small, medium and large. By default the size is set as medium. Pass `1` as argument for small size and `2` for large size
+* `:items` - Expects an array of hashes. Possible keys are: type, path, text and active
+  * **type**: can be `:transition` or `:link`. By default it's set as `:transition`
+  * **active**: adding active class to page-item if set `true`
 
-### label - optional
-Expects a String for attribute `aria-label`
+* `:size` - There are 3 different sizes. small, medium and large. By default the size is set as medium. Pass `:sm` as argument for small size and `:lg` for large size
 
-### HMTL attributes - optional
-This component accepts all the canonical [HTML global attributes](https://www.w3schools.com/tags/ref_standardattributes.asp) like `id` or `class`.
+* `:aria_label` - Expects a String for attribute `aria-label`
+
+* Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding pagination div.
 
 ## Examples
 
-### Example 1: 
+### Example 1: Basic page navigation
 
 ```ruby
-pagination items: { "Previous": "#", "1": "#", "2": "#", "3": "#", "Next": "#" }, label: "Page navigation example"
+pagination aria_label: "Page navigation example", items: [
+            { type: :link, path: "#", text: "Previous" },
+            { type: :link, path: "#", text: "1", active: true },
+            { type: :link, path: "#", text: "2" },
+            { type: :link, path: "#", text: "3" },
+            { type: :link, path: "#", text: "Next" },
+          ]
 ```
 
 returns
@@ -34,7 +39,7 @@ returns
 <nav aria-label="Page navigation example">
   <ul class="pagination">
     <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link active" href="#">1</a></li>
     <li class="page-item"><a class="page-link" href="#">2</a></li>
     <li class="page-item"><a class="page-link" href="#">3</a></li>
     <li class="page-item"><a class="page-link" href="#">Next</a></li>
@@ -45,8 +50,11 @@ returns
 ### Example 2: Using Size option
 
 ```ruby
-pagination items: { "1": "#", "2": "#", "3": "#" }, active_item: 1, size: 2,
-label: "..."
+pagination aria_label: "...", size: :lg, items: [
+            { path: "#", text: "1", active: true },
+            { path: "#", text: "2" },
+            { path: "#", text: "3" },
+          ]
 ```
 
 returns

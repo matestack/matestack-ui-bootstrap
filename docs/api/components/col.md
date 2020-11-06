@@ -2,25 +2,27 @@
 
 The Bootstrap `column` component, implemented in Ruby.
 
-## Parameters
-This component can handle various optional configuration params and can yield content
+## `col(*args, &block)`
+----
 
-### sm, md, lg, xl, xxl - optional
+Returns a bootstrap column containing content specified by a block. Also the column is customizable with the following options. 
+
+**Optional options**
+
+* `sm`, `md`, `lg`, `xl`, `xxl`:
 Expects an Integer <= 12. This parameter set the size of the column by the given breakpoint
 
-### default - optional
-Expects an Integer <= 12. `default: 12` is equal to `col-12` in bootstrap 
+* `default` - Expects an Integer <= 12. `default: 12` is equal to `col-12` in bootstrap 
 
-### order, order_sm, order_md, order_lg, order_xl, order_xxl - optional
+* `order`, `order_sm`, `order_md`, `order_lg`, `order_xl`, `order_xxl`:
 Expects an Integer <= 12. Set the order of the column by the given breakpoint
 
-### offset, offset_sm, offset_md, offset_lg, offset_xl, offset_xxl - optional
+* `offset`, `offset_sm`, `offset_md`, `offset_lg`, `offset_xl`, `offset_xxl`:
 Expects an Integer <= 12. Move columns to the right using offset parameter by the given breakpoint
 
-### align_self - optional
-Expects `start`, `center`, `end`. Align vertically within the column
+* `align_self` - Expects `start`, `center`, `end`. Align vertically within the column
 
-### HMTL attributes - optional
+**HMTL attributes**
 This component accepts all the canonical [HTML global attributes](https://www.w3schools.com/tags/ref_standardattributes.asp) like `id` or `class`.
 
 ## Examples

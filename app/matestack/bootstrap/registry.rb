@@ -31,7 +31,7 @@ module Bootstrap::Registry
 
   CONTENT = {
     figure: Bootstrap::Content::Figure,
-    table: Bootstrap::Content::Table,
+    smart_table: Bootstrap::Content::Table,
   }
 
   LAYOUTS = {
@@ -43,6 +43,7 @@ module Bootstrap::Registry
   Matestack::Ui::Core::Component::Registry.register_components(
     **COMPONENTS,
     **FORMS,
+    **CONTENT,
     **LAYOUTS
   )
 

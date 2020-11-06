@@ -4,7 +4,8 @@ class Bootstrap::Components::Progress < Matestack::Ui::Component
   optional :text, :valuemin, :valuemax
   # progress expects a number or a list containing hashes with at least a :value
   # other options are :text, :class, :variant, :striped, :animated, :aria_valuenow
-  optional :progress, :value
+  optional :progress
+  # :value
   optional :variant, :striped, :animated, :height
 
   def response 
