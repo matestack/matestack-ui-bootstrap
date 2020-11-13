@@ -2,6 +2,7 @@ module Bootstrap::Registry
 
   COMPONENTS = {
     alert: Bootstrap::Components::Alert,
+    accordion: Bootstrap::Components::Accordion,
     badge: Bootstrap::Components::Badge,
     breadcrumb: Bootstrap::Components::Breadcrumb,
     btn: Bootstrap::Components::Button,
@@ -10,8 +11,8 @@ module Bootstrap::Registry
     carousel: Bootstrap::Components::Carousel,
     close: Bootstrap::Components::Close,
     collapse: Bootstrap::Components::Collapse,
-    accordion: Bootstrap::Components::Accordion,
     dropdown: Bootstrap::Components::Dropdown,
+    bootstrap_icon: Bootstrap::Components::Icon,
     list_group: Bootstrap::Components::ListGroup,
     modal: Bootstrap::Components::Modal,
     navigation: Bootstrap::Components::Nav,
@@ -26,7 +27,12 @@ module Bootstrap::Registry
   }
 
   FORMS = {
-    bootstrap_checkbox: Bootstrap::Form::Checkbox
+    bootstrap_input: Bootstrap::Form::Input,
+    bootstrap_select: Bootstrap::Form::Select,
+    bootstrap_checkbox: Bootstrap::Form::Checkbox,
+    bootstrap_radio: Bootstrap::Form::Radio,
+    bootstrap_switch: Bootstrap::Form::Switch,
+    bootstrap_submit: Bootstrap::Form::Submit,
   }
 
   CONTENT = {

@@ -2,12 +2,27 @@ class Bootstrap::Components::Button < Matestack::Ui::Component
 
   optional :text, :type, :variant, :size, :outline
   optional attributes: { as: :bs_attrs }, class: { as: :bs_class }
-  
-  def response 
-    button button_attributes do
-      plain text if text
-      yield_components
+  optional :is_transition
+
+  def response
+    if is_transition
+      transition button_attributes.merge({path: root_path}) do
+        inner_response
+      end
+    else
+      button_response
     end
+  end
+
+  def button_response
+    button button_attributes do
+      inner_response
+    end
+  end
+
+  def inner_response
+    plain text if text
+    yield_components
   end
 
   protected
@@ -35,5 +50,5 @@ class Bootstrap::Components::Button < Matestack::Ui::Component
       classes << bs_class
     end.join(' ').strip
   end
-  
+
 end

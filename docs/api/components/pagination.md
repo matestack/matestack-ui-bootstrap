@@ -5,7 +5,7 @@ The Bootstrap `pagination` component, implemented in Ruby. Use it like any other
 ## `pagination(*args, &block)`
 ----
 
-Returns a bootstrap pagination containing list of items or content specified by a block. Also the pagination is customizable with the following options. 
+Returns a bootstrap pagination containing list of items or content specified by a block. Also the pagination is customizable with the following options.
 
 **Optional options**
 

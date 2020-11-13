@@ -1,15 +1,15 @@
 class Bootstrap::Components::Card < Matestack::Ui::Component
 
   optional class: { as: :bs_class }
-  
+
   # header attributes, expects a hash or string
   # possible keys `:class, :text`
-  optional :header 
+  optional :header
   # footer attributes, expects a hash or string
   # possible keys `:class, :text`
-  optional :footer 
+  optional :footer
 
-  optional :title, :body, :subtitle # body attributes 
+  optional :title, :body, :subtitle # body attributes
   optional :img_path, :img_pos, :alt_text # image attributes
 
   optional :slots # passed in slots for card header or footer
@@ -17,11 +17,11 @@ class Bootstrap::Components::Card < Matestack::Ui::Component
   def response
     div card_attributes do
       if header || slots && slots[:header]
-        header_partial 
+        header_partial
       end
 
       img_partial :top unless img_pos == :bottom
-      body_partial if body || slots && slots[:body]
+      body_partial if title || body || slots && slots[:body]
 
       # custom body components
       # needed a div otherwise it will be displayed below footer

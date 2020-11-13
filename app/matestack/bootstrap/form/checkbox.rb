@@ -1,17 +1,25 @@
 class Bootstrap::Form::Checkbox < Matestack::Ui::Core::Form::Checkbox::Checkbox
 
+  optional :form_text
+  optional :disabled
+  optional :variant
+
   def response
+    if !checkbox_options.empty?
+      label for: attr_key,  class: "form-label", text: input_label if input_label
+    end
     if !checkbox_options.empty?
       multiple_checkboxes
     else
       true_false_checkbox
     end
+    render_form_text
   end
 
   private
 
   def checkbox_wrapper(options = {}, &block)
-    div class: 'form-check', attributes: options[:attributes] do
+    div class: "form-check #{'form-check-inline' if variant == :inline}", attributes: options[:attributes] do
       yield
     end
   end
@@ -21,7 +29,7 @@ class Bootstrap::Form::Checkbox < Matestack::Ui::Core::Form::Checkbox::Checkbox
   end
 
   def true_false_checkbox
-    checkbox_wrapper foo: :bar do
+    checkbox_wrapper do
       form_input type: :hidden, key: key, value: (false_value || 0), errors: false
       input html_attributes.merge(
         type: :checkbox,
@@ -29,6 +37,7 @@ class Bootstrap::Form::Checkbox < Matestack::Ui::Core::Form::Checkbox::Checkbox
         name: item_name(key),
         value: checked_value,
         class: 'form-check-input',
+        disabled: disabled,
         attributes: vue_attributes.merge(
           ref: "input.#{attr_key}",
         )
@@ -47,6 +56,7 @@ class Bootstrap::Form::Checkbox < Matestack::Ui::Core::Form::Checkbox::Checkbox
           name: item_name(item),
           value: item_value(item),
           class: 'form-check-input',
+          disabled: disabled,
           attributes: vue_attributes
         )
         bootstrap_label text: item_name(item), for_input: id_for_item(item_value(item))
@@ -71,5 +81,10 @@ class Bootstrap::Form::Checkbox < Matestack::Ui::Core::Form::Checkbox::Checkbox
     super || {}
   end
 
+  def render_form_text
+    div id: "form_text_for_#{attr_key}", class: "form-text" do
+      plain form_text
+    end
+  end
 
 end

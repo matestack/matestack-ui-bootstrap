@@ -11,4 +11,18 @@ module Utils
     ExamplePage.define_method(:response, block)
   end
 
+  def get_form_config(path: nil)
+    {
+      for: :wrapper,
+      path: path,
+      method: :post,
+      success: {
+        emit: :success
+      },
+      failure: {
+        emit: :failure
+      }
+    }
+  end
+
 end
