@@ -1,24 +1,26 @@
-# README
+# Matestack Ui Bootstrap
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## Develpment
 
-* Ruby version
+```shell
+bundle install
+yarn install
+rake db:setup
+rails s
+./bin/webpack --watch
+```
 
-* System dependencies
+```shell
+rails s
+```
 
-* Configuration
+```shell
+./bin/webpack --watch
+```
 
-* Database creation
+## Testing
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```shell
+bundle exec rspec
+```
