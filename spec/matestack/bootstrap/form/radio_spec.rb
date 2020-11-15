@@ -18,7 +18,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     allow_any_instance_of(FormTestController).to receive(:expect_params)
   end
 
-  it 'does not render a radio button if initalized with single value' do
+  it 'renders a radio button if initalized with single value' do
     form_config = get_form_config(path: radio_success_form_test_path)
     matestack_render do
       form form_config do
@@ -27,7 +27,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).not_to have_xpath('//form//input[@id="some_radio_input_1" and contains(@class, "form-check-input")]')
+    # broken right now
+    expect(page).to have_xpath('//form//input[@id="some_radio_input_1" and contains(@class, "form-check-input")]')
   end
 
   it 'renders bootstrap radio buttons with options as Array' do
@@ -200,6 +201,19 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     expect(page).to have_xpath('//form//div[contains(@class, "form-check-inline")]')
     expect(page).to have_xpath('//form//input[@id="foo_1" and contains(@class, "form-check-input")]')
     expect(page).to have_xpath('//form//input[@id="foo_2" and contains(@class, "form-check-input")]')
+  end
+
+  it 'renders disabled radio buttons' do
+    form_config = get_form_config(path: radio_success_form_test_path)
+    matestack_render do
+      form form_config do
+        bootstrap_radio key: :foo, options: [1, 2], disabled: true
+        bootstrap_submit text: "Submit"
+      end
+    end
+    visit example_path
+    have_xpath('//form//input[@id="foo_1" and @disabled="disabled" and contains(@class, "is-invalid")]')
+    have_xpath('//form//input[@id="foo_2" and @disabled="disabled" and contains(@class, "is-invalid")]')
   end
 
 end
