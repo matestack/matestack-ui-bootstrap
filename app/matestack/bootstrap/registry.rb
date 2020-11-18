@@ -33,6 +33,7 @@ module Bootstrap::Registry
     bootstrap_radio: Bootstrap::Form::Radio,
     bootstrap_switch: Bootstrap::Form::Switch,
     bootstrap_submit: Bootstrap::Form::Submit,
+    bootstrap_date: Bootstrap::Form::Date,
   }
 
   CONTENT = {

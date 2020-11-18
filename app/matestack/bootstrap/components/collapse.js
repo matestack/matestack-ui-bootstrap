@@ -1,3 +1,5 @@
+const bootstrap = require('bootstrap')
+
 MatestackUiCore.Vue.component('matestack-ui-bootstrap-collapse', {
   mixins: [MatestackUiCore.componentMixin],
   data() {
@@ -23,7 +25,7 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-collapse', {
       const self = this;
       self.collapseInstance.hide();
       self.collapseInstance.dispose();
-      // ToDo: Error occurs after dispose when click on the button again 
+      // ToDo: Error occurs after dispose when click on the button again
     }
   },
 
@@ -42,12 +44,12 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-collapse', {
     if(self.componentConfig["toggle_on"] != undefined){
       var toggle_events = self.componentConfig["toggle_on"].split(",")
       toggle_events.forEach(toggle_event => MatestackUiCore.matestackEventHub.$on(toggle_event.trim(), self.toggle));
-    } 
+    }
     // show_on event registration
     if(self.componentConfig["show_on"] != undefined){
       var show_events = self.componentConfig["show_on"].split(",")
       show_events.forEach(show_event => MatestackUiCore.matestackEventHub.$on(show_event.trim(), self.show));
-    } 
+    }
     // hide_on event registration
     if(self.componentConfig["hide_on"] != undefined){
       var hide_events = self.componentConfig["hide_on"].split(",")

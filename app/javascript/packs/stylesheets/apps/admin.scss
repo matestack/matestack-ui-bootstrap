@@ -1,0 +1,59 @@
+// Page loading state
+.matestack-page-container{
+
+  .matestack-page-wrapper {
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+
+    &.loading {
+      opacity: 0;
+    }
+  }
+
+  .loading-state-element-wrapper{
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+
+    &.loading {
+      opacity: 1;
+    }
+  }
+
+}
+
+// Async loading state
+.matestack-async-component-container{
+
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+
+  &.loading {
+    opacity: 0;
+  }
+
+}
+
+
+// Sidebar
+.sidebar-wrapper{
+  margin-top: 90px;
+  width: 250px;
+  // position: fixed; --> breaks flex box
+  top: 100px;
+  height: calc(100vh - 100px);
+}
+
+.sidebar{
+  .list-group-item{
+    border-top-left-radius: 0px!important;
+    border-bottom-left-radius: 0px!important;
+    &.active{
+      margin-top: 0px!important;
+    }
+    &.active-child{
+      color: var(--bs-white);
+      background-color: var(--bs-primary);
+      // background-color: $purple;
+    }
+  }
+}

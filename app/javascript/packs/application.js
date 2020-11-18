@@ -8,6 +8,9 @@ require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
 
+import bootstrap from 'bootstrap';
+import flatpickr from "flatpickr";
+
 import MatestackUiCore from 'matestack-ui-core';
 
 import "./stylesheets/application.scss";
@@ -20,11 +23,7 @@ import '../../matestack/bootstrap/components/modal'
 import '../../matestack/bootstrap/components/toast'
 import '../../matestack/bootstrap/components/popover'
 import '../../matestack/bootstrap/components/tooltip'
-
-
-// document.addEventListener("turbolinks:load", () => {
-//   $('[data-toggle="tooltip"]').tooltip()
-// })
+import '../../matestack/bootstrap/form/date'
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

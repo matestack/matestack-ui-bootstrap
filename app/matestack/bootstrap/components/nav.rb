@@ -1,9 +1,9 @@
 class Bootstrap::Components::Nav < Matestack::Ui::Component
 
-  optional :items, :tabs, :pills, :fill, :justified, :vertical, :horizontal, 
+  optional :items, :tabs, :pills, :fill, :justified, :vertical, :horizontal,
             class: { as: :bs_class }, attributes: { as: :bs_attrs}
 
-  def response 
+  def response
     ul nav_attributes do
       nav_items_partial if items.present?
       yield_components if !items.present?
@@ -37,7 +37,7 @@ class Bootstrap::Components::Nav < Matestack::Ui::Component
         hash[:'aria-controls'] = "#{path.gsub('#','')}" if toggle.present?
       end
 
-      hash[:data] = { toggle: "pill" } if pills 
+      hash[:data] = { toggle: "pill" } if pills
       hash[:data] = { toggle: "tab" } if tabs
       hash[:text] = text
       hash[:path] = path

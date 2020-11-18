@@ -1,5 +1,5 @@
 class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
-  vue_js_component_name "matestack-ui-bootstrap-toast" 
+  vue_js_component_name "matestack-ui-bootstrap-toast"
 
   # header attributes, expects a hash or string
   # possible keys `:icon_class, :icon, :title, :subtitle`
@@ -12,9 +12,10 @@ class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
   optional class: { as: :bs_class }, attributes: { as: :bs_attrs }, data: { as: :bs_data }
   optional :slots
 
-  def response 
-    standard_placement_partial unless placement.present?
-    custom_placement_partial if placement.present?
+  def response
+    standard_placement_partial
+    # standard_placement_partial unless placement.present?
+    # custom_placement_partial if placement.present?
   end
 
   protected
@@ -38,16 +39,19 @@ class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
       img class: "#{'rounded mr-2' || header[:icon_class]}", path: header[:icon] if header[:icon].present?
       strong class: "mr-auto", text: header[:title] if header[:title].present?
       small text: header[:subtitle] if header[:subtitle].present?
-      
+
       slot slots[:header] if slots && slots[:header]
-      close dismiss: 'toast', class: "ml-2 mb-1"
+      close dismiss: 'toast', class: "ml-2 mb-1", attributes: { "@click": "hide()"}
     end
 
   end
 
   def body_partial
     div class: "toast-body" do
-      paragraph text: body if body
+      plain body if body
+    end
+    unless header || slots && slots[:header]
+      close dismiss: 'toast', class: "ml-auto mr-2 btn-close-white", attributes: { "@click": "hide()"}
     end
   end
 
@@ -67,19 +71,20 @@ class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
     end
   end
 
-  def toast_attrs 
+  def toast_attrs
     (bs_attrs || {}).tap do |hash|
-      hash[:role] = (important == false ? 'status' : 'alert') 
+      hash[:role] = (important == false ? 'status' : 'alert')
       hash[:'aria-live'] = (important ? 'assertive' : 'polite') if important.present? && !placement.present?
       hash[:'aria-live'] = 'assertive' unless important.present?
       hash[:'aria-atomic'] = 'true' unless placement.present?
-      hash[:style] = "position: absolute; #{placement[:position] || 'top: 0; right: 0;' }"  if placement.present?
+      hash[:style] = "position: fixed; #{placement[:position] || 'top: 0; right: 0;' }"  if placement.present?
+      hash["v-bind:class"] = "{'show' : showing }"
     end
   end
 
   def toast_classes
     [].tap do |classes|
-      classes << 'toast p-0'
+      classes << 'toast p-0 fade d-flex align-items-center border-0'
       classes << bs_class
     end.join(' ').strip
   end
@@ -87,7 +92,7 @@ class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
   def placement_attrs
     {}.tap do |hash|
       hash[:'aria-live'] = (important ? 'assertive' : 'polite') if important.present?
-      hash[:'aria-atomic'] = 'true' 
+      hash[:'aria-atomic'] = 'true'
       hash[:style] = "position: relative; min-height: #{placement[:height]};"
     end
   end

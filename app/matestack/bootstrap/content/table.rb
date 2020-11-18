@@ -5,6 +5,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   # Smart Table Attributes
   optional :columns, :filters, :base_query, :paginate, :order
   optional :row_actions
+  optional :rerender_on
 
   # Bootstrap Table Attributes
   optional :variant, :with_index, :striped, :hoverable, :borderless, :border_variant
@@ -38,11 +39,9 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
         if value.present?
           #TODO: checking for . option like person.name is not working
           if ".".in? key.to_s # key.to_s.include? "."
-            puts "Key columns . "
             associated_name = key.to_s.split(".").first
             filtered_query = filtered_query.joins(associated_name.to_sym)
             table_name = model.reflections[associated_name].table_name.name
-            puts "Table Name --> #{table_name}"
             key = key.to_s.gsub(associated_name, table_name)
           else
             key = key.to_sym
@@ -87,7 +86,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
 
   def filter_partial
     collection_filter @collection.config do
-      row horizontal: :end, class: "mt-2" do
+      row horizontal: :end, class: "mt-2 mb-4" do
         div class: "col-auto" do
           row do
             filters.each do |filter_config|
@@ -145,9 +144,9 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   def content_partial
     # automatically generated table for a given array, hash or collection
     # needs to be evaluated how you would pass in a collection and attributes you want to display
-    div class: "row", id: "content", attributes: { style: "#{ 'margin-top: -100px;' if filters.present? }" } do
+    div class: "row", id: "content" do
       col do
-        async id: @collection_id, rerender_on: "#{@collection_id}-update" do
+        async id: @collection_id, rerender_on: "#{@collection_id}-update, #{rerender_on}" do
           div class: "#{ ((responsive == true) ? "table-responsive" : "table-responsive-#{responsive}") if responsive.present? }"  do
             collection_content @collection.config do
               table table_attributes do
@@ -221,12 +220,9 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   end
 
   def resolve_action_config data, action_config
-    {
-      method: action_config[:method],
-      path: action_config[:path],
-      params: action_config[:params].inject({}) { |h, (k, v)| h[k] = data.send(v); h },
-      confirm: action_config[:confirm],
-    }
+    processed_action_config = action_config.clone
+    processed_action_config[:params] = processed_action_config[:params].inject({}) { |h, (k, v)| h[k] = data.send(v); h }
+    processed_action_config
   end
 
   def render_transition data, action_config
@@ -239,12 +235,9 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   end
 
   def resolve_transition_config data, action_config
-    {
-      path: action_config[:path],
-      delay: action_config[:delay],
-      emit: action_config[:emit],
-      params: action_config[:params].inject({}) { |h, (k, v)| h[k] = data.send(v); h }
-    }
+    processed_action_config = action_config.clone
+    processed_action_config[:params] = processed_action_config[:params].inject({}) { |h, (k, v)| h[k] = data.send(v); h }
+    processed_action_config
   end
 
   def render_link data, action_config
@@ -257,11 +250,9 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   end
 
   def resolve_link_config data, action_config
-    {
-      path: action_config[:path],
-      target: action_config[:target],
-      params: action_config[:params].inject({}) { |h, (k, v)| h[k] = data.send(v); h }
-    }
+    processed_action_config = action_config.clone
+    processed_action_config[:params] = processed_action_config[:params].inject({}) { |h, (k, v)| h[k] = data.send(v); h }
+    processed_action_config
   end
 
   def table_footer_partial

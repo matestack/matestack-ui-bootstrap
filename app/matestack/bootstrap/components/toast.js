@@ -1,19 +1,32 @@
+const bootstrap = require('bootstrap')
+
 MatestackUiCore.Vue.component('matestack-ui-bootstrap-toast', {
 
   mixins: [MatestackUiCore.componentMixin],
   data() {
     return {
-      toastsInstance: undefined
+      toastsInstance: undefined,
+      eventData: {},
+      showing: false,
     };
   },
   methods: {
-    show: function(){
+    show: function(event){
       const self = this;
-      self.toastsInstance.show()
+      if(this.componentConfig["autohide"]){
+        setTimeout(function () {
+          self.showing = false;
+        }, 5000);
+      }
+      this.showing = true
+      this.eventData = event
     },
-    hide: function(){
+    hide: function(event){
       const self = this;
-      self.toastsInstance.hide()
+      this.showing = false
+      setTimeout(function () {
+        self.eventData = false;
+      }, 500);
     },
     dispose: function(){
       const self = this;

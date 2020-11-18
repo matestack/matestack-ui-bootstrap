@@ -1,3 +1,5 @@
+const bootstrap = require('bootstrap')
+
 MatestackUiCore.Vue.component('matestack-ui-bootstrap-carousel', {
   mixins: [MatestackUiCore.componentMixin],
   data() {
