@@ -5,12 +5,51 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Person.create(name: 'Murray', age: 22, email: 'mark@gmail.com')
-Person.create(name: 'Sammie', age: 23, email: 'muster@gmail.com')
-Person.create(name: 'Xavier', age: 24, email: 'xavier@gmail.com')
-Person.create(name: 'Omer', age: 25, email: 'omer@gmail.com')
-Person.create(name: 'Otis', age: 26, email: 'otis@gmail.com')
-Person.create(name: 'Marlo', age: 27, email: 'marlo@gmail.com')
-Person.create(name: 'Manuel', age: 28, email: 'manuel@gmail.com')
-Person.create(name: 'Io', age: 29, email: 'io@gmail.com')
-Person.create(name: 'Woodrow', age: 30, email: 'woodrow@gmail.com')
+
+Admin.create(email: "admin@matestack.io", password: "password")
+
+50.times do
+  Customer.create(
+    created_at: Faker::Date.between(from: 50.days.ago, to: Date.today),
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    street: Faker::Address.street_name,
+    house_number: Faker::Address.building_number,
+    postal_code: Faker::Address.postcode,
+    city: Faker::Address.city
+  )
+end
+
+25.times do
+  Product.create(
+    name: Faker::Commerce.product_name,
+    description: "High quality product made with #{Faker::Commerce.material}",
+    price_in_euro: Faker::Commerce.price,
+  )
+end
+
+customer_count = Customer.count
+product_count = Product.count
+
+50.times do
+  random_customer = Customer.find(rand(1..customer_count))
+  ordered_at = Faker::Date.between(from: 50.days.ago, to: Date.today)
+
+  order = Order.create(
+    created_at: ordered_at,
+    customer: random_customer,
+    shipped_at: ordered_at + 2.days
+  )
+
+  rand(1..5).times do
+    random_product = Product.find(rand(1..product_count))
+    order_item = OrderItem.create(
+      created_at: ordered_at,
+      product: random_product,
+      order: order,
+      price_in_euro: random_product.price_in_euro,
+    )
+  end
+
+end
