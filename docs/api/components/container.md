@@ -2,7 +2,6 @@
 
 The Bootstrap `container` component, implemented in Ruby.
 
-
 ## `container(*args, &block)`
 ----
 
