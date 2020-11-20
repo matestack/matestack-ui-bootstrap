@@ -14,6 +14,13 @@ class FormTestController < ActionController::Base
     }, status: 200
   end
 
+  def delayed_success_submit
+    sleep 1
+    render json: {
+      message: "server says: form submitted successfully"
+    }, status: 200
+  end
+
   def failure_submit
     render json: {
       message: "server says: form was not submitted successfully",
