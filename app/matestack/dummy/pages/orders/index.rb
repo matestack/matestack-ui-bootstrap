@@ -4,7 +4,39 @@ class Dummy::Pages::Orders::Index < Bootstrap::Pages::Admin
     page_heading_partial title: "Orders"
     section_wrapper do
       smart_table table_config
+
+      smart_table_v2 v2_config
     end
+  end
+
+  def v2_config
+    {
+      id: 'foobar',
+      items: Order.includes(:customer, :order_items).all,
+      paginate: 10,
+      columns: {
+        id: 'ID',
+        'customer.last_name': {
+          heading: 'Customer Name',
+          filter: {
+            placeholder: 'Filter by Customer Name',
+            match: :starts_with,
+          },
+        },
+        price_in_euro: {
+          heading: 'Price in €',
+          format: -> (s){ number_to_currency(s, locale: :de) },
+          text: :right
+        }
+      },
+      item_actions: ->(data) do
+        transition path: edit_dummy_order_path(data) do
+          btn outline: true, size: :sm, variant: :primary do
+            bootstrap_icon name: 'arrow-right', size: 20
+          end
+        end
+      end
+    }
   end
 
   def table_config
@@ -14,7 +46,8 @@ class Dummy::Pages::Orders::Index < Bootstrap::Pages::Admin
       filters: filters, # optional: which filters should appear?
       paginate: 10, # optional: how many items should be shown per page?
       row_actions: row_actions, # optional: what actions should be possible per row?
-      rerender_on: "success"
+      rerender_on: "success",
+      threshold: 0,
     }
   end
 
@@ -24,7 +57,14 @@ class Dummy::Pages::Orders::Index < Bootstrap::Pages::Admin
         column: :id,
         type: :input,
         match: :equals,
+        threshold: 0,
         placeholder: "Search by ID"
+      },
+      {
+        column: 'customer.last_name',
+        type: :input,
+        match: :starts_with,
+        placeholder: 'Search by Last Name'
       }
     ]
   end

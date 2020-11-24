@@ -22,7 +22,8 @@ class Bootstrap::Layout::Column < Matestack::Ui::Component
 
   def col_attributes
     html_attributes.merge(
-      class: col_classes
+      class: col_classes,
+      attributes: options[:attributes]
     )
   end
 

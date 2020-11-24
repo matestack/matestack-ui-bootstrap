@@ -7,6 +7,12 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
   optional :row_actions
   optional :rerender_on
 
+
+  # allow on input setting
+  # threshold sets how much characters are needed before input event triggers submit
+  # should also be configurable per item
+  optional :threshold
+
   # Bootstrap Table Attributes
   optional :variant, :with_index, :striped, :hoverable, :borderless, :border_variant
   optional :responsive
@@ -19,17 +25,17 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
     # model_name = model.model_name.name
 
     current_filter = get_collection_filter(@collection_id)
-    current_order = get_collection_order(@collection_id)
+    # current_order = get_collection_order(@collection_id)
 
     filtered_query = base_query
 
-    if order.present?
-      if current_order.count < 1
-        filtered_query = base_query.order(order)
-      else
-        filtered_query = base_query.order(current_order)
-      end
-    end
+    # if order.present?
+    #   if current_order.count < 1
+    #     filtered_query = base_query.order(order)
+    #   else
+    #     filtered_query = base_query.order(current_order)
+    #   end
+    # end
 
 
     if filters.present?
@@ -41,18 +47,22 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
           if ".".in? key.to_s # key.to_s.include? "."
             associated_name = key.to_s.split(".").first
             filtered_query = filtered_query.joins(associated_name.to_sym)
-            table_name = model.reflections[associated_name].table_name.name
+            table_name = base_query.klass.reflections[associated_name].table_name
             key = key.to_s.gsub(associated_name, table_name)
           else
             key = key.to_sym
-            case filter_config[:match]
-            when :equals
-              filtered_query = filtered_query.where("#{key}": value)
-            when :like
-              filtered_query = filtered_query.where("lower(#{key}) LIKE ?", "%#{value.downcase}%")
-            else
-              filtered_query = filtered_query.where("#{key}": value)
-            end
+          end
+          case filter_config[:match]
+          when :equals
+            filtered_query = filtered_query.where("#{key}": value)
+          when :like
+            filtered_query = filtered_query.where("lower(#{key}) LIKE ?", "%#{value.downcase}%")
+          when :starts_with
+            filtered_query = filtered_query.where("lower(#{key}) LIKE ?", "#{value.downcase}%")
+          when :ends_with
+            filtered_query = filtered_query.where("lower(#{key}) LIKE ?", "%#{value.downcase}")
+          else
+            filtered_query = filtered_query.where("#{key}": value)
           end
         end
       end
@@ -90,7 +100,7 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
         div class: "col-auto" do
           row do
             filters.each do |filter_config|
-              col do
+              col attributes: { '@input': "(filter['#{filter_config[:column]}'].length > #{filter_config[:threshold] || threshold || 0} || filter['#{filter_config[:column]}'].length == 0 ? submitFilter() : null)" } do
                 if filter_config[:type] == :input
                   collection_filter_input key: filter_config[:column],
                     type: :text,
