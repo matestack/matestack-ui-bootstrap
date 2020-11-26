@@ -6,7 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Admin.create(email: "admin@matestack.io", password: "password")
+if Admin.count == 0
+  Admin.create(email: "admin@matestack.io", password: "password")
+end
 
 50.times do
   Customer.create(
@@ -21,12 +23,14 @@ Admin.create(email: "admin@matestack.io", password: "password")
   )
 end
 
-25.times do
-  Product.create(
-    name: Faker::Commerce.product_name,
-    description: "High quality product made with #{Faker::Commerce.material}",
-    price_in_euro: Faker::Commerce.price,
-  )
+if Product.count == 0
+  25.times do
+    Product.create(
+      name: Faker::Commerce.product_name,
+      description: "High quality product made with #{Faker::Commerce.material}",
+      price_in_euro: Faker::Commerce.price,
+    )
+  end
 end
 
 customer_count = Customer.count
