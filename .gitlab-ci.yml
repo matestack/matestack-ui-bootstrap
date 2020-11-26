@@ -24,6 +24,7 @@ release:
 deploy-production-de:
   stage: deploy-production
   only:
+    - develop
     - master
   script:
     - docker pull $CONTAINER_RELEASE_IMAGE
@@ -41,6 +42,7 @@ deploy-production-de:
 deploy-production-us:
   stage: deploy-production
   only:
+    - develop
     - master
   script:
     - docker pull $CONTAINER_RELEASE_IMAGE
@@ -58,6 +60,7 @@ deploy-production-us:
 deploy-production-singapore-1:
   stage: deploy-production
   only:
+    - develop
     - master
   script:
     - docker pull $CONTAINER_RELEASE_IMAGE
