@@ -29,6 +29,10 @@ class Bootstrap::Pages::Devise::SignIn < Matestack::Ui::Page
       toggle show_on: 'sign_in_failure' do
         plain 'Your email or password is not valid.'
       end
+      br
+      small text: "Dummy user: admin@matestack.io"
+      br
+      small text: "Dummy password: password"
     end
   end
 
