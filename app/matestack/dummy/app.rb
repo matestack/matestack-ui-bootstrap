@@ -1,11 +1,20 @@
 class Dummy::App < Bootstrap::Apps::Admin
 
-  def brand
-    {
-      path: root_path,
-      text: "Your Rails Backend",
-      # img: asset_pack_url("media/images/logos/matestack-logo-orange.png")
-    }
+  def sidebar_top_partial
+    div class: "text-center" do
+      transition path: root_path, delay: 300 do
+        heading size: 4, text: "Your Rails Backend"
+        # img height: 40, path: asset_pack_url("media/images/logos/matestack-logo-orange.png")
+      end
+    end
+    div class: "text-center my-5" do
+      div class: "rounded-circle bg-primary text-white text-center p-2", attributes: { style: "display: inline-block; height: 40px; width: 40px;"} do
+        plain current_admin.email.first.upcase
+      end
+      div class: "my-3" do
+        plain current_admin.email
+      end
+    end
   end
 
   def sidebar_navigation_items
@@ -17,10 +26,26 @@ class Dummy::App < Bootstrap::Apps::Admin
     ]
   end
 
-  def header_navigation_extra_partial
-    span class: "pr-2", text: current_admin.email
+  # def navbar_items
+  #   [
+  #     { type: :transition, path: dummy_dashboard_path, icon: "columns-gap"},
+  #     { type: :transition, path: dummy_products_path, icon: "box" },
+  #     { type: :transition, path: dummy_customers_path, icon: "people-fill" },
+  #     { type: :transition, path: dummy_orders_path, icon: "cart-check-fill"},
+  #   ]
+  # end
+  #
+  # def navbar_brand_config
+  #   {
+  #     text: "Your Rails Backend"
+  #   }
+  # end
+
+  def navbar_end_partial
     action sign_out_config do
-      btn variant: :primary, outline: true, text: "logout"
+      btn variant: :link, size: :lg, class: "text-muted" do
+        bootstrap_icon name: "box-arrow-in-right", size: 25
+      end
     end
   end
 
@@ -42,5 +67,9 @@ class Dummy::App < Bootstrap::Apps::Admin
       { show_on: "success", class: "bg-primary text-white", body: "Performed successfully".html_safe },
     ]
   end
+
+  # def content_background_class
+  #   "bg-white"
+  # end
 
 end

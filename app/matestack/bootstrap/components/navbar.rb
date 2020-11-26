@@ -5,6 +5,7 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
 
   optional class: { as: :bs_class }
   optional :items, :items_class, :theme, :hide_at, :color, :container_size
+  optional :collapse_class
   # brand expect hash or string, possible keys for hash: text, path, img
   optional :brand
   # toogle expect hash or a symbol (:left or :right),
@@ -23,7 +24,7 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
           slot options[:slots][:custom_items]
         else
           toggle_button if @toggle[:position] == :left
-          brand_partial if brand.present?
+          brand_partial
           toggle_button if !@toggle[:position].present? || @toggle[:position] == :right
           navbar_content_partial
         end
@@ -43,14 +44,20 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
   end
 
   def navbar_content_partial
-    div class: "collapse navbar-collapse", id: 'matestackNavbarContent' do
+    div class: "collapse navbar-collapse #{collapse_class}", id: 'matestackNavbarContent' do
       ul class: items_classes do
         items.each do |item|
           li class: "nav-item" do
             if item[:type] == :link
-              link class: "nav-link", path: item[:path], text: item[:text]
+              link class: "nav-link", path: item[:path] do
+                bootstrap_icon name: item[:icon], size: 20 if item[:icon]
+                span class: "pl-3", text: item[:text] if item[:text]
+              end
             else
-              transition class: "nav-link", path: item[:path], text: item[:text]
+              transition class: "nav-link", path: item[:path] do
+                bootstrap_icon name: item[:icon], size: 20 if item[:icon]
+                span class: "pl-3", text: item[:text] if item[:text]
+              end
             end
           end
         end
@@ -80,13 +87,17 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
 
   def toggle_button
     button toggle_attributes do
-      span class: "navbar-toggler-icon"
+      bootstrap_icon name: "list", size: 25, class: "text-muted"
     end
+    # button toggle_attributes do
+    #   span class: "navbar-toggler-icon"
+    # end
   end
 
   def toggle_attributes
     toggle_classes = [].tap do |classes|
-      classes << 'navbar-toggler'
+      classes << 'd-lg-none'
+      classes << 'btn btn-link'
       classes << "ml-auto" if @toggle[:position] == :right
       classes << "mr-auto" if @toggle[:position] == :left
       classes << @toggle[:class] if @toggle[:class]

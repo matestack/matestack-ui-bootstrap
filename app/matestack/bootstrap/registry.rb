@@ -9,6 +9,7 @@ module Bootstrap::Registry
     btn_group: Bootstrap::Components::ButtonGroup,
     card: Bootstrap::Components::Card,
     carousel: Bootstrap::Components::Carousel,
+    chart: Bootstrap::Components::Chart,
     close: Bootstrap::Components::Close,
     collapse: Bootstrap::Components::Collapse,
     dropdown: Bootstrap::Components::Dropdown,
@@ -45,6 +46,7 @@ module Bootstrap::Registry
     col: Bootstrap::Layout::Column,
     container: Bootstrap::Layout::Container,
     row: Bootstrap::Layout::Row,
+    sidebar: Bootstrap::Layout::Sidebar
   }
 
   Matestack::Ui::Core::Component::Registry.register_components(

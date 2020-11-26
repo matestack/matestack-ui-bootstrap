@@ -4,7 +4,7 @@ module Dummy::Pages::Orders::Form
     form form_config do
 
       div class: "mb-3" do
-        bootstrap_date key: :shipped_at, label: "Shipped at"
+        bootstrap_date key: :shipped_at, label: "Shipped at", enable_time: true
       end
 
       div class: "mb-3" do

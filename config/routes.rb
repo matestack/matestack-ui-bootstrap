@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: {
     sessions: 'admins/sessions'
   }
-  root :to => redirect('/dummy/dashboard')
+
+  root to: 'dummy/dashboard#show'
 
   namespace :dummy do
     get :dashboard, to: 'dashboard#show'

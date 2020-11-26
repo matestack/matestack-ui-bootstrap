@@ -9,8 +9,10 @@ class Dummy::Pages::Products::Index < Bootstrap::Pages::Admin
         end
       end
     end
-    section_wrapper do
-      smart_table table_config
+    async defer: true, id: "list" do
+      section_wrapper do
+        smart_table table_config
+      end
     end
   end
 

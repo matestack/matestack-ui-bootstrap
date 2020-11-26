@@ -1,41 +1,43 @@
 class Bootstrap::Apps::Admin < Matestack::Ui::App
 
   def response
-    navbar fixed_top: true, theme: :white, brand: brand, items: header_navigation_items, class: "shadow-sm" do
-      header_navigation_extra_partial
-    end
-    main do
-      div class: "d-flex flex-row" do
-        div class: "sidebar-wrapper" do
-          sidebar_partial
-        end
-        div class: "content-wrapper w-100 mt-5" do
-          container class: "mt-5" do
-            yield_page slots: { loading_state: loading_state_slot }
+    div class: "d-flex flex-row" do
+      if should_show_sidebar?
+        sidebar sidebar_navigation_items: sidebar_navigation_items, slots: { sidebar_top: sidebar_top_slot }
+      end
+      div id: "content", class: "content-wrapper w-100 #{content_background_class}" do
+        if should_show_navbar?
+          navbar brand: navbar_brand_config, items: navbar_items, class: "pt-4 #{'pl-5' if should_show_sidebar?}", collapse_class: "text-right text-lg-left pr-3" do
+            navbar_end_partial if self.respond_to?(:navbar_end_partial)
           end
         end
+        container class: "mt-5 px-4" do
+          yield_page slots: { loading_state: loading_state_slot }
+        end
       end
-      toasts_partial
+    end
+    toasts_partial
+  end
+
+  def should_show_sidebar?
+    if !self.respond_to?(:sidebar_top_partial) && sidebar_navigation_items.empty?
+      false
+    else
+      true
     end
   end
 
-  def sidebar_partial
-    nav class: 'sidebar' do
-      div class: "list-group" do
-        sidebar_navigation_items.each do |item|
-          if item[:type] == :link
-            link class: "list-group-item list-group-item-action border-0 rounded-right", path: item[:path] do
-              bootstrap_icon name: item[:icon], size: 20 if item[:icon]
-              span class: "pl-3", text: item[:text] if item[:text]
-            end
-          else
-            transition class: "list-group-item list-group-item-action border-0 rounded-right", path: item[:path], delay: item[:delay] || 300 do
-              bootstrap_icon name: item[:icon], size: 20 if item[:icon]
-              span class: "pl-3", text: item[:text] if item[:text]
-            end
-          end
-        end
-      end
+  def should_show_navbar?
+    if navbar_brand_config.nil? && !self.respond_to?(:navbar_end_partial) && navbar_items.empty?
+      false
+    else
+      true
+    end
+  end
+
+  def sidebar_top_slot
+    slot do
+      sidebar_top_partial if self.respond_to?(:sidebar_top_partial)
     end
   end
 
@@ -52,26 +54,28 @@ class Bootstrap::Apps::Admin < Matestack::Ui::App
   end
 
   def loading_state_slot
-    slot do
-      # div class: "d-flex justify-content-center" do
-      #   spinner class: "mt-5"
-      # end
-    end
+    # slot do
+    #   div class: "d-flex justify-content-center" do
+    #     spinner class: "mt-5"
+    #   end
+    # end
   end
 
-  def brand
-    {
-      text: "Admin UI",
-      path: root_path
-    }
-  end
-
-  def header_navigation_items
+  def navbar_items
     []
   end
 
   def sidebar_navigation_items
     []
   end
+
+  def navbar_brand_config
+
+  end
+
+  def content_background_class
+    "bg-light"
+  end
+
 
 end

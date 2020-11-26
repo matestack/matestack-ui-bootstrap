@@ -77,7 +77,7 @@ class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
       hash[:'aria-live'] = (important ? 'assertive' : 'polite') if important.present? && !placement.present?
       hash[:'aria-live'] = 'assertive' unless important.present?
       hash[:'aria-atomic'] = 'true' unless placement.present?
-      hash[:style] = "position: fixed; #{placement[:position] || 'top: 0; right: 0;' }"  if placement.present?
+      hash[:style] = "z-index: 10000; position: fixed; #{placement[:position] || 'top: 0; right: 0;' }"  if placement.present?
       hash["v-bind:class"] = "{'show' : showing }"
     end
   end

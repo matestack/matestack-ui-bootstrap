@@ -24,7 +24,9 @@ gem 'jbuilder', '~> 2.7'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-gem 'matestack-ui-core'
+# gem 'matestack-ui-core', :git => 'https://github.com/matestack/matestack-ui-core.git', :branch => 'next-release'
+
+gem 'matestack-ui-core', '~> 1.2'
 
 
 # For dummy application
