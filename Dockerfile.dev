@@ -1,0 +1,1 @@
+FROM registry.gitlab.com/basemate-ops/workflow/dev:latest

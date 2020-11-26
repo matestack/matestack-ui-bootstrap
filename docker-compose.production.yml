@@ -1,0 +1,43 @@
+version: '3'
+services:
+
+  postgres:
+    image: registry.gitlab.com/basemate-ops/workflow/postgres
+    expose:
+      - 5432
+    volumes:
+      - data-volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: "production"
+    env_file:
+      - ./.env
+
+  rails:
+    image: registry.gitlab.com/matestack/matestack-ui-bootstrap
+    ports:
+      - "3003:3000"
+    links:
+      - postgres
+      - redis
+    environment:
+      RAILS_ENV: "production"
+      POSTGRES_DB: "production"
+      SECRET_KEY_BASE: $SECRET_KEY_BASE
+      MAILER_ADDRESS: $MAILER_ADDRESS
+      MAILER_DOMAIN: $MAILER_DOMAIN
+      MAILER_PASSWORD: $MAILER_PASSWORD
+      MAILER_USER: $MAILER_USER
+    env_file:
+      - ./.env
+    command: "bundle exec rails server --binding 0.0.0.0 --port 3000"
+
+  redis:
+    restart: always
+    image: redis:5.0.7-alpine
+    volumes:
+      - redis-volume:/data
+
+
+volumes:
+  data-volume:
+  redis-volume:

@@ -1,0 +1,73 @@
+stages:
+  - release
+  - deploy-production
+
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+
+variables:
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+
+release:
+  stage: release
+  script:
+    - chmod +x create_env.sh
+    - "sh ./create_env.sh"
+    - docker build --pull -t $CONTAINER_RELEASE_IMAGE ./ -f ./Dockerfile.release
+    - docker push $CONTAINER_RELEASE_IMAGE
+  only:
+    - develop
+    - master
+  tags:
+    - build #shared runner on shared machine
+
+deploy-production-de:
+  stage: deploy-production
+  only:
+    - master
+  script:
+    - docker pull $CONTAINER_RELEASE_IMAGE
+    - chmod +x dbauth.sh
+    - "sh ./dbauth.sh"
+    - docker-compose -f docker-compose.production.yml up -d postgres
+    - docker-compose -f docker-compose.production.yml exec -d postgres sh /usr/bin/setpw.sh
+    - sleep 10 #make sure postgres container is ready
+    - docker-compose -f docker-compose.production.yml run --rm rails bundle exec rake db:create
+    - docker-compose -f docker-compose.production.yml run --rm rails bundle exec rake db:migrate
+    - docker-compose -f docker-compose.production.yml up -d rails
+  tags:
+    - production-do-de-1
+
+deploy-production-us:
+  stage: deploy-production
+  only:
+    - master
+  script:
+    - docker pull $CONTAINER_RELEASE_IMAGE
+    - chmod +x dbauth.sh
+    - "sh ./dbauth.sh"
+    - docker-compose -f docker-compose.production.yml up -d postgres
+    - docker-compose -f docker-compose.production.yml exec -d postgres sh /usr/bin/setpw.sh
+    - sleep 10 #make sure postgres container is ready
+    - docker-compose -f docker-compose.production.yml run --rm rails bundle exec rake db:create
+    - docker-compose -f docker-compose.production.yml run --rm rails bundle exec rake db:migrate
+    - docker-compose -f docker-compose.production.yml up -d rails
+  tags:
+    - production-do-us-1
+
+deploy-production-singapore-1:
+  stage: deploy-production
+  only:
+    - master
+  script:
+    - docker pull $CONTAINER_RELEASE_IMAGE
+    - chmod +x dbauth.sh
+    - "sh ./dbauth.sh"
+    - docker-compose -f docker-compose.production.yml up -d postgres
+    - docker-compose -f docker-compose.production.yml exec -d postgres sh /usr/bin/setpw.sh
+    - sleep 10 #make sure postgres container is ready
+    - docker-compose -f docker-compose.production.yml run --rm rails bundle exec rake db:create
+    - docker-compose -f docker-compose.production.yml run --rm rails bundle exec rake db:migrate
+    - docker-compose -f docker-compose.production.yml up -d rails
+  tags:
+    - production-do-singapore-1
