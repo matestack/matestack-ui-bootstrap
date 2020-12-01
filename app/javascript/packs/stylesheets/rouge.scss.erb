@@ -1,0 +1,45 @@
+<% require 'rouge' %>
+<%= Rouge::Themes::Base16.mode(:dark).new.render %>
+
+div.highlight {
+
+  margin-bottom: 20px;
+
+  @media only screen and (max-width: 600px) {
+    overflow: scroll;
+    font-size: 10px;
+  }
+
+  @media only screen and (max-width: 400px) {
+    overflow: scroll;
+    font-size: 9px;
+  }
+}
+
+pre.highlight {
+  font-size: 10px;
+  // background-color: white;
+  display: block;
+  white-space: pre-wrap;
+  padding: 2rem 1.5rem;
+  margin: 0;
+
+  code {
+    background: none;
+    padding: 0;
+    // white-space: pre-wrap;
+    white-space: pre;
+    overflow: scroll;
+  }
+}
+
+code {
+  background: #eaecf3;
+  padding: 3px 6px;
+  white-space: nowrap;
+  border-radius: 5px
+}
+
+.n {
+  color: #ea2f0e;
+}

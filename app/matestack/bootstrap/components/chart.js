@@ -136,6 +136,22 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-chart', {
           }
         }
         item["hoverBackgroundColor"] = "rgba(0, 0, 0, 0.1)"
+        if (item["borderColor"] === undefined){
+          item["borderColor"] = self.getThemeColor("white")
+        }else{
+          item["borderColor"] = self.getThemeColor(item["borderColor"])
+        }
+        if (item["hoverBorderColor"] === undefined){
+          item["hoverBorderColor"] = self.getThemeColor("white")
+        }else{
+          item["hoverBorderColor"] = self.getThemeColor(item["hoverBorderColor"])
+        }
+        if (item["borderWidth"] === undefined){
+          item["borderWidth"] = 10
+        }
+        if (item["weight"] === undefined){
+          item["weight"] = 1
+        }
       })
       this.chartJsInstance = new Chart(chartElement, {
         type: 'doughnut',
@@ -146,7 +162,8 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-chart', {
         options: {
             legend: {
               display: this.componentConfig["display_legend"],
-            }
+            },
+            cutoutPercentage: this.componentConfig["cutout_percentage"]
         }
       });
     },
@@ -188,7 +205,7 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-chart', {
 
     Chart.defaults.global.defaultFontColor = this.fontColor
     Chart.defaults.global.defaultFontFamily = this.fontFamily
-    // Chart.defaults.global.defaultColor = this.fontFamily
+    Chart.defaults.global.defaultColor = this.fontFamily
 
     const chartElement = this.$refs.chart
 

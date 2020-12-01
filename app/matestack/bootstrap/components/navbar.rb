@@ -54,7 +54,7 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
                 span class: "pl-3", text: item[:text] if item[:text]
               end
             else
-              transition class: "nav-link", path: item[:path] do
+              transition class: "nav-link", path: item[:path], delay: item[:delay] do
                 bootstrap_icon name: item[:icon], size: 20 if item[:icon]
                 span class: "pl-3", text: item[:text] if item[:text]
               end

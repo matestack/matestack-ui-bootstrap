@@ -33,6 +33,8 @@ gem 'matestack-ui-core', '~> 1.2'
 gem 'devise'
 gem 'faker'
 gem 'paper_trail'
+gem 'redcarpet' # for markdown usage
+gem 'rouge' # for syntax highlighting
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

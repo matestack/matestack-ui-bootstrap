@@ -1,8 +1,6 @@
-class Dummy::OrderItemsController < ApplicationController
+class Dummy::OrderItemsController < Dummy::BaseController
 
-  before_action :set_paper_trail_whodunnit
-  before_action :authenticate_admin!
-  after_action :broadcast_activity_tracked, only: [:create, :update, :destroy]
+  after_action :broadcast_activity_tracked, only: [:destroy]
 
   def destroy
     order_item = OrderItem.find(params[:id])

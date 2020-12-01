@@ -149,10 +149,12 @@ class Bootstrap::Content::Table < Matestack::Ui::Component
         async id: @collection_id, rerender_on: "#{@collection_id}-update, #{rerender_on}" do
           div class: "#{ ((responsive == true) ? "table-responsive" : "table-responsive-#{responsive}") if responsive.present? }"  do
             collection_content @collection.config do
-              table table_attributes do
-                table_head_partial if columns.present?
-                table_body_partial
-                table_footer_partial if footer.present?
+              div class: "table-responsive" do
+                table table_attributes do
+                  table_head_partial if columns.present?
+                  table_body_partial
+                  table_footer_partial if footer.present?
+                end
               end
               paginate_partial if paginate.present?
             end

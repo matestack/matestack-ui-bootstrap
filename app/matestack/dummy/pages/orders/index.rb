@@ -1,9 +1,9 @@
 class Dummy::Pages::Orders::Index < Bootstrap::Pages::Admin
 
   def response
-    page_heading_partial title: "Orders"
+    page_heading title: "Orders"
     async defer: true, id: "list" do
-      section_wrapper do
+      section_card do
         smart_table table_config
       end
     end

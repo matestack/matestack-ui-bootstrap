@@ -8,9 +8,7 @@ class Dummy::App < Bootstrap::Apps::Admin
       end
     end
     div class: "text-center my-5" do
-      div class: "rounded-circle bg-primary text-white text-center p-2", attributes: { style: "display: inline-block; height: 40px; width: 40px;"} do
-        plain current_admin.email.first.upcase
-      end
+      avatar img_path: asset_pack_url('media/images/avatar-placeholder.png')
       div class: "my-3" do
         plain current_admin.email
       end

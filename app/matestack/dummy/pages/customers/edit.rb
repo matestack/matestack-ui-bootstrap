@@ -7,7 +7,7 @@ class Dummy::Pages::Customers::Edit < Bootstrap::Pages::Admin
   end
 
   def response
-    page_heading_partial title: "Customer # #{customer.id} | #{customer.last_name}" do
+    page_heading title: "Customer # #{customer.id} | #{customer.last_name}" do
       transition path: dummy_customers_path, delay: 300 do
         btn variant: :primary do
           bootstrap_icon name: "chevron-left"
@@ -15,12 +15,12 @@ class Dummy::Pages::Customers::Edit < Bootstrap::Pages::Admin
         end
       end
     end
-    section_wrapper do
+    section_card do
       div class: "w-50" do
         customer_form_partial form_config
       end
     end
-    section_wrapper do
+    section_card do
       heading size: 4, text: "Orders", class: "mb-4"
       async id: "orders-list", rerender_on: "success" do
         paragraph class: "mb-4" do

@@ -12,6 +12,7 @@
     "flatpickr": "^4.6.6",
     "matestack-ui-core": "https://github.com/matestack/matestack-ui-core#v1.1.0",
     "popper.js": "^1.16.1",
+    "rails-erb-loader": "^5.5.2",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",

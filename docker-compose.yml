@@ -10,7 +10,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: production
+      POSTGRES_DB: development
 
   rails:
     build:
@@ -22,9 +22,9 @@ services:
       - postgres
       - redis
     environment:
-      RAILS_ENV: "production"
+      RAILS_ENV: "development"
       POSTGRES_DB: "development"
-      SECRET_KEY_BASE: d02a2360017c32d7a418be453e03dc935d64af37463eb576edf4e90a6beaa73f2bbbbef640e4acd50bee9909bace340062742d1af8dbdc5bb84a7c06d159ea3b
+      # SECRET_KEY_BASE: d02a2360017c32d7a418be453e03dc935d64af37463eb576edf4e90a6beaa73f2bbbbef640e4acd50bee9909bace340062742d1af8dbdc5bb84a7c06d159ea3b
     volumes:
       - ./:/app
       - gem-volume:/usr/local/bundle

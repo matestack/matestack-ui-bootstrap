@@ -1,8 +1,9 @@
 module Bootstrap::Registry
 
   COMPONENTS = {
-    alert: Bootstrap::Components::Alert,
     accordion: Bootstrap::Components::Accordion,
+    alert: Bootstrap::Components::Alert,
+    avatar: Bootstrap::Components::Avatar,
     badge: Bootstrap::Components::Badge,
     breadcrumb: Bootstrap::Components::Breadcrumb,
     btn: Bootstrap::Components::Button,
@@ -16,13 +17,16 @@ module Bootstrap::Registry
     bootstrap_icon: Bootstrap::Components::Icon,
     list_group: Bootstrap::Components::ListGroup,
     modal: Bootstrap::Components::Modal,
-    navigation: Bootstrap::Components::Nav,
     navbar: Bootstrap::Components::Navbar,
     pagination: Bootstrap::Components::Pagination,
+    page_heading: Bootstrap::Components::PageHeading,
     popover: Bootstrap::Components::Popover,
     progress: Bootstrap::Components::Progress,
     scrollspy: Bootstrap::Components::Scrollspy,
+    section_card: Bootstrap::Components::SectionCard,
     spinner: Bootstrap::Components::Spinner,
+    tab_nav: Bootstrap::Components::TabNav,
+    tab_nav_content: Bootstrap::Components::TabNavContent,
     toast: Bootstrap::Components::Toast,
     tooltip: Bootstrap::Components::Tooltip,
   }

@@ -1,33 +1,21 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  dashboard:
+    title: "Dashboard"
+    subtitle: "Data on this dummy app is generated with the Faker Gem and will be resetted every hour"
+  components:
+    dashboard:
+      revenue:
+        title: "Revenue"
+        subtitle: "Showcasing how to use the built in line chart component"
+        total: "Total"
+        four_weeks_ago: "Four weeks ago"
+        three_weeks_ago: "Three weeks ago"
+        two_weeks_ago: "Two weeks ago"
+        last_7_days: "Last 7 days"
+      products:
+        title: "Top Products"
+        subtitle: "Showcasing how to use the built in doughnut chart component"
+        total: "All time best"
+      activity:
+        title: "Latest Activity"
+        subtitle: "Showcasing how to use a third party Gem, in this case PaperTrail"

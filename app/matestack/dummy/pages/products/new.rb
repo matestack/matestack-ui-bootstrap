@@ -3,7 +3,7 @@ class Dummy::Pages::Products::New < Bootstrap::Pages::Admin
   include Dummy::Pages::Products::Form
 
   def response
-    page_heading_partial title: "New Product" do
+    page_heading title: "New Product" do
       transition path: dummy_products_path, delay: 300 do
         btn variant: :primary do
           bootstrap_icon name: "chevron-left"
@@ -11,7 +11,7 @@ class Dummy::Pages::Products::New < Bootstrap::Pages::Admin
         end
       end
     end
-    section_wrapper do
+    section_card do
       div class: "w-50" do
         product_form_partial form_config
       end

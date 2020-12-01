@@ -7,7 +7,7 @@ class Dummy::Pages::Orders::Edit < Bootstrap::Pages::Admin
   end
 
   def response
-    page_heading_partial title: "Order # #{order.id} | #{order.customer.last_name}" do
+    page_heading title: "Order # #{order.id} | #{order.customer.last_name}" do
       transition path: dummy_orders_path, delay: 300 do
         btn variant: :primary do
           bootstrap_icon name: "chevron-left"
@@ -15,12 +15,12 @@ class Dummy::Pages::Orders::Edit < Bootstrap::Pages::Admin
         end
       end
     end
-    section_wrapper do
+    section_card do
       div class: "w-50" do
         order_form_partial form_config
       end
     end
-    section_wrapper do
+    section_card do
       heading size: 4, text: "Order Items", class: "mb-4"
       async id: "order-items-list", rerender_on: "success" do
         paragraph class: "mb-4" do

@@ -11,7 +11,7 @@ class Bootstrap::Apps::Admin < Matestack::Ui::App
             navbar_end_partial if self.respond_to?(:navbar_end_partial)
           end
         end
-        container class: "mt-5 px-4" do
+        container class: "my-5 px-4" do
           yield_page slots: { loading_state: loading_state_slot }
         end
       end

@@ -36,7 +36,8 @@ class Bootstrap::Form::Input < Matestack::Ui::Core::Form::Input::Input
       ref: "input.#{attr_key}",
       'init-value': init_value,
       'v-bind:class': "{ '#{input_error_class}': #{error_key} }",
-      "aria-describedby": attr_key
+      "aria-describedby": attr_key,
+      "step": "any"
     }).merge(
       type != :file ? { "#{v_model_type}": input_key } : {}
     ) # file inputs are readonly, no v-model possible

@@ -1,7 +1,7 @@
 class Dummy::Pages::Customers::Index < Bootstrap::Pages::Admin
 
   def response
-    page_heading_partial title: "Customers" do
+    page_heading title: "Customers" do
       transition path: new_dummy_customer_path, delay: 300 do
         btn variant: :primary do
           bootstrap_icon name: "person-plus"
@@ -10,7 +10,7 @@ class Dummy::Pages::Customers::Index < Bootstrap::Pages::Admin
       end
     end
     async defer: true, id: "list" do
-      section_wrapper do
+      section_card do
         smart_table table_config
       end
     end
