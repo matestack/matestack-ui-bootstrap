@@ -1,6 +1,6 @@
 module Dummy::Pages::Dashboard::CodeRenderingUtils
 
-  include Dummy::Utils
+  include Dummy::CodeRenderingUtils
 
   def matestack_implementation_partial
     code_grid_items = [
@@ -44,22 +44,6 @@ module Dummy::Pages::Dashboard::CodeRenderingUtils
       }
     ]
     render_code_grid code_grid_items, "rails_integration"
-  end
-
-  def javascript_implementation_partial
-    row do
-      col class: "pl-4" do
-        b text: "None!"
-      end
-    end
-  end
-
-  def css_implementation_partial
-    row do
-      col class: "pl-4" do
-        b text: "None!"
-      end
-    end
   end
 
 end

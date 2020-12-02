@@ -1,5 +1,7 @@
 class Dummy::Pages::Orders::Edit < Bootstrap::Pages::Admin
 
+  include Dummy::Pages::Orders::EditCodeRenderingUtils
+
   include Dummy::Pages::Orders::Form
 
   def order
@@ -7,11 +9,15 @@ class Dummy::Pages::Orders::Edit < Bootstrap::Pages::Admin
   end
 
   def response
-    page_heading title: "Order # #{order.id} | #{order.customer.last_name}" do
+    render_dummy_and_code_in_tabs
+  end
+
+  def dummy_tab_content
+    page_heading title: "#{t("orders.edit.title")} # #{order.id}", subtitle: t("orders.edit.subtitle") do
       transition path: dummy_orders_path, delay: 300 do
         btn variant: :primary do
           bootstrap_icon name: "chevron-left"
-          plain "Back"
+          plain t("orders.edit.back")
         end
       end
     end
@@ -21,10 +27,10 @@ class Dummy::Pages::Orders::Edit < Bootstrap::Pages::Admin
       end
     end
     section_card do
-      heading size: 4, text: "Order Items", class: "mb-4"
+      heading size: 4, text: t("orders.edit.order_items.title"), class: "mb-4"
       async id: "order-items-list", rerender_on: "success" do
         paragraph class: "mb-4" do
-          b text: "Total:"
+          b text: t("orders.edit.order_items.total")
           plain "#{order.price_in_euro} €"
         end
         row do
@@ -43,7 +49,7 @@ class Dummy::Pages::Orders::Edit < Bootstrap::Pages::Admin
       div class: "p-3" do
         action delete_item_config(item.id) do
           btn variant: :danger, size: :sm do
-            plain "delete"
+            plain t("orders.edit.order_items.delete")
           end
         end
       end

@@ -1,8 +1,14 @@
 class Dummy::Pages::Customers::New < Bootstrap::Pages::Admin
 
+  include Dummy::Pages::Customers::NewCodeRenderingUtils
+
   include Dummy::Pages::Customers::Form
 
   def response
+    render_dummy_and_code_in_tabs
+  end
+
+  def dummy_tab_content
     page_heading title: "New Customer" do
       transition path: dummy_customers_path, delay: 300 do
         btn variant: :primary do

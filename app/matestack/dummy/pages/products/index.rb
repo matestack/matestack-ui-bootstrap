@@ -1,11 +1,17 @@
 class Dummy::Pages::Products::Index < Bootstrap::Pages::Admin
 
+  include Dummy::Pages::Products::IndexCodeRenderingUtils
+
   def response
-    page_heading title: "Products" do
+    render_dummy_and_code_in_tabs
+  end
+
+  def dummy_tab_content
+    page_heading title: t("products.index.title"), subtitle: t("products.index.subtitle") do
       transition path: new_dummy_product_path, delay: 300 do
         btn variant: :primary do
           bootstrap_icon name: "plus"
-          plain "New product"
+          plain t("products.index.add_product")
         end
       end
     end

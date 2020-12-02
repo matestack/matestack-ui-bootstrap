@@ -2,6 +2,32 @@ en:
   dashboard:
     title: "Dashboard"
     subtitle: "Data on this dummy app is generated with the Faker Gem and will be resetted every hour"
+  products:
+    index:
+      title: "Products"
+      subtitle: "Showcasing how to use the smart collection"
+      add_product: "Add Product"
+    edit:
+      title: "Edit Product"
+      subtitle: "Showcasing how to use the styled form inputs"
+      back: "Back"
+    new:
+      title: "New Product"
+      subtitle: "Showcasing how to use the styled form inputs"
+      back: "Back"
+  orders:
+    index:
+      title: "Orders"
+      subtitle: "Showcasing how to use the smart collection"
+      add_product: "Add Order"
+    edit:
+      title: "Edit Order"
+      subtitle: "Showcasing how to use the styled form inputs"
+      back: "Back"
+    new:
+      title: "New Order"
+      subtitle: "Showcasing how to use the styled form inputs"
+      back: "Back"
   components:
     dashboard:
       revenue:

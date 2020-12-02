@@ -1,5 +1,7 @@
 class Dummy::Pages::Products::Edit < Bootstrap::Pages::Admin
 
+  include Dummy::Pages::Products::EditCodeRenderingUtils
+
   include Dummy::Pages::Products::Form
 
   def product
@@ -7,11 +9,15 @@ class Dummy::Pages::Products::Edit < Bootstrap::Pages::Admin
   end
 
   def response
-    page_heading title: "Product # #{product.id} | #{product.name}" do
+    render_dummy_and_code_in_tabs
+  end
+
+  def dummy_tab_content
+    page_heading title: "#{t("products.edit.title")} #{product.name}", subtitle: t("products.edit.subtitle") do
       transition path: dummy_products_path, delay: 300 do
         btn variant: :primary do
           bootstrap_icon name: "chevron-left"
-          plain "Back"
+          plain t("products.edit.back")
         end
       end
     end

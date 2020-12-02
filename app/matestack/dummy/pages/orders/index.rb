@@ -1,7 +1,20 @@
 class Dummy::Pages::Orders::Index < Bootstrap::Pages::Admin
 
+  include Dummy::Pages::Orders::IndexCodeRenderingUtils
+
   def response
-    page_heading title: "Orders"
+    render_dummy_and_code_in_tabs
+  end
+
+  def dummy_tab_content
+    page_heading title: t("orders.index.title"), subtitle: t("orders.index.subtitle") do
+      transition path: new_dummy_order_path, delay: 300 do
+        btn variant: :primary do
+          bootstrap_icon name: "plus"
+          plain t("orders.index.add_order")
+        end
+      end
+    end
     async defer: true, id: "list" do
       section_card do
         smart_table table_config

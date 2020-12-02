@@ -1,13 +1,19 @@
 class Dummy::Pages::Products::New < Bootstrap::Pages::Admin
 
+  include Dummy::Pages::Products::NewCodeRenderingUtils
+
   include Dummy::Pages::Products::Form
 
   def response
-    page_heading title: "New Product" do
+    render_dummy_and_code_in_tabs
+  end
+
+  def dummy_tab_content
+    page_heading title: t("products.new.title"), subtitle: t("products.new.subtitle") do
       transition path: dummy_products_path, delay: 300 do
         btn variant: :primary do
           bootstrap_icon name: "chevron-left"
-          plain "Back"
+          plain t("products.new.back")
         end
       end
     end

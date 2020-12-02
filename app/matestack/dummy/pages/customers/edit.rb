@@ -1,5 +1,7 @@
 class Dummy::Pages::Customers::Edit < Bootstrap::Pages::Admin
 
+  include Dummy::Pages::Customers::EditCodeRenderingUtils
+
   include Dummy::Pages::Customers::Form
 
   def customer
@@ -7,6 +9,10 @@ class Dummy::Pages::Customers::Edit < Bootstrap::Pages::Admin
   end
 
   def response
+    render_dummy_and_code_in_tabs
+  end
+
+  def dummy_tab_content
     page_heading title: "Customer # #{customer.id} | #{customer.last_name}" do
       transition path: dummy_customers_path, delay: 300 do
         btn variant: :primary do

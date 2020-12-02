@@ -1,13 +1,19 @@
 class Dummy::Pages::Orders::New < Bootstrap::Pages::Admin
 
+  include Dummy::Pages::Orders::NewCodeRenderingUtils
+
   include Dummy::Pages::Orders::Form
 
   def response
-    page_heading title: "New Order" do
+    render_dummy_and_code_in_tabs
+  end
+
+  def dummy_tab_content
+    page_heading title: t("orders.new.title"), subtitle: t("orders.new.subtitle") do
       transition path: dummy_orders_path, delay: 300 do
         btn variant: :primary do
           bootstrap_icon name: "chevron-left"
-          plain "Back"
+          plain t("orders.new.back")
         end
       end
     end
