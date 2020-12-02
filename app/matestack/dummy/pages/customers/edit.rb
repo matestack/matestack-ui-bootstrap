@@ -1,4 +1,4 @@
-class Dummy::Pages::Customers::Edit < Bootstrap::Pages::Admin
+class Dummy::Pages::Customers::Edit < Matestack::Ui::Page
 
   include Dummy::Pages::Customers::EditCodeRenderingUtils
 
@@ -13,11 +13,11 @@ class Dummy::Pages::Customers::Edit < Bootstrap::Pages::Admin
   end
 
   def dummy_tab_content
-    page_heading title: "Customer # #{customer.id} | #{customer.last_name}" do
+    page_heading title: "#{t("customers.edit.title")} # #{customer.id} | #{customer.last_name}" do
       transition path: dummy_customers_path, delay: 300 do
         btn variant: :primary do
           bootstrap_icon name: "chevron-left"
-          plain "Back"
+          plain t("orders.edit.back")
         end
       end
     end
@@ -27,10 +27,10 @@ class Dummy::Pages::Customers::Edit < Bootstrap::Pages::Admin
       end
     end
     section_card do
-      heading size: 4, text: "Orders", class: "mb-4"
+      heading size: 4, text: t("customers.edit.orders.title"), class: "mb-4"
       async id: "orders-list", rerender_on: "success" do
         paragraph class: "mb-4" do
-          b text: "Total:"
+          b text: t("customers.edit.orders.total")
           plain "#{customer.orders.count}"
         end
         row do
@@ -54,12 +54,12 @@ class Dummy::Pages::Customers::Edit < Bootstrap::Pages::Admin
         br
         action delete_order_config(order.id) do
           btn variant: :danger, size: :sm do
-            plain "delete"
+            plain t("customers.edit.orders.delete")
           end
         end
         transition path: edit_dummy_order_path(order.id), delay: 300 do
           btn variant: :primary, outline: true, size: :sm do
-            plain "show"
+            plain t("customers.edit.orders.show")
           end
         end
       end

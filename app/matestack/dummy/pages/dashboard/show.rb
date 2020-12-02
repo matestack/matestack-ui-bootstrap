@@ -1,4 +1,4 @@
-class Dummy::Pages::Dashboard::Show < Bootstrap::Pages::Admin
+class Dummy::Pages::Dashboard::Show < Matestack::Ui::Page
 
   include Dummy::Pages::Dashboard::CodeRenderingUtils
 

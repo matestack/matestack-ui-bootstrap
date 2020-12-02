@@ -1,4 +1,4 @@
-class Dummy::Pages::Orders::Index < Bootstrap::Pages::Admin
+class Dummy::Pages::Orders::Index < Matestack::Ui::Page
 
   include Dummy::Pages::Orders::IndexCodeRenderingUtils
 

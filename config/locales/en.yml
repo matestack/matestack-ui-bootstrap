@@ -1,38 +1,60 @@
 en:
   dashboard:
     title: "Dashboard"
-    subtitle: "Data on this dummy app is generated with the Faker Gem and will be resetted every hour"
+    subtitle: "Data on this dummy app is generated with the Faker Gem and will be resetted every hour."
+  customers:
+    index:
+      title: "Customers"
+      subtitle: "Showcasing how to use the smart collection and the defer component"
+      add_product: "Add Customer"
+    edit:
+      title: "Edit Customer"
+      subtitle: "Showcasing how to use reactive, styled form inputs, render server errors and trigger the toast"
+      back: "Back"
+      orders:
+        title: "Orders"
+        total: "total"
+        show: "show"
+        delete: "delete"
+    new:
+      title: "New Customer"
+      subtitle: "Showcasing how to use reactive, styled form inputs, render server errors and trigger the toast"
+      back: "Back"
   products:
     index:
       title: "Products"
-      subtitle: "Showcasing how to use the smart collection"
+      subtitle: "Showcasing how to use the smart collection and the defer component"
       add_product: "Add Product"
     edit:
       title: "Edit Product"
-      subtitle: "Showcasing how to use the styled form inputs"
+      subtitle: "Showcasing how to use reactive, styled form inputs, render server errors and trigger the toast"
       back: "Back"
     new:
       title: "New Product"
-      subtitle: "Showcasing how to use the styled form inputs"
+      subtitle: "Showcasing how to use reactive, styled form inputs, render server errors and trigger the toast"
       back: "Back"
   orders:
     index:
       title: "Orders"
-      subtitle: "Showcasing how to use the smart collection"
+      subtitle: "Showcasing how to use the smart collection and the defer component"
       add_product: "Add Order"
     edit:
       title: "Edit Order"
-      subtitle: "Showcasing how to use the styled form inputs"
+      subtitle: "Showcasing how to use reactive, styled form inputs, render server errors and trigger the toast"
       back: "Back"
+      order_items:
+        title: "Order Items"
+        total: "total"
+        delete: "delete"
     new:
       title: "New Order"
-      subtitle: "Showcasing how to use the styled form inputs"
+      subtitle: "Showcasing how to use reactive, styled form inputs, render server errors and trigger the toast"
       back: "Back"
   components:
     dashboard:
       revenue:
         title: "Revenue"
-        subtitle: "Showcasing how to use the built in line chart component"
+        subtitle: "Showcasing how to use the built in line chart component. This component is deferred via Matestack's async component."
         total: "Total"
         four_weeks_ago: "Four weeks ago"
         three_weeks_ago: "Three weeks ago"
@@ -40,8 +62,8 @@ en:
         last_7_days: "Last 7 days"
       products:
         title: "Top Products"
-        subtitle: "Showcasing how to use the built in doughnut chart component"
+        subtitle: "Showcasing how to use the built in doughnut chart component. This component is deferred via Matestack's async component."
         total: "All time best"
       activity:
         title: "Latest Activity"
-        subtitle: "Showcasing how to use a third party Gem, in this case PaperTrail"
+        subtitle: "Showcasing how to use a third party Gem, in this case PaperTrail. This component is deferred via Matestack's async component."

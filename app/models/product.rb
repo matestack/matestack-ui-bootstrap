@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   has_paper_trail
-  
-  has_many :order_items
+
+  has_many :order_items, dependent: :destroy
 
   validates :name, presence: :true
   validates :description, presence: :true

@@ -1,7 +1,7 @@
 class Customer < ApplicationRecord
   has_paper_trail
-  
-  has_many :orders
+
+  has_many :orders, dependent: :destroy
 
   validates :first_name, presence: :true
   validates :last_name, presence: :true

@@ -1,4 +1,4 @@
-class Dummy::Pages::Customers::New < Bootstrap::Pages::Admin
+class Dummy::Pages::Customers::New < Matestack::Ui::Page
 
   include Dummy::Pages::Customers::NewCodeRenderingUtils
 
@@ -9,11 +9,11 @@ class Dummy::Pages::Customers::New < Bootstrap::Pages::Admin
   end
 
   def dummy_tab_content
-    page_heading title: "New Customer" do
+    page_heading title: t("customers.new.title"), subtitle: t("customers.new.subtitle") do
       transition path: dummy_customers_path, delay: 300 do
         btn variant: :primary do
           bootstrap_icon name: "chevron-left"
-          plain "Back"
+          plain t("customers.new.back")
         end
       end
     end

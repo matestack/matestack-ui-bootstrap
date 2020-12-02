@@ -1,4 +1,4 @@
-class Dummy::Pages::Products::Index < Bootstrap::Pages::Admin
+class Dummy::Pages::Products::Index < Matestack::Ui::Page
 
   include Dummy::Pages::Products::IndexCodeRenderingUtils
 
@@ -7,7 +7,7 @@ class Dummy::Pages::Products::Index < Bootstrap::Pages::Admin
   end
 
   def dummy_tab_content
-    page_heading title: t("products.index.title"), subtitle: t("products.index.subtitle") do
+    page_heading title: t("products.index.title"), subtitle: t("products.index.subtitle").html_safe do
       transition path: new_dummy_product_path, delay: 300 do
         btn variant: :primary do
           bootstrap_icon name: "plus"

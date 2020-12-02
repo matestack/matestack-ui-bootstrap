@@ -1,4 +1,4 @@
-class Dummy::Pages::Orders::Edit < Bootstrap::Pages::Admin
+class Dummy::Pages::Orders::Edit < Matestack::Ui::Page
 
   include Dummy::Pages::Orders::EditCodeRenderingUtils
 

@@ -1,4 +1,4 @@
-class Dummy::Pages::Customers::Index < Bootstrap::Pages::Admin
+class Dummy::Pages::Customers::Index < Matestack::Ui::Page
 
   include Dummy::Pages::Customers::IndexCodeRenderingUtils
 
@@ -7,11 +7,11 @@ class Dummy::Pages::Customers::Index < Bootstrap::Pages::Admin
   end
 
   def dummy_tab_content
-    page_heading title: "Customers" do
+    page_heading title: t("customers.index.title"), subtitle: t("customers.index.subtitle") do
       transition path: new_dummy_customer_path, delay: 300 do
         btn variant: :primary do
           bootstrap_icon name: "person-plus"
-          plain "New customer"
+          plain t("customers.index.add_customer")
         end
       end
     end

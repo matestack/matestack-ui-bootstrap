@@ -5,11 +5,11 @@ module Dummy::Pages::Customers::EditCodeRenderingUtils
   def matestack_implementation_partial
     code_grid_items = [
       {
-        path: "app/matestack/dummy/pages/customer/edit.rb",
+        path: "app/matestack/dummy/pages/customers/edit.rb",
         title: "Customers Edit Page"
       },
       {
-        path: "app/matestack/dummy/pages/customer/form.rb",
+        path: "app/matestack/dummy/pages/customers/form.rb",
         title: "Customers Form Partial in a Module for Reusability"
       }
     ]

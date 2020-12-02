@@ -1,4 +1,4 @@
-class Dummy::Pages::Products::Edit < Bootstrap::Pages::Admin
+class Dummy::Pages::Products::Edit < Matestack::Ui::Page
 
   include Dummy::Pages::Products::EditCodeRenderingUtils
 
