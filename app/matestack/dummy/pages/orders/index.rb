@@ -16,60 +16,49 @@ class Dummy::Pages::Orders::Index < Matestack::Ui::Page
       end
     end
     async defer: true, id: "list" do
-      section_card do
-        smart_table table_config
+      section_card title: t("orders.index.collection.title"), subtitle: t("orders.index.collection.subtitle").html_safe do
+        smart_collection collection_config
       end
     end
   end
 
-  def table_config
+  def collection_config
     {
-      base_query: Order.includes(:customer, :order_items).all, # ActiveRecord query, could be something different than .all
-      columns: [ :id, "customer.last_name", :price_in_euro], # which columns should be shown?
-      filters: filters, # optional: which filters should appear?
-      paginate: 10, # optional: how many items should be shown per page?
-      row_actions: row_actions, # optional: what actions should be possible per row?
-      rerender_on: "success"
+      id: 'orders',
+      items: Order.includes(:customer, :order_items).all,
+      paginate: 10,
+      rerender_on: "success",
+      columns: {
+        id: 'ID',
+        'customer.last_name': {
+          heading: 'Customer Name'
+        },
+        price_in_euro: {
+          heading: 'Price in €',
+          format: -> (column_data){ "#{column_data} €" },
+          text: :right
+        }
+      },
+      filters: {
+        'customer.last_name': {
+          placeholder: 'Filter by Customer Name',
+          match: :starts_with,
+        }
+      },
+      slots: {
+        table_item_actions: method(:table_item_actions)
+      }
     }
   end
 
-  def filters
-    [
-      {
-        column: :id,
-        type: :input,
-        match: :equals,
-        placeholder: "Search by ID"
-      }
-    ]
-  end
-
-  def row_actions
-    # configure what actions should appear per row as buttons with text or icons
-    # pass in path as symbol, as it will be resolved within the smart_table component
-    # for each iteration, calling the "id" of the instance of the current iteration
-    [
-      {
-        type: :transition,
-        icon: "arrow-right",
-        btn_variant: :primary,
-        path: :edit_dummy_order_path,
-        params: { id: :id },
-        delay: 300
-      },
-      {
-        type: :action,
-        icon: "trash2",
-        btn_variant: :danger,
-        method: :delete,
-        path: :dummy_order_path,
-        params: { id: :id },
-        confirm: true,
-        success: {
-          emit: "success"
-        }
-      },
-    ]
+  def table_item_actions order
+    slot do
+      transition path: edit_dummy_order_path(order), delay: 300 do
+        btn outline: true, size: :sm, variant: :primary do
+          bootstrap_icon name: 'arrow-right', size: 20
+        end
+      end
+    end
   end
 
 end
