@@ -22,8 +22,10 @@ class Dummy::Pages::Customers::Edit < Matestack::Ui::Page
       end
     end
     section_card do
-      div class: "w-50" do
-        customer_form_partial form_config
+      row do
+        col xl: 6 do
+          customer_form_partial form_config
+        end
       end
     end
     section_card do
@@ -45,22 +47,20 @@ class Dummy::Pages::Customers::Edit < Matestack::Ui::Page
   end
 
   def order_card order
-    card title: "# #{order.id} | #{order.created_at.strftime("%d.%m.%Y")}", class: "h-100", body: "#{order.price_in_euro} €" do
-      div class: "p-3" do
-        order.order_items.each do |item|
-          plain item.product.name
-          br
-        end
+    card title: "# #{order.id} | #{order.created_at.strftime("%d.%m.%Y")}", class: "h-100", subtitle: "#{order.price_in_euro} €" do
+      order.order_items.each do |item|
+        plain item.product.name
         br
-        action delete_order_config(order.id) do
-          btn variant: :danger, size: :sm do
-            plain t("customers.edit.orders.delete")
-          end
+      end
+      br
+      action delete_order_config(order.id) do
+        btn variant: :danger, size: :sm do
+          plain t("customers.edit.orders.delete")
         end
-        transition path: edit_dummy_order_path(order.id), delay: 300 do
-          btn variant: :primary, outline: true, size: :sm do
-            plain t("customers.edit.orders.show")
-          end
+      end
+      transition path: edit_dummy_order_path(order.id), delay: 300 do
+        btn variant: :primary, outline: true, size: :sm do
+          plain t("customers.edit.orders.show")
         end
       end
     end

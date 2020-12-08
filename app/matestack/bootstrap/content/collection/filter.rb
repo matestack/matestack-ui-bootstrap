@@ -1,11 +1,11 @@
-module Bootstrap::Content::Table::Filter
+module Bootstrap::Content::Collection::Filter
 
   def filter_partial
     collection_filter collection.config do
       row horizontal: :end, class: 'mt-2 mb-4' do
         div class: 'col-auto' do
           row do
-            filters.each do |key, config|
+            processed_filters.each do |key, config|
               col do
                 filter_input key, config
               end

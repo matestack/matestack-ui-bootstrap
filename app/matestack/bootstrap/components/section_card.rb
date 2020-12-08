@@ -22,7 +22,7 @@ class Bootstrap::Components::SectionCard < Matestack::Ui::Component
           end
         end
       end
-      div class: "section-card-content #{'p-4' unless content_padding == false}" do
+      div class: "section-card-content #{'p-4' unless content_padding == false} #{'pt-1' if title || subtitle}" do
         yield_components
       end
     end

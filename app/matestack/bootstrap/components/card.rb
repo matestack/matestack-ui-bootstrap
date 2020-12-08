@@ -25,7 +25,7 @@ class Bootstrap::Components::Card < Matestack::Ui::Component
 
       # custom body components
       # needed a div otherwise it will be displayed below footer
-      div do yield_components end
+      div class: "p-3 pt-1" do yield_components end
 
       img_partial :bottom if img_pos == :bottom
 
@@ -46,9 +46,9 @@ class Bootstrap::Components::Card < Matestack::Ui::Component
   def body_partial
     div class: "card-body" do
       # title
-      card_title(title)
+      card_title(title, "card-title")
       # subtitle
-      card_title(subtitle, 6)
+      card_title(subtitle, 6, "card-subtitle text-muted")
       # body
       if body.is_a? Hash
         paragraph class: "card-text #{body[:class]}", text: body[:text]
@@ -84,12 +84,12 @@ class Bootstrap::Components::Card < Matestack::Ui::Component
     end.join(' ').strip
   end
 
-  def card_title(options, default_size = 5)
+  def card_title(options, default_size = 5, title_class)
     if options.is_a? Hash
-      heading size: (options[:size] || default_size), class: "#{options[:class]} card-title",
+      heading size: (options[:size] || default_size), class: "#{options[:class]} #{title_class}",
         text: options[:text]
     elsif options
-      heading size: default_size, class: 'card-title', text: options
+      heading size: default_size, class: title_class, text: options
     end
   end
 

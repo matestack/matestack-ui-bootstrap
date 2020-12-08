@@ -16,60 +16,67 @@ class Dummy::Pages::Products::Index < Matestack::Ui::Page
       end
     end
     async defer: true, id: "list" do
-      section_card do
-        smart_table table_config
+      section_card title: t("products.index.collection.title"), subtitle: t("products.index.collection.subtitle").html_safe do
+        smart_collection collection_config
       end
     end
   end
 
-  def table_config
+  def collection_config
     {
-      base_query: Product.all, # ActiveRecord query, could be something different than .all
-      columns: [ :id, :name, :price_in_euro ], # which columns should be shown?
-      filters: filters, # optional: which filters should appear?
-      paginate: 10, # optional: how many items should be shown per page?
-      row_actions: row_actions, # optional: what actions should be possible per row?
-      rerender_on: "success"
+      id: 'products',
+      items: Product.all,
+      paginate: 15,
+      rerender_on: "success",
+      filters: {
+        name: {
+          placeholder: 'Filter by Name',
+          match: :like
+        },
+      },
+      slots: {
+        collection_rendering: method(:collection_rendering)
+      }
     }
   end
 
-  def filters
-    [
-      {
-        column: :name,
-        type: :input,
-        match: :like,
-        placeholder: "Search by name"
-      }
-    ]
+  def collection_rendering products
+    slot do
+      row do
+        products.each do |product|
+          col xl: 4, class: "mb-3" do
+            collection_card product
+          end
+        end
+      end
+    end
   end
 
-  def row_actions
-    # configure what actions should appear per row as buttons with text or icons
-    # pass in path as symbol, as it will be resolved within the smart_table component
-    # for each iteration, calling the "id" of the instance of the current iteration
-    [
-      {
-        type: :transition,
-        icon: "arrow-right",
-        btn_variant: :primary,
-        path: :edit_dummy_product_path,
-        params: { id: :id },
-        delay: 300
-      },
-      {
-        type: :action,
-        icon: "trash2",
-        btn_variant: :danger,
-        method: :delete,
-        path: :dummy_product_path,
-        params: { id: :id },
-        confirm: true,
-        success: {
-          emit: "success"
-        }
-      },
-    ]
+  def collection_card product
+    card title: product.name, subtitle: "#{product.price_in_euro} €", class: "h-100" do
+      paragraph class: "fw-lighter", text: product.description
+      transition path: edit_dummy_product_path(product), delay: 300 do
+        btn outline: true, size: :sm, variant: :primary do
+          bootstrap_icon name: 'arrow-right', size: 20
+        end
+      end
+      action product_delete_action_config(product) do
+        btn outline: true, size: :sm, variant: :danger do
+          bootstrap_icon name: 'trash2', size: 20
+        end
+      end
+    end
+  end
+
+  def product_delete_action_config product
+    {
+      method: :delete,
+      path: dummy_product_path(id: product.id),
+      confirm: true,
+      success: {
+        emit: "success"
+      }
+    }
   end
 
 end

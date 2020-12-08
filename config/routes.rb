@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     resources :products
     resources :orders
     resources :order_items
+    
+    get :shared_implementation, to: 'shared_implementation#show'
   end
+
 
 end

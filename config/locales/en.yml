@@ -7,6 +7,9 @@ en:
       title: "Customers"
       subtitle: "Showcasing how to use the smart collection and the defer component"
       add_product: "Add Customer"
+      collection:
+        title: "Deferred loaded section card"
+        subtitle: "Showcasing how to use a smart collection in order to render a paginated, filterable, reactive table within a deferred section card. <br> We pass in a custom slot in order to define the action seen for each item."
     edit:
       title: "Edit Customer"
       subtitle: "Showcasing how to use reactive, styled form inputs, render server errors and trigger the toast"
@@ -25,6 +28,9 @@ en:
       title: "Products"
       subtitle: "Showcasing how to use the smart collection and the defer component"
       add_product: "Add Product"
+      collection:
+        title: "Deferred loaded section card"
+        subtitle: "Showcasing how to use a smart collection in order to render a paginated, filterable, reactive, customized collection within a deferred section card. <br> As seen on this page, the smart collection can take a slot in order to render a collection in various ways. <br> Here, we see a collection visualized with cards for each item."
     edit:
       title: "Edit Product"
       subtitle: "Showcasing how to use reactive, styled form inputs, render server errors and trigger the toast"
@@ -38,6 +44,9 @@ en:
       title: "Orders"
       subtitle: "Showcasing how to use the smart collection and the defer component"
       add_product: "Add Order"
+      collection:
+        title: "Deferred loaded section card"
+        subtitle: "Showcasing how to use a smart collection in order to render a paginated, filterable, reactive table within a deferred section card. <br> As seen on this page, the smart collection can render attributes of related models (Order belongs_to Customer)"
     edit:
       title: "Edit Order"
       subtitle: "Showcasing how to use reactive, styled form inputs, render server errors and trigger the toast"

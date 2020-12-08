@@ -45,12 +45,10 @@ class Dummy::Pages::Orders::Edit < Matestack::Ui::Page
   end
 
   def item_card item
-    card title: item.product.name, class: "h-100", body: "#{item.price_in_euro} €" do
-      div class: "p-3" do
-        action delete_item_config(item.id) do
-          btn variant: :danger, size: :sm do
-            plain t("orders.edit.order_items.delete")
-          end
+    card title: item.product.name, class: "h-100", subtitle: "#{item.price_in_euro} €" do
+      action delete_item_config(item.id) do
+        btn variant: :danger, size: :sm do
+          plain t("orders.edit.order_items.delete")
         end
       end
     end

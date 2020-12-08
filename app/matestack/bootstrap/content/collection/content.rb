@@ -1,15 +1,24 @@
-module Bootstrap::Content::Table::Content
+module Bootstrap::Content::Collection::Content
 
   def content
     row id: 'content' do
       col do
-        async id: collection_id, rerender_on: "#{collection_id}-update" do
-          div class: responsive_class do
-            table table_attributes do
-              table_head
-              table_body
-              table_footer
+        async id: collection_id, rerender_on: "#{collection_id}-update, #{rerender_on} " do
+          collection_content collection.config do
+            div class: responsive_class do
+              if slots && slots[:collection_rendering]
+                slot slots[:collection_rendering].call(collection.paginated_data)
+              elsif columns
+                div class: "table-responsive" do
+                  table table_attributes do
+                    table_head
+                    table_body
+                    table_footer
+                  end
+                end
+              end
             end
+            paginate_partial if paginate.present?
           end
         end
       end
@@ -22,7 +31,7 @@ module Bootstrap::Content::Table::Content
         columns&.each do |key, value|
           th text: value.is_a?(Hash) ? value[:heading] : value, class: cell_class(value), attributes: { scope: :col }
         end
-        th if item_actions
+        th if slots && slots[:table_item_actions]
       end
     end
   end
@@ -34,8 +43,10 @@ module Bootstrap::Content::Table::Content
           columns.each do |key, value|
             cell(data, key, value)
           end
-          td class: 'text-right' do 
-            instance_exec data, &item_actions
+          if slots && slots[:table_item_actions]
+            td class: 'text-right' do
+              slot slots[:table_item_actions].call(data)
+            end
           end
         end
       end
@@ -67,7 +78,7 @@ module Bootstrap::Content::Table::Content
 
   def cell_text(data, key, value)
     text = data.instance_eval(key.to_s)
-    text = value[:format].call(text) if value.is_a?(Hash) && value[:format] 
+    text = value[:format].call(text) if value.is_a?(Hash) && value[:format]
     text
   end
 

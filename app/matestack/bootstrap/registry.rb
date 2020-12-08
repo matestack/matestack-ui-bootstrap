@@ -43,8 +43,7 @@ module Bootstrap::Registry
 
   CONTENT = {
     figure: Bootstrap::Content::Figure,
-    smart_table: Bootstrap::Content::Table,
-    smart_table_v2: Bootstrap::Content::Table::Table,
+    smart_collection: Bootstrap::Content::Collection::Collection,
   }
 
   LAYOUTS = {

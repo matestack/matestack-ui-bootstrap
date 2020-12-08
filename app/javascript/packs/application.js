@@ -27,6 +27,7 @@ import '../../matestack/bootstrap/components/tooltip'
 import '../../matestack/bootstrap/form/date'
 import '../../matestack/bootstrap/layout/sidebar'
 import '../../matestack/bootstrap/layout/sidebar.scss'
+import '../../matestack/bootstrap/content/collection/collection.scss'
 
 
 import './stylesheets/rouge.scss.erb'

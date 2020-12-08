@@ -1,0 +1,10 @@
+.smart-collection{
+  .pagination{
+    .page-item{
+      cursor: pointer;
+    }
+    .page-item.disabled{
+      cursor: initial;
+    }
+  }
+}

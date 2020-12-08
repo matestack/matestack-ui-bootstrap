@@ -1,7 +1,8 @@
-class Bootstrap::Content::Table::Table < Matestack::Ui::Component
+class Bootstrap::Content::Collection::Collection < Matestack::Ui::Component
   include Matestack::Ui::Core::Collection::Helper
-  include Bootstrap::Content::Table::Content
-  include Bootstrap::Content::Table::Filter
+  include Bootstrap::Content::Collection::Content
+  include Bootstrap::Content::Collection::Filter
+  include Bootstrap::Content::Collection::Paginate
 
   # html attributes
   optional id: { as: :bs_id }
@@ -9,9 +10,13 @@ class Bootstrap::Content::Table::Table < Matestack::Ui::Component
   # table configuration
   optional :items
   optional :columns
+  optional :filters
   optional :footer
   optional :paginate
-  optional :item_actions
+  optional :rerender_on
+  optional :item_actions_proc
+  optional :collection_rendering_proc
+  optional :slots
 
   # bootstrap settings
   optional :responsive
@@ -21,11 +26,13 @@ class Bootstrap::Content::Table::Table < Matestack::Ui::Component
   optional :border_variant
   optional :borderless
 
-  attr_accessor :filters
+  attr_accessor :processed_filters
 
   def response
-    filter_partial
-    content
+    div class: "smart-collection" do
+      filter_partial
+      content
+    end
   end
 
 
@@ -34,7 +41,7 @@ class Bootstrap::Content::Table::Table < Matestack::Ui::Component
   def collection
     return @collection if @collection
     settings = {}.tap do |h|
-      h[:id] = bs_id || "smarttable"
+      h[:id] = bs_id || "smartcollection"
       h[:data] = filtered_query
       h[:base_count] = items.count
       h[:init_limit] = paginate if paginate
@@ -50,14 +57,18 @@ class Bootstrap::Content::Table::Table < Matestack::Ui::Component
   def filtered_query
     return @filtered_query if @filtered_query
     @filtered_query = items
-    columns.select { |key, value| '.'.in? key.to_s }.each do |key, value|
+    filters.select { |key, value| '.'.in? key.to_s }.each do |key, value|
       associated_name = key.to_s.split(".").first
-      # associated_name = key.to_s.split(".")[0..-2].reverse.inject { |a, n| { n.to_sym => a.to_sym } }
-      # associated_name = associated_name.to_sym if associated_name.is_a? String
       @filtered_query = @filtered_query.joins(associated_name.to_sym).all
-      if value.is_a?(Hash) && filter_config = value[:filter]
-        filters[key] = filter_config
-        @filtered_query = add_query_filter(@filtered_query, associated_name, key, filter_config)
+      if value.is_a?(Hash)
+        processed_filters[key] = value
+        @filtered_query = add_query_filter(@filtered_query, associated_name, key, value)
+      end
+    end
+    filters.reject { |key, value| '.'.in? key.to_s }.each do |key, value|
+      if value.is_a?(Hash)
+        processed_filters[key] = value
+        @filtered_query = add_query_filter(@filtered_query, nil, key, value)
       end
     end
     @filtered_query
@@ -66,8 +77,13 @@ class Bootstrap::Content::Table::Table < Matestack::Ui::Component
   def add_query_filter(query, associated_name, key, filter_config)
     value = get_collection_filter(collection_id)[key.to_sym]
     if value.present?
-      table_name = items.klass.reflections[associated_name].table_name
-      key = key.to_s.gsub(associated_name, table_name)
+      if associated_name.present?
+        table_name = items.klass.reflections[associated_name].table_name
+        key = key.to_s.gsub(associated_name, table_name)
+      else
+        table_name = items.klass.table_name
+        key = key.to_s
+      end
       case filter_config[:match]
       when :equals
         query = query.where("#{key}": value)
@@ -88,7 +104,7 @@ class Bootstrap::Content::Table::Table < Matestack::Ui::Component
     columns.map { |key, value| value.is_a?(Hash) ? value[:heading] : value }
   end
 
-  def filters
+  def processed_filters
     @filters ||= {}
   end
 
