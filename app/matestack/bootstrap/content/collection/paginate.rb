@@ -1,7 +1,7 @@
 module Bootstrap::Content::Collection::Paginate
 
   def paginate_partial
-    div class: "current-pagination-state text-right pr-2" do
+    div class: "current-pagination-state pl-2" do
       small do
         plain "showing #{@collection.from}"
         plain "to #{@collection.to}"

@@ -26,8 +26,9 @@ class Dummy::Pages::Customers::Index < Matestack::Ui::Page
     {
       id: 'customers',
       items: Customer.all,
-      paginate: 2,
+      paginate: 10,
       rerender_on: "success",
+      hoverable: true,
       columns: {
         id: 'ID',
         first_name: "First Name",
