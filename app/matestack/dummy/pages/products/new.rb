@@ -18,8 +18,10 @@ class Dummy::Pages::Products::New < Matestack::Ui::Page
       end
     end
     section_card do
-      div class: "w-50" do
-        product_form_partial form_config
+      row do
+        col xl: 6 do
+          product_form_partial form_config
+        end
       end
     end
   end

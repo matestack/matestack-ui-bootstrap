@@ -21,6 +21,7 @@ class Dummy::Pages::Customers::Edit < Matestack::Ui::Page
         end
       end
     end
+
     section_card do
       row do
         col xl: 6 do
@@ -28,6 +29,7 @@ class Dummy::Pages::Customers::Edit < Matestack::Ui::Page
         end
       end
     end
+    
     section_card do
       heading size: 4, text: t("customers.edit.orders.title"), class: "mb-4"
       async id: "orders-list", rerender_on: "success" do

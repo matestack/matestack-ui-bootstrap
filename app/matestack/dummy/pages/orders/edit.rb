@@ -21,11 +21,15 @@ class Dummy::Pages::Orders::Edit < Matestack::Ui::Page
         end
       end
     end
+
     section_card do
-      div class: "w-50" do
-        order_form_partial form_config
+      row do
+        col xl: 6 do
+          order_form_partial form_config
+        end
       end
     end
+
     section_card do
       heading size: 4, text: t("orders.edit.order_items.title"), class: "mb-4"
       async id: "order-items-list", rerender_on: "success" do

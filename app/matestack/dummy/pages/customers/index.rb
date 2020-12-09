@@ -26,7 +26,7 @@ class Dummy::Pages::Customers::Index < Matestack::Ui::Page
     {
       id: 'customers',
       items: Customer.all,
-      paginate: 10,
+      paginate: 2,
       rerender_on: "success",
       columns: {
         id: 'ID',
@@ -52,12 +52,12 @@ class Dummy::Pages::Customers::Index < Matestack::Ui::Page
   def table_item_actions customer
     slot do
       transition path: edit_dummy_customer_path(customer), delay: 300 do
-        btn outline: true, size: :sm, variant: :primary do
+        btn outline: true, size: :sm, variant: :primary, class: "m-1" do
           bootstrap_icon name: 'arrow-right', size: 20
         end
       end
       action customer_delete_action_config(customer) do
-        btn outline: true, size: :sm, variant: :danger do
+        btn outline: true, size: :sm, variant: :danger, class: "m-1" do
           bootstrap_icon name: 'trash2', size: 20
         end
       end

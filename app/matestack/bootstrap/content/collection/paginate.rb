@@ -15,7 +15,7 @@ module Bootstrap::Content::Collection::Paginate
   end
 
   def pagination_nav_partial
-    nav do
+    nav class: "table-responsive", attributes: { style: "display: -webkit-box;" } do
       ul class: ul_classes do
         li class: "page-item #{ 'disabled' if current_page == 1 }" do
           collection_content_previous class: 'page-link' do

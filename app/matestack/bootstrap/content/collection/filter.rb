@@ -2,7 +2,7 @@ module Bootstrap::Content::Collection::Filter
 
   def filter_partial
     collection_filter collection.config do
-      row horizontal: :end, class: 'mt-2 mb-4' do
+      row class: 'mt-2 mb-4' do
         div class: 'col-auto' do
           row do
             processed_filters.each do |key, config|
