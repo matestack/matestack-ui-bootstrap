@@ -10,7 +10,12 @@ if Admin.count == 0
   Admin.create(email: "admin@matestack.io", password: "password")
 end
 
-50.times do
+Product.destroy_all
+Customer.destroy_all
+Order.destroy_all
+OrderItem.destroy_all
+
+100.times do
   Customer.create(
     created_at: Faker::Date.between(from: 50.days.ago, to: Date.today),
     first_name: Faker::Name.first_name,
@@ -23,21 +28,16 @@ end
   )
 end
 
-if Product.count == 0
-  25.times do
-    Product.create(
-      name: Faker::Commerce.product_name,
-      description: "High quality product made with #{Faker::Commerce.material}",
-      price_in_euro: Faker::Commerce.price,
-    )
-  end
+50.times do
+  Product.create(
+    name: Faker::Commerce.product_name,
+    description: "High quality product made with #{Faker::Commerce.material}",
+    price_in_euro: Faker::Commerce.price,
+  )
 end
 
-customer_count = Customer.count
-product_count = Product.count
-
-50.times do
-  random_customer = Customer.find(rand(1..customer_count))
+75.times do
+  random_customer = Customer.order(Arel.sql('RANDOM()')).first
   ordered_at = Faker::Date.between(from: 50.days.ago, to: Date.today)
 
   order = Order.create(
@@ -47,7 +47,7 @@ product_count = Product.count
   )
 
   rand(1..5).times do
-    random_product = Product.find(rand(1..product_count))
+    random_product = Product.order(Arel.sql('RANDOM()')).first
     order_item = OrderItem.create(
       created_at: ordered_at,
       product: random_product,
