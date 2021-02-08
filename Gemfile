@@ -26,7 +26,8 @@ gem 'redis', '~> 4.0'
 # gem 'image_processing', '~> 1.2'
 # gem 'matestack-ui-core', :git => 'https://github.com/matestack/matestack-ui-core.git', :branch => 'next-release'
 
-gem 'matestack-ui-core', '~> 1.2'
+gem 'matestack-ui-core', '~> 1.4'
+# gem 'matestack-ui-core', :git => 'https://github.com/matestack/matestack-ui-core.git', :branch => 'next_release'
 
 
 # For dummy application

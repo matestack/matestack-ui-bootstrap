@@ -106,7 +106,7 @@ GEM
       railties (>= 3.0.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    haml (5.2.0)
+    haml (5.2.1)
       temple (>= 0.8.0)
       tilt
     i18n (1.8.5)
@@ -123,12 +123,12 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
-    matestack-ui-core (1.2.0)
-      cells-haml
-      cells-rails
-      haml
-      rails (>= 5.0)
-      trailblazer-cells
+    matestack-ui-core (1.4.0)
+      cells-haml (>= 0.0.10)
+      cells-rails (>= 0.1.0)
+      haml (>= 4.1.0.beta.1)
+      rails (>= 5.2)
+      trailblazer-cells (>= 0.0.3)
     method_source (1.0.0)
     mimemagic (0.3.5)
     mini_mime (1.0.2)
@@ -283,7 +283,7 @@ DEPENDENCIES
   generator_spec
   jbuilder (~> 2.7)
   listen (~> 3.2)
-  matestack-ui-core (~> 1.2)
+  matestack-ui-core (~> 1.4)
   paper_trail
   pg
   pry-byebug
