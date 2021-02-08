@@ -11,22 +11,24 @@ class Bootstrap::Form::Input < Matestack::Ui::Core::Form::Input::Input
   optional :show_value
 
   def response
-    label for: attr_key,  class: "form-label", text: input_label if input_label
-    case type
-    when :range
-      input html_attributes.merge(attributes: vue_attributes).merge(bootstrap_range_attributes)
-      if show_value
-        div id: attr_key, class: "form-text" do
-          plain "{{ data['#{attr_key}'] }}"
+    div do
+      label for: attr_key,  class: "form-label", text: input_label if input_label
+      case type
+      when :range
+        input html_attributes.merge(attributes: vue_attributes).merge(bootstrap_range_attributes)
+        if show_value
+          div id: attr_key, class: "form-text" do
+            plain "{{ data['#{attr_key}'] }}"
+          end
         end
+      when :file
+        file_input
+      else
+        input html_attributes.merge(attributes: vue_attributes).merge(bootstrap_input_attributes)
+        render_errors
       end
-    when :file
-      file_input
-    else
-      input html_attributes.merge(attributes: vue_attributes).merge(bootstrap_input_attributes)
-      render_errors
+      render_form_text if form_text
     end
-    render_form_text if form_text
   end
 
   def vue_attributes

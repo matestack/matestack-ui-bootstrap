@@ -7,10 +7,10 @@ class Bootstrap::Form::Submit < Matestack::Ui::Component
 
   def response
     form_submit do
-      btn type: "submit", variant: button_variant || :primary, attributes: { "v-if": "!loading" } do
+      btn type: "submit", variant: button_variant || :primary, attributes: { "v-if": "!loading()" } do
         plain text || "Submit"
       end
-      btn type: "submit", variant: button_variant || :primary, attributes: { disabled: true, "v-if": "loading" } do
+      btn type: "submit", variant: button_variant || :primary, attributes: { disabled: true, "v-if": "loading()" } do
         spinner variant: spinner_variant || :light, size: :sm
         plain loading_text || "Loading..."
       end
