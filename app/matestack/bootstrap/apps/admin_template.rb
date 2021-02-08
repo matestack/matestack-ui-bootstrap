@@ -1,4 +1,4 @@
-class Bootstrap::Apps::Admin < Matestack::Ui::App
+class Bootstrap::Apps::AdminTemplate < Matestack::Ui::App
 
   def response
     div class: "d-flex flex-row" do
@@ -7,11 +7,15 @@ class Bootstrap::Apps::Admin < Matestack::Ui::App
       end
       div id: "content", class: "content-wrapper w-100 #{content_background_class}" do
         if should_show_navbar?
-          navbar brand: navbar_brand_config, items: navbar_items, class: "pt-4 #{'pl-5' if should_show_sidebar?}", collapse_class: "text-right text-lg-left pr-3" do
-            navbar_end_partial if self.respond_to?(:navbar_end_partial)
+          container do
+            navbar brand: navbar_brand_config, items: navbar_items, class: "pt-4 #{'pl-5' if should_show_sidebar?}", collapse_class: "text-end text-lg-start pr-3" do
+              # div class: "d-flex" do
+              #   navbar_end_partial if self.respond_to?(:navbar_end_partial)
+              # end
+            end
           end
         end
-        container class: "my-5 px-4" do
+        container class: "my-5 px-4 pt-5" do
           yield_page slots: { loading_state: loading_state_slot }
         end
       end

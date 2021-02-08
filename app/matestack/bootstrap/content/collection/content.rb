@@ -44,7 +44,7 @@ module Bootstrap::Content::Collection::Content
             cell(data, key, value)
           end
           if slots && slots[:table_item_actions]
-            td class: 'text-right' do
+            td class: 'text-end' do
               slot slots[:table_item_actions].call(data)
             end
           end

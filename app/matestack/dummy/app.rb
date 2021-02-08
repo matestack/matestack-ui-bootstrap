@@ -1,4 +1,4 @@
-class Dummy::App < Matestack::Ui::Apps::AdminTemplate
+class Dummy::App < Bootstrap::Apps::AdminTemplate
 
   def sidebar_top_partial
     div class: "text-center" do
@@ -8,8 +8,14 @@ class Dummy::App < Matestack::Ui::Apps::AdminTemplate
     end
     div class: "text-center my-5" do
       avatar img_path: asset_pack_url('media/images/avatar-placeholder.png')
-      div class: "my-3" do
+      div class: "mt-3" do
         plain current_admin.email
+
+      end
+      action sign_out_config do
+        btn variant: :link, size: :sm, class: "text-muted" do
+          bootstrap_icon name: "box-arrow-in-right", size: 25
+        end
       end
     end
   end
@@ -23,19 +29,21 @@ class Dummy::App < Matestack::Ui::Apps::AdminTemplate
     ]
   end
 
+  # not working right now, please use sidebar only
   # def navbar_items
   #   [
   #     { type: :transition, path: dummy_shared_implementation_path, text: "Shared Implementation"}
   #   ]
   # end
 
-  def navbar_end_partial
-    action sign_out_config do
-      btn variant: :link, size: :lg, class: "text-muted" do
-        bootstrap_icon name: "box-arrow-in-right", size: 25
-      end
-    end
-  end
+  # not working right now, please use sidebar only
+  # def navbar_end_partial
+  #   action sign_out_config do
+  #     btn variant: :link, size: :lg, class: "text-muted" do
+  #       bootstrap_icon name: "box-arrow-in-right", size: 25
+  #     end
+  #   end
+  # end
 
   def sign_out_config
     {
