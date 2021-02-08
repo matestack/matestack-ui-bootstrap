@@ -16,8 +16,8 @@ class Bootstrap::Components::PageHeading < Matestack::Ui::Component
             end
           end
         end
-        col md: 12, xl: 4, class: "text-xl-right mt-3" do
-          div class: "page-heading-actions" do
+        col md: 12, xl: 4, class: "text-xl-end mt-3" do
+          div class: "page-heading-actions text-xl-end" do
             yield_components
           end
         end

@@ -12,6 +12,8 @@ class Bootstrap::Components::Card < Matestack::Ui::Component
   optional :title, :body, :subtitle # body attributes
   optional :img_path, :img_pos, :alt_text # image attributes
 
+  optional :content_wrapper_class # class for content wrapper -> useful for content padding without affecting top image
+
   optional :slots # passed in slots for card header or footer
 
   def response
@@ -21,15 +23,17 @@ class Bootstrap::Components::Card < Matestack::Ui::Component
       end
 
       img_partial :top unless img_pos == :bottom
-      body_partial if title || body || slots && slots[:body]
+      div class: content_wrapper_class do
+        body_partial if title || body || slots && slots[:body]
 
-      # custom body components
-      # needed a div otherwise it will be displayed below footer
-      div class: "p-3 pt-1" do yield_components end
+        # custom body components
+        # needed a div otherwise it will be displayed below footer
+        div class: "p-3 pt-1" do yield_components end
 
-      img_partial :bottom if img_pos == :bottom
+        img_partial :bottom if img_pos == :bottom
 
-      footer_partial if footer || slots && slots[:footer]
+        footer_partial if footer || slots && slots[:footer]
+      end
     end
   end
 
@@ -72,7 +76,7 @@ class Bootstrap::Components::Card < Matestack::Ui::Component
   end
 
   def card_attributes
-    html_attributes.merge(
+    html_attributes.except(:title).merge(
       class: card_classes
     )
   end

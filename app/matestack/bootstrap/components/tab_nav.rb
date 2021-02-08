@@ -28,7 +28,7 @@ class Bootstrap::Components::TabNav < Matestack::Ui::Component
                 role: "tab",
                 "aria-controls": "tab-#{item[:id]}",
                 "aria-selected": "#{'true' if item[:active]}",
-                "data-toggle": "tab"
+                "data-bs-toggle": "tab"
               } do
                 bootstrap_icon name: item[:icon], size: 20 if item[:icon]
                 span class: "#{'pl-3' if item[:icon]}", text: item[:text] if item[:text]

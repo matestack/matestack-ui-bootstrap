@@ -38,8 +38,8 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
     brand = self.brand.is_a?(Hash) ? self.brand : { text: self.brand }
     path = brand[:path].present? ? brand[:path] : "/"
     link class: "navbar-brand", path: path do
-      plain brand[:text]
       img height: 40, path: brand[:img], attributes: { loading: "lazy" } if brand[:img].present?
+      plain brand[:text]
     end
   end
 
