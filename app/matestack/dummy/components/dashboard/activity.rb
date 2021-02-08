@@ -20,7 +20,7 @@ class Dummy::Components::Dashboard::Activity < Matestack::Ui::Component
 
   def version_item_partial version
     row class: "mb-3" do
-      div class: "col-auto pr-0" do
+      div class: "col-auto pe-0" do
         if version.whodunnit.present?
           avatar img_path: asset_pack_url('media/images/avatar-placeholder.png')
         end

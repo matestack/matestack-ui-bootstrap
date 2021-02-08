@@ -31,19 +31,19 @@ class Bootstrap::Components::TabNav < Matestack::Ui::Component
                 "data-bs-toggle": "tab"
               } do
                 bootstrap_icon name: item[:icon], size: 20 if item[:icon]
-                span class: "#{'pl-3' if item[:icon]}", text: item[:text] if item[:text]
+                span class: "#{'ps-3' if item[:icon]}", text: item[:text] if item[:text]
               end
 
         # case item[:type]
         # when :link
         #   link link_attrs item[:path], item[:active], item[:disabled] do
         #     bootstrap_icon name: item[:icon], size: 20 if item[:icon]
-        #     span class: "#{'pl-3' if item[:icon]}", text: item[:text] if item[:text]
+        #     span class: "#{'ps-3' if item[:icon]}", text: item[:text] if item[:text]
         #   end
         # else
         #   transition link_attrs item[:path], item[:active], item[:disabled], delay: item[:delay] || 300 do
         #     bootstrap_icon name: item[:icon], size: 20 if item[:icon]
-        #     span class: "#{'pl-3' if item[:icon]}", text: item[:text] if item[:text]
+        #     span class: "#{'ps-3' if item[:icon]}", text: item[:text] if item[:text]
         #   end
         # end
       end

@@ -56,7 +56,7 @@ module Dummy::CodeRenderingUtils
 
   def javascript_implementation_partial
     row do
-      col class: "pl-4" do
+      col class: "ps-4" do
         b text: "None!"
       end
     end
@@ -64,7 +64,7 @@ module Dummy::CodeRenderingUtils
 
   def css_implementation_partial
     row do
-      col class: "pl-4" do
+      col class: "ps-4" do
         b text: "None!"
       end
     end

@@ -29,12 +29,12 @@ class Bootstrap::Layout::Sidebar < Matestack::Ui::VueJsComponent
         if item[:type] == :link
           link class: "list-group-item list-group-item-action border-0 rounded", path: item[:path] do
             bootstrap_icon name: item[:icon], size: 20 if item[:icon]
-            span class: "pl-3", text: item[:text] if item[:text]
+            span class: "ps-3", text: item[:text] if item[:text]
           end
         else
           transition class: "list-group-item list-group-item-action border-0 rounded", path: item[:path], delay: item[:delay] || 300 do
             bootstrap_icon name: item[:icon], size: 20 if item[:icon]
-            span class: "pl-3", text: item[:text] if item[:text]
+            span class: "ps-3", text: item[:text] if item[:text]
           end
         end
       end

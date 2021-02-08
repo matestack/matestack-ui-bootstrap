@@ -8,7 +8,7 @@ class Bootstrap::Apps::AdminTemplate < Matestack::Ui::App
       div id: "content", class: "content-wrapper w-100 #{content_background_class}" do
         if should_show_navbar?
           container do
-            navbar brand: navbar_brand_config, items: navbar_items, class: "pt-4 #{'pl-5' if should_show_sidebar?}", collapse_class: "text-end text-lg-start pr-3" do
+            navbar brand: navbar_brand_config, items: navbar_items, class: "pt-4 #{'ps-5' if should_show_sidebar?}", collapse_class: "text-end text-lg-start pe-3" do
               # div class: "d-flex" do
               #   navbar_end_partial if self.respond_to?(:navbar_end_partial)
               # end
