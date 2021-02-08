@@ -1,5 +1,5 @@
 class Bootstrap::Components::Popover < Matestack::Ui::VueJsComponent
-  vue_js_component_name "matestack-ui-bootstrap-popover" 
+  vue_js_component_name "matestack-ui-bootstrap-popover"
 
   # How i imagine using a popover
   #
@@ -44,7 +44,7 @@ class Bootstrap::Components::Popover < Matestack::Ui::VueJsComponent
   # :placement # placement direction as string
 
   def response
-    if tag.present? 
+    if tag.present?
       public_send(tag, popover_attributes) do
         content_partial
       end
@@ -68,12 +68,12 @@ class Bootstrap::Components::Popover < Matestack::Ui::VueJsComponent
       hash[:attributes] = { role: (text ? 'button': nil), title: "#{title}", tabindex: "#{tabindex}" }
       hash[:data] = {}.tap do |data|
         DATA_ALIAS_ATTRIBUTES.each do |attribute|
-          data[attribute] = self.send(:"bs_#{attribute}") if self.send(:"bs_#{attribute}")
+          data["bs-#{attribute}"] = self.send(:"bs_#{attribute}") if self.send(:"bs_#{attribute}")
         end
         (DATA_ATTRIBUTES - [:tag, :text, :variant]).each do |attribute|
-          data[attribute] = self.send(:"#{attribute}") if self.send(:"#{attribute}")
+          data["bs-#{attribute}"] = self.send(:"#{attribute}") if self.send(:"#{attribute}")
         end
-        data[:toggle] = "popover"
+        data["bs-toggle"] = "popover"
       end
     end
     html_attributes.merge(

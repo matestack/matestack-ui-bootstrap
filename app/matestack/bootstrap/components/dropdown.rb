@@ -1,21 +1,22 @@
 class Bootstrap::Components::Dropdown < Matestack::Ui::VueJsComponent
-  vue_js_component_name "matestack-ui-bootstrap-dropdown" 
-  
+  vue_js_component_name "matestack-ui-bootstrap-dropdown"
+
   optional :variant, :text, :btn_class # button attributes
-  optional :direction, :align, :offset, :reference 
+  optional :direction, :align, :offset, :reference
   # dropdown menu attributes, expects an array of items with possible keys: type, path, text
   # or hash with possible keys: items, class
-  optional :menu 
+  optional :menu
   optional class: { as: :bs_class }, id: { as: :bs_id }, data: { as: :bs_data }
   optional :slots
-  
+  optional :size
+
   def prepare
     @bs_menu = self.menu.is_a?(Hash) ? self.menu : { items: self.menu }
   end
-  def response 
+  def response
     div dropdown_attributes do
-      split_btn_partial if slots && slots[:split_btn] 
-      btn btn_attributes unless slots && slots[:split_btn] 
+      split_btn_partial if slots && slots[:split_btn]
+      btn btn_attributes unless slots && slots[:split_btn]
 
       ul menu_attributes do
         menu_partial unless @bs_menu[:items].blank?
@@ -36,14 +37,16 @@ class Bootstrap::Components::Dropdown < Matestack::Ui::VueJsComponent
   def menu_partial
     @bs_menu[:items].each do |item|
       case item[:type]
-      when :button 
-        li do btn class: "dropdown-item", text: item[:text] end
+      when :button
+        li do btn item.merge(class: "dropdown-item #{item[:class]}") end
       when :divider
         li do hr class: "dropdown-divider" end
       when :link
-        li do link class: "dropdown-item", path: item[:path], text: item[:text] end
+        li do link item.merge(class: "dropdown-item #{item[:class]}") end
       when :transition
-        li do transition class: "dropdown-item", path: item[:path], text: item[:text] end
+        li do transition item.merge(class: "dropdown-item #{item[:class]}") end
+      when :action
+        li do action item.merge(class: "dropdown-item #{item[:class]}") do plain item[:text] end end
       else
         span class: "dropdown-item-text" do plain item[:text] end
       end
@@ -68,16 +71,17 @@ class Bootstrap::Components::Dropdown < Matestack::Ui::VueJsComponent
     {
       id: bs_id,
       text: "#{text unless (slots && slots[:split_btn])}",
-      variant: (variant || :primary), 
+      variant: (variant || :primary),
       class: btn_classes,
       data: btn_data,
+      size: size,
       attributes: { 'aria-expanded': "false" }
     }
   end
-  
+
   def btn_data
     (bs_data || {}).tap do |hash|
-      hash[:toggle] = 'dropdown'
+      hash["bs-toggle"] = 'dropdown'
       hash[:offset] = offset if offset.present?
       hash[:reference] = reference if reference.present?
     end
@@ -86,8 +90,8 @@ class Bootstrap::Components::Dropdown < Matestack::Ui::VueJsComponent
   def btn_classes
     [].tap do |classes|
       classes << 'dropdown-toggle'
-      classes << 'dropdown-toggle-split' if slots && slots[:split_btn] 
-      #custom classes 
+      classes << 'dropdown-toggle-split' if slots && slots[:split_btn]
+      #custom classes
       classes << btn_class
     end.join(' ').strip
   end
@@ -103,10 +107,10 @@ class Bootstrap::Components::Dropdown < Matestack::Ui::VueJsComponent
   def menu_classes
     [].tap do |classes|
       classes << 'dropdown-menu'
-      classes << "dropdown-menu-#{align}" if align.present? 
-      #custom classes 
+      classes << "dropdown-menu-#{align}" if align.present?
+      #custom classes
       classes << @bs_menu[:class] if menu.is_a?(Hash)
     end.join(' ').strip
   end
-  
+
 end
