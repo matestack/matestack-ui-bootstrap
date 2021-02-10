@@ -98,8 +98,8 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
     toggle_classes = [].tap do |classes|
       classes << 'd-lg-none'
       classes << 'btn btn-link'
-      classes << "ml-auto" if @toggle[:position] == :right
-      classes << "mr-auto" if @toggle[:position] == :left
+      classes << "ms-auto" if @toggle[:position] == :right
+      classes << "me-auto" if @toggle[:position] == :left
       classes << @toggle[:class] if @toggle[:class]
     end.join(' ').strip
 
@@ -113,8 +113,8 @@ class Bootstrap::Components::Navbar < Matestack::Ui::Component
   def items_classes
     [].tap do |classes|
       classes << 'navbar-nav'
-      classes << (items_class.present? ? items_class : "ml-auto mb-2 mb-lg-0")
-      # classes << "ml-auto" unless items_class.present?
+      classes << (items_class.present? ? items_class : "ms-auto mb-2 mb-lg-0")
+      # classes << "ms-auto" unless items_class.present?
     end.join(' ').strip
   end
 end

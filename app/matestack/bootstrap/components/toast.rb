@@ -36,12 +36,12 @@ class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
   def header_partial
     header = self.header.is_a?(Hash) ? self.header : { title: self.header }
     div class: "toast-header" do
-      img class: "#{'rounded mr-2' || header[:icon_class]}", path: header[:icon] if header[:icon].present?
-      strong class: "mr-auto", text: header[:title] if header[:title].present?
+      img class: "#{'rounded me-2' || header[:icon_class]}", path: header[:icon] if header[:icon].present?
+      strong class: "me-auto", text: header[:title] if header[:title].present?
       small text: header[:subtitle] if header[:subtitle].present?
 
       slot slots[:header] if slots && slots[:header]
-      close dismiss: 'toast', class: "ml-2 mb-1", attributes: { "@click": "hide()"}
+      close dismiss: 'toast', class: "ms-2 mb-1", attributes: { "@click": "hide()"}
     end
 
   end
@@ -51,7 +51,7 @@ class Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
       plain body if body
     end
     unless header || slots && slots[:header]
-      close dismiss: 'toast', class: "ml-auto mr-2 btn-close-white", attributes: { "@click": "hide()"}
+      close dismiss: 'toast', class: "ms-auto me-2 btn-close-white", attributes: { "@click": "hide()"}
     end
   end
 

@@ -29,12 +29,12 @@ class Bootstrap::Components::ListGroup < Matestack::Ui::Component
         end
       when :label 
         label id: item[:id], class: "#{list_classes item, false}" do
-          input class: "form-check-input mr-1", attributes: { 'type': "checkbox", 'value': "" } if checkbox
+          input class: "form-check-input me-1", attributes: { 'type': "checkbox", 'value': "" } if checkbox
           plain item[:text]
         end
       else
         li id: item[:id], class: "#{list_classes item, false}" do
-          input class: "form-check-input mr-1", attributes: { 'type': "checkbox", 'value': "", 'aria-label': "#{item[:text]}" } if checkbox
+          input class: "form-check-input me-1", attributes: { 'type': "checkbox", 'value': "", 'aria-label': "#{item[:text]}" } if checkbox
           plain item[:text]
         end
       end
