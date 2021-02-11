@@ -12,7 +12,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: development
 
-  rails:
+  dummy:
     build:
       context: .
       dockerfile: ./Dockerfile.dev
@@ -27,7 +27,6 @@ services:
     volumes:
       - ./:/app
       - gem-volume:/usr/local/bundle
-      - node-volume:/app/node_modules
     command: "bundle exec rails server --binding 0.0.0.0 --port 3000"
 
   redis:
@@ -36,8 +35,24 @@ services:
     volumes:
       - redis-volume:/data
 
+  # webpack-watcher:
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfile.dev
+  #   environment:
+  #     RAILS_ENV: development
+  #   volumes:
+  #     - ./:/app
+  #     - gem-volume:/usr/local/bundle
+  #     - node-volume:/app/node_modules
+  #     - builder-node-volume:/app/builder/node_modules
+  #   command: "sh -c 'cd builder && ./bin/webpack --watch'"
+  #   user: ${CURRENT_UID}
+
 volumes:
   data-volume:
   gem-volume:
   node-volume:
+  dummy-node-volume:
   redis-volume:
+  builder-node-volume:

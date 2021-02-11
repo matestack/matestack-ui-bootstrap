@@ -39,3 +39,7 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+/spec/dummy/node_modules
+/spec/dummy/tmp
+/spec/dummy/public

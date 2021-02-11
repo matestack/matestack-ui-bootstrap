@@ -1,22 +1,31 @@
 {
-  "name": "matestack_bootstrap_addon",
-  "private": true,
+  "name": "matestack-ui-bootstrap",
+  "version": "1.4.0",
+  "license": "LGPLv3",
+  "main": "app/javascript/matestack-ui-bootstrap/index.js",
+  "files": [
+    "app",
+    "LICENSE"
+  ],
   "dependencies": {
-    "@rails/actioncable": "^6.0.0",
-    "@rails/activestorage": "^6.0.0",
-    "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "4.2.2",
+    "@rails/webpacker": "5.2.1",
+    "@popperjs/core": "^2.5.4",
     "bootstrap": "^5.0.0-beta1",
     "bootstrap-icons": "^1.1.0",
     "chart.js": "^2.9.4",
     "flatpickr": "^4.6.6",
-    "matestack-ui-core": "https://github.com/matestack/matestack-ui-core#v1.4.0",
-    "@popperjs/core": "^2.5.4",
-    "rails-erb-loader": "^5.5.2",
-    "turbolinks": "^5.2.0"
+    "link-module-alias": "^1.2.0",
+    "matestack-ui-core": "^1.4.1",
+    "rails-erb-loader": "^5.5.2"
   },
-  "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"
+  },
+  "exports": {
+    ".": "./app/javascript/matestack-ui-bootstrap",
+    "./concepts/": "./app/concepts/matestack/ui/bootstrap/"
+  },
+  "scripts": {
+    "postinstall": "link-module-alias"
   }
 }
