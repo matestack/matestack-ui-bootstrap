@@ -1,7 +1,5 @@
 # Install
 
-## Usage
-
 {% hint style="danger" %}
 Docs and specs in progress, please wait for official release announcement before using this gem
 {% endhint %}
@@ -65,49 +63,5 @@ ActiveStorage.start()
 * download latest compatible icons: [https://github.com/twbs/icons/releases/tag/v1.3.0](https://github.com/twbs/icons/releases/tag/v1.3.0)
 * extract the bootstrap-icons.svg to this path: app/assets/images/icons \(server via assets pipeline\)
 
-## Development
 
-### Dummy App
-
-**initial setup**
-
-```text
-docker-compose build dummy
-docker-compose run --rm dummy bash
-```
-
-inside container:
-
-```text
-bundle install
-yarn install
-cd spec/dummy
-bundle install
-npm install (npm and not yarn!)
-```
-
-**dummy app start**
-
-on your host:
-
-```text
-docker-compose up dummy
-```
-
-and
-
-```text
-docker-compose run --rm dummy sh -c "cd spec/dummy && ./bin/webpack --watch"
-```
-
-## Release
-
-```text
-docker-compose run --rm builder
-gem bump ...
-gem release
-npm bump ...
-npm release
-git tag ...
-```
 
