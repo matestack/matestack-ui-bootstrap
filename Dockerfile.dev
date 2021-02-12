@@ -10,8 +10,8 @@ WORKDIR /app
 
 COPY ./lib/ /app/lib/
 COPY matestack-ui-bootstrap.gemspec /app/
-COPY Gemfile* /app/
+COPY Gemfile* yarn* /app/
 RUN bundle install
 
 COPY package.json* /app/
-RUN npm install
+RUN yarn install
