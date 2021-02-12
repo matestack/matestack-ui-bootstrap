@@ -4,13 +4,14 @@
 
 ### Webpacker Installation
 
-```shell
+```text
 bundle add 'matestack-ui-bootstrap'
 yarn add 'matestack-ui-bootstrap'
 ```
 
 `app/views/layouts/application.html.erb`
-```erb
+
+```text
 <!DOCTYPE html>
 <html>
   <head>
@@ -29,15 +30,16 @@ yarn add 'matestack-ui-bootstrap'
     </div>
   </body>
 </html>
-
 ```
 
 `app/javascript/packs/stylesheets/application.scss`
-```scss
+
+```css
 @import "~bootstrap/scss/bootstrap.scss";
 ```
 
 `app/javascript/packs/application.js`
+
 ```javascript
 import Rails from "@rails/ujs"
 // import Turbolinks from "turbolinks"
@@ -56,9 +58,8 @@ ActiveStorage.start()
 
 `app/assets/images/icons`
 
-- download latest compatible icons: https://github.com/twbs/icons/releases/tag/v1.3.0
-- extract the bootstrap-icons.svg to this path: app/assets/images/icons (server via assets pipeline)
-
+* download latest compatible icons: [https://github.com/twbs/icons/releases/tag/v1.3.0](https://github.com/twbs/icons/releases/tag/v1.3.0)
+* extract the bootstrap-icons.svg to this path: app/assets/images/icons \(server via assets pipeline\)
 
 ## Development
 
@@ -66,14 +67,14 @@ ActiveStorage.start()
 
 **initial setup**
 
-```shell
+```text
 docker-compose build dummy
 docker-compose run --rm dummy bash
 ```
 
 inside container:
 
-```shell
+```text
 bundle install
 yarn install
 cd spec/dummy
@@ -84,19 +85,20 @@ npm install (npm and not yarn!)
 **dummy app start**
 
 on your host:
-```shell
+
+```text
 docker-compose up dummy
 ```
 
 and
 
-```shell
+```text
 docker-compose run --rm dummy sh -c "cd spec/dummy && ./bin/webpack --watch"
 ```
 
 ## Release
 
-```shell
+```text
 docker-compose run --rm builder
 gem bump ...
 gem release
@@ -104,3 +106,4 @@ npm bump ...
 npm release
 git tag ...
 ```
+

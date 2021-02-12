@@ -3,20 +3,15 @@
 The Bootstrap `button group` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
 ## `btn_group(*args, &block)`
-----
 
-Returns a bootstrap button-group containing content specified by a block. Also the button_group is customizable with the following options.
+Returns a bootstrap button-group containing content specified by a block. Also the button\_group is customizable with the following options.
 
 **Optional options**
 
-* `size` - Use `:sm` (small), `:md` (medium), `:lg` (large) to change size of the button group. The default is `nil`.
-
+* `size` - Use `:sm` \(small\), `:md` \(medium\), `:lg` \(large\) to change size of the button group. The default is `nil`.
 * `toolbar` - Set `true` for using button toolbar instead of button group
-
 * `label` - Expects a String. Adding label to attributes `aria-label`
-
 * `vertical` - Expects `true` or `false`. By default is set as `true`. This parameter determines whether the button group should align vertically
-
 * Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding button group div.
 
 ## Examples
@@ -33,7 +28,7 @@ end
 
 returns
 
-```html
+```markup
 <div class="btn-group" role="group" aria-label="Basic example">
   <button type="button" class="btn btn-secondary">Left</button>
   <button type="button" class="btn btn-secondary">Middle</button>
@@ -51,7 +46,7 @@ bs_btn_group size: :sm, label: "..." do ... end
 
 returns
 
-```html
+```markup
 <div class="btn-group btn-group-lg" role="group" aria-label="...">...</div>
 <div class="btn-group" role="group" aria-label="...">...</div>
 <div class="btn-group btn-group-sm" role="group" aria-label="...">...</div>
@@ -76,7 +71,7 @@ end
 
 returns
 
-```html
+```markup
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
   <div class="btn-group" role="group" aria-label="First group">
     <button type="button" class="btn btn-secondary">1</button>
@@ -90,3 +85,4 @@ returns
   </div>
 </div>
 ```
+

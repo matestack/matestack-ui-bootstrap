@@ -3,31 +3,20 @@
 The Bootstrap `card` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
 ## `bs_card(*args, &block)`
-----
 
 Returns a bootstrap card containing text or content specified by a block. Also the card is customizable with the following options.
 
 **Optional options**
 
 * `header` - Expects a string or a hash with `class` and `text` as possible keys, that should go inside the header component
-
 * `footer` - Expects a string or a hash with `class` and `text` as possible keys, that should go inside the footer component
-
 * `body` - Expects a string or a hash with `class` and `text` as possible keys, with the text that should go inside the card-body component
-
-* `title` - additional to the body text, you can add a string as title with pre-defined heading size (`h5`)
-
-* `subtitle` - additional to the body text, you can add a string as subtitle with pre-defined heading size (`h6`)
-
+* `title` - additional to the body text, you can add a string as title with pre-defined heading size \(`h5`\)
+* `subtitle` - additional to the body text, you can add a string as subtitle with pre-defined heading size \(`h6`\)
 * `img_path` - Insert an image component into the card body by giving the image path
-
-* `img_pos` - Expects `:bottom` or `:top`. This parameter will set the placement of the image in the bottom of the card component.
-By default it's set as top image
-
+* `img_pos` - Expects `:bottom` or `:top`. This parameter will set the placement of the image in the bottom of the card component. By default it's set as top image
 * `alt_text` - Expects a string for image's alt-text
-
 * `slots` - Using slots to yield custom components in card components for `header`, `footer` or `body`
-
 * Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding card div.
 
 ## Examples
@@ -42,7 +31,7 @@ bs_card img_path: image_url("...png"),
 
 returns
 
-```html
+```markup
 <div class="card">
   <div class="card-header">
     Card Header
@@ -67,7 +56,7 @@ bs_card body: "Some quick example text",
 
 returns
 
-```html
+```markup
 <div class="card">
   <div class="card-header text-center h3">
     Card header hash
@@ -98,7 +87,7 @@ end
 
 returns
 
-```html
+```markup
 <div class="card">
   <img src="..." class="card-img-top" alt="...">
   <div class="card-body">
@@ -145,7 +134,7 @@ end
 
 returns
 
-```html
+```markup
 <div class="card text-center">
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
@@ -168,6 +157,7 @@ returns
 ```
 
 ### Example 5: Yield a given block
+
 **Point of attention:** Custom Component will be yield outside of the `card-body` tag.
 
 ```ruby
@@ -181,7 +171,7 @@ end
 
 returns
 
-```html
+```markup
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">Card title</h5>
@@ -193,3 +183,4 @@ returns
   </div>
 </div>
 ```
+

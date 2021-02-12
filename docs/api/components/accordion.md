@@ -3,7 +3,6 @@
 The Bootstrap `accordion` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
 ## `bs_accordion(*args, &block)`
-----
 
 Returns a bootstrap accordion containing card header and collapsable card-body elements or content specified by a block.
 
@@ -19,7 +18,6 @@ Returns a bootstrap accordion containing card header and collapsable card-body e
     * `class` - adding custom class to body component
     * `multi` - If set true, collapse body can be control by multiple sources
     * `text` - adding text block to body
-<br>
 * Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding accordion div.
 
 ## Examples
@@ -37,7 +35,7 @@ bs_accordion id: "accordionExample", items: [
 
 returns
 
-```html
+```markup
 <div class="accordion" id="accordionExample">
   <div class="card">
     <div class="card-header p-0" id="headingOne">
@@ -70,3 +68,4 @@ returns
   </div>
 </div>
 ```
+

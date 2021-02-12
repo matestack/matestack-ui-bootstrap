@@ -3,33 +3,24 @@
 The Bootstrap `carousel` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
 ## `bs_carousel(*args, &block)`
-----
 
 Returns a bootstrap carousel containing a hash of `items` with `path`, `title`, `text` and `interval`. Also the carousel is customizable with the following options.
 
 **Optional options**
 
 * `:controls` - If set `true`, the previous and next arrows will be visible
-
 * `:indicators` - If set `true`, the bottom indicators will be visible
-
 * `:fade` - If set `true`, the animation when switching between items will be faded animation instead of sliding animation
-
 * `:start` - Set the active item for carousel at the beginning. Counting start at 0.
-
 * `:cycle_on` - Cycles through the carousel items from left to right.
-
 * `:pause_on` - Stops the carousel from cycling through items.
-
 * `:prev_on` - Cycles to the previous item.
-
 * `:next_on` - Cycles to the next item.
-
 * Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding carousel div.
 
 **Further explanation**
-* `:items` array: each item can include a hash with `path`, `title`, `text` and `interval` where `path` is the image-url, `interval` is the amount of time to delay between automatically cycling to the next item, `title` and `text` is the caption of the item
 
+* `:items` array: each item can include a hash with `path`, `title`, `text` and `interval` where `path` is the image-url, `interval` is the amount of time to delay between automatically cycling to the next item, `title` and `text` is the caption of the item
 * `:cycle_on`, `:pause_on`, `:prev_on`, `:next_on` are JavaScript behaviors which can be trigger for example by an onclick method
 
 ## Examples
@@ -45,7 +36,7 @@ bs_carousel items: [
 
 returns
 
-```html
+```markup
 <div id="..." class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -75,7 +66,7 @@ bs_carousel items: items
 
 returns
 
-```html
+```markup
 <div id="..." class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active" data-interval="20000">
@@ -108,7 +99,7 @@ bs_carousel controls: true, indicators: true, fade: true, items: items
 
 returns
 
-```html
+```markup
 <div id="..." class="carousel slide carousel-fade" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -135,9 +126,10 @@ returns
 ```
 
 ### Example 4: Trigger Carousel per event
-*with `cycle_on`, `pause_on`, `prev_on`, `next_on` you can trigger the JavaScript behaviors of carousel per event*
 
-*`cycle_on` and `pause_on` can be use similarly as the exmample with `prev_on` and `next_on` below*
+_with `cycle_on`, `pause_on`, `prev_on`, `next_on` you can trigger the JavaScript behaviors of carousel per event_
+
+_`cycle_on` and `pause_on` can be use similarly as the exmample with `prev_on` and `next_on` below_
 
 ```ruby
 items = [
@@ -153,3 +145,4 @@ onclick emit: "next-carousel" do
   bs_btn text: "Next"
 end
 ```
+

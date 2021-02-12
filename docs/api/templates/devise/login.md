@@ -10,8 +10,6 @@ Docs in progress. Please review the examples
 
 ### Example 1: Simple sign in with redirect and error message rendering
 
-
-
 ```ruby
 class Devise::Pages::SignIn < Matestack::Ui::Bootstrap::Pages::Devise::SignIn
 
@@ -33,5 +31,5 @@ class Devise::Pages::SignIn < Matestack::Ui::Bootstrap::Pages::Devise::SignIn
   end
 
 end
-
 ```
+

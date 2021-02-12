@@ -1,9 +1,8 @@
 # Matestack Bootstrap Component: Smart collection
 
-Render a collection in a paginated, filterable table with custom row action slots or with completely customized collection rendering (e.g. cards per item instead of table rows)
+Render a collection in a paginated, filterable table with custom row action slots or with completely customized collection rendering \(e.g. cards per item instead of table rows\)
 
 ## `bs_smart_collection(*args)`
-----
 
 **Optional options**
 
@@ -14,7 +13,6 @@ Docs in progress! Please review the examples.
 ### Example 1: Table rendering with custom row actions
 
 ```ruby
-
 def response
   #...
   bs_smart_collection collection_config
@@ -123,7 +121,6 @@ def table_item_actions order
     end
   end
 end
-
 ```
 
 ### Example 3: Custom collection rendering
@@ -192,3 +189,4 @@ def product_delete_action_config product
   }
 end
 ```
+

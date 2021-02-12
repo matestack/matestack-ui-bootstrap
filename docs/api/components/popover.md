@@ -3,7 +3,6 @@
 The Bootstrap `popover` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
 ## `bs_popover(*args, &block)`
-----
 
 Returns a bootstrap component containing text or content specified by a block which can trigger a popover element. Also the popover is customizable with the following options.
 
@@ -11,27 +10,25 @@ Returns a bootstrap component containing text or content specified by a block wh
 
 * `:text` - expects a string as text inside the element in which popover will be applied to
 * `:variant` - Specify a variant for the popover. Variant represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class. The default is `:primary`
-* `:tag` - element that popover should be applied to: *div, span, links, button, ...*
-<br>
-
+* `:tag` - element that popover should be applied to: _div, span, links, button, ..._  
 * `:content` - expects a string as the body text for popover
 * `:title` - expects a string as the title text for popover
-
 * `:animation` - Apply a CSS fade transition to the popover
-* `:placement` - How to position the popover - `auto` | `top` | `bottom` | `left` | `right`. when auto is specified, it will dynamically reorient the popover.
+* `:placement` - How to position the popover - `auto` \| `top` \| `bottom` \| `left` \| `right`. when auto is specified, it will dynamically reorient the popover.
 * `:tabindex` - For proper cross-browser and cross-platform behavior, you must use the `a` tag, not the `button` tag for dismiss-on-next-click, and you also must include a tabindex attribute.
-* `:trigger` - How popover is triggered - `click` | `hover` | `focus` | `manual`. You may pass multiple triggers; separate them with a space. `manual` cannot be combined with any other trigger.
+* `:trigger` - How popover is triggered - `click` \| `hover` \| `focus` \| `manual`. You may pass multiple triggers; separate them with a space. `manual` cannot be combined with any other trigger.
 * `:boundary` - Overflow constraint boundary of the popover
 * `:offset` - Offset of the popover relative to its target.
 * `:container` - Appends the popover to a specific element.
-* `:delay` - Delay showing and hiding the popover (ms) - does not apply to manual trigger type. If a number is supplied, delay is applied to both hide/show
+* `:delay` - Delay showing and hiding the popover \(ms\) - does not apply to manual trigger type. If a number is supplied, delay is applied to both hide/show
 * `:selector` - If a selector is provided, popover objects will be delegated to the specified targets
 * `:html` - Insert HTML into the popover. If false, innerText property will be used to insert content into the DOM.
 * `:template` - Base HTML to use when creating the popover.
 * `:fallback_placement` - Allow to specify which position Popper will use on fallback.
-* `:popper_config` - 	To change Bootstrap's default Popper.js config
-*Source: https://v5.getbootstrap.com/docs/5.0/components/popovers/#options*
-<br>
+* `:popper_config` -     To change Bootstrap's default Popper.js config
+
+  _Source:_ [https://v5.getbootstrap.com/docs/5.0/components/popovers/\#options](https://v5.getbootstrap.com/docs/5.0/components/popovers/#options)
+
 * Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding popover div.
 
 ## Examples
@@ -47,7 +44,7 @@ bs_popover text: "Click to toggle popover",
 
 returns
 
-```html
+```markup
 <button type="button" class="btn btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
   Click to toggle popover
 </button>
@@ -57,12 +54,11 @@ returns
 
 ```ruby
 bs_popover text: "Popover", html: 'true', content: "<p>this paragraph in popover</p>"
-
 ```
 
 returns
 
-```html
+```markup
 <button data-content="<p>this paragraph in popover</p>" data-html="true" data-toggle="popover" role="button" tabindex="" title="" type="button" class="btn btn-primary" data-original-title="">
   Popover
 </button>
@@ -72,13 +68,13 @@ returns
 
 ```ruby
 bs_popover tag: :link, placement: :top, tabindex: "0", variant: :danger, trigger: "focus", title: "Dismissible popover", content: "And here's some amazing content. It's very engaging. Right?", text: "Dismissible Popover"
-
 ```
 
 returns
 
-```html
+```markup
 <a data-content="And here's some amazing content. It's very engaging. Right?" data-placement="top" data-tabindex="0" data-title="Dismissible popover" data-toggle="popover" data-trigger="focus" role="button" tabindex="0" title="" class="btn btn-danger" data-original-title="Dismissible popover">
   Dismissible Popover
 </a>
 ```
+

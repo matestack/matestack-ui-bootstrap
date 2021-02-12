@@ -3,7 +3,6 @@
 Chart.js integration, Bootstrap theming aware
 
 ## `bs_chart(*args)`
-----
 
 **Optional options**
 
@@ -21,8 +20,8 @@ bs_chart class: "w-50", type: :bar, datasets: [
     backgroundColor: :primary
   },
 ], labels: ["x", "y", "z"]
-
 ```
+
 ### Example 2: Doughnut chart
 
 ```ruby
@@ -64,5 +63,5 @@ bs_chart type: :pie, datasets: [
     backgroundColor: [:orange, :secondary, :primary]
   },
 ], labels: ["x", "y", "z"]
-
 ```
+

@@ -3,7 +3,6 @@
 The Bootstrap `modal` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
 ## `bs_modal(*args, &block)`
-----
 
 Returns a bootstrap modal containing header, body, footer or content specified by a block. The component can be trigger remotely. Also the modal is customizable with the following options.
 
@@ -24,7 +23,6 @@ Returns a bootstrap modal containing header, body, footer or content specified b
 * **Javascript Triggers**
   * Expects an event as string on which the modal will perfrom those javascript methods
   * `:toggle_on`, `:show_on`, `:hide_on`, `:handle_update_on`, `:dispose_on`
-<br>
 * Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding modal div.
 
 ## Examples
@@ -46,7 +44,7 @@ bs_modal toggle_on: "toggleModal", id: 'staticBackdrop', header: "Modal Title", 
 
 returns
 
-```html
+```markup
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
   Launch Modal
@@ -72,7 +70,9 @@ returns
 ```
 
 ### Example 2: Modal with custom header
-*body and footer hashes are working in similar way*
+
+_body and footer hashes are working in similar way_
+
 ```ruby
 bs_modal header: { text: "Modal Title", class: "text-center", size: 1 },     
       body: "Modal Messages", footer: "Close"
@@ -80,11 +80,11 @@ bs_modal header: { text: "Modal Title", class: "text-center", size: 1 },
 
 returns
 
-```html
+```markup
 ...
 <div class="modal-header">
   <h1 class="modal-title text-center">Modal title</h1>
 </div>
 ...
-
 ```
+

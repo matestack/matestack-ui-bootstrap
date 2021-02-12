@@ -75,5 +75,5 @@ class Dummy::App < Matestack::Ui::Bootstrap::Apps::AdminTemplate
   end
 
 end
-
 ```
+
