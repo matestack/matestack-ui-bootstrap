@@ -2,10 +2,10 @@
 
 The Bootstrap `badge` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## `badge(*args, &block)`
+## `bs_badge(*args, &block)`
 ----
 
-Returns a bootstrap badge containing text and/or content specified by a block. Also the badge is customizable with the following options. 
+Returns a bootstrap badge containing text and/or content specified by a block. Also the badge is customizable with the following options.
 
 **Optional options**
 
@@ -26,7 +26,7 @@ Returns a bootstrap badge containing text and/or content specified by a block. A
 ### Basic badge
 
 ```ruby
-badge text: 'New' 
+bs_badge text: 'New'
 ```
 
 Result:
@@ -38,7 +38,7 @@ Result:
 ### Badge with block content
 
 ```ruby
-badge variant: :warning do
+bs_badge variant: :warning do
   div do
     paragraph text: "Custom inner html"
   end
@@ -58,7 +58,7 @@ Result:
 ### Rounded success badge
 
 ```ruby
-badge text: "Success", variant: :success, rounded: true
+bs_badge text: "Success", variant: :success, rounded: true
 ```
 
 Result:

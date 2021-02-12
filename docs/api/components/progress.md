@@ -2,15 +2,15 @@
 
 The Bootstrap `progress` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## `progress(*args, &block)`
+## `bs_progress(*args, &block)`
 ----
 
-Returns a bootstrap progress containing text or content specified by a block. Also the progress is customizable with the following options. 
+Returns a bootstrap progress containing text or content specified by a block. Also the progress is customizable with the following options.
 
 **Optional options**
 
 * `:progress` - expects a number or a list containing hashes with at least a `:value`. Other options are `:text`, `:class`, `:variant`, `:striped`, `:animated` and `:aria_valuenow`.
-  * `value` -  Expects an Interger <= 100. Set the current value of the progress bar with this parameter 
+  * `value` -  Expects an Interger <= 100. Set the current value of the progress bar with this parameter
   * `class` - adding custom class for progress bar
   * `variant` - Specify a variant for the progress. Variant represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class. The default is `:primary`
   * `striped` - Expects `true` or `false`. By default is set as `false`. Set this parameter to true for striped progress bar style
@@ -48,10 +48,10 @@ Returns a bootstrap progress containing text or content specified by a block. Al
 ### Example 1: Basic example
 
 ```ruby
-progress height: 20, variant: :success, progress: 25, valuemin: 0, valuemax: 100, text: "25%"
+bs_progress height: 20, variant: :success, progress: 25, valuemin: 0, valuemax: 100, text: "25%"
 
 # because valuemin and valuemax is set as default. It can be shorten like this:
-progress height: 20, variant: :success, progress: 25, text: "25%"
+bs_progress height: 20, variant: :success, progress: 25, text: "25%"
 ```
 
 returns
@@ -65,7 +65,7 @@ returns
 ### Example 2: Using striped and animated option
 
 ```ruby
-progress progress: 50, text: "50%", valuemin: 0, valuemax: 100, stripped: true, animated: true
+bs_progress progress: 50, text: "50%", valuemin: 0, valuemax: 100, stripped: true, animated: true
 ```
 
 returns
@@ -79,7 +79,7 @@ returns
 ### Example 3: Multiple bars
 
 ```ruby
-progress progress: [
+bs_progress progress: [
           { value: 15, text: "15%", variant: :success },
           { value: 30, text: "30%", variant: :info }
         ], valuemin: 0, valuemax: 100

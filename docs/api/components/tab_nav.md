@@ -2,7 +2,7 @@
 
 The Bootstrap `nav` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## `navigation(*args, &block)`
+## `bs_tab_nav(*args, &block), bs_tab_nav_content(*args, &block)`
 ----
 
 Returns a bootstrap nav. Also the nav is customizable with the following options.
@@ -30,14 +30,14 @@ Returns a bootstrap nav. Also the nav is customizable with the following options
 
 ```ruby
 def response
-  tab_nav tab_nav_config do
-    tab_nav_content id: :a, active: true do
+  bs_tab_nav tab_nav_config do
+    bs_tab_nav_content id: :a, active: true do
       plain "A"
     end
-    tab_nav_content id: :b do
+    bs_tab_nav_content id: :b do
       plain "B"
     end
-    tab_nav_content id: :c do
+    bs_tab_nav_content id: :c do
       plain "C"
     end
   end

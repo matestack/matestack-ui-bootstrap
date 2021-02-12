@@ -2,10 +2,10 @@
 
 The Bootstrap `row` component, implemented in Ruby.
 
-## `row(*args, &block)`
+## `bs_row(*args, &block)`
 ----
 
-Returns a bootstrap row containing content specified by a block. Also the row is customizable with the following options. 
+Returns a bootstrap row containing content specified by a block. Also the row is customizable with the following options.
 
 **Optional options**
 
@@ -13,7 +13,7 @@ Returns a bootstrap row containing content specified by a block. Also the row is
 
 * `:horizontal` - For horizontal alignment. Expects parameter: `start`, `center`, `end`, `around`, `between`, `evenly`
 
-**HMTL attributes**
+**HTML attributes**
 This component accepts all the canonical [HTML global attributes](https://www.w3schools.com/tags/ref_standardattributes.asp) like `id` or `class`.
 
 ## Examples
@@ -21,7 +21,7 @@ This component accepts all the canonical [HTML global attributes](https://www.w3
 ### Example 1: Basic
 
 ```ruby
-row horizontal: :start, vertical: :center do
+bs_row horizontal: :start, vertical: :center do
   # content here
 end
 ```

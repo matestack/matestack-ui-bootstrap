@@ -2,10 +2,10 @@
 
 The Bootstrap `card` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## `card(*args, &block)`
+## `bs_card(*args, &block)`
 ----
 
-Returns a bootstrap card containing text or content specified by a block. Also the card is customizable with the following options. 
+Returns a bootstrap card containing text or content specified by a block. Also the card is customizable with the following options.
 
 **Optional options**
 
@@ -19,7 +19,7 @@ Returns a bootstrap card containing text or content specified by a block. Also t
 
 * `subtitle` - additional to the body text, you can add a string as subtitle with pre-defined heading size (`h6`)
 
-* `img_path` - Insert an image component into the card body by giving the image path 
+* `img_path` - Insert an image component into the card body by giving the image path
 
 * `img_pos` - Expects `:bottom` or `:top`. This parameter will set the placement of the image in the bottom of the card component.
 By default it's set as top image
@@ -35,8 +35,8 @@ By default it's set as top image
 ### Example 1: Basic example with simple body, footer and header text
 
 ```ruby
-card img_path: image_url("...png"), 
-      title: "Card title", body: "Some quick example text", 
+bs_card img_path: image_url("...png"),
+      title: "Card title", body: "Some quick example text",
       header: "Card Header", footer: "Card Footer"
 ```
 
@@ -61,7 +61,7 @@ returns
 ### Example 2: Example with body and header as a hash
 
 ```ruby
-card body: "Some quick example text", 
+bs_card body: "Some quick example text",
       header: { text: "Card header hash", class: "text-center h3" }
 ```
 
@@ -81,7 +81,7 @@ returns
 ### Example 3: Using Slots for customize card body
 
 ```ruby
-card slots: { body: my_card_body }
+bs_card slots: { body: my_card_body }
 
 def my_card_body
   slot {
@@ -120,16 +120,16 @@ returns
 ### Example 4: Using Slots for customize card header and footer
 
 ```ruby
-card body: "With supporting text below.", title: "Special title treatment", 
+bs_card body: "With supporting text below.", title: "Special title treatment",
     slots: { header: my_card_header, footer: my_card_footer }, class: "text-center"
 
 def my_card_header
   slot {
     ul class: "nav nav-tabs card-header-tabs" do
-      li class: "nav-item" do 
+      li class: "nav-item" do
         link class: "nav-link", path: "#", text: "Tab 1"  
       end
-      li class: "nav-item" do 
+      li class: "nav-item" do
         link class: "nav-link", path: "#", text: "Tab 2"  
       end
     end
@@ -168,13 +168,13 @@ returns
 ```
 
 ### Example 5: Yield a given block
-**Point of attention:** Custom Component will be yield outside of the `card-body` tag. 
+**Point of attention:** Custom Component will be yield outside of the `card-body` tag.
 
 ```ruby
-card title: "Card title", body: "Some quick example text" do
+bs_card title: "Card title", body: "Some quick example text" do
   div class: "p-3" do
-    btn text: "Card Button"
-    btn text: "Another Button"
+    bs_btn text: "Card Button"
+    bs_btn text: "Another Button"
   end
 end
 ```

@@ -2,10 +2,10 @@
 
 The Bootstrap `Toast` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## `Toast(*args, &block)`
+## `bs_toast(*args, &block)`
 ----
 
-Returns a bootstrap Toast containing text or content specified by a block. Also the Toast is customizable with the following options. 
+Returns a bootstrap Toast containing text or content specified by a block. Also the Toast is customizable with the following options.
 
 **Optional options**
 
@@ -23,11 +23,11 @@ Returns a bootstrap Toast containing text or content specified by a block. Also 
 
 * `slots` - Using slots option to extend customization of your `header` beyond the standard option
 
-* `:show_on` - Expects an event as string on which the toast will be showed calling bootstraps `show` method. 
+* `:show_on` - Expects an event as string on which the toast will be showed calling bootstraps `show` method.
 
-* `:hide_on` - Expects an event as string on which the toast will be hidden calling bootstraps `hide` method. 
+* `:hide_on` - Expects an event as string on which the toast will be hidden calling bootstraps `hide` method.
 
-* `:dispose_on` - Expects an event as string on which the toast will be disposed calling bootstraps `dispose` method. 
+* `:dispose_on` - Expects an event as string on which the toast will be disposed calling bootstraps `dispose` method.
 
 * Additionally, you can add custom `class`, `attributes` or `data` attributes to the toast component
 
@@ -38,7 +38,7 @@ Returns a bootstrap Toast containing text or content specified by a block. Also 
 ### Example 1: Basic Toast
 
 ```ruby
-toast header: { title: "Bootstrap", subtitle: "11 mins ago" }, 
+bs_toast header: { title: "Bootstrap", subtitle: "11 mins ago" },
       body: "Hello, world! This is a toast message."
 ```
 
@@ -60,8 +60,8 @@ returns
 ### Example 2: Color schemes
 
 ```ruby
-toast class: "bg-primary text-white", 
-      header: { title: "Bootstrap", subtitle: "11 mins ago" }, 
+bs_toast class: "bg-primary text-white",
+      header: { title: "Bootstrap", subtitle: "11 mins ago" },
       body: "Hello, world! This is a toast message."
 ```
 
@@ -83,13 +83,13 @@ returns
 ### Example 3: Trigger Javascript Behaviors with onclick methode
 
 ```ruby
-toast show_on: "showToast", hide_on: "hideToast", 
+bs_toast show_on: "showToast", hide_on: "hideToast",
       body: "Hello, world! This is a toast message."
 
 onclick emit: "showToast" do
-  btn text: "Show Toasts"
-end 
+  bs_btn text: "Show Toasts"
+end
 onclick emit: "hideToast" do
-  btn text: "Hide Toasts"
+  bs_btn text: "Hide Toasts"
 end
 ```

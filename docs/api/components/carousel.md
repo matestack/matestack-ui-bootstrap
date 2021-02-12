@@ -2,10 +2,10 @@
 
 The Bootstrap `carousel` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## `carousel(*args, &block)`
+## `bs_carousel(*args, &block)`
 ----
 
-Returns a bootstrap carousel containing a hash of `items` with `path`, `title`, `text` and `interval`. Also the carousel is customizable with the following options. 
+Returns a bootstrap carousel containing a hash of `items` with `path`, `title`, `text` and `interval`. Also the carousel is customizable with the following options.
 
 **Optional options**
 
@@ -21,7 +21,7 @@ Returns a bootstrap carousel containing a hash of `items` with `path`, `title`, 
 
 * `:pause_on` - Stops the carousel from cycling through items.
 
-* `:prev_on` - Cycles to the previous item. 
+* `:prev_on` - Cycles to the previous item.
 
 * `:next_on` - Cycles to the next item.
 
@@ -37,7 +37,7 @@ Returns a bootstrap carousel containing a hash of `items` with `path`, `title`, 
 ### Example 1: Basic Carousel with 2 items
 
 ```ruby
-carousel items: [
+bs_carousel items: [
           { path: image_url("matestack-data.png") },
           { path: image_url("matestack-data.png") }
         ]
@@ -63,14 +63,14 @@ returns
 ```ruby
 # declare items array before using carousel component
 items = [
-    { path: image_url("matestack-data.png"), 
+    { path: image_url("matestack-data.png"),
       title: "First slide", text: "First slide text caption",
       interval: 20000 },
     { path: image_url("matestack-data.png"),
       title: "Second slide", text: "Second slide text caption",
       interval: 5000 }
 ]
-carousel items: items
+bs_carousel items: items
 ```
 
 returns
@@ -103,7 +103,7 @@ items = [
   { path: image_url("matestack-data.png") },
   { path: image_url("matestack-data.png") }
 ]
-carousel controls: true, indicators: true, fade: true, items: items
+bs_carousel controls: true, indicators: true, fade: true, items: items
 ```
 
 returns
@@ -144,12 +144,12 @@ items = [
   { path: image_url("matestack-data.png") },
   { path: image_url("matestack-data.png") }
 ]
-carousel prev_on: "prev-carousel", next_on: "next-carousel", items: items 
+bs_carousel prev_on: "prev-carousel", next_on: "next-carousel", items: items
 
 onclick emit: "prev-carousel" do
-  btn text: "Prev"
+  bs_btn text: "Prev"
 end
 onclick emit: "next-carousel" do
-  btn text: "Next"
+  bs_btn text: "Next"
 end
 ```

@@ -2,17 +2,17 @@
 
 The Bootstrap `column` component, implemented in Ruby.
 
-## `col(*args, &block)`
+## `bs_col(*args, &block)`
 ----
 
-Returns a bootstrap column containing content specified by a block. Also the column is customizable with the following options. 
+Returns a bootstrap column containing content specified by a block. Also the column is customizable with the following options.
 
 **Optional options**
 
 * `sm`, `md`, `lg`, `xl`, `xxl`:
 Expects an Integer <= 12. This parameter set the size of the column by the given breakpoint
 
-* `default` - Expects an Integer <= 12. `default: 12` is equal to `col-12` in bootstrap 
+* `default` - Expects an Integer <= 12. `default: 12` is equal to `col-12` in bootstrap
 
 * `order`, `order_sm`, `order_md`, `order_lg`, `order_xl`, `order_xxl`:
 Expects an Integer <= 12. Set the order of the column by the given breakpoint
@@ -22,7 +22,7 @@ Expects an Integer <= 12. Move columns to the right using offset parameter by th
 
 * `align_self` - Expects `start`, `center`, `end`. Align vertically within the column
 
-**HMTL attributes**
+**HTML attributes**
 This component accepts all the canonical [HTML global attributes](https://www.w3schools.com/tags/ref_standardattributes.asp) like `id` or `class`.
 
 ## Examples
@@ -30,8 +30,8 @@ This component accepts all the canonical [HTML global attributes](https://www.w3
 ### Example 1: Basic
 
 ```ruby
-row do
-  col md: 12, lg: 6, xl: 4 do
+bs_row do
+  bs_col md: 12, lg: 6, xl: 4 do
     # content here
   end
 end
@@ -50,11 +50,11 @@ returns
 ### Example 2: Using offset option
 
 ```ruby
-row do
-  col md: 4 do
+bs_row do
+  bs_col md: 4 do
     plain ".col-md-4"
   end
-  col md: 4, offset_md: 4 do
+  bs_col md: 4, offset_md: 4 do
     plain ".col-md-4 .offset-md-4"
   end
 end
@@ -72,14 +72,14 @@ returns
 ### Example 3: Using the order option
 
 ```ruby
-row do
-  col sm: 12, md: 6, xl: 3 do          
+bs_row do
+  bs_col sm: 12, md: 6, xl: 3 do          
     plain "Column 1"
   end
-  col sm: 12, md: 6, xl: 3, order_md: 5 do          
+  bs_col sm: 12, md: 6, xl: 3, order_md: 5 do          
     plain "Column 2"
   end
-  col sm: 12, md: 6, xl: 3, order_md: 1 do
+  bs_col sm: 12, md: 6, xl: 3, order_md: 1 do
     plain "Column 3"
   end
 end

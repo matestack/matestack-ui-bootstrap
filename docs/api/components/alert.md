@@ -2,7 +2,7 @@
 
 The Bootstrap `alert` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## `alert(*args, &block)`
+## `bs_alert(*args, &block)`
 ----
 
 Returns a bootstrap alert containing text and/or content specified by a block. Also the alert is customizable with the following options.
@@ -33,7 +33,7 @@ Returns a bootstrap alert containing text and/or content specified by a block. A
 ### Basic alert with title and text
 
 ```ruby
-alert color: :success, heading: "Well done!", text: 'Some alert message'
+bs_alert color: :success, heading: "Well done!", text: 'Some alert message'
 ```
 
 returns
@@ -47,7 +47,7 @@ returns
 
 ### Animated, dismissible alert with content specified in a block
 ```ruby
-alert color: :warning, animate: true, dismissible: true do
+bs_alert color: :warning, animate: true, dismissible: true do
   strong text: "Holy guacamole!"
   plain "You should check in on some of those fields below."
 end
@@ -66,9 +66,9 @@ returns
 ### Alert closing on event triggered by button click
 
 ```ruby
-alert close_on: 'close-alert', text: "Closing Alert test"  
+bs_alert close_on: 'close-alert', text: "Closing Alert test"  
 onclick emit: "close-alert" do
-  btn text: "close alert"
+  bs_btn text: "close alert"
 end
 ```
 
@@ -77,9 +77,9 @@ end
 
 ```ruby
 toggle show_on: "my-event" do        
-  alert heading: "Alert Heading", text: "This is an alert", animate: true, dismissible: true
+  bs_alert heading: "Alert Heading", text: "This is an alert", animate: true, dismissible: true
 end
 onclick emit: "my-event" do
-  btn text: "Show Alert"
+  bs_btn text: "Show Alert"
 end
 ```

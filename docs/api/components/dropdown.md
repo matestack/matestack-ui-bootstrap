@@ -2,10 +2,10 @@
 
 The Bootstrap `dropdown` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## `dropdown(*args, &block)`
+## `bs_dropdown(*args, &block)`
 ----
 
-Returns a bootstrap dropdown. Also the dropdown is customizable with the following options. 
+Returns a bootstrap dropdown. Also the dropdown is customizable with the following options.
 
 **Optional options**
 
@@ -28,10 +28,10 @@ Returns a bootstrap dropdown. Also the dropdown is customizable with the followi
 
 ## Examples
 
-### Example 1: Single Button 
+### Example 1: Single Button
 
 ```ruby
-dropdown id: "dropdownMenuButton", variant: :secondary, text: "Dropdown button", menu: [
+bs_dropdown id: "dropdownMenuButton", variant: :secondary, text: "Dropdown button", menu: [
             { type: :link, path: "#", text: "Action" },
             { type: :link, path: "#", text: "Another action" }
           ]
@@ -50,10 +50,10 @@ returns
 </div>
 ```
 
-### Example 2: Split Button 
+### Example 2: Split Button
 
 ```ruby
-dropdown slots: { split_btn: slot { btn text: "Split Button" } }, 
+bs_dropdown slots: { split_btn: slot { btn text: "Split Button" } }, 
           menu: [
             { type: :link, path: "#", text: "Action" },
             { type: :link, path: "#", text: "Another action" },

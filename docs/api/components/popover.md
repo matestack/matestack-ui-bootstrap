@@ -2,10 +2,10 @@
 
 The Bootstrap `popover` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## `popover(*args, &block)`
+## `bs_popover(*args, &block)`
 ----
 
-Returns a bootstrap component containing text or content specified by a block which can trigger a popover element. Also the popover is customizable with the following options. 
+Returns a bootstrap component containing text or content specified by a block which can trigger a popover element. Also the popover is customizable with the following options.
 
 **Optional options**
 
@@ -39,9 +39,9 @@ Returns a bootstrap component containing text or content specified by a block wh
 ### Example 1: Basic Popover
 
 ```ruby
-popover text: "Click to toggle popover", 
-        content: "And here's some amazing content. It's very engaging. Right?", 
-        title: "Popover title", 
+bs_popover text: "Click to toggle popover",
+        content: "And here's some amazing content. It's very engaging. Right?",
+        title: "Popover title",
         variant: :danger
 ```
 
@@ -56,7 +56,7 @@ returns
 ### Example 2: Popover with HTML tag inside
 
 ```ruby
-popover text: "Popover", html: 'true', content: "<p>this paragraph in popover</p>" 
+bs_popover text: "Popover", html: 'true', content: "<p>this paragraph in popover</p>"
 
 ```
 
@@ -68,10 +68,10 @@ returns
 </button>
 ```
 
-### Example 3: 
+### Example 3:
 
 ```ruby
-popover tag: :link, placement: :top, tabindex: "0", variant: :danger, trigger: "focus", title: "Dismissible popover", content: "And here's some amazing content. It's very engaging. Right?", text: "Dismissible Popover"
+bs_popover tag: :link, placement: :top, tabindex: "0", variant: :danger, trigger: "focus", title: "Dismissible popover", content: "And here's some amazing content. It's very engaging. Right?", text: "Dismissible Popover"
 
 ```
 

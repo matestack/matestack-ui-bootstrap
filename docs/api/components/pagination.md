@@ -2,7 +2,7 @@
 
 The Bootstrap `pagination` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## `pagination(*args, &block)`
+## `bs_pagination(*args, &block)`
 ----
 
 Returns a bootstrap pagination containing list of items or content specified by a block. Also the pagination is customizable with the following options.
@@ -24,7 +24,7 @@ Returns a bootstrap pagination containing list of items or content specified by 
 ### Example 1: Basic page navigation
 
 ```ruby
-pagination aria_label: "Page navigation example", items: [
+bs_pagination aria_label: "Page navigation example", items: [
             { type: :link, path: "#", text: "Previous" },
             { type: :link, path: "#", text: "1", active: true },
             { type: :link, path: "#", text: "2" },
@@ -50,7 +50,7 @@ returns
 ### Example 2: Using Size option
 
 ```ruby
-pagination aria_label: "...", size: :lg, items: [
+bs_pagination aria_label: "...", size: :lg, items: [
             { path: "#", text: "1", active: true },
             { path: "#", text: "2" },
             { path: "#", text: "3" },

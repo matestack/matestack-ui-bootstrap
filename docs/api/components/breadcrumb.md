@@ -2,10 +2,10 @@
 
 The Bootstrap `breadcrumb` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## `breadcrumb(*args, &block)`
+## `bs_breadcrumb(*args, &block)`
 ----
 
-Returns a bootstrap breadcrumb containing content created from an array of `items` and/or content specified by a block. The breadcrumb is customizable with the following options. 
+Returns a bootstrap breadcrumb containing content created from an array of `items` and/or content specified by a block. The breadcrumb is customizable with the following options.
 
 **Optional options**
 
@@ -26,7 +26,7 @@ items = [
   { path: root_path, text: 'Home' },
   { path: products_path, text: 'Products' },
 ]
-breadcrumb items: items, class: 'my-breadcrumb'
+bs_breadcrumb items: items, class: 'my-breadcrumb'
 ```
 
 Result:
@@ -45,14 +45,14 @@ Result:
 ```
 _Note: Attributes which are set to enable transition on "a" tags are not added for the case of simplicity._
 
-### Breadcrumb with one transition and one link 
+### Breadcrumb with one transition and one link
 
 ```ruby
 items = [
   { path: root_path, text: 'Home', type: :link },
   { path: products_path, text: 'Products' },
 ]
-breadcrumb items: items, class: 'my-breadcrumb'
+bs_breadcrumb items: items, class: 'my-breadcrumb'
 ```
 
 Result:

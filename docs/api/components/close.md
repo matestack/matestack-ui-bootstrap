@@ -2,10 +2,10 @@
 
 The Bootstrap `close` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## `close(*args, &block)`
+## `bs_close(*args, &block)`
 ----
 
-Returns a bootstrap close button for dismissing content like modals and alerts. Also the close is customizable with the following options. 
+Returns a bootstrap close button for dismissing content like modals and alerts. Also the close is customizable with the following options.
 
 **Optional options**
 
@@ -18,7 +18,7 @@ Returns a bootstrap close button for dismissing content like modals and alerts. 
 ### Example 1: Display basic close button
 
 ```ruby
-close
+bs_close
 ```
 
 returns
@@ -32,7 +32,7 @@ returns
 ### Example 2: Using close button for dismissing a modal content
 
 ```ruby
-close dismiss: "modal"
+bs_close dismiss: "modal"
 ```
 
 returns

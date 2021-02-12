@@ -5,7 +5,7 @@ The Bootstrap `button group` component, implemented in Ruby. Use it like any oth
 ## `btn_group(*args, &block)`
 ----
 
-Returns a bootstrap button-group containing content specified by a block. Also the button_group is customizable with the following options. 
+Returns a bootstrap button-group containing content specified by a block. Also the button_group is customizable with the following options.
 
 **Optional options**
 
@@ -21,13 +21,13 @@ Returns a bootstrap button-group containing content specified by a block. Also t
 
 ## Examples
 
-### Example 1: 
+### Example 1:
 
 ```ruby
-btn_group label: "Basic example" do 
-  btn variant: :secondary, text: "Left"
-  btn variant: :secondary, text: "Middle"
-  btn variant: :secondary, text: "Right"
+bs_btn_group label: "Basic example" do
+  bs_btn variant: :secondary, text: "Left"
+  bs_btn variant: :secondary, text: "Middle"
+  bs_btn variant: :secondary, text: "Right"
 end
 ```
 
@@ -44,9 +44,9 @@ returns
 ### Example 2: Using size
 
 ```ruby
-btn_group size: :lg, label: "..." do ... end
-btn_group label: "..." do ... end
-btn_group size: :sm, label: "..." do ... end
+bs_btn_group size: :lg, label: "..." do ... end
+bs_btn_group label: "..." do ... end
+bs_btn_group size: :sm, label: "..." do ... end
 ```
 
 returns
@@ -60,13 +60,13 @@ returns
 ### Example 3: Button Toolbar
 
 ```ruby
-btn_group toolbar: true, label: "Toolbar with button groups" do
-  btn_group label: "First group" do 
+bs_btn_group toolbar: true, label: "Toolbar with button groups" do
+  bs_btn_group label: "First group" do
     btn variant: :secondary, text: "1"
     btn variant: :secondary, text: "2"
     btn variant: :secondary, text: "3"
   end
-  btn_group label: "Second group" do 
+  bs_btn_group label: "Second group" do 
     btn variant: :secondary, text: "1"
     btn variant: :secondary, text: "2"
     btn variant: :secondary, text: "3"

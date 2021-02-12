@@ -2,10 +2,10 @@
 
 The Bootstrap `tooltip` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## `tooltip(*args, &block)`
+## `bs_tooltip(*args, &block)`
 ----
 
-Returns a bootstrap component containing text or content specified by a block which can trigger a tooltip element. Also the tooltip is customizable with the following options. 
+Returns a bootstrap component containing text or content specified by a block which can trigger a tooltip element. Also the tooltip is customizable with the following options.
 
 **Optional options**
 
@@ -39,10 +39,10 @@ Returns a bootstrap component containing text or content specified by a block wh
 ### Example 1: Basic tooltip
 
 ```ruby
-tooltip text: "Click to toggle tooltip", 
-        content: "And here's some amazing content. It's very engaging. Right?", 
-        title: "tooltip title", 
-        variant: :danger
+bs_tooltip text: "Click to toggle tooltip",
+  content: "And here's some amazing content. It's very engaging. Right?",
+  title: "tooltip title",
+  variant: :danger
 ```
 
 returns
@@ -56,7 +56,14 @@ returns
 ### Example 2: Tooltip as link appears when click
 
 ```ruby
-tooltip tag: :link, placement: :top, tabindex: "0", variant: :danger, trigger: "focus", title: "Tooltip Title", content: "And here's some amazing content. It's very engaging. Right?", text: "Click for tooltip"
+bs_tooltip tag: :link,
+  placement: :top,
+  tabindex: "0",
+  variant: :danger,
+  trigger: "focus",
+  title: "Tooltip Title",
+  content: "And here's some amazing content. It's very engaging. Right?",
+  text: "Click for tooltip"
 ```
 
 returns

@@ -2,10 +2,10 @@
 
 The Bootstrap `modal` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## `modal(*args, &block)`
+## `bs_modal(*args, &block)`
 ----
 
-Returns a bootstrap modal containing header, body, footer or content specified by a block. The component can be trigger remotely. Also the modal is customizable with the following options. 
+Returns a bootstrap modal containing header, body, footer or content specified by a block. The component can be trigger remotely. Also the modal is customizable with the following options.
 
 **Optional options**
 
@@ -15,7 +15,7 @@ Returns a bootstrap modal containing header, body, footer or content specified b
 * `:fade` - If set true, it will slide down and fade in from the top of the page. By default it's set as true.
 * `:size` - Modals have three optional sizes, available via modifier classes `:sm`, `:lg`, `:xl`. Default size is set when size option is not available
 * `:fullscreen` - option to pop up a modal that covers the user viewport, available via modifier classes
-* `:static` - if set true, the modal will not close when clicking outside it. 
+* `:static` - if set true, the modal will not close when clicking outside it.
 * `:keyboard` - set true to close the modal when escape key is pressed
 * `:scrollable` - set true to create a scrollable modal that allows scroll the modal body
 * `:centered` - set true to vertically center the modal
@@ -33,15 +33,15 @@ Returns a bootstrap modal containing header, body, footer or content specified b
 
 ```ruby
 # To trigger Modal you can use btn component with data-toggle and data-target
-btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
+bs_btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
 
-modal id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close", static: true, keyboard: false
+bs_modal id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close", static: true, keyboard: false
 # ---------------------------------------
 # or you can also use javascript trigger
 onclick emit: "toggleModal" do
-  btn text: "Launch Modal"
+  bs_btn text: "Launch Modal"
 end
-modal toggle_on: "toggleModal", id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close", static: true, keyboard: false
+bs_modal toggle_on: "toggleModal", id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close", static: true, keyboard: false
 ```
 
 returns
@@ -74,7 +74,7 @@ returns
 ### Example 2: Modal with custom header
 *body and footer hashes are working in similar way*
 ```ruby
-modal header: { text: "Modal Title", class: "text-center", size: 1 },     
+bs_modal header: { text: "Modal Title", class: "text-center", size: 1 },     
       body: "Modal Messages", footer: "Close"
 ```
 

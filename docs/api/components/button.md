@@ -5,7 +5,7 @@ The Bootstrap `button` component, implemented in Ruby. Use it like any other mat
 ## `btn(*args, &block)`
 ----
 
-Returns a bootstrap button containing text or content specified by a block. Also the button is customizable with the following options. 
+Returns a bootstrap button containing text or content specified by a block. Also the button is customizable with the following options.
 
 **Optional options**
 
@@ -27,18 +27,18 @@ Returns a bootstrap button containing text or content specified by a block. Also
 The btn implemented in ruby has by default primary as styling
 
 ```ruby
-btn text: "Primary"
-btn variant: :secondary, text: "Secondary"
-btn variant: :success, text: "Success"
-btn variant: :danger, text: "Danger"
-btn variant: :warning, text: "Warning"
-btn variant: :info, text: "Info"
-btn variant: :light, text: "Light"
-btn variant: :dark, text: "Dark"
-btn variant: :link, text: "Link"
+bs_btn text: "Primary"
+bs_btn variant: :secondary, text: "Secondary"
+bs_btn variant: :success, text: "Success"
+bs_btn variant: :danger, text: "Danger"
+bs_btn variant: :warning, text: "Warning"
+bs_btn variant: :info, text: "Info"
+bs_btn variant: :light, text: "Light"
+bs_btn variant: :dark, text: "Dark"
+bs_btn variant: :link, text: "Link"
 
-btn variant: :primary, outline: true, text: "Outline Primary"
-btn variant: :secondary, outline: true, text: "Outline Secondary"
+bs_btn variant: :primary, outline: true, text: "Outline Primary"
+bs_btn variant: :secondary, outline: true, text: "Outline Secondary"
 ...
 ```
 
@@ -62,7 +62,7 @@ returns
 ### Example 2: Yield a given block
 
 ```ruby
-btn id: 'foo', class: 'bar' do
+bs_btn id: 'foo', class: 'bar' do
   plain "Click me"
 end
 ```
@@ -78,8 +78,8 @@ returns
 
 ### Example 3: Using pre define btn size parameter
 ```ruby
-btn variant: :success, size: :sm, text: "Small btn"
-btn variant: :secondary, size: :lg, text: "Large btn"
+bs_btn variant: :success, size: :sm, text: "Small btn"
+bs_btn variant: :secondary, size: :lg, text: "Large btn"
 ```
 
 returns

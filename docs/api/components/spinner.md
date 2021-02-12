@@ -4,15 +4,15 @@ Bootstraps `spinner` component implemented in Ruby. Use it like any other matest
 
 
 
-## `spinner(*args, &block)`
+## `bs_spinner(*args, &block)`
 ----
 
-Returns a bootstrap spinner containing text or content specified by a block. Also the spinner is customizable with the following options. 
+Returns a bootstrap spinner containing text or content specified by a block. Also the spinner is customizable with the following options.
 
 **Optional options**
 
 * `:variant` - Specify a variant for the spinner. Variant represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class. The default is `:primary`
-  
+
 * `:kind` - Choose one of the two available bootstrap spinners. Possible values are `:border, :grow`. The default value is `:border`
 
 * `:size` - Use `:sm` to make the spinner appear smaller. The default is `nil`.
@@ -26,7 +26,7 @@ Returns a bootstrap spinner containing text or content specified by a block. Als
 ### Basic border spinner
 Basic border spinner with primary style as default and a default screen reader only text.
 ```ruby
-spinner
+bs_spinner
 ```
 Result:
 ```html
@@ -38,7 +38,7 @@ Result:
 ### Border Spinner with different variants
 Changing the appearance of the border spinner.
 ```ruby
-spinner variant: :secondary, 
+bs_spinner variant: :secondary,
 ```
 Result:
 ```html
@@ -50,7 +50,7 @@ Result:
 ### Growing spinner
 Changing the spinner kind to display bootstraps growing spinner with the "success" appearance.
 ```ruby
-spinner kind: :grow, variant: :success
+bs_spinner kind: :grow, variant: :success
 ```
 Result:
 ```html
@@ -59,11 +59,11 @@ Result:
 </div>
 ```
 
-### Small spinner within a button 
+### Small spinner within a button
 
 ```ruby
-btn variant: :secondary do
-  spinner kind: :grow, size: :sm
+bs_btn variant: :secondary do
+  bs_spinner kind: :grow, size: :sm
   plain "Loading..."
 end
 ```

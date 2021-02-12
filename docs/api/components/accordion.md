@@ -2,15 +2,15 @@
 
 The Bootstrap `accordion` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## `accordion(*args, &block)`
+## `bs_accordion(*args, &block)`
 ----
 
-Returns a bootstrap accordion containing card header and collapsable card-body elements or content specified by a block. 
+Returns a bootstrap accordion containing card header and collapsable card-body elements or content specified by a block.
 
 **Optional options**
 
 * `:items` - expects an array with 2 hashes, one for `header` and one for `body`. The two hashes can have the following keys
-  * `header`: 
+  * `header`:
     * `class` & `id` - adding custom class and id to header component
     * `size` - customize heading element, by default it's set as `h2`
     * `variant` - Specify a variant for the xxxx. Variant represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class.
@@ -24,13 +24,13 @@ Returns a bootstrap accordion containing card header and collapsable card-body e
 
 ## Examples
 
-### Example 1: 
+### Example 1:
 
 ```ruby
-accordion id: "accordionExample", items: [
-  { header: { text: "Collapsible Group Item #1", variant: :light, class: "text-left p-3 rounded-0" }, 
+bs_accordion id: "accordionExample", items: [
+  { header: { text: "Collapsible Group Item #1", variant: :light, class: "text-left p-3 rounded-0" },
     body: { text: "Random Text for Collapse #1" } },
-  { header: { text: "Collapsible Group Item #2", variant: :light, class: "text-left p-3 rounded-0" }, 
+  { header: { text: "Collapsible Group Item #2", variant: :light, class: "text-left p-3 rounded-0" },
     body: { text: "Random Text for Collapse #2" } }
 ]
 ```
