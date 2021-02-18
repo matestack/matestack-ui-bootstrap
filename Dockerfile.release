@@ -1,1 +1,26 @@
-FROM registry.gitlab.com/basemate-ops/workflow/release:latest
+FROM ruby:2.7.2-alpine3.12
+
+RUN gem install bundler:2.1.4
+
+RUN apk update --no-cache && \
+    apk add build-base postgresql-dev git nodejs yarn tzdata bash sqlite-dev npm && \
+    mkdir -p /app
+
+WORKDIR /app
+
+COPY ./lib/ /app/lib/
+COPY matestack-ui-bootstrap.gemspec /app/
+COPY Gemfile* yarn* /app/
+RUN bundle install
+
+COPY package.json* /app/
+RUN yarn install
+
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+
+COPY . /app/
+RUN touch /app/.env && set -a && source /app/.env && set +a && bundle exec rails assets:precompile RAILS_ENV=production
+
+CMD ["bundle", "exec", "rails", "server"]
