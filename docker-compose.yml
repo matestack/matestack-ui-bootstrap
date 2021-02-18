@@ -2,7 +2,9 @@ version: '3'
 services:
 
   postgres:
-    image: registry.gitlab.com/basemate-ops/workflow/postgres
+    build:
+      context: .
+      dockerfile: ./Dockerfile.postgres
     expose:
       - 5432
     volumes:
@@ -12,7 +14,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: development
 
-  rails:
+  dummy:
     build:
       context: .
       dockerfile: ./Dockerfile.dev
@@ -27,8 +29,16 @@ services:
     volumes:
       - ./:/app
       - gem-volume:/usr/local/bundle
-      - node-volume:/app/node_modules
     command: "bundle exec rails server --binding 0.0.0.0 --port 3000"
+
+  builder:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - ./:/app
+      - gem-volume:/usr/local/bundle
+    command: "bundle exec rake app:matestack_ui_bootstrap:webpacker:compile"
 
   redis:
     restart: always
@@ -40,4 +50,6 @@ volumes:
   data-volume:
   gem-volume:
   node-volume:
+  dummy-node-volume:
   redis-volume:
+  builder-node-volume:

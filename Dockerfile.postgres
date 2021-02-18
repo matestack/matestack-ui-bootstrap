@@ -1,0 +1,4 @@
+FROM postgres:10.6-alpine
+
+COPY setpw.sh /usr/bin/
+RUN chmod +x /usr/bin/setpw.sh

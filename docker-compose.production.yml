@@ -2,7 +2,9 @@ version: '3'
 services:
 
   postgres:
-    image: registry.gitlab.com/basemate-ops/workflow/postgres
+    build:
+      context: .
+      dockerfile: ./Dockerfile.postgres
     expose:
       - 5432
     volumes:

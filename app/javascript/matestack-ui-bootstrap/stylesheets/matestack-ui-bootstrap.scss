@@ -1,0 +1,65 @@
+// Page loading state
+.matestack-page-container{
+
+  .matestack-page-wrapper {
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+
+    &.loading {
+      opacity: 0;
+    }
+  }
+
+  .loading-state-element-wrapper{
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+
+    &.loading {
+      opacity: 1;
+    }
+  }
+
+}
+
+// Async loading state
+.matestack-async-component-container{
+
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+
+  &.loading {
+    opacity: 0;
+  }
+
+}
+
+// Isolated loading state
+.matestack-isolated-component-container{
+
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+
+  &.loading {
+    opacity: 0;
+  }
+
+}
+
+
+//Layouting
+
+.matestack-app-wrapper{
+  overflow-x: hidden;
+}
+
+.content-wrapper{
+  position: relative;
+  z-index: 1;
+  min-height: 101vh;
+  transition: 0.5s;
+  &.sidebar-open{
+    @media (max-width: 992px) {
+      margin-left: -300px;
+    }
+  }
+}
