@@ -21,6 +21,6 @@ RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
 COPY . /app/
-RUN touch /app/.env && set -a && source /app/.env && set +a && bundle exec rails assets:precompile RAILS_ENV=production
+RUN touch /app/.env && set -a && source /app/.env && set +a && bundle exec rails app:assets:precompile RAILS_ENV=production
 
 CMD ["bundle", "exec", "rails", "server"]

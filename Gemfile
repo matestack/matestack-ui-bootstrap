@@ -23,18 +23,15 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-group :development, :test do
-  gem 'rspec-rails', '~> 3.8'
-  gem 'capybara'
-  gem 'webpacker', '~> 5.0'
-  gem 'pg', '>= 0.18', '< 2.0'
-  gem 'selenium-webdriver'
-  gem 'puma'
-  gem 'simplecov', require: false, group: :test
-  gem 'byebug'
-  gem 'webmock'
-  gem 'turbolinks'
-end
+gem 'rspec-rails', '~> 3.8'
+gem 'capybara'
+gem 'webpacker', '~> 5.0'
+gem 'pg', '>= 0.18', '< 2.0'
+gem 'selenium-webdriver'
+gem 'puma'
+gem 'simplecov', require: false, group: :test
+gem 'byebug'
+gem 'webmock'
 
 group :test do
   gem 'pry-rails'
