@@ -17,15 +17,14 @@ release:
     - docker push $CONTAINER_RELEASE_IMAGE
   only:
     - develop
-    - master
+    - main
   tags:
     - build #shared runner on shared machine
 
 deploy-production-de:
   stage: deploy-production
   only:
-    - develop
-    - master
+    - main
   script:
     - docker pull $CONTAINER_RELEASE_IMAGE
     - chmod +x dbauth.sh
@@ -43,8 +42,7 @@ deploy-production-de:
 deploy-production-us:
   stage: deploy-production
   only:
-    - develop
-    - master
+    - main
   script:
     - docker pull $CONTAINER_RELEASE_IMAGE
     - chmod +x dbauth.sh
@@ -62,8 +60,7 @@ deploy-production-us:
 deploy-production-singapore-1:
   stage: deploy-production
   only:
-    - develop
-    - master
+    - main
   script:
     - docker pull $CONTAINER_RELEASE_IMAGE
     - chmod +x dbauth.sh
