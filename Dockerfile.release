@@ -23,6 +23,7 @@ ENTRYPOINT ["entrypoint.sh"]
 COPY . /app/
 
 WORKDIR /app/spec/dummy
+RUN rm package-lock.json
 RUN npm install
 
 WORKDIR /app
