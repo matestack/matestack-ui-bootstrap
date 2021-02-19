@@ -196,6 +196,7 @@ GEM
       thor (~> 1.0)
     rake (13.0.3)
     redcarpet (3.5.1)
+    redis (4.2.5)
     regexp_parser (2.0.3)
     request_store (1.5.0)
       rack (>= 1.4)
@@ -292,6 +293,7 @@ DEPENDENCIES
   pry-rails
   puma
   redcarpet
+  redis
   rouge
   rspec-rails (~> 3.8)
   rspec-retry

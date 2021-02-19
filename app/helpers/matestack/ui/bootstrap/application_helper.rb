@@ -2,12 +2,16 @@
 
 require "webpacker/helper"
 
-module MyEngine
-  module ApplicationHelper
-    include ::Webpacker::Helper
+module Matestack
+  module Ui
+    module Bootstrap
+      module ApplicationHelper
+        include ::Webpacker::Helper
 
-    def current_webpacker_instance
-      MyEngine.webpacker
+        def current_webpacker_instance
+          Matestack::Ui::Bootstrap::Engine.webpacker
+        end
+      end
     end
   end
 end

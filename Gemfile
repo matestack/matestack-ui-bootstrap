@@ -32,6 +32,7 @@ gem 'puma'
 gem 'simplecov', require: false, group: :test
 gem 'byebug'
 gem 'webmock'
+gem 'redis'
 
 group :test do
   gem 'pry-rails'
