@@ -32,7 +32,6 @@ deploy-production-de:
     - docker-compose -f docker-compose.production.yml up -d postgres
     - docker-compose -f docker-compose.production.yml exec -d postgres sh /usr/bin/setpw.sh
     - sleep 10 #make sure postgres container is ready
-    - docker-compose -f docker-compose.production.yml run --rm dummy bundle exec rails app:webpacker:compile RAILS_ENV=production
     - docker-compose -f docker-compose.production.yml run --rm dummy bundle exec rake db:create
     - docker-compose -f docker-compose.production.yml run --rm dummy bundle exec rake db:migrate
     - docker-compose -f docker-compose.production.yml run --rm dummy bundle exec rake db:seed
