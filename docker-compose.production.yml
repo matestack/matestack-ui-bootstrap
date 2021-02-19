@@ -14,7 +14,7 @@ services:
     env_file:
       - ./.env
 
-  rails:
+  dummy:
     image: registry.gitlab.com/matestack/matestack-ui-bootstrap
     ports:
       - "3003:3000"
