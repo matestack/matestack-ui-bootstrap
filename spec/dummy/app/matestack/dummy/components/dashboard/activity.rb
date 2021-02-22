@@ -22,7 +22,7 @@ class Dummy::Components::Dashboard::Activity < Matestack::Ui::Component
     bs_row class: "mb-3" do
       div class: "col-auto pe-0" do
         if version.whodunnit.present?
-          # bs_avatar img_path: asset_pack_url('media/images/avatar-placeholder.png')
+          bs_avatar img_path: image_url('avatar-placeholder.png')
         end
       end
       bs_col do
