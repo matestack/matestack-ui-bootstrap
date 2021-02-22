@@ -23,7 +23,9 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-gem 'rspec-rails', '~> 3.8'
+gem 'rails', '6.1.2'
+
+gem 'rspec-rails', '~> 4.0.2'
 gem 'capybara'
 gem 'webpacker', '~> 5.0'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -39,5 +41,5 @@ group :test do
   gem 'pry-byebug'
   gem "generator_spec"
   gem "rspec-retry" # repeating flaky tests
-  gem "rspec-wait", "~> 0.0.9"
+  gem "rspec-wait"
 end

@@ -41,6 +41,33 @@ services:
       - gem-volume:/usr/local/bundle
     command: "bundle exec rake app:matestack_ui_bootstrap:webpacker:compile"
 
+  test:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.test
+    environment:
+      RAILS_ENV: test
+    links:
+      - postgres_test
+    ports:
+      - "33123:33123"
+    volumes:
+      - ./:/app
+      - gem-volume:/usr/local/bundle
+    command: "bundle exec rspec spec/test"
+    user: ${CURRENT_UID}
+
+  postgres_test:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.postgres
+    expose:
+      - 5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: test
+
   redis:
     restart: always
     image: redis:5.0.7-alpine
