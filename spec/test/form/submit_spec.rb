@@ -1,5 +1,5 @@
 require 'rails_helper'
-require_relative "../../../support/form_test_controller"
+require_relative "../../support/form_test_controller"
 
 RSpec.describe "Bootstrap::Form::Submit", type: :feature, js: true do
   include Utils
