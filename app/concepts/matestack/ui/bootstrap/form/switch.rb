@@ -13,7 +13,7 @@ class Matestack::Ui::Bootstrap::Form::Switch < Matestack::Ui::Core::Form::Checkb
     else
       true_false_switch
     end
-    render_form_text
+    render_form_text unless form_text.nil? # otherwise renders empty div
   end
 
   private
@@ -34,6 +34,7 @@ class Matestack::Ui::Bootstrap::Form::Switch < Matestack::Ui::Core::Form::Checkb
       input html_attributes.merge(
         type: :checkbox,
         id: "#{id_for_item(value)}",
+        # id: "#{key}", alternative to address the visible input field better?
         name: item_name(key),
         value: checked_value,
         class: 'form-check-input',

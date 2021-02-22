@@ -13,7 +13,7 @@ class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::Core::Form::Chec
     else
       true_false_checkbox
     end
-    render_form_text
+    render_form_text unless form_text.nil? # otherwise renders empty div
   end
 
   private

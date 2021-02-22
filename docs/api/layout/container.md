@@ -17,7 +17,7 @@ Returns a bootstrap container containing content specified by a block. Also the 
 ### Example 1: Basic
 
 ```ruby
-bs_container size: :fluid do 
+bs_container size: :fluid do
   # content here
 end
 ```
@@ -29,4 +29,3 @@ returns
   <!-- Content here -->
 </div>
 ```
-

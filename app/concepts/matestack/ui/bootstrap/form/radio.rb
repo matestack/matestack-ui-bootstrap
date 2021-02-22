@@ -61,5 +61,4 @@ class Matestack::Ui::Bootstrap::Form::Radio < Matestack::Ui::Core::Form::Radio::
     'is-invalid'
   end
 
-
 end
