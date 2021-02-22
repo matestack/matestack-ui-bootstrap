@@ -24,9 +24,9 @@ services:
       - postgres
       - redis
     environment:
-      RAILS_ENV: "production"
+      RAILS_ENV: "development"
       POSTGRES_DB: "development"
-      SECRET_KEY_BASE: "8bd2ce5eb177ca1a2fbe752302ac77d5cad6698de75cdecd24ccfe9a02a8d174c354f654a15bd9f04a89973990bc7ac3cdd7121861ad2615fc1296e16c042c28"
+      # SECRET_KEY_BASE: "8bd2ce5eb177ca1a2fbe752302ac77d5cad6698de75cdecd24ccfe9a02a8d174c354f654a15bd9f04a89973990bc7ac3cdd7121861ad2615fc1296e16c042c28"
     volumes:
       - ./:/app
       - gem-volume:/usr/local/bundle

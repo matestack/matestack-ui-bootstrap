@@ -25,10 +25,6 @@ services:
       RAILS_ENV: "production"
       POSTGRES_DB: "production"
       SECRET_KEY_BASE: $SECRET_KEY_BASE
-      MAILER_ADDRESS: $MAILER_ADDRESS
-      MAILER_DOMAIN: $MAILER_DOMAIN
-      MAILER_PASSWORD: $MAILER_PASSWORD
-      MAILER_USER: $MAILER_USER
     env_file:
       - ./.env
     command: "bundle exec rails server --binding 0.0.0.0 --port 3000"
