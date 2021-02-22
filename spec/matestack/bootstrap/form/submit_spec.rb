@@ -22,7 +22,7 @@ RSpec.describe "Bootstrap::Form::Submit", type: :feature, js: true do
     form_config = get_form_config(path: delayed_success_submit_path)
     matestack_render do
       form form_config do
-        bootstrap_submit
+        bs_form_submit
       end
     end
     visit example_path
@@ -35,7 +35,7 @@ RSpec.describe "Bootstrap::Form::Submit", type: :feature, js: true do
     form_config = get_form_config(path: delayed_success_submit_path)
     matestack_render do
       form form_config do
-        bootstrap_submit text: "Submit!!", loading_text: "Getting submitted"
+        bs_form_submit text: "Submit!!", loading_text: "Getting submitted"
       end
     end
     visit example_path
@@ -48,7 +48,7 @@ RSpec.describe "Bootstrap::Form::Submit", type: :feature, js: true do
     form_config = get_form_config(path: delayed_success_submit_path)
     matestack_render do
       form form_config do
-        bootstrap_submit button_variant: :light, spinner_variant: :dark
+        bs_form_submit button_variant: :light, spinner_variant: :dark
       end
     end
     visit example_path
@@ -61,7 +61,7 @@ RSpec.describe "Bootstrap::Form::Submit", type: :feature, js: true do
     form_config = get_form_config(path: delayed_success_submit_path)
     matestack_render do
       form form_config do
-        bootstrap_submit size: :lg
+        bs_form_submit size: :lg
       end
     end
     visit example_path
@@ -74,7 +74,7 @@ RSpec.describe "Bootstrap::Form::Submit", type: :feature, js: true do
     form_config = get_form_config(path: delayed_success_submit_path)
     matestack_render do
         form form_config do
-            bootstrap_submit button_variant: :light, spinner_variant: :dark, size: :lg, text: "Submit!!", loading_text: "Getting submitted"
+            bs_form_submit button_variant: :light, spinner_variant: :dark, size: :lg, text: "Submit!!", loading_text: "Getting submitted"
         end
     end
     visit example_path
@@ -87,7 +87,7 @@ RSpec.describe "Bootstrap::Form::Submit", type: :feature, js: true do
     form_config = get_form_config(path: delayed_success_submit_path)
     matestack_render do
       form form_config do
-        bootstrap_submit button_variant: :light, spinner_variant: :dark, class: "custom-submit", class_loading: "custom-submit-loading", size: :lg, text: "Submit!!", loading_text: "Getting submitted"
+        bs_form_submit button_variant: :light, spinner_variant: :dark, class: "custom-submit", class_loading: "custom-submit-loading", size: :lg, text: "Submit!!", loading_text: "Getting submitted"
       end
     end
     visit example_path

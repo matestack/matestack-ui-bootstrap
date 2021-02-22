@@ -5,7 +5,7 @@ describe 'Bootstrap::Components::Progress', type: :feature, js: true do
 
   it 'default progress bar with as primary' do
     matestack_render do
-      progress progress: 50
+      bs_progress progress: 50
     end
     visit example_path
     expect(page).to have_selector('div.progress')
@@ -17,15 +17,15 @@ describe 'Bootstrap::Components::Progress', type: :feature, js: true do
   end
 
   it 'can render a default progress bar with text' do
-    matestack_render { progress progress: 50, text: '50%' }
+    matestack_render { bs_progress progress: 50, text: '50%' }
     visit example_path
     expect(page).to have_selector('div.progress-bar', text: '50%')
   end
-  
+
   it 'is possible to either set value or progress' do
-    matestack_render do 
-      progress progress: 50, text: '50%'
-      progress value: 40, text: '40%'
+    matestack_render do
+      bs_progress progress: 50, text: '50%'
+      bs_progress value: 40, text: '40%'
     end
     visit example_path
     expect(page).to have_css('div.progress-bar[aria-valuenow="50"]', text: '50%')
@@ -35,7 +35,7 @@ describe 'Bootstrap::Components::Progress', type: :feature, js: true do
   end
 
   it 'can set a valuemin and valuemax' do
-    matestack_render { progress progress: 50, valuemin: 10, valuemax: 70 }
+    matestack_render { bs_progress progress: 50, valuemin: 10, valuemax: 70 }
     visit example_path
     expect(page).to have_selector('div.progress-bar.bg-primary[role=progressbar]')
     expect(page).to have_css('div.progress-bar[aria-valuenow="50"]')
@@ -45,7 +45,7 @@ describe 'Bootstrap::Components::Progress', type: :feature, js: true do
 
   it 'is possible to change its height' do
     matestack_render do
-      progress height: 40, value: 30
+      bs_progress height: 40, value: 30
     end
     visit example_path
     expect(page).to have_css('div.progress[style="height: 40px;"]')
@@ -53,7 +53,7 @@ describe 'Bootstrap::Components::Progress', type: :feature, js: true do
   end
 
   it 'is possible to change its appearance' do
-    matestack_render { progress variant: :secondary, value: 30 }
+    matestack_render { bs_progress variant: :secondary, value: 30 }
     visit example_path
     expect(page).to have_css('div.progress')
     expect(page).to have_selector('div.progress-bar.bg-secondary[role=progressbar]')
@@ -61,7 +61,7 @@ describe 'Bootstrap::Components::Progress', type: :feature, js: true do
 
   it 'is possible to make it striped and animated' do
     matestack_render do
-      progress value: 30, striped: true, animated: true
+      bs_progress value: 30, striped: true, animated: true
     end
     visit example_path
     expect(page).to have_css('div.progress')
@@ -70,7 +70,7 @@ describe 'Bootstrap::Components::Progress', type: :feature, js: true do
 
   it 'is possible to create multiple progress bars by passing in a list to :progress' do
     matestack_render do
-      progress animated: true, variant: :light, progress: [
+      bs_progress animated: true, variant: :light, progress: [
           { value: 50, text: '50%', variant: :success, striped: true },
           { value: 25, text: '25%', variant: :warning, animated: false },
           { value: 15, text: '15%', class: 'a-class', aria_valuenow: 'some percent' }

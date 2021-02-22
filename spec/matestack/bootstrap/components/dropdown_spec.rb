@@ -2,10 +2,10 @@ require 'rails_helper'
 
 describe 'Bootstrap::Components::ListGroup', type: :feature, js: true do
   include Utils
-  
+
   it 'renders basic dropdown' do
-    matestack_render do 
-      dropdown 
+    matestack_render do
+      bs_dropdown
     end
     visit example_path
     expect(page).to have_selector('div.dropdown')
@@ -13,8 +13,8 @@ describe 'Bootstrap::Components::ListGroup', type: :feature, js: true do
   end
 
   it 'has custom button with text' do
-    matestack_render do 
-      dropdown variant: :secondary, text: "Dropdown"
+    matestack_render do
+      bs_dropdown variant: :secondary, text: "Dropdown"
     end
     visit example_path
     expect(page).to have_selector('button.btn.btn-secondary.dropdown-toggle')
@@ -22,11 +22,11 @@ describe 'Bootstrap::Components::ListGroup', type: :feature, js: true do
   end
 
   it 'has a dropdown menu item' do
-    matestack_render do 
-      dropdown text: "Dropdown", menu: [
+    matestack_render do
+      bs_dropdown text: "Dropdown", menu: [
         { type: :link, path: "#", text: "Nulla vitae elit" },
         { type: :button, text: "Action" },
-        { type: :divider }, 
+        { type: :divider },
         { type: :link, path: "#", text: "Separated link" }
       ]
     end
@@ -40,8 +40,8 @@ describe 'Bootstrap::Components::ListGroup', type: :feature, js: true do
   end
 
   it 'has a block yiel after menu' do
-    matestack_render do 
-      dropdown text: "Dropdown", menu: [
+    matestack_render do
+      bs_dropdown text: "Dropdown", menu: [
         { type: :link, path: "#", text: "Nulla vitae elit" },
         { type: :button, text: "Action" }
       ] do
@@ -58,61 +58,61 @@ describe 'Bootstrap::Components::ListGroup', type: :feature, js: true do
   end
 
   it 'has a custom class for menu' do
-    matestack_render do 
-      dropdown text: "Dropdown", menu: { items: [
+    matestack_render do
+      bs_dropdown text: "Dropdown", menu: { items: [
         { type: :link, path: "#", text: "Nulla vitae elit" },
         { type: :button, text: "Action" },
-        { type: :divider }, 
+        { type: :divider },
         { type: :link, path: "#", text: "Separated link" }
-      ], class: "foobar" }    
+      ], class: "foobar" }
     end
     visit example_path
     expect(page).to have_selector('div.dropdown')
-    click_on('Dropdown')  
+    click_on('Dropdown')
     expect(page).to have_content('Nulla vitae elit')
     expect(page).to have_selector('li > button.btn.btn-primary.dropdown-item')
     expect(page).to have_selector('ul.dropdown-menu.foobar')
   end
 
   it 'can have a  split button using slot' do
-    matestack_render do 
-      dropdown slots: { split_btn: slot {
-        btn text: "Split Button"
+    matestack_render do
+      bs_dropdown slots: { split_btn: slot {
+        bs_btn text: "Split Button"
       } }
     end
     visit example_path
     expect(page).to have_content('Split Button')
-    expect(page).to have_selector('button.btn.btn-primary.dropdown-toggle.dropdown-toggle-split')  
+    expect(page).to have_selector('button.btn.btn-primary.dropdown-toggle.dropdown-toggle-split')
   end
 
   it 'can have different direction' do
-    matestack_render do 
-      dropdown text: "Dropdown", menu: [
+    matestack_render do
+      bs_dropdown text: "Dropdown", menu: [
         { type: :link, path: "#", text: "Nulla vitae elit" },
         { type: :button, text: "Action" },
       ], direction: :right
     end
     visit example_path
     expect(page).to have_selector('div.dropdown.dropright')
-    click_on('Dropdown')  
+    click_on('Dropdown')
     expect(page).to have_content('Nulla vitae elit')
   end
 
   it 'can have different alignment' do
-    matestack_render do 
-      dropdown text: "Dropdown", menu: [
+    matestack_render do
+      bs_dropdown text: "Dropdown", menu: [
         { type: :link, path: "#", text: "Nulla vitae elit" },
         { type: :button, text: "Action" },
       ], align: :center
     end
     visit example_path
-    click_on('Dropdown')  
+    click_on('Dropdown')
     expect(page).to have_selector('ul.dropdown-menu.dropdown-menu-center')
   end
 
   it 'can have an offset for menu' do
-    matestack_render do 
-      dropdown offset: "10,22", text: "Dropdown"
+    matestack_render do
+      bs_dropdown offset: "10,22", text: "Dropdown"
     end
     visit example_path
     expect(page).to have_selector('button.btn.btn-primary.dropdown-toggle[data-offset="10,22"]')

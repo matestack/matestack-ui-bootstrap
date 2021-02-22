@@ -5,15 +5,15 @@ RSpec.describe "Bootstrap::Components::Accordion", type: :feature, js: true do
 
   it 'renders basic accordion' do
     matestack_render do
-      accordion
+      bs_accordion
     end
     visit example_path
     expect(page).to have_selector('.accordion')
   end
-  
+
   it 'can expand and collapse with multiple card elements' do
     matestack_render do
-      accordion items: [
+      bs_accordion items: [
         { header: { text: "Group Item #1" }, body: { text: "Random Text for Collapse #1" } },
         { header: { text: "Group Item #3" }, body: { text: "Random Text for Collapse #3" } }
       ]
@@ -32,7 +32,7 @@ RSpec.describe "Bootstrap::Components::Accordion", type: :feature, js: true do
 
   it 'header can have custom variant' do
     matestack_render do
-      accordion items: [
+      bs_accordion items: [
         { header: { text: "Group Item #1", variant: :light }, body: { text: "Random Text for Collapse #1" } },
       ]
     end
@@ -41,7 +41,7 @@ RSpec.describe "Bootstrap::Components::Accordion", type: :feature, js: true do
   end
   it 'header can have custom class' do
     matestack_render do
-      accordion items: [
+      bs_accordion items: [
         { header: { text: "Group Item #2", class: "foobar" }, body: { text: "Random Text for Collapse #2" } },
       ]
     end
@@ -51,7 +51,7 @@ RSpec.describe "Bootstrap::Components::Accordion", type: :feature, js: true do
 
   it 'body can have custom class' do
     matestack_render do
-      accordion items: [
+      bs_accordion items: [
         { header: { text: "Group Item #2" }, body: { text: "Random Text for Collapse #2", class: "foobar" } },
       ]
     end
@@ -62,7 +62,7 @@ RSpec.describe "Bootstrap::Components::Accordion", type: :feature, js: true do
 
   it 'has collapse with multi target' do
     matestack_render do
-      accordion items: [
+      bs_accordion items: [
         { header: { text: "Group Item #2" }, body: { text: "Random Text for Collapse #2", multi: true } },
       ]
     end

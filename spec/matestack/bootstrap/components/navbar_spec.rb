@@ -5,23 +5,23 @@ RSpec.describe "Bootstrap::Components::Navbar", type: :feature, js: true do
 
   it 'rendes basic navbar' do
     matestack_render do
-      navbar
+      bs_navbar
     end
     visit example_path
     expect(page).to have_selector('nav.navbar', visible: false)
   end
-  
+
   it 'has brand elements' do
     matestack_render do
-      navbar brand: {text: "BRAND TEXT", path: "#"}
+      bs_navbar brand: {text: "BRAND TEXT", path: "#"}
     end
     visit example_path
     expect(page).to have_selector('.navbar-brand')
   end
-  
+
   it 'can have custom toggle class' do
     matestack_render do
-      navbar brand: "BRAND HERE", toggle: { position: :left, class: "foobar" }
+      bs_navbar brand: "BRAND HERE", toggle: { position: :left, class: "foobar" }
     end
     visit example_path
     expect(page).to have_selector('.foobar')
@@ -29,7 +29,7 @@ RSpec.describe "Bootstrap::Components::Navbar", type: :feature, js: true do
 
   it 'can have custom theme' do
     matestack_render do
-      navbar brand: "BRAND HERE", theme: :dark
+      bs_navbar brand: "BRAND HERE", theme: :dark
     end
     visit example_path
     expect(page).to have_selector('.navbar-dark.bg-dark')
@@ -37,7 +37,7 @@ RSpec.describe "Bootstrap::Components::Navbar", type: :feature, js: true do
 
   it 'can have different background color' do
     matestack_render do
-      navbar brand: "BRAND HERE", theme: :dark, color: :primary 
+      bs_navbar brand: "BRAND HERE", theme: :dark, color: :primary
     end
     visit example_path
     expect(page).to have_selector('.navbar-dark.bg-primary')
@@ -45,8 +45,8 @@ RSpec.describe "Bootstrap::Components::Navbar", type: :feature, js: true do
 
   it 'has multiple items' do
     matestack_render do
-      navbar hide_at: :sm, items: [
-                          { type: :transition, path: "/", text: "Home" }, 
+      bs_navbar hide_at: :sm, items: [
+                          { type: :transition, path: "/", text: "Home" },
                           { type: :transition, path: "#", text: "Contact" } ]
     end
     visit example_path
@@ -58,11 +58,11 @@ RSpec.describe "Bootstrap::Components::Navbar", type: :feature, js: true do
 
   it 'renders navbar with yield custom classes and custom component' do
     matestack_render do
-      navbar hide_at: :sm, items_class: "foobar", class: "text-center",
+      bs_navbar hide_at: :sm, items_class: "foobar", class: "text-center",
       items: [
-        { type: :transition, path: "/", text: "Home" }, 
+        { type: :transition, path: "/", text: "Home" },
         { type: :transition, path: "#", text: "Contact" } ] do
-                btn text: "Login"
+                bs_btn text: "Login"
               end
     end
     visit example_path
@@ -73,28 +73,28 @@ RSpec.describe "Bootstrap::Components::Navbar", type: :feature, js: true do
 
   it 'can have fixed top, fixed bottom or sticky top' do
     matestack_render do
-      navbar fixed_top: true
-      navbar fixed_bottom: true
-      navbar sticky_top: true
+      bs_navbar fixed_top: true
+      bs_navbar fixed_bottom: true
+      bs_navbar sticky_top: true
     end
     visit example_path
     expect(page).to have_selector('nav.navbar.fixed-top')
     expect(page).to have_selector('nav.navbar.fixed-bottom')
     expect(page).to have_selector('nav.navbar.sticky-top')
   end
-  
+
   it 'can have different container sizes' do
     matestack_render do
-      navbar container_size: :lg
+      bs_navbar container_size: :lg
     end
     visit example_path
     expect(page).to have_selector('nav > div.container-lg')
   end
-  
+
   it 'can collapse and expand' do
     matestack_render do
-      navbar toggle: :left, items: [
-        { type: :transition, path: "/", text: "Home" }, 
+      bs_navbar toggle: :left, items: [
+        { type: :transition, path: "/", text: "Home" },
         { type: :transition, path: "#", text: "Contact" } ]
     end
     visit example_path

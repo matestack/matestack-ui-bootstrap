@@ -5,7 +5,7 @@ describe 'Bootstrap::Components::Badge', type: :feature, js: true do
 
   it 'renders simple container' do
     matestack_render do
-      container do
+      bs_container do
         plain "Container"
       end
     end
@@ -15,7 +15,7 @@ describe 'Bootstrap::Components::Badge', type: :feature, js: true do
 
   it 'renders container with size & custom classes' do
     matestack_render do
-      container size: :lg, class: "bg-warning py-3" do
+      bs_container size: :lg, class: "bg-warning py-3" do
         plain "Container"
       end
     end

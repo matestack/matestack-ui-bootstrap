@@ -5,12 +5,12 @@ describe 'Bootstrap::Components::Col', type: :feature, js: true do
 
   it 'renders default column' do
     matestack_render do
-      row do
-        col do         
-          btn text: "Button A"
+      bs_row do
+        bs_col do
+          bs_btn text: "Button A"
         end
-        col do    
-          btn text: "Button B"      
+        bs_col do
+          bs_btn text: "Button B"
         end
       end
     end
@@ -20,12 +20,12 @@ describe 'Bootstrap::Components::Col', type: :feature, js: true do
 
   it 'renders column with breakpoints & alignment' do
     matestack_render do
-      row do
-        col default: 12, lg: 4, align_self: :center do
-          btn text: "Button A"
+      bs_row do
+        bs_col default: 12, lg: 4, align_self: :center do
+          bs_btn text: "Button A"
         end
-        col default: 12, md: 6, align_self: :start do
-          btn text: "Button B"      
+        bs_col default: 12, md: 6, align_self: :start do
+          bs_btn text: "Button B"
         end
       end
     end
@@ -36,14 +36,14 @@ describe 'Bootstrap::Components::Col', type: :feature, js: true do
 
   it 'renders column with order & offset' do
     matestack_render do
-      row do
-        col sm: 12, md: 4, lg: 4 do          
+      bs_row do
+        bs_col sm: 12, md: 4, lg: 4 do
           paragraph text: "Test 1"
         end
-        col sm: 12, md: 4, lg: 4, order_lg: 5 do          
+        bs_col sm: 12, md: 4, lg: 4, order_lg: 5 do
           paragraph text: "Test 2"
         end
-        col md: 4, order_lg: 1, offset: 2 do
+        bs_col md: 4, order_lg: 1, offset: 2 do
           paragraph text: "Test 3"
         end
       end
@@ -53,5 +53,5 @@ describe 'Bootstrap::Components::Col', type: :feature, js: true do
     expect(page).to have_selector('div.col-md-4.order-lg-1.offset-2')
   end
 
-  
+
 end

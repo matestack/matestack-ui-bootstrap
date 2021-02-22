@@ -16,7 +16,7 @@
 
 require 'capybara/rspec'
 
-require File.expand_path('config/environment.rb')
+require File.expand_path('spec/dummy/config/environment.rb')
 
 Dir[File.expand_path 'spec/support/**/*.rb'].each { |f| require f }
 
@@ -101,7 +101,7 @@ RSpec.configure do |config|
   config.before :all, type: :feature do
     unless Rails.application.routes.url_helpers.method_defined?(:example_path)
       Rails.application.routes.append do
-        get '/example', to: 'example#example', as: :example 
+        get '/example', to: 'example#example', as: :example
       end
       Rails.application.reload_routes!
     end

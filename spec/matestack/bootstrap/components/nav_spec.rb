@@ -5,7 +5,7 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
 
   it 'renders basic navigation' do
     matestack_render do
-      navigation
+      bs_navigation
     end
     visit example_path
     expect(page).to have_selector('ul.nav', visible: false)
@@ -13,7 +13,7 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
 
   it 'has basic transition' do
     matestack_render do
-      navigation items: [
+      bs_navigation items: [
         { path: "#home", text: "Home" },
         { path: "#messages", text: "Message" }
       ]
@@ -23,10 +23,10 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
     expect(page).to have_content('Home')
     expect(page).to have_content('Message')
   end
-  
+
   it 'has basic link element' do
     matestack_render do
-      navigation items: [
+      bs_navigation items: [
         { path: "#home", text: "Home" },
         { path: "#messages", text: "Message" }
       ]
@@ -39,7 +39,7 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
 
   it 'can align horizontally' do
     matestack_render do
-      navigation items: [
+      bs_navigation items: [
         { type: :link, path: "#home", text: "Home" },
         { type: :link, path: "#messages", text: "Message" }
       ], horizontal: :center
@@ -50,7 +50,7 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
 
   it 'can stack vertically' do
     matestack_render do
-      navigation items: [
+      bs_navigation items: [
         { type: :link, path: "#home", text: "Home" },
         { type: :link, path: "#messages", text: "Message" }
       ], vertical: true
@@ -61,7 +61,7 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
 
   it 'has elements with equals width' do
     matestack_render do
-      navigation items: [
+      bs_navigation items: [
         { type: :link, path: "#home", text: "Home" },
         { type: :link, path: "#messages", text: "Message" }
       ], justified: true
@@ -72,7 +72,7 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
 
   it 'has elements that proportionately fill all available space' do
     matestack_render do
-      navigation items: [
+      bs_navigation items: [
         { type: :link, path: "#home", text: "Home" },
         { type: :link, path: "#messages", text: "Message" }
       ], fill: true
@@ -83,7 +83,7 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
 
   it 'renders navigation with tabs' do
     matestack_render do
-      navigation items: [
+      bs_navigation items: [
         { type: :link, path: "#home", text: "Home" },
         { type: :link, path: "#profile", text: "Profile" },
       ], tabs: true
@@ -104,10 +104,10 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
     click_on('Profile')
     expect(page).to have_content('Content Tab Profile')
   end
-  
+
   it 'renders navigation pills' do
     matestack_render do
-      navigation items: [
+      bs_navigation items: [
         { type: :link, path: "#home", text: "Home" },
         { type: :link, path: "#messages", text: "Message" },
       ], pills: true
@@ -119,7 +119,7 @@ RSpec.describe "Bootstrap::Components::Nav", type: :feature, js: true do
 
   it 'can have custom class' do
     matestack_render do
-      navigation class: "foobar"
+      bs_navigation class: "foobar"
     end
     visit example_path
     expect(page).to have_selector('ul.nav.foobar', visible: false)

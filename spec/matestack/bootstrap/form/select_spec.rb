@@ -22,8 +22,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: select_success_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_select key: :foo, options: [1, 2, 3]
-        bootstrap_submit text: "Submit"
+        bs_form_select key: :foo, options: [1, 2, 3]
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path
@@ -41,8 +41,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: select_success_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_select key: :foo, options: { "Option 1": 1, "Option 2": 2, "Option 3": 3 }
-        bootstrap_submit text: "Submit"
+        bs_form_select key: :foo, options: { "Option 1": 1, "Option 2": 2, "Option 3": 3 }
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path
@@ -60,8 +60,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: select_failure_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_select key: :foo, options: [1, 2, 3]
-        bootstrap_submit text: "Submit"
+        bs_form_select key: :foo, options: [1, 2, 3]
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path
@@ -78,8 +78,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: select_success_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_select key: :foo, options: [1, 2, 3], class: "some-class"
-        bootstrap_submit text: "Submit"
+        bs_form_select key: :foo, options: [1, 2, 3], class: "some-class"
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path
@@ -90,8 +90,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: select_success_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_select key: :foo, options: [1, 2, 3], label: "Some label"
-        bootstrap_submit text: "Submit"
+        bs_form_select key: :foo, options: [1, 2, 3], label: "Some label"
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path
@@ -102,8 +102,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: select_success_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_select key: :foo, options: [1, 2, 3], placeholder: "select!"
-        bootstrap_submit text: "Submit"
+        bs_form_select key: :foo, options: [1, 2, 3], placeholder: "select!"
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path
@@ -114,8 +114,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: select_success_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_select key: :foo, options: [1, 2, 3], form_text: "some notes"
-        bootstrap_submit text: "Submit"
+        bs_form_select key: :foo, options: [1, 2, 3], form_text: "some notes"
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path

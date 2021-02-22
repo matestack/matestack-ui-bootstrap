@@ -9,7 +9,7 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
         { path: image_url("matestack-data.png") },
         { path: image_url("matestack-data.png") }
       ]
-      carousel items: items 
+      bs_carousel items: items
     end
     visit example_path
     expect(page).to have_selector('div.carousel.slide[data-ride=carousel]')
@@ -27,13 +27,13 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
         { path: image_url("matestack-data.png"), title: "First slide", text: "Carousel First Text Caption" },
         { path: image_url("matestack-data.png"), title: "Second slide", text: "Carousel Second Text Caption" }
       ]
-      carousel items: items
+      bs_carousel items: items
     end
     visit example_path
     expect(page).to have_selector('div.carousel.slide[data-ride=carousel]')
     expect(page).to have_selector('div.carousel-inner')
-    expect(page).to have_content('First slide') 
-    expect(page).to have_content('Carousel First Text Caption') 
+    expect(page).to have_content('First slide')
+    expect(page).to have_content('Carousel First Text Caption')
     expect(page).to_not have_content('Second slide')
   end
 
@@ -43,13 +43,13 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
         { path: image_url("matestack-data.png"), title: "First slide", text: "Carousel First Text Caption" },
         { path: image_url("matestack-data.png"), title: "Second slide", text: "Carousel Second Text Caption" }
       ]
-      carousel fade: true, start: 1, items: items
+      bs_carousel fade: true, start: 1, items: items
     end
     visit example_path
     expect(page).to have_selector('div.carousel.slide.carousel-fade[data-ride=carousel]')
     expect(page).to have_selector('div.carousel-inner')
-    expect(page).to have_content('Second slide') 
-    expect(page).to_not have_content('Carousel First Text Caption') 
+    expect(page).to have_content('Second slide')
+    expect(page).to_not have_content('Carousel First Text Caption')
     expect(page).to_not have_content('First slide')
   end
 
@@ -59,13 +59,13 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
         { path: image_url("matestack-data.png"), title: "First slide", interval: 5000 },
         { path: image_url("matestack-data.png"), title: "Second slide", interval: 8000 }
       ]
-      carousel items: items
+      bs_carousel items: items
     end
     visit example_path
     expect(page).to have_selector('div.carousel.slide[data-ride=carousel]')
     expect(page).to have_selector('div.carousel-inner')
     expect(page).to have_selector('div.carousel-item', count: 2, visible: false)
-    expect(page).to have_content('First slide') 
+    expect(page).to have_content('First slide')
     expect(page).to_not have_content('Second slide')
     expect(page).to have_content('Second slide', wait: 6)
     expect(page).to_not have_content('First slide', wait: 6)
@@ -78,7 +78,7 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
         { path: image_url("matestack-data.png") },
         { path: image_url("matestack-data.png") }
       ]
-      carousel controls: true, indicators: true, items: items
+      bs_carousel controls: true, indicators: true, items: items
     end
     visit example_path
     expect(page).to have_selector('div.carousel.slide[data-ride=carousel]')
@@ -94,20 +94,20 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
         { path: image_url("matestack-data.png"), title: "First slide", interval: 10000, title_class: 'text-dark'  },
         { path: image_url("matestack-data.png"), title: "Second slide", interval: 10000, title_class: 'text-dark'  }
       ]
-      carousel next_on: "next-carousel", pause_on: "pause", items: items, style: "width: 1000px"
+      bs_carousel next_on: "next-carousel", pause_on: "pause", items: items, style: "width: 1000px"
     end
     visit example_path
     expect(page).to have_selector('div.carousel.slide[data-ride=carousel]')
     expect(page).to have_selector('div.carousel-inner')
     expect(page).to have_selector('div.carousel-item', count: 2, visible: false)
-    expect(page).to have_content('First slide') 
+    expect(page).to have_content('First slide')
     expect(page).to_not have_content('Second slide')
     page.execute_script('MatestackUiCore.matestackEventHub.$emit("next-carousel")')
-    expect(page).to have_content('Second slide', wait: 2) 
+    expect(page).to have_content('Second slide', wait: 2)
     expect(page).to_not have_content('First slide', wait: 2)
     sleep 0.5
     page.execute_script('MatestackUiCore.matestackEventHub.$emit("next-carousel")')
-    expect(page).to have_content('First slide', wait: 2) 
+    expect(page).to have_content('First slide', wait: 2)
     expect(page).to_not have_content('Second slide', wait: 2)
   end
 
@@ -117,17 +117,17 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
         { path: image_url("matestack-data.png"), title: "First slide" },
         { path: image_url("matestack-data.png"), title: "Second slide" }
       ]
-      carousel prev_on: "prev-carousel", items: items
+      bs_carousel prev_on: "prev-carousel", items: items
     end
     visit example_path
     expect(page).to have_selector('div.carousel.slide[data-ride=carousel]')
     expect(page).to have_selector('div.carousel-inner')
     expect(page).to have_selector('div.carousel-item')
 
-    expect(page).to have_content('First slide') 
+    expect(page).to have_content('First slide')
     expect(page).to_not have_content('Second slide')
     page.execute_script('MatestackUiCore.matestackEventHub.$emit("prev-carousel")')
-    expect(page).to have_content('Second slide') 
+    expect(page).to have_content('Second slide')
     expect(page).to_not have_content('First slide')
   end
 
@@ -137,29 +137,29 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
         { path: image_url("matestack-data.png"), title: "First slide", title_class: 'text-dark' },
         { path: image_url("matestack-data.png"), title: "Second slide", title_class: 'text-dark' }
       ]
-      carousel cycle_on: "cycle-carousel", pause_on: "pause-carousel", items: items, interval: 500, style: "width: 300px"
+      bs_carousel cycle_on: "cycle-carousel", pause_on: "pause-carousel", items: items, interval: 500, style: "width: 300px"
     end
     visit example_path
     expect(page).to have_selector('div.carousel.slide[data-ride=carousel]')
     expect(page).to have_selector('div.carousel-inner')
     expect(page).to have_selector('div.carousel-item')
-    expect(page).to have_content('First slide') 
+    expect(page).to have_content('First slide')
     expect(page).to_not have_content('Second slide')
     sleep 0.75
     page.execute_script('MatestackUiCore.matestackEventHub.$emit("pause-carousel")')
-    expect(page).to_not have_content('First slide') 
+    expect(page).to_not have_content('First slide')
     expect(page).to have_content('Second slide')
     sleep 0.5
-    expect(page).to_not have_content('First slide') 
+    expect(page).to_not have_content('First slide')
     expect(page).to have_content('Second slide')
 
     page.execute_script('MatestackUiCore.matestackEventHub.$emit("cycle-carousel")')
-    expect(page).to_not have_content('First slide') 
+    expect(page).to_not have_content('First slide')
     expect(page).to have_content('Second slide')
-    expect(page).to have_content('First slide', wait: 2) 
+    expect(page).to have_content('First slide', wait: 2)
     expect(page).to_not have_content('Second slide', wait: 2)
   end
-  
+
   # it 'can be disposed on event' do
   #   pending
 
@@ -174,6 +174,6 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
   #   expect(page).to have_selector('div.carousel.slide[data-ride=carousel]')
   #   expect(page).to have_selector('div.carousel-inner')
   #   expect(page).to have_selector('div.carousel-item')
-    
+
   # end
 end

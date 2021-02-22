@@ -5,7 +5,7 @@ describe 'Bootstrap::Components::Close', type: :feature, js: true do
 
   it 'renders modal close button' do
     matestack_render do
-      close dismiss: "modal"
+      bs_close dismiss: "modal"
     end
     visit example_path
     expect(page).to have_selector('button.close[type=button]')
@@ -13,7 +13,7 @@ describe 'Bootstrap::Components::Close', type: :feature, js: true do
   end
 
   it 'is possible to add custom classes' do
-    matestack_render { close class: 'foobar' }
+    matestack_render { bs_close class: 'foobar' }
     visit example_path
     expect(page).to have_selector('button.close.foobar[type=button]')
   end

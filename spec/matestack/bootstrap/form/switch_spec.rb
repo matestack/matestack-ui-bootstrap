@@ -22,8 +22,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: switch_success_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_switch key: :some_switch_input_1
-        bootstrap_submit text: "Submit"
+        bs_form_switch key: :some_switch_input_1
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path
@@ -39,8 +39,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: switch_success_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_switch form_text: "just some notes", label: "Single Switch", key: :some_switch_input_1
-        bootstrap_submit text: "Submit"
+        bs_form_switch form_text: "just some notes", label: "Single Switch", key: :some_switch_input_1
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path
@@ -58,8 +58,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: switch_success_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_switch form_text: "just some notes", label: "Single Switch", key: :some_switch_input_1
-        bootstrap_submit text: "Submit"
+        bs_form_switch form_text: "just some notes", label: "Single Switch", key: :some_switch_input_1
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path
@@ -77,8 +77,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: switch_success_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_switch key: :foo, options: [1, 2]
-        bootstrap_submit text: "Submit"
+        bs_form_switch key: :foo, options: [1, 2]
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path
@@ -97,8 +97,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: switch_success_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_switch key: :foo, options: { "Option 1": 1, "Option 2": 2 }
-        bootstrap_submit text: "Submit"
+        bs_form_switch key: :foo, options: { "Option 1": 1, "Option 2": 2 }
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path
@@ -117,8 +117,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: switch_success_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_switch key: :foo, options: [1, 2]
-        bootstrap_submit text: "Submit"
+        bs_form_switch key: :foo, options: [1, 2]
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path
@@ -138,8 +138,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: switch_success_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_switch key: :foo, options: { "Option 1": 1, "Option 2": 2 }
-        bootstrap_submit text: "Submit"
+        bs_form_switch key: :foo, options: { "Option 1": 1, "Option 2": 2 }
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path
@@ -159,8 +159,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: switch_failure_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_switch key: :foo, options: [1, 2]
-        bootstrap_submit text: "Submit"
+        bs_form_switch key: :foo, options: [1, 2]
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path
@@ -179,8 +179,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
 #     form_config = get_form_config(path: switch_success_form_test_path)
 #     matestack_render do
 #       form form_config do
-#         bootstrap_switch key: :foo, options: [1, 2], class: "some-class"
-#         bootstrap_submit text: "Submit"
+#         bs_form_switch key: :foo, options: [1, 2], class: "some-class"
+#         bs_form_submit text: "Submit"
 #       end
 #     end
 #     visit example_path
@@ -191,8 +191,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: switch_success_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_switch key: :foo, options: [1, 2], disabled: true
-        bootstrap_submit text: "Submit"
+        bs_form_switch key: :foo, options: [1, 2], disabled: true
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path
@@ -204,8 +204,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: switch_success_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_switch key: :foo, options: [1, 2], label: "Some label"
-        bootstrap_submit text: "Submit"
+        bs_form_switch key: :foo, options: [1, 2], label: "Some label"
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path
@@ -216,8 +216,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: switch_success_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_switch key: :foo, options: [1, 2], form_text: "some notes"
-        bootstrap_submit text: "Submit"
+        bs_form_switch key: :foo, options: [1, 2], form_text: "some notes"
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path
@@ -228,8 +228,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: switch_success_form_test_path)
     matestack_render do
       form form_config do
-        bootstrap_switch key: :foo, options: [1, 2], variant: :inline
-        bootstrap_submit text: "Submit"
+        bs_form_switch key: :foo, options: [1, 2], variant: :inline
+        bs_form_submit text: "Submit"
       end
     end
     visit example_path

@@ -5,7 +5,7 @@ RSpec.describe "Bootstrap::Components::Pagination", type: :feature, js: true do
 
   it 'renders basic pagination' do
     matestack_render do
-      pagination
+      bs_pagination
     end
     visit example_path
     expect(page).to have_selector('nav > ul.pagination', visible: false)
@@ -13,7 +13,7 @@ RSpec.describe "Bootstrap::Components::Pagination", type: :feature, js: true do
 
   it 'can render pagination from item list with active item' do
     matestack_render do
-      pagination items: [
+      bs_pagination items: [
         { type: :link, path: "#", text: "1", active: false },
         { type: :link, path: "#", text: "2", active: true },
         { type: :link, path: "#", text: "3", active: false }
@@ -28,7 +28,7 @@ RSpec.describe "Bootstrap::Components::Pagination", type: :feature, js: true do
 
   it 'can have custom content given in a block' do
     matestack_render do
-      pagination do
+      bs_pagination do
         plain "Test Block"
       end
     end
@@ -37,10 +37,10 @@ RSpec.describe "Bootstrap::Components::Pagination", type: :feature, js: true do
     expect(page).to_not have_selector('li.page-item')
     expect(page).to have_content('Test Block')
   end
-  
+
   it 'renders the block after the item list' do
     matestack_render do
-      pagination items: [
+      bs_pagination items: [
         { type: :link, path: "#", text: "1", active: false },
         { type: :link, path: "#", text: "2", active: false },
         { type: :link, path: "#", text: "3", active: false }
@@ -56,7 +56,7 @@ RSpec.describe "Bootstrap::Components::Pagination", type: :feature, js: true do
 
   it 'can have different sizes' do
     matestack_render do
-      pagination items: [
+      bs_pagination items: [
         { type: :link, path: "#", text: "1", active: false },
         { type: :link, path: "#", text: "2", active: false }
       ], size: :sm
@@ -68,7 +68,7 @@ RSpec.describe "Bootstrap::Components::Pagination", type: :feature, js: true do
 
   it 'has a custom aria_label' do
     matestack_render do
-      pagination items: [
+      bs_pagination items: [
         { type: :link, path: "#", text: "1", active: false },
         { type: :link, path: "#", text: "2", active: false },
         { type: :link, path: "#", text: "3", active: false }

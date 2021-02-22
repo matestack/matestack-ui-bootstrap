@@ -5,7 +5,7 @@ describe 'Bootstrap::Components::Card', type: :feature, js: true do
 
   it 'has title and body text' do
     matestack_render do
-      card title: "Card title", body: "Some quick example text"
+      bs_card title: "Card title", body: "Some quick example text"
     end
     visit example_path
     expect(page).to have_selector('div.card-body')
@@ -14,7 +14,7 @@ describe 'Bootstrap::Components::Card', type: :feature, js: true do
 
   it 'has a card header and card footer' do
     matestack_render do
-      card title: "Card title", body: "Some quick example text",
+      bs_card title: "Card title", body: "Some quick example text",
       header: "Card header", footer: "card footer"
     end
     visit example_path
@@ -26,10 +26,10 @@ describe 'Bootstrap::Components::Card', type: :feature, js: true do
 
   it 'has a custom header and footer implemented with slots option' do
     matestack_render do
-      card slots: { 
+      bs_card slots: {
             header: slot {
-              btn text: "Title Button"
-            }, 
+              bs_btn text: "Title Button"
+            },
             footer: slot {
               paragraph class: "text-center", text: "2 days ago"
             } }
@@ -40,25 +40,25 @@ describe 'Bootstrap::Components::Card', type: :feature, js: true do
     expect(page).to have_selector('button.btn.btn-primary')
     expect(page).to have_selector('div.card-footer')
     expect(page).to have_selector('p.text-center')
-    expect(page).to have_content('2 days ago') 
+    expect(page).to have_content('2 days ago')
   end
 
   it 'has an image above the body text' do
     matestack_render do
-      card title: "Card title", body: "Some quick example text",
+      bs_card title: "Card title", body: "Some quick example text",
             img_path: image_url("matestack-data.png")
     end
     visit example_path
-    expect(page).to have_selector('img.card-img-top') 
-    expect(page).to have_selector("img[src*='matestack-data']") 
+    expect(page).to have_selector('img.card-img-top')
+    expect(page).to have_selector("img[src*='matestack-data']")
   end
 
   it 'has only custom body component' do
     matestack_render do
-      card title: "Card title", body: "Some quick example text" do
+      bs_card title: "Card title", body: "Some quick example text" do
         div class: "p-3" do
-          btn text: "Card Button"
-          btn text: "Another Button"
+          bs_btn text: "Card Button"
+          bs_btn text: "Another Button"
         end
       end
     end
@@ -72,7 +72,7 @@ describe 'Bootstrap::Components::Card', type: :feature, js: true do
 
   it 'has a custom body implemented with slots option' do
     matestack_render do
-      card slots: { 
+      bs_card slots: {
             body: slot {
               ul class: 'list-group list-group-flush' do
                 li class: "list-group-item" do plain "Item 1" end

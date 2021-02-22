@@ -5,7 +5,7 @@ RSpec.describe "Bootstrap::Components::Tooltip", type: :feature, js: true do
 
   it 'tooltip is not shown on initial page load' do
     matestack_render do
-      tooltip 
+      bs_tooltip
     end
     visit example_path
     expect(page).to have_selector('button.btn.btn-primary[data-toggle="tooltip"]')
@@ -13,7 +13,7 @@ RSpec.describe "Bootstrap::Components::Tooltip", type: :feature, js: true do
 
   it 'appears with a button a text message' do
     matestack_render do
-      tooltip text: "Button", title: "Help Message"
+      bs_tooltip text: "Button", title: "Help Message"
     end
     visit example_path
     expect(page).to have_content('Button')
@@ -24,7 +24,7 @@ RSpec.describe "Bootstrap::Components::Tooltip", type: :feature, js: true do
 
   it 'can have different direction' do
     matestack_render do
-      tooltip placement: :top
+      bs_tooltip placement: :top
     end
     visit example_path
     expect(page).to have_selector('button.btn.btn-primary[data-placement="top"]')
@@ -32,7 +32,7 @@ RSpec.describe "Bootstrap::Components::Tooltip", type: :feature, js: true do
 
   it 'can have custom HTML added' do
     matestack_render do
-      tooltip text: "Button", title: "<em>Tooltip</em> <u>with</u> <b>HTML</b>", html: 'true'
+      bs_tooltip text: "Button", title: "<em>Tooltip</em> <u>with</u> <b>HTML</b>", html: 'true'
     end
     visit example_path
     expect(page).to have_selector('button.btn.btn-primary[data-html="true"]')
@@ -42,7 +42,7 @@ RSpec.describe "Bootstrap::Components::Tooltip", type: :feature, js: true do
 
   it 'can have a custom delay' do
     matestack_render do
-      tooltip text: "Button", title: "Message", delay: 3000
+      bs_tooltip text: "Button", title: "Message", delay: 3000
     end
     visit example_path
     expect(page).to have_selector('button.btn.btn-primary[data-delay="3000"]')
@@ -54,7 +54,7 @@ RSpec.describe "Bootstrap::Components::Tooltip", type: :feature, js: true do
 
   it 'can have an offset' do
     matestack_render do
-      tooltip text: "Button", title: "Message", offset: 100
+      bs_tooltip text: "Button", title: "Message", offset: 100
     end
     visit example_path
     expect(page).to have_selector('button.btn.btn-primary[data-offset="100"]')
@@ -62,7 +62,7 @@ RSpec.describe "Bootstrap::Components::Tooltip", type: :feature, js: true do
 
   it 'can have different trigger' do
     matestack_render do
-      tooltip text: "Button", title: "Message", trigger: 'hover focus'
+      bs_tooltip text: "Button", title: "Message", trigger: 'hover focus'
     end
     visit example_path
     expect(page).to have_selector('button.btn.btn-primary[data-trigger="hover focus"]')
@@ -70,15 +70,15 @@ RSpec.describe "Bootstrap::Components::Tooltip", type: :feature, js: true do
 
   it 'doesnt have animation' do
     matestack_render do
-      tooltip text: "Button", title: "Message", animation: 'false'
+      bs_tooltip text: "Button", title: "Message", animation: 'false'
     end
     visit example_path
     expect(page).to have_selector('button.btn.btn-primary[data-animation="false"]')
   end
-  
+
   it 'is tag span' do
     matestack_render do
-      tooltip tag: :span
+      bs_tooltip tag: :span
     end
     visit example_path
     expect(page).to have_selector('span[data-type="span"]')
@@ -86,7 +86,7 @@ RSpec.describe "Bootstrap::Components::Tooltip", type: :feature, js: true do
 
   it 'is tag div' do
     matestack_render do
-      tooltip tag: :div
+      bs_tooltip tag: :div
     end
     visit example_path
     expect(page).to have_selector('div[data-type="div"]')
@@ -94,7 +94,7 @@ RSpec.describe "Bootstrap::Components::Tooltip", type: :feature, js: true do
 
   it 'is tag link' do
     matestack_render do
-      tooltip tag: :link
+      bs_tooltip tag: :link
     end
     visit example_path
     expect(page).to have_selector('a.btn.btn-link[data-type="link"]')
