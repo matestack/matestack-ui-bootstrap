@@ -8,6 +8,14 @@ module Utils
   end
 
   def matestack_render(&block)
+    example_context = self
+    ExamplePage.define_method(:method_missing) do |*args|
+      if example_context.respond_to? args.first
+        example_context.send(*args, &block)
+      else
+        super
+      end
+    end
     ExamplePage.define_method(:response, block)
   end
 
