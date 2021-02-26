@@ -6,7 +6,7 @@ describe 'Bootstrap::Layout::Row', type: :feature, js: true do
   it 'should create a simple row' do
     matestack_render { bs_row }
     visit example_path
-    expect(page).to have_selector('div.row')
+    expect(page).to have_selector('div.row', visible: false)
   end
   it 'should create a row with vertical alignment' do
     matestack_render {

@@ -18,13 +18,13 @@ describe 'Bootstrap::Components::Badge', type: :feature, js: true do
   it 'renders button with round badge and set sr_only message' do
     matestack_render do
       bs_btn text: "Button" do
-        bs_badge text: "2", variant: :secondary, sr_only: "unread message"
+        bs_badge text: "2", variant: :secondary, visually_hidden: "unread message"
       end
     end
     visit example_path
     expect(page).to have_selector('button.btn.btn-primary')
     expect(page).to have_selector('button > span.badge.bg-secondary')
-    expect(page).to have_selector('button > span.badge + span.sr-only')
+    expect(page).to have_selector('button > span.badge + span.visually-hidden ')
   end
 
 end

@@ -59,12 +59,14 @@ describe 'Bootstrap::Components::ListGroup', type: :feature, js: true do
 
   it 'has a custom class for menu' do
     matestack_render do
-      bs_dropdown text: "Dropdown", menu: { items: [
-        { type: :link, path: "#", text: "Nulla vitae elit" },
-        { type: :button, text: "Action" },
-        { type: :divider },
-        { type: :link, path: "#", text: "Separated link" }
-      ], class: "foobar" }
+      div attributes: { style: "height: 500px;" } do
+        bs_dropdown text: "Dropdown", menu: { items: [
+          { type: :link, path: "#", text: "Nulla vitae elit" },
+          { type: :button, text: "Action" },
+          { type: :divider },
+          { type: :link, path: "#", text: "Separated link" }
+        ], class: "foobar" }
+      end
     end
     visit example_path
     expect(page).to have_selector('div.dropdown')
@@ -115,6 +117,23 @@ describe 'Bootstrap::Components::ListGroup', type: :feature, js: true do
       bs_dropdown offset: "10,22", text: "Dropdown"
     end
     visit example_path
+    expect(page).to have_selector('button.btn.btn-primary.dropdown-toggle[data-offset="10,22"]')
+    expect(page).to have_content('Dropdown')
+  end
+
+  it 'can have action, transition and onclick components as items' do
+    matestack_render do
+      div attributes: { style: "height: 500px;" } do
+        bs_dropdown text: "Dropdown", menu: [
+          { type: :link, path: "#", text: "Link" },
+          { type: :transition, path: root_path, text: "Transition" },
+          { type: :action, path: root_path, method: :post, text: "Action" },
+          { type: :onclick, emit: "test", text: "Onclick" }
+        ]
+      end
+    end
+    visit example_path
+    sleep
     expect(page).to have_selector('button.btn.btn-primary.dropdown-toggle[data-offset="10,22"]')
     expect(page).to have_content('Dropdown')
   end

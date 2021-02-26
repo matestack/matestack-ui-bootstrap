@@ -5,7 +5,7 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
 
   it 'modal is not shown on initial page load' do
     matestack_render do
-      bs_btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
+      bs_btn text: "Launch Modal", data: { "bs-toggle": 'modal', "bs-target": '#staticBackdrop' }
       bs_modal id: 'staticBackdrop', static: true, header: "Modal Title", body: "Modal Messages", footer: "Close"
     end
     visit example_path
@@ -17,7 +17,7 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
 
   it 'reveals modal when click button' do
     matestack_render do
-      bs_btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
+      bs_btn text: "Launch Modal", data: { "bs-toggle": 'modal', "bs-target": '#staticBackdrop' }
       bs_modal id: 'staticBackdrop', static: true, header: "Modal Title", body: "Modal Messages", footer: "Close"
     end
     visit example_path
@@ -32,7 +32,7 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
 
   it 'is centered and scrollable with size lg' do
     matestack_render do
-      bs_btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
+      bs_btn text: "Launch Modal", data: { "bs-toggle": 'modal', "bs-target": '#staticBackdrop' }
       bs_modal id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close",
             centered: true, scrollable: true, size: :lg
     end
@@ -44,8 +44,8 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
 
   it 'is fullscreen with breakpoints' do
     matestack_render do
-      bs_btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
-      bs_btn text: "Launch Modal MD", data: { toggle: 'modal', target: '#staticBackdropMd' }
+      bs_btn text: "Launch Modal", data: { "bs-toggle": 'modal', "bs-target": '#staticBackdrop' }
+      bs_btn text: "Launch Modal MD", data: { "bs-toggle": 'modal', "bs-target": '#staticBackdropMd' }
       bs_modal id: 'staticBackdrop', fullscreen: true, body: "Modal Messages", footer: "Close"
       bs_modal id: 'staticBackdropMd', fullscreen: :md, body: "Modal Messages", footer: "Close"
     end
@@ -65,7 +65,7 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
 
   it 'has custom header and footer using slots' do
     matestack_render do
-      bs_btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
+      bs_btn text: "Launch Modal", data: { "bs-toggle": 'modal', "bs-target": '#staticBackdrop' }
       bs_modal id: 'staticBackdrop', body: "Modal Messages",
             slots: {
               header: slot {
@@ -89,7 +89,7 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
 
   it 'has custom header and footer classes' do
     matestack_render do
-      bs_btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
+      bs_btn text: "Launch Modal", data: { "bs-toggle": 'modal', "bs-target": '#staticBackdrop' }
       bs_modal id: 'staticBackdrop', header: { text: "Title Header", class: "text-primary" },
       footer: { text: "OK", class: "btn-primary" }
     end
@@ -104,10 +104,10 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
 
   it 'has custom body content' do
     matestack_render do
-      bs_btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
+      bs_btn text: "Launch Modal", data: { "bs-toggle": 'modal', "bs-target": '#staticBackdrop' }
       bs_modal id: 'staticBackdrop' do
-        heading size: 2, text: "Custom Body Text"
         bs_close dismiss: "modal"
+        heading size: 2, text: "Custom Body Text"
       end
     end
     visit example_path
@@ -115,12 +115,48 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
     click_button "Launch Modal"
     sleep 2
     expect(page).to have_content 'Custom Body Text'
-    expect(page).to have_selector('button.close[data-dismiss=modal]')
+    expect(page).to have_selector('button.btn-close[data-bs-dismiss="modal"]')
   end
 
-  it 'can be toggled via event'
-  it 'can be shown via event'
-  it 'can be hiden via event'
+  it 'can be shown via event' do
+    matestack_render do
+      bs_modal show_on: "show_modal", body: "Modal Messages"
+    end
+    visit example_path
+    expect(page).not_to have_content 'Modal Messages'
+    page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_modal")')
+    sleep 2
+    expect(page).to have_content 'Modal Messages'
+  end
+
+  it 'can be closed via event' do
+    matestack_render do
+      bs_modal show_on: "show_modal", hide_on: "close_modal", body: "Modal Messages"
+    end
+    visit example_path
+    expect(page).not_to have_content 'Modal Messages'
+    page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_modal")')
+    sleep 2
+    expect(page).to have_content 'Modal Messages'
+    page.execute_script('MatestackUiCore.matestackEventHub.$emit("close_modal")')
+    sleep 2
+    expect(page).not_to have_content 'Modal Messages'
+  end
+
+  it 'can be toggled via event' do
+    matestack_render do
+      bs_modal toggle_on: "toggle_modal", body: "Modal Messages"
+    end
+    visit example_path
+    expect(page).not_to have_content 'Modal Messages'
+    page.execute_script('MatestackUiCore.matestackEventHub.$emit("toggle_modal")')
+    sleep 2
+    expect(page).to have_content 'Modal Messages'
+    page.execute_script('MatestackUiCore.matestackEventHub.$emit("toggle_modal")')
+    sleep 2
+    expect(page).not_to have_content 'Modal Messages'
+  end
+
   it 'can be disposed via event'
 
 end

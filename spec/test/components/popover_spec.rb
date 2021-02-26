@@ -6,7 +6,7 @@ RSpec.describe "Bootstrap::Components::Pagination", type: :feature, js: true do
   it 'renders a default popover' do
     matestack_render { bs_popover }
     visit example_path
-    expect(page).to have_selector('button.btn[data-toggle="popover"]')
+    expect(page).to have_selector('button.btn[data-bs-toggle="popover"]')
   end
 
   it 'has text and content' do
@@ -14,7 +14,7 @@ RSpec.describe "Bootstrap::Components::Pagination", type: :feature, js: true do
       bs_popover text: "Popover", content: "Pop Content"
     }
     visit example_path
-    expect(page).to have_selector('button.btn[data-toggle="popover"]')
+    expect(page).to have_selector('button.btn[data-bs-toggle="popover"]')
     expect(page).to have_content('Popover')
     expect(page).not_to have_content('Pop Content')
     click_on('Popover')
@@ -28,9 +28,9 @@ RSpec.describe "Bootstrap::Components::Pagination", type: :feature, js: true do
       end
     }
     visit example_path
-    expect(page).to have_selector('a[data-toggle="popover"]')
-    expect(page).to have_selector('div[data-toggle="popover"]')
-    expect(page).to have_selector('span[data-toggle="popover"]')
+    expect(page).to have_selector('a[data-bs-toggle="popover"]')
+    expect(page).to have_selector('div[data-bs-toggle="popover"]')
+    expect(page).to have_selector('span[data-bs-toggle="popover"]')
   end
 
   it 'can popup in different direction' do
@@ -40,10 +40,10 @@ RSpec.describe "Bootstrap::Components::Pagination", type: :feature, js: true do
       end
     }
     visit example_path
-    expect(page).to have_selector('button.btn[data-placement="top"]')
-    expect(page).to have_selector('button.btn[data-placement="bottom"]')
-    expect(page).to have_selector('button.btn[data-placement="left"]')
-    expect(page).to have_selector('button.btn[data-placement="right"]')
+    expect(page).to have_selector('button.btn[data-bs-placement="top"]')
+    expect(page).to have_selector('button.btn[data-bs-placement="bottom"]')
+    expect(page).to have_selector('button.btn[data-bs-placement="left"]')
+    expect(page).to have_selector('button.btn[data-bs-placement="right"]')
   end
 
   it 'can dismiss on next click' do
@@ -52,7 +52,7 @@ RSpec.describe "Bootstrap::Components::Pagination", type: :feature, js: true do
       bs_popover text: "Popover", content: "Pop Content", trigger: :focus
     }
     visit example_path
-    expect(page).to have_selector('button.btn[data-trigger="focus"]')
+    expect(page).to have_selector('button.btn[data-bs-trigger="focus"]')
     click_on('Popover')
     expect(page).to have_content('Pop Content')
     click_button('Random Button')
@@ -64,7 +64,7 @@ RSpec.describe "Bootstrap::Components::Pagination", type: :feature, js: true do
       bs_popover text: "Popover", content: "Pop Content", animation: 'true'
     }
     visit example_path
-    expect(page).to have_selector('button.btn[data-animation="true"]')
+    expect(page).to have_selector('button.btn[data-bs-animation="true"]')
   end
 
   it 'content has title' do
@@ -90,7 +90,7 @@ RSpec.describe "Bootstrap::Components::Pagination", type: :feature, js: true do
       bs_popover text: "Popover", content: "Pop Content", delay: "3000"
     }
     visit example_path
-    expect(page).to have_selector('button.btn[data-delay="3000"]')
+    expect(page).to have_selector('button.btn[data-bs-delay="3000"]')
     click_on('Popover')
     expect(page).not_to have_content('Pop Content')
     expect(page).to have_content('Pop Content', wait: 5)
@@ -101,7 +101,7 @@ RSpec.describe "Bootstrap::Components::Pagination", type: :feature, js: true do
       bs_popover text: "Popover", html: 'true', content: "<p>this paragraph in popover</p>"
     }
     visit example_path
-    expect(page).to have_selector('button.btn[data-html="true"]')
+    expect(page).to have_selector('button.btn[data-bs-html="true"]')
     click_on('Popover')
     expect(page).to have_content('this paragraph in popover')
     expect(page).to have_selector('div.popover-body > p')
@@ -112,6 +112,6 @@ RSpec.describe "Bootstrap::Components::Pagination", type: :feature, js: true do
       bs_popover text: "Popover", content: "Pop Content", offset: "20"
     }
     visit example_path
-    expect(page).to have_selector('button.btn[data-offset="20"]')
+    expect(page).to have_selector('button.btn[data-bs-offset="20"]')
   end
 end

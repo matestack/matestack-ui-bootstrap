@@ -19,6 +19,7 @@ describe 'Bootstrap::Components::ButtonGroup', type: :feature, js: true do
     matestack_render do
       bs_btn_group size: :sm, label: "buttongroup" do
         bs_btn text: "Tab 4"
+        bs_btn text: "Tab 4"
       end
     end
     visit example_path

@@ -43,14 +43,15 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
     expect(page).to have_content '11 mins ago'
   end
 
-  it 'hide after a delay timeout' do
+  it 'shows after a delay' do
     matestack_render do
-      bs_toast header: "Bootstrap Toast", body: 'I`m a toast', show_on: 'show_toast', delay: 100
+      bs_toast header: "Bootstrap Toast", body: 'I`m a toast', show_on: 'show_toast', delay: 1000
     end
     visit example_path
     page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_toast")')
-    expect(page).to have_content 'Bootstrap Toast'
     expect(page).not_to have_content 'Bootstrap Toast'
+    sleep 1
+    expect(page).to have_content 'Bootstrap Toast'
   end
 
   it 'is not animated' do
@@ -60,7 +61,7 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
     visit example_path
     page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_toast")')
     expect(page).to have_content 'Bootstrap Toast'
-    expect(page).to have_selector('[data-animation=false]')
+    expect(page).to have_selector('[data-bs-animation=false]')
   end
 
   it 'is not hiding automatically' do
@@ -70,7 +71,7 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
     visit example_path
     page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_toast")')
     expect(page).to have_content 'Bootstrap Toast'
-    expect(page).to have_selector('div.toast[data-autohide=false]')
+    expect(page).to have_selector('div.toast[data-bs-autohide=false]')
   end
 
 end

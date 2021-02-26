@@ -3,41 +3,40 @@ require 'rails_helper'
 describe 'Bootstrap::Components::Breadcrumb', type: :feature, js: true do
   include Utils
 
+
+  let(:items) do [
+      { type: :link, path: "/", text: "Item 1" },
+      { type: :link, path: "#", text: "Item 2" },
+      { text: "Item 3" }
+    ]
+  end
+
   it 'is possible to set a custom class' do
-    matestack_render { bs_breadcrumb class: 'custom classes' }
+    matestack_render { bs_breadcrumb class: 'custom', items: items }
     visit example_path
     expect(page).to have_selector('nav[aria-label=breadcrumb]')
-    expect(page).to have_selector('ol.breadcrumb.custom.classes')
+    expect(page).to have_selector('ol.breadcrumb.custom')
   end
 
   it 'renders breadcrumb with transition' do
-    items = [
-      { type: :link, path: "/", text: "Item 1" },
-      { type: :link, path: "#", text: "Item 1" }
-    ]
     matestack_render do
       bs_breadcrumb items: items
     end
     visit example_path
     expect(page).to have_selector('nav[aria-label=breadcrumb]')
     expect(page).to have_selector('ol.breadcrumb')
-    items.each do |item|
+    items[0..-2].each do |item|
       expect(page).to have_selector("li.breadcrumb-item > a", text: item[:text])
     end
   end
 
   it 'renders breadcrumb with link' do
-    items = [
-      { type: :link, path: "/", text: "Item 1" },
-      { type: :link, path: "#", text: "Item 1" }
-    ]
     matestack_render do
       bs_breadcrumb items: items
     end
     visit example_path
     expect(page).to have_selector('nav[aria-label=breadcrumb]')
-    expect(page).to have_selector('li.breadcrumb-item.active > a', text: items.last[:text])
-    items.each do |item|
+    items[0..-2].each do |item|
       expect(page).to have_selector("li.breadcrumb-item > a", text: item[:text])
     end
   end
@@ -56,7 +55,7 @@ describe 'Bootstrap::Components::Breadcrumb', type: :feature, js: true do
   end
 
   it 'is possible to add a nav class' do
-    matestack_render { bs_breadcrumb nav_class: 'custom classes' }
+    matestack_render { bs_breadcrumb nav_class: 'custom classes', items: items }
     visit example_path
     expect(page).to have_selector('nav.custom.classes[aria-label=breadcrumb]')
   end

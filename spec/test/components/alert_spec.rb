@@ -5,7 +5,6 @@ describe 'Bootstrap::Components::Alert', type: :feature, js: true do
 
   it 'should create a simple primary alert without any content' do
     matestack_render { bs_alert }
-    # check for correct default values and classes
     visit example_path
     expect(page).to have_selector('div.alert.alert-primary[role=alert]')
   end
@@ -13,14 +12,18 @@ describe 'Bootstrap::Components::Alert', type: :feature, js: true do
   it 'can get a title with various sizes and some content' do
     matestack_render { bs_alert title: 'An alert', text: 'An alert message' }
     visit example_path
-    # check for correct title and content
     expect(page).to have_content('An alert')
     expect(page).to have_content('An alert message')
 
     matestack_render { bs_alert title: 'An alert', title_size: 2, text: 'An alert message' }
     visit example_path
-    # check for correct title size
     expect(page).to have_selector('h2.alert-heading')
+  end
+
+  it 'can render a block for custom content' do
+    matestack_render { bs_alert { span class: "foobar", text: "custom content" } }
+    visit example_path
+    expect(page).to have_selector('.alert > span.foobar', text: "custom content")
   end
 
   it 'is possible to change the appearance' do
@@ -36,7 +39,7 @@ describe 'Bootstrap::Components::Alert', type: :feature, js: true do
   end
 
   it 'gets correct classes for animation' do
-    matestack_render { bs_alert animate: true }
+    matestack_render { bs_alert text: 'An alert message', animate: true, dismissible: true }
     visit example_path
     expect(page).to have_selector('div.alert.alert-primary.fade.show[role=alert]')
   end
@@ -49,9 +52,9 @@ describe 'Bootstrap::Components::Alert', type: :feature, js: true do
 
   it 'can be closed per event' do
     matestack_render {
-      alert close_on: 'closeAlert', text: "Close Alert Test"
+      bs_alert close_on: 'closeAlert', text: "Close Alert Test"
       onclick emit: "closeAlert" do
-        btn text: "Close"
+        bs_btn text: "Close"
       end
     }
     visit example_path

@@ -3,71 +3,86 @@ require 'rails_helper'
 RSpec.describe "Bootstrap::Components::Accordion", type: :feature, js: true do
   include Utils
 
-  it 'renders basic accordion' do
-    matestack_render do
-      bs_accordion
-    end
-    visit example_path
-    expect(page).to have_selector('.accordion')
-  end
-
-  it 'can expand and collapse with multiple card elements' do
+  it 'can expand and collapse with multiple elements, all hidden by default' do
     matestack_render do
       bs_accordion items: [
         { header: { text: "Group Item #1" }, body: { text: "Random Text for Collapse #1" } },
-        { header: { text: "Group Item #3" }, body: { text: "Random Text for Collapse #3" } }
+        { header: { text: "Group Item #2" }, body: { text: "Random Text for Collapse #2" } }
       ]
     end
     visit example_path
-    expect(page).not_to have_content('Random Text for Collapse #1')
-    expect(page).not_to have_content('Random Text for Collapse #3')
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-header > .accordion-button', text: "Group Item #1", visible: true)
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-header > .accordion-button', text: "Group Item #2", visible: true)
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: false)
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: false)
     click_on('Group Item #1')
-    expect(page).to have_content('Random Text for Collapse #1')
-    click_on('Group Item #3')
-    expect(page).to have_content('Random Text for Collapse #3')
-    sleep 0.25
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: true)
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: false)
+    click_on('Group Item #2')
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: true)
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: true)
     click_on('Group Item #1')
-    expect(page).not_to have_content('Random Text for Collapse #1')
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: false)
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: true)
   end
 
-  it 'header can have custom variant' do
+  it 'can expand and collapse with multiple elements, all shown when open true' do
     matestack_render do
-      bs_accordion items: [
-        { header: { text: "Group Item #1", variant: :light }, body: { text: "Random Text for Collapse #1" } },
+      bs_accordion open: true, items: [
+        { header: { text: "Group Item #1" }, body: { text: "Random Text for Collapse #1" } },
+        { header: { text: "Group Item #2" }, body: { text: "Random Text for Collapse #2" } }
       ]
     end
     visit example_path
-    expect(page).to have_selector('.btn-light')
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-header > .accordion-button', text: "Group Item #1", visible: true)
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-header > .accordion-button', text: "Group Item #2", visible: true)
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: true)
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: true)
   end
-  it 'header can have custom class' do
+
+  it 'can expand and collapse with multiple elements, only specified items are shown initially' do
+    matestack_render do
+      bs_accordion items: [
+        { header: { text: "Group Item #1" }, body: { text: "Random Text for Collapse #1" }, open: true },
+        { header: { text: "Group Item #2" }, body: { text: "Random Text for Collapse #2" } }
+      ]
+    end
+    visit example_path
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-header > .accordion-button', text: "Group Item #1", visible: true)
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-header > .accordion-button', text: "Group Item #2", visible: true)
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: true)
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: false)
+  end
+
+  it 'can render in flush variant' do
+    matestack_render do
+      bs_accordion variant: :flush, items: [
+        { header: { text: "Group Item #1" }, body: { text: "Random Text for Collapse #1" }, open: true },
+        { header: { text: "Group Item #2" }, body: { text: "Random Text for Collapse #2" } }
+      ]
+    end
+    visit example_path
+    expect(page).to have_selector('.accordion.accordion-flush')
+  end
+
+  it 'item header can have custom class' do
     matestack_render do
       bs_accordion items: [
         { header: { text: "Group Item #2", class: "foobar" }, body: { text: "Random Text for Collapse #2" } },
       ]
     end
     visit example_path
-    expect(page).to have_selector('.foobar')
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-header.foobar > .accordion-button', text: "Group Item #2", visible: true)
   end
 
-  it 'body can have custom class' do
+  it 'item body can have custom class' do
     matestack_render do
       bs_accordion items: [
         { header: { text: "Group Item #2" }, body: { text: "Random Text for Collapse #2", class: "foobar" } },
       ]
     end
     visit example_path
-    click_on('Group Item #2')
-    expect(page).to have_selector('.card-body.foobar')
+    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body.foobar', text: "Random Text for Collapse #2", visible: false)
   end
 
-  it 'has collapse with multi target' do
-    matestack_render do
-      bs_accordion items: [
-        { header: { text: "Group Item #2" }, body: { text: "Random Text for Collapse #2", multi: true } },
-      ]
-    end
-    visit example_path
-    click_on('Group Item #2')
-    expect(page).to have_selector('.multi-collapse')
-  end
 end
