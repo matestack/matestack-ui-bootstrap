@@ -6,6 +6,7 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.2.1",
+    "chart.js": "^2.9.4",
     "matestack-ui-bootstrap": "../.."
   },
   "devDependencies": {
