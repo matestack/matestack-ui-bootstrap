@@ -7,7 +7,8 @@ module Dummy::Components::Registry
   )
 
   Matestack::Ui::Core::Component::Registry.register_components(
-    md: Dummy::Components::Md
+    md: Dummy::Components::Md,
+    chart_js: Dummy::Components::ChartJs
   )
 
 end

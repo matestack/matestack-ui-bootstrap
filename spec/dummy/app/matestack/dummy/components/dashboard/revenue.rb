@@ -36,7 +36,7 @@ class Dummy::Components::Dashboard::Revenue < Matestack::Ui::Component
   end
 
   def chart_kpis_partial
-    bs_chart type: :line,
+    chart_js type: :line,
       datasets: [
         {
           label: "€",

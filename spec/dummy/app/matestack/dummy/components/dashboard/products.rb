@@ -32,7 +32,7 @@ class Dummy::Components::Dashboard::Products < Matestack::Ui::Component
   end
 
   def chart_kpis_partial
-    bs_chart type: :doughnut,
+    chart_js type: :doughnut,
       datasets: [
         {
           data: Dummy::ProductKpiService.top_5_product_values,

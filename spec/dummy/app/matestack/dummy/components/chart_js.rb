@@ -1,5 +1,5 @@
-class Matestack::Ui::Bootstrap::Components::Chart < Matestack::Ui::VueJsComponent
-  vue_js_component_name "matestack-ui-bootstrap-chart"
+class Dummy::Components::ChartJs < Matestack::Ui::VueJsComponent
+  vue_js_component_name "chart-js-component"
 
   requires :type
   requires :datasets
@@ -13,6 +13,7 @@ class Matestack::Ui::Bootstrap::Components::Chart < Matestack::Ui::VueJsComponen
   optional class: { as: :bs_class }
 
   def setup
+    # injected into vue.js components
     @component_config[:type] = type
     @component_config[:datasets] = datasets
     @component_config[:labels] = labels

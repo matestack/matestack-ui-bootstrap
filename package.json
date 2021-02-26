@@ -10,9 +10,8 @@
   "dependencies": {
     "@rails/webpacker": "5.2.1",
     "@popperjs/core": "^2.5.4",
-    "bootstrap": "^5.0.0-beta1",
+    "bootstrap": "^5.0.0-beta2",
     "bootstrap-icons": "^1.1.0",
-    "chart.js": "^2.9.4",
     "flatpickr": "^4.6.6",
     "link-module-alias": "^1.2.0",
     "matestack-ui-core": "^1.4.1",
@@ -22,8 +21,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "exports": {
-    ".": "./app/javascript/matestack-ui-bootstrap",
-    "./concepts/": "./app/concepts/matestack/ui/bootstrap/"
+    ".": "./app/javascript/matestack-ui-bootstrap"
   },
   "scripts": {
     "postinstall": "link-module-alias"

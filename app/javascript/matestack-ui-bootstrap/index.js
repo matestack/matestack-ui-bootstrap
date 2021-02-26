@@ -7,7 +7,6 @@ import "./stylesheets/matestack-ui-bootstrap.scss";
 
 import '../../concepts/matestack/ui/bootstrap/components/alert'
 import '../../concepts/matestack/ui/bootstrap/components/carousel'
-import '../../concepts/matestack/ui/bootstrap/components/chart'
 import '../../concepts/matestack/ui/bootstrap/components/collapse'
 import '../../concepts/matestack/ui/bootstrap/components/dropdown'
 import '../../concepts/matestack/ui/bootstrap/components/modal'

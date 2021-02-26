@@ -22,7 +22,7 @@ class Dummy::Components::Dashboard::Orders < Matestack::Ui::Component
             small text: last_7_days
           end
           bs_col xs: 6 do
-            bs_chart type: :line, datasets: [
+            chart_js type: :line, datasets: [
               {
                 label: "Orders",
                 data: [four_weeks_ago, three_weeks_ago, two_weeks_ago, last_7_days],
