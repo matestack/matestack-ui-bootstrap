@@ -7,8 +7,10 @@ class Matestack::Ui::Bootstrap::Components::TabNav < Matestack::Ui::Component
             class: { as: :bs_class }, attributes: { as: :bs_attrs}
 
   def response
-    ul nav_attributes do
-      nav_items_partial if items.present?
+    if items.present?
+      ul nav_attributes do
+        nav_items_partial
+      end
     end
     div class: "tab-content", id: "#{id}Content" do
       yield_components

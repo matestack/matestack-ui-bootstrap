@@ -1,18 +1,18 @@
 class Matestack::Ui::Bootstrap::Components::Progress < Matestack::Ui::Component
-  
+
   optional class: { as: :bs_class }
   optional :text, :valuemin, :valuemax
   # progress expects a number or a list containing hashes with at least a :value
   # other options are :text, :class, :variant, :striped, :animated, :aria_valuenow
   optional :progress
-  # :value
+  optional :value
   optional :variant, :striped, :animated, :height
 
-  def response 
+  def response
     div progress_attributes do
       progress = self.progress.is_a?(Array) ? self.progress : [{ value: self.progress || value, text: self.text }]
       progress.each do |prog|
-        progress_bar(prog[:value], valuemin, valuemax, 
+        progress_bar(prog[:value], valuemin, valuemax,
           text: prog[:text], klass: prog[:class], variant: prog[:variant] || variant,
           striped: prog[:striped] || striped, animated: prog[:animated] || animated,
           aria_valuenow: prog[:aria_valuenow]
@@ -27,7 +27,7 @@ class Matestack::Ui::Bootstrap::Components::Progress < Matestack::Ui::Component
   def progress_attributes
     attributes = {}.tap do |hash|
       hash[:class] = "progress #{bs_class}".strip
-      hash[:attributes] = { style: "height: #{height}px;" } if height 
+      hash[:attributes] = { style: "height: #{height}px;" } if height
     end
     html_attributes.merge(
       attributes
@@ -36,7 +36,7 @@ class Matestack::Ui::Bootstrap::Components::Progress < Matestack::Ui::Component
 
   def progress_bar(value, min, max, text: nil, klass: nil, variant: :primary, striped: false, animated: false, aria_valuenow: nil)
     div progress_bar_attributes(value, klass, variant, striped, animated, aria_valuenow) do
-      plain text if text      
+      plain text if text
     end
   end
 

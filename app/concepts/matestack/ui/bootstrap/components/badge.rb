@@ -1,14 +1,14 @@
 class Matestack::Ui::Bootstrap::Components::Badge < Matestack::Ui::Component
-  
+
   optional class: { as: :bs_class }
-  optional :text, :variant, :rounded, :sr_only
+  optional :text, :variant, :rounded, :visually_hidden
 
   def response
     span badge_attributes do
       plain text if text
       yield_components
     end
-    span class: "sr-only", text: sr_only if sr_only.present?
+    span class: "visually-hidden", text: visually_hidden if visually_hidden.present?
   end
 
   protected

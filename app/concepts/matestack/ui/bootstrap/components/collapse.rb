@@ -1,12 +1,12 @@
 class Matestack::Ui::Bootstrap::Components::Collapse < Matestack::Ui::VueJsComponent
-  vue_js_component_name "matestack-ui-bootstrap-collapse" 
-  
+  vue_js_component_name "matestack-ui-bootstrap-collapse"
+
   optional :multi, :labelledby, :parent, class: { as: :bs_class }
   optional :card # possible keys: class, text
   # event trigger
   optional :toggle_on, :show_on, :hide_on, :dispose_on
 
-  def response 
+  def response
     div collapse_attributes do
       card_partial if card
       yield_components
@@ -25,7 +25,7 @@ class Matestack::Ui::Bootstrap::Components::Collapse < Matestack::Ui::VueJsCompo
   def collapse_attributes
     html_attributes.merge(
       class: collapse_classes,
-      data: { parent: parent },
+      data: { "bs-parent": parent },
       attributes: { 'aria-labelledby': "#{labelledby}" }
     )
   end
@@ -35,7 +35,7 @@ class Matestack::Ui::Bootstrap::Components::Collapse < Matestack::Ui::VueJsCompo
       classes << 'collapse'
       # mulit target
       classes << 'multi-collapse' if multi
-      #custom classes 
+      #custom classes
       classes << bs_class
     end.join(' ').strip
   end

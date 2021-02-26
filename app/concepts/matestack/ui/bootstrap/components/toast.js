@@ -18,7 +18,13 @@ MatestackUiCore.Vue.component('matestack-ui-bootstrap-toast', {
           self.showing = false;
         }, 5000);
       }
-      this.showing = true
+      if(this.componentConfig["delay"]){
+        setTimeout(function () {
+          self.showing = true;
+        }, parseInt(self.componentConfig["delay"]));
+      } else {
+        self.showing = true
+      }
       this.eventData = event
     },
     hide: function(event){

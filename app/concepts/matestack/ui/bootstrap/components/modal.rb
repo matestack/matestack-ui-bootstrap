@@ -63,7 +63,7 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::VueJsComponen
       slot slots[:footer] if slots && slots[:footer]
       if footer[:text].present?
         button class: "btn #{footer[:class].present? ? footer[:class] : 'btn-secondary'}",
-          data: { dismiss: 'modal' }, attributes: { type: 'button' },
+          data: { "bs-dismiss": 'modal' }, attributes: { type: 'button' },
           text: footer[:text]
       end
     end

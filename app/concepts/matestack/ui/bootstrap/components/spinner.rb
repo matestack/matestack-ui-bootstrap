@@ -5,7 +5,7 @@ class Matestack::Ui::Bootstrap::Components::Spinner < Matestack::Ui::Component
 
   def response
     div spinner_attributes do
-      span class: "sr-only", text: sr_only
+      span class: "visually-hidden", text: sr_only
     end
   end
 

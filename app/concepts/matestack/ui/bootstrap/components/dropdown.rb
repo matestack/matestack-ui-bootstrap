@@ -30,7 +30,7 @@ class Matestack::Ui::Bootstrap::Components::Dropdown < Matestack::Ui::VueJsCompo
   def split_btn_partial
     slot slots[:split_btn]
     bs_btn btn_attributes do
-      span class:"sr-only" do plain "Toggle Dropdown" end
+      span class:"visually-hidden" do plain "Toggle Dropdown" end
     end
   end
 
@@ -47,6 +47,8 @@ class Matestack::Ui::Bootstrap::Components::Dropdown < Matestack::Ui::VueJsCompo
         li do transition item.merge(class: "dropdown-item #{item[:class]}") end
       when :action
         li do action item.merge(class: "dropdown-item #{item[:class]}") do plain item[:text] end end
+      when :onclick
+        li do onclick item.merge(class: "dropdown-item #{item[:class]}", attributes: { style: "cursor: pointer;" }) do plain item[:text] end end
       else
         span class: "dropdown-item-text" do plain item[:text] end
       end
@@ -99,7 +101,6 @@ class Matestack::Ui::Bootstrap::Components::Dropdown < Matestack::Ui::VueJsCompo
   def menu_attributes
     {
       class: menu_classes,
-      data: { toggle: 'dropdown' },
       attributes: { 'aria-labelledby': bs_id }
     }
   end

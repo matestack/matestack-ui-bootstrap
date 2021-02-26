@@ -7,7 +7,7 @@ class Matestack::Ui::Bootstrap::Components::Alert < Matestack::Ui::VueJsComponen
   def response
     div alert_attributes do
       heading size: (title_size || 4), class: 'alert-heading', text: title if title
-      paragraph text: text if text
+      plain text if text
       yield_components
       bs_close dismiss: "alert" if dismissible
     end

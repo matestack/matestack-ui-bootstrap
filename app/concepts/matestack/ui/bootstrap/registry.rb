@@ -10,7 +10,6 @@ module Matestack::Ui::Bootstrap::Registry
     bs_btn_group: Matestack::Ui::Bootstrap::Components::ButtonGroup,
     bs_card: Matestack::Ui::Bootstrap::Components::Card,
     bs_carousel: Matestack::Ui::Bootstrap::Components::Carousel,
-    bs_chart: Matestack::Ui::Bootstrap::Components::Chart,
     bs_close: Matestack::Ui::Bootstrap::Components::Close,
     bs_collapse: Matestack::Ui::Bootstrap::Components::Collapse,
     bs_dropdown: Matestack::Ui::Bootstrap::Components::Dropdown,

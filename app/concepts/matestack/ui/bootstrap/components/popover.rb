@@ -49,7 +49,7 @@ class Matestack::Ui::Bootstrap::Components::Popover < Matestack::Ui::VueJsCompon
         content_partial
       end
     else
-      btn popover_attributes do
+      bs_btn popover_attributes do
         content_partial
       end
     end
