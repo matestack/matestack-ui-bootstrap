@@ -2,7 +2,7 @@
 
 The Bootstrap `checkbox` form component, implemented in Ruby. Use it like any of the other matestack form components in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the configuration options.
 
-## `bootstrap_checkbox(*args, &block)`
+## `bs_form_checkbox(*args, &block)`
 ----
 
 Renders one or multiple bootstrap checkbox input fields.
@@ -22,23 +22,13 @@ Renders one or multiple bootstrap checkbox input fields.
 ### Example 1: Basic usage with single checkbox field
 
 ```ruby
-bootstrap_checkbox label: "Single checkbox", key: :some_checkbox_input
-```
-
-returns
-
-```html
-<div class="form-check ">
-  <input type="hidden" value="" class="">
-  <input id="_" name="some_checkbox_input" type="checkbox" value="1" class="form-check-input">
-  <label for="_" class="form-check-label">Single checkbox</label>
-</div>
+bs_form_checkbox label: "Single checkbox", key: :some_checkbox_input
 ```
 
 and sends
 
 ```ruby
-"some_checkbox_input"=>false # or true, if the input has been clicked
+"some_checkbox_input"=>nil # or true, if the input has been clicked or false if the input was clicked again
 ```
 
 to the corresponding Controller.
@@ -46,115 +36,35 @@ to the corresponding Controller.
 ### Example 2: Basic usage with an Array
 
 ```ruby
-bootstrap_checkbox key: :foo, options: [1, 2]
-```
-
-returns
-
-```html
-<div class="form-check ">
-  <input id="_1" name="1" type="checkbox" value-type="Integer" value="1" class="form-check-input">
-  <label for="_1" class="form-check-label">1</label>
-</div>
-<div class="form-check ">
-  <input id="_2" name="2" type="checkbox" value-type="Integer" value="2" class="form-check-input">
-  <label for="_2" class="form-check-label">2</label>
-</div>
+bs_form_checkbox key: :foo, options: [1, 2]
 ```
 
 ### Example 3: Basic usage with a Hash
 
 ```ruby
-bootstrap_checkbox key: :foo, options: { "Option 1": 1, "Option 2": 2 }
-```
-
-returns
-
-```html
-<div class="form-check ">
-  <input id="_1" name="Option 1" type="checkbox" value-type="Integer" value="1" class="form-check-input">
-  <label for="_1" class="form-check-label">Option 1</label>
-</div>
-<div class="form-check ">
-  <input id="_2" name="Option 2" type="checkbox" value-type="Integer" value="2" class="form-check-input">
-  <label for="_2" class="form-check-label">Option 2</label>
-</div>
+bs_form_checkbox key: :foo, options: { "Option 1": 1, "Option 2": 2 }
 ```
 
 ### Example 4: Using a label
 
 ```ruby
-bootstrap_checkbox key: :foo, options: [1, 2], label: "Some label"
-```
-
-returns
-
-```html
-<label for="foo" class="form-label">Some label</label>
-<div class="form-check ">
-  <input id="_1" name="1" type="checkbox" value-type="Integer" value="1" class="form-check-input">
-  <label for="_1" class="form-check-label">1</label>
-</div>
-<div class="form-check ">
-  <input id="_2" name="2" type="checkbox" value-type="Integer" value="2" class="form-check-input">
-  <label for="_2" class="form-check-label">2</label>
-</div>
+bs_form_checkbox key: :foo, options: [1, 2], label: "Some label"
 ```
 
 ### Example 5: Using a form_text
 
 ```ruby
-bootstrap_checkbox key: :foo, options: [1, 2], form_text: "some notes"
-```
-
-returns
-
-```html
-<div class="form-check ">
-  <input id="_1" name="1" type="checkbox" value-type="Integer" value="1" class="form-check-input">
-  <label for="_1" class="form-check-label">1</label>
-</div>
-<div class="form-check ">
-  <input id="_2" name="2" type="checkbox" value-type="Integer" value="2" class="form-check-input">
-  <label for="_2" class="form-check-label">2</label>
-</div>
-<div id="form_text_for_foo" class="form-text">some notes</div>
+bs_form_checkbox key: :foo, options: [1, 2], form_text: "some notes"
 ```
 
 ### Example 6: Using the `disabled` option
 
 ```ruby
-bootstrap_checkbox key: :foo, options: [1, 2], disabled: true
-```
-
-returns
-
-```html
-<div class="form-check ">
-  <input disabled="disabled" id="_1" name="1" type="checkbox" value-type="Integer" value="1" class="form-check-input">
-  <label for="_1" class="form-check-label">1</label>
-</div>
-<div class="form-check ">
-  <input disabled="disabled" id="_2" name="2" type="checkbox" value-type="Integer" value="2" class="form-check-input">
-  <label for="_2" class="form-check-label">2</label>
-</div>
+bs_form_checkbox key: :foo, options: [1, 2], disabled: true
 ```
 
 ### Example 7: Using the `:inline` variant
 
 ```ruby
-bootstrap_checkbox key: :foo, options: [1, 2], variant: :inline
-```
-
-returns
-
-```html
-<div class="form-check form-check-inline">
-  <input id="_1" name="1" type="checkbox" value-type="Integer" value="1" class="form-check-input">
-  <label for="_1" class="form-check-label">1</label>
-</div>
-<div class="form-check form-check-inline">
-  <input id="_2" name="2" type="checkbox" value-type="Integer" value="2" class="form-check-input">
-  <label for="_2" class="form-check-label">2</label>
-</div>
+bs_form_checkbox key: :foo, options: [1, 2], variant: :inline
 ```
