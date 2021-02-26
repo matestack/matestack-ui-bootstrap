@@ -13,6 +13,10 @@ Returns a bootstrap button containing text or content specified by a block. Also
 * `:size` - Use `:block, :sm, :md or :lg` to change the size of the button. The default is `nil`.
 * `:type` - Specify the type button tags. By default is set as `button`. You can set is for example as `submit`, `reset`, etc.
 * `:text` - Expects a string with the text that should go inside the button
+* `:link` - Expects a hash with parameters for a link component, button will act as a link (`a` tag with btn css classes)
+* `:transition` - Expects a hash with parameters for a transition component, button will act as a transition (`a` tag with btn css classes)
+* `:action` - Expects a hash with parameters for a action component, button will act as a action (`a` tag with btn css classes)
+* `:onclick` - Expects a hash with parameters for a onclick component, button will act as a onclick (`a` tag with btn css classes)
 * Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding button div.
 
 ## Examples
@@ -54,7 +58,24 @@ returns
 <btn type="button" class="btn btn-outline-secondary">Outline Secondary</btn>
 ```
 
-### Example 2: Yield a given block
+### Example 2: Applying actions, transition, links or onclicks
+
+```ruby
+bs_btn action: { path: root_path, method: :post ... } do
+  plain "Action"
+end
+bs_btn transition: { path: root_path ... } do
+  plain "Transition"
+end
+bs_btn link: { path: root_path ... } do
+  plain "Link"
+end
+bs_btn onclick: { emit: "test" ... } do
+  plain "Onclick"
+end
+```
+
+### Example 3: Yield a given block
 
 ```ruby
 bs_btn id: 'foo', class: 'bar' do
@@ -70,7 +91,7 @@ returns
 </btn>
 ```
 
-### Example 3: Using pre define btn size parameter
+### Example 4: Using btn size parameter
 
 ```ruby
 bs_btn variant: :success, size: :sm, text: "Small btn"
@@ -84,4 +105,3 @@ returns
 
 <btn type="button" class="btn btn-secondary btn-lg">Large btn</btn>
 ```
-

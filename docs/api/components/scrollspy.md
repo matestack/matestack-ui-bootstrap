@@ -4,7 +4,13 @@ The Bootstrap `scrollspy` component, implemented in Ruby. Use it like any other 
 
 ## `bs_scrollspy(*args, &block)`
 
-Returns a bootstrap scrollspy containing content specified by a block. Also the scrollspy is customizable with the following options.
+_use only when you want to apply the scrollspy behavior to a specific element on your UI (other than `body`)_
+
+Returns a `div` with applied bootstrap scrollspy data attributes and `position: relative;` containing content specified by a block. Also the scrollspy is customizable with the following options:
+
+**Required options**
+
+* `:height` - Defines the height for the scrollable container, can be an Integer which will be interepreted as `Xpx`, or a custom String like `"20em"`
 
 **Optional options**
 
@@ -18,41 +24,24 @@ Returns a bootstrap scrollspy containing content specified by a block. Also the 
 ### Example 1: Scrollspy with list-group
 
 ```ruby
-bs_list_group id: "list-example", items: [
-            { type: :link, text: "Go to Item 1", path: "#list-item1"},
-            { type: :link, text: "Go to Item 2", path: "#list-item2" }
-          ]
-
-bs_scrollspy target: "#list-example" do
-  heading size: 2, id: "list-item1", text: "Item 1"
-  paragraph text: "Foo"
-
-  heading size: 2, id: "list-item2", text: "Item 2"
-  paragraph text: "Bar"
+bs_row class: "m-3" do
+  bs_col lg: 4 do
+    bs_list_group id: "list-example", class: "mb-5", actionable_items: true, items: [
+      { type: :link, text: "Item 1", path: "#list-item1"},
+      { type: :link, text: "Item 2", path: "#list-item2" }
+    ]
+  end
+  bs_col lg: 8 do
+    bs_scrollspy target: "#list-example", offset: 0, height: 200 do
+      heading size: 2, id: "list-item1", text: "Item 1"
+      100.times do
+        paragraph text: "Text for item 1"
+      end
+      heading size: 2, id: "list-item2", text: "Item 2"
+      100.times do
+        paragraph text: "Text for item 2"
+      end
+    end
+  end
 end
 ```
-
-returns
-
-```markup
-<ul id="list-example" class="list-group">
-  <a href="#list-item1" class="list-group-item list-group-item-action">
-    Go to Item 1
-  </a>
-  <a href="#list-item2" class="list-group-item list-group-item-action">
-    Go to Item 2
-  </a>
-</ul>
-
-<div data-spy="scroll" data-target="#list-example">
-  <h2 id="list-item1">Item 1</h2>
-  <p>
-    Foo
-  </p>
-  <h2 id="list-item2">Item 2</h2>
-  <p>
-    Bar
-  </p>
-</div>
-```
-

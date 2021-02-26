@@ -10,7 +10,7 @@ Returns a bootstrap collapse containing text or content specified by a block. Al
 
 * `card` - can be 2 types of option depends on the argument it has been given. you can pass on a String or a hash with custom `class` and `text`
 * `multi` - If set true, collapse element can show and hide by multiple sources
-* `parent` - Set data attribute _data-parent_
+* `parent` - Set data attribute _data-bs-parent_
 * `labeledby`- Set attribute _aria-labelledby_
 * **Javascript Triggers:**
   * `toggle_on` - Expects an event as string on which the collapse will be showed or hidden
@@ -21,7 +21,7 @@ Returns a bootstrap collapse containing text or content specified by a block. Al
 
 ## Examples
 
-### Example 1: Basic Collapse component using Javascript trigger
+### Example 1: Basic Collapse component triggered by Matestack Events
 
 ```ruby
 onclick emit: "toggleCollapse" do
@@ -33,26 +33,41 @@ bs_collapse toggle_on: "toggleCollapse", card: "Random text for card body conten
 returns
 
 ```markup
-<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Toggle Collapse
-</button>
+<!-- onclick component -->
 
-<div class="collapse" id="collapseExample">
+<div class="collapse">
   <div class="card card-body">
     Random text for card body content
   </div>
 </div>
 ```
 
-## Examples
+### Example 2: Basic Collapse component triggered via data attributes
 
-### Example 2: Multiple Targets
+```ruby
+bs_btn text: "Toggle both element", data: { "bs-toggle": "collapse",  "bs-target": "#example" }, attributes: { 'aria-expanded': "false", 'aria-controls': "example" }
+bs_collapse id: "example", card: "Random text for card body content"
+```
+
+returns
+
+```markup
+<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#example" aria-expanded="false" aria-controls="example">Toggle both elements</button>
+
+<div class="collapse">
+  <div class="card card-body">
+    Random text for card body content
+  </div>
+</div>
+```
+
+### Example 3: Multiple Targets
 
 ```ruby
 paragraph do
-  link class: "btn btn-primary", text: "Toggle first element", path: "#multiCollapseExample1", data: { toggle: "collapse" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample1", 'role': "button" }
-  bs_btn text: "Toggle second element", data: { toggle: "collapse",  target: "#multiCollapseExample2" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample2" }
-  bs_btn text: "Toggle both element", data: { toggle: "collapse",  target: ".multi-collapse" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample1 multiCollapseExample2" }
+  link class: "btn btn-primary", text: "Toggle first element", path: "#multiCollapseExample1", data: { "bs-toggle": "collapse" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample1", 'role': "button" }
+  bs_btn text: "Toggle second element", data: { "bs-toggle": "collapse",  "bs-target": "#multiCollapseExample2" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample2" }
+  bs_btn text: "Toggle both element", data: { "bs-toggle": "collapse",  "bs-target": ".multi-collapse" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample1 multiCollapseExample2" }
 end
 
 bs_row do
@@ -67,9 +82,9 @@ end
 
 ```markup
 <p>
-  <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Toggle first element</a>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Toggle second element</button>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements</button>
+  <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Toggle first element</a>
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Toggle second element</button>
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements</button>
 </p>
 <div class="row">
   <div class="col">
@@ -88,4 +103,3 @@ end
   </div>
 </div>
 ```
-

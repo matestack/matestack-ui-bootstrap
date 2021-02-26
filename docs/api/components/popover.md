@@ -45,7 +45,7 @@ bs_popover text: "Click to toggle popover",
 returns
 
 ```markup
-<button type="button" class="btn btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
+<button type="button" class="btn btn-danger" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">
   Click to toggle popover
 </button>
 ```
@@ -59,7 +59,7 @@ bs_popover text: "Popover", html: 'true', content: "<p>this paragraph in popover
 returns
 
 ```markup
-<button data-content="<p>this paragraph in popover</p>" data-html="true" data-toggle="popover" role="button" tabindex="" title="" type="button" class="btn btn-primary" data-original-title="">
+<button data-bs-content="<p>this paragraph in popover</p>" data-bs-html="true" data-bs-toggle="popover" role="button" tabindex="" title="" type="button" class="btn btn-primary" data-bs-original-title="">
   Popover
 </button>
 ```
@@ -73,8 +73,7 @@ bs_popover tag: :link, placement: :top, tabindex: "0", variant: :danger, trigger
 returns
 
 ```markup
-<a data-content="And here's some amazing content. It's very engaging. Right?" data-placement="top" data-tabindex="0" data-title="Dismissible popover" data-toggle="popover" data-trigger="focus" role="button" tabindex="0" title="" class="btn btn-danger" data-original-title="Dismissible popover">
+<a data-bs-content="And here's some amazing content. It's very engaging. Right?" data-bs-placement="top" data-bs-tabindex="0" data-bs-title="Dismissible popover" data-bs-toggle="popover" data-bs-trigger="focus" role="button" tabindex="0" title="" class="btn btn-danger" data-bs-original-title="Dismissible popover">
   Dismissible Popover
 </a>
 ```
-

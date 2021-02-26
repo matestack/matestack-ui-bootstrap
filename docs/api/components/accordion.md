@@ -6,66 +6,53 @@ The Bootstrap `accordion` component, implemented in Ruby. Use it like any other 
 
 Returns a bootstrap accordion containing card header and collapsable card-body elements or content specified by a block.
 
-**Optional options**
+**Required options**
 
 * `:items` - expects an array with 2 hashes, one for `header` and one for `body`. The two hashes can have the following keys
+  * `open` - if true, this item will be shown initially
   * `header`:
     * `class` & `id` - adding custom class and id to header component
     * `size` - customize heading element, by default it's set as `h2`
-    * `variant` - Specify a variant for the xxxx. Variant represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class.
     * `text` - header text block
   * `body`:
     * `class` - adding custom class to body component
     * `multi` - If set true, collapse body can be control by multiple sources
     * `text` - adding text block to body
+
+**Optional options**
+
+* `:open` - if true, all items will be shown initially
 * Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding accordion div.
 
 ## Examples
 
-### Example 1:
+### Example 1: Open specified items initially
 
 ```ruby
-bs_accordion id: "accordionExample", items: [
-  { header: { text: "Collapsible Group Item #1", variant: :light, class: "text-left p-3 rounded-0" },
-    body: { text: "Random Text for Collapse #1" } },
-  { header: { text: "Collapsible Group Item #2", variant: :light, class: "text-left p-3 rounded-0" },
-    body: { text: "Random Text for Collapse #2" } }
+bs_accordion items: [
+  {
+    open: true,
+    header: { text: "Collapsible Group Item #1" },
+    body: { text: "Random Text for Collapse #1" }
+  },
+  {
+    header: { text: "Collapsible Group Item #2" },
+    body: { text: "Random Text for Collapse #2", class: "foobar" }
+  }
 ]
 ```
 
-returns
+### Example 1: Open all items initially
 
-```markup
-<div class="accordion" id="accordionExample">
-  <div class="card">
-    <div class="card-header p-0" id="headingOne">
-      <h2 class="mb-0">
-        <button class="btn btn-light btn-block text-left p-3 rounded-0" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Collapsible Group Item #1
-        </button>
-      </h2>
-    </div>
-
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body">
-        Random Text for Collapse #1
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header p-0" id="headingTwo">
-      <h2 class="mb-0">
-        <button class="btn btn-light btn-block text-left collapsed p-3 rounded-0" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Collapsible Group Item #2
-        </button>
-      </h2>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body">
-        Random Text for Collapse #2
-      </div>
-    </div>
-  </div>
-</div>
+```ruby
+bs_accordion open: true, items: [
+  {
+    header: { text: "Collapsible Group Item #1", class: "foobar" },
+    body: { text: "Random Text for Collapse #1" }
+  },
+  {
+    header: { text: "Collapsible Group Item #2" },
+    body: { text: "Random Text for Collapse #2" }
+  }
+]
 ```
-

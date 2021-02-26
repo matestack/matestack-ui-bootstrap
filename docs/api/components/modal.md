@@ -27,64 +27,28 @@ Returns a bootstrap modal containing header, body, footer or content specified b
 
 ## Examples
 
-### Example 1: Basic Modal Static Modal
+### Example 1: Basic Modal triggered via data attributes
 
 ```ruby
-# To trigger Modal you can use btn component with data-toggle and data-target
-bs_btn text: "Launch Modal", data: { toggle: 'modal', target: '#staticBackdrop' }
-
+bs_btn text: "Launch Modal", data: { "bs-toggle": 'modal', "bs-target": '#staticBackdrop' }
 bs_modal id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close", static: true, keyboard: false
-# ---------------------------------------
-# or you can also use javascript trigger
-onclick emit: "toggleModal" do
-  bs_btn text: "Launch Modal"
-end
-bs_modal toggle_on: "toggleModal", id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close", static: true, keyboard: false
+
 ```
 
-returns
+### Example 2: Basic Modal triggered Matestack events
 
-```markup
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-  Launch Modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Modal Messages
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+```ruby
+onclick emit: "toggle_modal" do
+  bs_btn text: "Launch Modal"
+end
+bs_modal toggle_on: "toggle_modal", id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close", static: true, keyboard: false
 ```
 
 ### Example 2: Modal with custom header
-
-_body and footer hashes are working in similar way_
 
 ```ruby
 bs_modal header: { text: "Modal Title", class: "text-center", size: 1 },     
       body: "Modal Messages", footer: "Close"
 ```
 
-returns
-
-```markup
-...
-<div class="modal-header">
-  <h1 class="modal-title text-center">Modal title</h1>
-</div>
-...
-```
-
+_body and footer hashes are working in similarly_

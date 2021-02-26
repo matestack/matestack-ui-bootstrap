@@ -1,6 +1,8 @@
 # Table of contents
 
 * [Install](README.md)
+* [Integrations](integrations/README.md)
+  * [Chart.js](integrations/chartjs.md)
 * [API](api/README.md)
   * [Layout](api/layout/README.md)
     * [Container](api/layout/container.md)
@@ -38,4 +40,3 @@
       * [Admin App Template](api/templates/apps/admin.md)
   * [Form](api/form/README.md)
     * [Form Components](api/form/components.md)
-

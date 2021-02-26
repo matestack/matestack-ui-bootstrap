@@ -8,8 +8,8 @@ Returns a bootstrap breadcrumb containing content created from an array of `item
 
 **Optional options**
 
-* `:items` - Expects an array of hashes. Each hash represents an item and is required to contain at least `:path` and `:text` keys. The items will be rendered as transitions with `:path` and `:text` from the hash. In case you want links instead of transitions add a `type: :link` to the item which should be rendered as link. If items are given and a block the items are rendered before the block.
-* `:nav_class` - Expects a string. Use `:navclass` to add custom classes to the sourrounding "nav".
+* `:items` - Expects an array of hashes. Each hash represents an item and is required to contain at least `:path` and `:text` keys. The items will be rendered as transitions with all attributes from the hash injected into the transition component. In case you want links instead of transitions add a `type: :link` to the item which should be rendered as link. If items are given and a block the items are rendered before the block.
+* `:nav_class` - Expects a string. Use `:nav_class` to add custom classes to the sourrounding "nav".
 * `&block` - Use a block to create custom content/markup inside a breadcrumb. If used together with `:text` the text will be displayed before the block.
 * Html attributes - all w3c confirm html attributes for ol's can be set via options and will be added to the items and block surrounding breadcrumb ol element which is in bootstrap surrounded by a nav.
 
@@ -20,7 +20,7 @@ Returns a bootstrap breadcrumb containing content created from an array of `item
 ```ruby
 items = [
   { path: root_path, text: 'Home' },
-  { path: products_path, text: 'Products' },
+  { text: 'Products' },
 ]
 bs_breadcrumb items: items, class: 'my-breadcrumb'
 ```
@@ -34,13 +34,11 @@ Result:
       <a href="/">Home</a><!-- transition link -->
     </li>
     <li class="breadcrumb-item active" aria-current="page">
-      <a href="/products">Products</a><!-- transition link -->
+      Products
     </li>
   </ol>
 </nav>
 ```
-
-_Note: Attributes which are set to enable transition on "a" tags are not added for the case of simplicity._
 
 ### Breadcrumb with one transition and one link
 
@@ -48,6 +46,7 @@ _Note: Attributes which are set to enable transition on "a" tags are not added f
 items = [
   { path: root_path, text: 'Home', type: :link },
   { path: products_path, text: 'Products' },
+  { text: "Product A" }
 ]
 bs_breadcrumb items: items, class: 'my-breadcrumb'
 ```
@@ -60,10 +59,12 @@ Result:
     <li class="breadcrumb-item">
       <a href="/">Home</a><!-- link -->
     </li>
-    <li class="breadcrumb-item active" aria-current="page">
+    <li class="breadcrumb-item">
       <a href="/products">Products</a><!-- transition link -->
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      Product A
     </li>
   </ol>
 </nav>
 ```
-

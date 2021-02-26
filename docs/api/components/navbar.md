@@ -8,19 +8,22 @@ Returns a bootstrap navbar. This component can handle various optional configura
 
 **Optional options**
 
-* `:items` - Expects an array of Hashes. Each hash object can contain 3 keys: `type`, `path`, `text`.
-  * `type`: can be either `:transition` or `:link`.
-    * By default is `:transition`.
+* `:items` - Expects an array of Hashes. Each hash object should contain at least these keys: `type`, `path`, `text`.
+  * `type`: can be either `:transition`, `:link` or `action`.
+    * default is `:transition`.
     * With transition, _active_ class will be handle automatically.
   * `path` & `text`: expect a string
+  * `icon`: name of icon which should prepend the optinally given text
 * `:items_class` - You can add here additional class for navbar-nav list
-  * By default the list is set to be on the left of the navbar and align at the center when it collapsed = `mr-auto mb-2 mb-lg-0`
-* `:brand` - expect hash or string. Possible keys for hash: `text`, `path`, `img`. If the argument for brand is a string, navbar will display the given string as Brand text and path of the brand will be root path
+  * By default the list is set to be on the left of the navbar and align at the center when it collapsed = `me-auto mb-2 mb-lg-0`
+* `:brand` - expect hash or string. Possible keys for hash: `text`, `path`, `img` and `type`.
+ * If the argument for brand is a string, navbar will display the given string as Brand text and a transition to the root_path
+ * Default `type` is `transition`, you can specify to use a `link` instead using the `type`
 * `:toggle` - expect hash or a symbol \(`:left` or `:right`\). This parameter determines whether the expand navigation toggle button should be on the left or right
   * possible keys for hash: `position`, `class`. With `class` you can pass on additional class for toggle button
 * `:theme` & `:color` - Specify a theme for navbar. Theme represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class. **Point of attention:** If color parameter is not set, the color will be the same as theme
 * `:fixed_top`, `:fixed_bottom`, `:sticky_top` - Expects `true`. By setting this parameter to `true` the related functionality will be activated. If not set, it will simple keep deactivated and you don't have to do anything in addition
-* `:hide_at` - set at which screen size the navbar shoulb be collapsed
+* `:expand_at` - set at which screen size the navbar should be expanded
   * Expects a breakpoints `:xs, :sm, :md, :lg, :xl, :xxl`.
   * By default it's set as `:lg`
 * `:container_size` - The container inside the navbar is set as `:fluid` by default and can be set with any bootstrap breakpoints
@@ -48,7 +51,7 @@ returns
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-      <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
@@ -68,7 +71,7 @@ returns
 bs_navbar theme: :light, brand: "Navbar", class: "text-center", items: [
         { path: "#", text: "Home"},
         { path: "#", text: "Contact"} ] do
-          btn text: "Login", variant: :outline_success, horizontal: :end
+          bs_btn text: "Login", variant: :outline_success, horizontal: :end
         end
 ```
 
@@ -82,7 +85,7 @@ returns
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-      <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
@@ -147,4 +150,3 @@ returns
   </div>
 </nav>
 ```
-
