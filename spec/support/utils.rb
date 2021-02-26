@@ -13,7 +13,7 @@ module Utils
       if example_context.respond_to? args.first
         example_context.send(*args, &block)
       else
-        super
+        super(*args)
       end
     end
     ExamplePage.define_method(:response, block)
