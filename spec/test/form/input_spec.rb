@@ -27,7 +27,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_xpath('//form//input[@id="foo" and contains(@class, "form-control")]')
+    expect(page).to have_selector('form > div.matestack-ui-bootstrap-input > input.form-control#foo[type="text"]')
 
     fill_in "foo", with: "bar"
 
@@ -100,6 +100,19 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
+    expect(page).to have_xpath('//form//div[@id="form_text_for_foo" and contains(@class, "form-text") and contains(text(), "some notes")]')
+  end
+
+  it 'renders basic bootstrap range input' do
+    form_config = get_form_config(path: input_success_form_test_path)
+    matestack_render do
+      form form_config do
+        bs_form_input key: :foo, type: :range, min: 5, max: 11, step: 2, form_text: "some notes"
+        bs_form_submit text: "Submit"
+      end
+    end
+    visit example_path
+    expect(page).to have_selector('form > div.matestack-ui-bootstrap-input > input[type="range"][min="5"][max="11"][step="2"]')
     expect(page).to have_xpath('//form//div[@id="form_text_for_foo" and contains(@class, "form-text") and contains(text(), "some notes")]')
   end
 

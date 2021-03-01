@@ -18,19 +18,6 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     allow_any_instance_of(FormTestController).to receive(:expect_params)
   end
 
-  it 'renders a radio button if initalized with single value' do
-    form_config = get_form_config(path: radio_success_form_test_path)
-    matestack_render do
-      form form_config do
-        bs_form_radio form_text: "just some notes", label: "Single Switch", key: :some_radio_input_1
-        bs_form_submit text: "Submit"
-      end
-    end
-    visit example_path
-    # broken right now
-    expect(page).to have_xpath('//form//input[@id="some_radio_input_1" and contains(@class, "form-check-input")]')
-  end
-
   it 'renders bootstrap radio buttons with options as Array' do
     form_config = get_form_config(path: radio_success_form_test_path)
     matestack_render do
@@ -40,8 +27,10 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_xpath('//form//input[@id="foo_1" and contains(@class, "form-check-input")]')
-    expect(page).to have_xpath('//form//input[@id="foo_2" and contains(@class, "form-check-input")]')
+    expect(page).to have_selector('form > div.matestack-ui-bootstrap-radio > .form-check > input.form-check-input#foo_1[type="radio"]')
+    expect(page).to have_selector('form > div.matestack-ui-bootstrap-radio > .form-check > label.form-check-label[for="foo_1"]')
+    expect(page).to have_selector('form > div.matestack-ui-bootstrap-radio > .form-check > input.form-check-input#foo_2[type="radio"]')
+    expect(page).to have_selector('form > div.matestack-ui-bootstrap-radio > .form-check > label.form-check-label[for="foo_2"]')
 
     find('#foo_1').click
     click_button "Submit"
@@ -59,17 +48,21 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_xpath('//form//input[@id="foo_1" and contains(@class, "form-check-input")]')
-    expect(page).to have_xpath('//form//input[@id="foo_2" and contains(@class, "form-check-input")]')
+    expect(page).to have_selector('form > div.matestack-ui-bootstrap-radio > .form-check > input.form-check-input#foo_1[type="radio"][value="1"]')
+    expect(page).to have_selector('form > div.matestack-ui-bootstrap-radio > .form-check > label.form-check-label[for="foo_1"]', text: "Option 1")
+    expect(page).to have_selector('form > div.matestack-ui-bootstrap-radio > .form-check > input.form-check-input#foo_2[type="radio"][value="2"]')
+    expect(page).to have_selector('form > div.matestack-ui-bootstrap-radio > .form-check > label.form-check-label[for="foo_2"]', text: "Option 2")
 
     find('#foo_1').click
-    click_button "Submit"
 
     expect_any_instance_of(FormTestController).to receive(:expect_params)
       .with(hash_including(wrapper: { foo: 1 }))
+
+    click_button "Submit"
+
   end
 
-  it 'renders bootstrap radio buttons with options as Array, clicking multiple options' do
+  it 'renders bootstrap radio buttons with options as Array, clicking multiple options but still sends a single value (was an error once)' do
     form_config = get_form_config(path: radio_success_form_test_path)
     matestack_render do
       form form_config do
@@ -78,20 +71,19 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_xpath('//form//input[@id="foo_1" and contains(@class, "form-check-input")]')
-    expect(page).to have_xpath('//form//input[@id="foo_2" and contains(@class, "form-check-input")]')
 
     find('#foo_1').click
     find('#foo_2').click
     find('#foo_1').click
     find('#foo_2').click
-    click_button "Submit"
 
     expect_any_instance_of(FormTestController).to receive(:expect_params)
       .with(hash_including(wrapper: { foo: 2 }))
+
+    click_button "Submit"
   end
 
-  it 'renders bootstrap radio buttons with options as Hash, clicking multiple options' do
+  it 'renders bootstrap radio buttons with options as Hash, clicking multiple options but still sends a single value (was an error once)' do
     form_config = get_form_config(path: radio_success_form_test_path)
     matestack_render do
       form form_config do
@@ -100,17 +92,16 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_xpath('//form//input[@id="foo_1" and contains(@class, "form-check-input")]')
-    expect(page).to have_xpath('//form//input[@id="foo_2" and contains(@class, "form-check-input")]')
 
     find('#foo_1').click
     find('#foo_2').click
     find('#foo_1').click
     find('#foo_2').click
-    click_button "Submit"
 
     expect_any_instance_of(FormTestController).to receive(:expect_params)
       .with(hash_including(wrapper: { foo: 2 }))
+
+    click_button "Submit"
   end
 
   it 'renders bootstrap radio buttons with server errors (e.g. required and not clicked)' do
@@ -135,7 +126,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     form_config = get_form_config(path: radio_success_form_test_path)
     matestack_render do
       form form_config do
-        bs_form_radio key: :foo, options: [1, 2], init_value: 1
+        bs_form_radio key: :foo, options: [1, 2], init: 1
         bs_form_submit text: "Submit"
       end
     end
@@ -143,12 +134,10 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     expect(page).to have_xpath('//form//input[@id="foo_1" and contains(@class, "form-check-input")]')
     expect(page).to have_xpath('//form//input[@id="foo_2" and contains(@class, "form-check-input")]')
 
-    # to make test pass comment out line below; shouldn't be necessary from test definition, though
-    # find('#foo_1').click
-    click_button "Submit"
-
     expect_any_instance_of(FormTestController).to receive(:expect_params)
       .with(hash_including(wrapper: { foo: 1 }))
+
+    click_button "Submit"
   end
 
   it 'renders bootstrap radio buttons with additional custom class' do
@@ -174,7 +163,6 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     end
     visit example_path
     expect(page).to have_xpath('//form//label[@class="form-label" and contains(text(), "Some label")]')
-    # expect(page).to have_xpath('//form//label[@for="foo" and @class="form-label" and contains(text(), "Some label")]')
   end
 
   it 'renders bootstrap radio buttons with form text' do

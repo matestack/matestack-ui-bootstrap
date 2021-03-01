@@ -27,7 +27,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_xpath('//form//select[@id="foo" and contains(@class, "form-select")]')
+    sleep
+    expect(page).to have_xpath('//form//div//select[@id="foo" and contains(@class, "form-select")]')
 
     select "2", from: "foo"
 
@@ -46,7 +47,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_xpath('//form//select[@id="foo" and contains(@class, "form-select")]')
+    expect(page).to have_xpath('//form//div//select[@id="foo" and contains(@class, "form-select")]')
 
     select "Option 2", from: "foo"
 
@@ -68,7 +69,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
 
     click_button "Submit"
 
-    expect(page).to have_xpath('//form//select[@id="foo" and contains(@class, "form-select") and contains(@class, "is-invalid")]')
+    expect(page).to have_xpath('//form//div//select[@id="foo" and contains(@class, "form-select") and contains(@class, "is-invalid")]')
 
     expect(page).to have_xpath('//form//div[contains(@class, "invalid-feedback") and contains(text(), "can\'t be blank")]')
     expect(page).to have_xpath('//form//div[contains(@class, "invalid-feedback") and contains(text(), "is invalid")]')
@@ -83,7 +84,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_xpath('//form//select[@id="foo" and contains(@class, "form-select") and contains(@class, "some-class")]')
+    expect(page).to have_xpath('//form//div//select[@id="foo" and contains(@class, "form-select") and contains(@class, "some-class")]')
   end
 
   it 'renders bootstrap select field with label' do
@@ -107,7 +108,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_xpath('//form//select[@id="foo" and contains(@class, "form-select")]//option[@disabled="disabled" and contains(text(), "select!")]')
+    expect(page).to have_xpath('//form//div//select[@id="foo" and contains(@class, "form-select")]//option[@disabled="disabled" and contains(text(), "select!")]')
   end
 
   it 'renders basic bootstrap input field with form text' do

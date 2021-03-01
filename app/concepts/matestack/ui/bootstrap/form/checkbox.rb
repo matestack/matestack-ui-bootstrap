@@ -1,6 +1,6 @@
 class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::Core::Form::Checkbox::Base
 
-  vue_js_component_name "matestack-ui-bootstrap-form-checkbox"
+  vue_js_component_name "matestack-ui-core-form-checkbox"
 
   optional :form_text
   optional :disabled

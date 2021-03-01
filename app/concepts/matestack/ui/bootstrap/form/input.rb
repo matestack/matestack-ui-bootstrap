@@ -1,4 +1,6 @@
-class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::Core::Form::Input::Input
+class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::Core::Form::Input::Base
+
+  vue_js_component_name "matestack-ui-core-form-input"
 
   optional :form_text
   optional :disabled
@@ -11,7 +13,7 @@ class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::Core::Form::Input::
   optional :show_value
 
   def response
-    div do
+    div class: "matestack-ui-bootstrap-input" do
       label for: attr_key,  class: "form-label", text: input_label if input_label
       case type
       when :range
@@ -31,22 +33,9 @@ class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::Core::Form::Input::
     end
   end
 
-  def vue_attributes
-    (options[:attributes] || {}).merge({
-      id: attr_key,
-      "@change": change_event,
-      ref: "input.#{attr_key}",
-      'init-value': init_value,
-      'v-bind:class': "{ '#{input_error_class}': #{error_key} }",
-      "aria-describedby": attr_key,
-      "step": "any"
-    }).merge(
-      type != :file ? { "#{v_model_type}": input_key } : {}
-    ) # file inputs are readonly, no v-model possible
-  end
-
   def bootstrap_input_attributes
     {
+      id: (options[:id] || attr_key),
       class: (options[:class] || "") << (" form-control"),
       disabled: disabled
     }

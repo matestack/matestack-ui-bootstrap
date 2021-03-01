@@ -5,9 +5,11 @@ The Bootstrap `checkbox` form component, implemented in Ruby. Use it like any of
 ## `bs_form_checkbox(*args, &block)`
 ----
 
-Renders one or multiple bootstrap checkbox input fields.
+Renders one (nil/true/false) or multiple (array of selected values) bootstrap checkbox input fields.
 
 **Optional options**
+
+* `options` - Expects an Array or Hash of selectable options
 
 * `label` - Expects a string, gets displayed before the first input field
 

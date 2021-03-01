@@ -37,7 +37,7 @@ module Matestack::Ui::Bootstrap::Registry
     bs_form_radio: Matestack::Ui::Bootstrap::Form::Radio,
     bs_form_switch: Matestack::Ui::Bootstrap::Form::Switch,
     bs_form_submit: Matestack::Ui::Bootstrap::Form::Submit,
-    bs_form_date: Matestack::Ui::Bootstrap::Form::Date,
+    bs_form_flatpickr: Matestack::Ui::Bootstrap::Form::Flatpickr,
   }
 
   CONTENT = {

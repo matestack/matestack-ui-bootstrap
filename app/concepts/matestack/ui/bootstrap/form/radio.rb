@@ -1,46 +1,39 @@
-class Matestack::Ui::Bootstrap::Form::Radio < Matestack::Ui::Core::Form::Radio::Radio
+class Matestack::Ui::Bootstrap::Form::Radio < Matestack::Ui::Core::Form::Radio::Base
+
+  vue_js_component_name "matestack-ui-core-form-radio"
 
   optional :form_text
   optional :disabled
   optional :variant
 
   def response
-    label class: "form-label", text: input_label if input_label
+    div class: "matestack-ui-bootstrap-radio" do
+      label class: "form-label", text: input_label if input_label
 
-    radio_options.to_a.each_with_index do |item, index|
-      div class: "form-check #{'form-check-inline' if variant == :inline}" do
-        input html_attributes.merge(
-          attributes: vue_attributes,
-          type: :radio,
-          id: "#{id_for_item(item_value(item))}",
-          name: item_name(item),
-          value: item_value(item),
-          class: radio_class,
-          disabled: disabled
-        )
-        label class: "form-check-label", text: item_label(item), for: id_for_item(item_value(item))
-        if index == radio_options.to_a.size - 1
-          render_errors
+      radio_options.to_a.each_with_index do |item, index|
+        div class: "form-check #{'form-check-inline' if variant == :inline}" do
+          input html_attributes.merge(
+            attributes: vue_attributes,
+            type: :radio,
+            id: "#{id_for_item(item_value(item))}",
+            name: item_name(item),
+            value: item_value(item),
+            class: radio_class,
+            disabled: disabled
+          )
+          label class: "form-check-label", text: item_label(item), for: id_for_item(item_value(item))
+          if index == radio_options.to_a.size - 1
+            render_errors
+          end
         end
       end
+      render_form_text if form_text
     end
-    render_form_text if form_text
 
   end
 
   def radio_class
     (options[:class] || "") << (" form-check-input")
-  end
-
-  def vue_attributes
-    (options[:attributes] || {}).merge({
-      "@change": change_event,
-      ref: "select.#{attr_key}",
-      'init-value': init_value,
-      'v-bind:class': "{ '#{input_error_class}': #{error_key} }",
-      'value-type': value_type,
-      "#{v_model_type}": input_key,
-    })
   end
 
   def render_form_text
