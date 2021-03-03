@@ -1,3 +1,12 @@
+# Devise integration
+
+Please review the general guide on how to integrate `Devise` into Matestack within the docs of `matestack-ui-core`.
+
+Below you find examples implementing typical Devise views with `matestack-ui-bootstrap`
+
+## Login Page
+
+```ruby
 class Devise::Pages::SignIn < Matestack::Ui::Page
 
   def response
@@ -29,10 +38,6 @@ class Devise::Pages::SignIn < Matestack::Ui::Page
         toggle show_on: 'sign_in_failure' do
           plain 'Your email or password is not valid.'
         end
-        br
-        small text: "Dummy user: admin@matestack.io"
-        br
-        small text: "Dummy password: password"
       end
     end
 
@@ -54,3 +59,5 @@ class Devise::Pages::SignIn < Matestack::Ui::Page
     end
 
 end
+
+```
