@@ -11,7 +11,7 @@ class Matestack::Ui::Bootstrap::Form::Submit < Matestack::Ui::Component
       bs_btn type: "submit", size: options[:size], class: "#{options[:class]}", variant: button_variant || :primary, attributes: { "v-if": "!loading()" } do
         plain text || "Submit"
       end
-      bs_btn type: "submit", size: options[:size], class: "#{loading_class}", variant: button_variant || :primary, attributes: { disabled: true, "v-if": "loading()" } do
+      bs_btn type: "submit", size: options[:size], class: "#{options[:class]} #{loading_class}", variant: button_variant || :primary, attributes: { disabled: true, "v-if": "loading()" } do
         bs_spinner variant: spinner_variant || :light, size: :sm
         plain loading_text || "Loading..."
       end

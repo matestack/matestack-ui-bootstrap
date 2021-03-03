@@ -20,6 +20,10 @@ Renders a Bootstrap button that acts as a form submit trigger.
 
 * `size` - Expects a symbol that defines the Bootstrap button size
 
+* `class` - Additional custom CSS class applied to button
+
+* `loading_class` - Additional custom CSS class applied to button during submission
+
 ## Examples
 
 ### Example 1: Basic usage without any configuration
@@ -45,8 +49,8 @@ bs_form_submit button_variant: :light, spinner_variant: :dark
 bs_form_submit size: :lg
 ```
 
-### Example 5: Non-default text, loading_text, button_variant, spinner_variant, size plus additional, custom class & class_loading
+### Example 5: Non-default text, loading_text, button_variant, spinner_variant, size plus additional, custom class & loading_class
 
 ```ruby
-bs_form_submit button_variant: :light, spinner_variant: :dark, class: "custom-submit", class_loading: "custom-submit-loading", size: :lg, text: "Submit!!", loading_text: "Getting submitted"
+bs_form_submit button_variant: :light, spinner_variant: :dark, class: "custom-submit", loading_class: "custom-submit-loading", size: :lg, text: "Submit!!", loading_text: "Getting submitted"
 ```
