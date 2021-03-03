@@ -133,7 +133,7 @@ describe 'Bootstrap::Components::ListGroup', type: :feature, js: true do
       end
     end
     visit example_path
-    sleep
+
     expect(page).to have_selector('button.btn.btn-primary.dropdown-toggle[data-offset="10,22"]')
     expect(page).to have_content('Dropdown')
   end
