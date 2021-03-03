@@ -36,13 +36,12 @@ module Matestack::Ui::Bootstrap::Registry
     bs_form_checkbox: Matestack::Ui::Bootstrap::Form::Checkbox,
     bs_form_radio: Matestack::Ui::Bootstrap::Form::Radio,
     bs_form_switch: Matestack::Ui::Bootstrap::Form::Switch,
-    bs_form_submit: Matestack::Ui::Bootstrap::Form::Submit,
-    bs_form_flatpickr: Matestack::Ui::Bootstrap::Form::Flatpickr,
+    bs_form_submit: Matestack::Ui::Bootstrap::Form::Submit
   }
 
   CONTENT = {
     bs_figure: Matestack::Ui::Bootstrap::Content::Figure,
-    bs_smart_collection: Matestack::Ui::Bootstrap::Content::Collection::Collection,
+    bs_smart_collection: Matestack::Ui::Bootstrap::Content::SmartCollection::Collection,
   }
 
   LAYOUTS = {

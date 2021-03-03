@@ -13,10 +13,9 @@ import '../../concepts/matestack/ui/bootstrap/components/modal'
 import '../../concepts/matestack/ui/bootstrap/components/toast'
 import '../../concepts/matestack/ui/bootstrap/components/popover'
 import '../../concepts/matestack/ui/bootstrap/components/tooltip'
-import '../../concepts/matestack/ui/bootstrap/form/flatpickr'
 import '../../concepts/matestack/ui/bootstrap/layout/sidebar'
 import '../../concepts/matestack/ui/bootstrap/layout/sidebar.scss'
-import '../../concepts/matestack/ui/bootstrap/content/collection/collection.scss'
+import '../../concepts/matestack/ui/bootstrap/content/smart_collection/collection.scss'
 
 const MatestackUiBootstrap = {}
 

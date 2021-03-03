@@ -4,7 +4,7 @@ module Dummy::Pages::Orders::Form
     form form_config do
 
       div class: "mb-3" do
-        bs_form_flatpickr key: :shipped_at, label: "Shipped at", enable_time: true, type: :text
+        form_flatpickr key: :shipped_at, label: "Shipped at", enable_time: true, type: :text
       end
 
       div class: "mb-3" do

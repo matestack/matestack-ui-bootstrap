@@ -13,6 +13,7 @@ import MatestackUiCore from 'matestack-ui-core';
 import MatestackUiBootstrap from 'matestack-ui-bootstrap';
 
 import '../../matestack/dummy/components/chart_js.js'
+import '../../matestack/dummy/components/form/flatpickr.js'
 
 import './stylesheets/rouge.scss.erb'
 import '../../matestack/dummy/components/md.scss'
