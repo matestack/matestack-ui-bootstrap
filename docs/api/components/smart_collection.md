@@ -97,7 +97,7 @@ def collection_config
       price_in_euro: {
         heading: 'Price in €',
         format: -> (column_data){ "#{column_data} €" },
-        text: :right
+        text: :end
       }
     },
     filters: {
@@ -189,4 +189,3 @@ def product_delete_action_config product
   }
 end
 ```
-

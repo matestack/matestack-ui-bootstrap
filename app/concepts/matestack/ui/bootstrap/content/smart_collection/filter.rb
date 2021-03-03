@@ -1,4 +1,4 @@
-module Matestack::Ui::Bootstrap::Content::Collection::Filter
+module Matestack::Ui::Bootstrap::Content::SmartCollection::Filter
 
   def filter_partial
     collection_filter collection.config do
@@ -24,9 +24,9 @@ module Matestack::Ui::Bootstrap::Content::Collection::Filter
     }
     case config[:type]
     when :select
-      collection_filter_select attributes.merge(class: 'form-select', options: config[:options])
+      collection_filter_select attributes.merge(id: key, class: 'form-select', options: config[:options])
     else
-      collection_filter_input attributes.merge(class: 'form-control')
+      collection_filter_input attributes.merge(id: key, class: 'form-control smart-collection-filter')
     end
   end
 

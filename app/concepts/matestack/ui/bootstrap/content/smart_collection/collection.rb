@@ -1,8 +1,8 @@
-class Matestack::Ui::Bootstrap::Content::Collection::Collection < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Content::SmartCollection::Collection < Matestack::Ui::Component
   include Matestack::Ui::Core::Collection::Helper
-  include Matestack::Ui::Bootstrap::Content::Collection::Content
-  include Matestack::Ui::Bootstrap::Content::Collection::Filter
-  include Matestack::Ui::Bootstrap::Content::Collection::Paginate
+  include Matestack::Ui::Bootstrap::Content::SmartCollection::Content
+  include Matestack::Ui::Bootstrap::Content::SmartCollection::Filter
+  include Matestack::Ui::Bootstrap::Content::SmartCollection::Paginate
 
   # html attributes
   optional id: { as: :bs_id }
@@ -29,7 +29,7 @@ class Matestack::Ui::Bootstrap::Content::Collection::Collection < Matestack::Ui:
   attr_accessor :processed_filters
 
   def response
-    div class: "smart-collection" do
+    div id: bs_id, class: "smart-collection" do
       filter_partial
       content
     end
@@ -57,18 +57,20 @@ class Matestack::Ui::Bootstrap::Content::Collection::Collection < Matestack::Ui:
   def filtered_query
     return @filtered_query if @filtered_query
     @filtered_query = items
-    filters.select { |key, value| '.'.in? key.to_s }.each do |key, value|
-      associated_name = key.to_s.split(".").first
-      @filtered_query = @filtered_query.joins(associated_name.to_sym).all
-      if value.is_a?(Hash)
-        processed_filters[key] = value
-        @filtered_query = add_query_filter(@filtered_query, associated_name, key, value)
+    unless filters.nil?
+      filters.select { |key, value| '.'.in? key.to_s }.each do |key, value|
+        associated_name = key.to_s.split(".").first
+        @filtered_query = @filtered_query.joins(associated_name.to_sym).all
+        if value.is_a?(Hash)
+          processed_filters[key] = value
+          @filtered_query = add_query_filter(@filtered_query, associated_name, key, value)
+        end
       end
-    end
-    filters.reject { |key, value| '.'.in? key.to_s }.each do |key, value|
-      if value.is_a?(Hash)
-        processed_filters[key] = value
-        @filtered_query = add_query_filter(@filtered_query, nil, key, value)
+      filters.reject { |key, value| '.'.in? key.to_s }.each do |key, value|
+        if value.is_a?(Hash)
+          processed_filters[key] = value
+          @filtered_query = add_query_filter(@filtered_query, nil, key, value)
+        end
       end
     end
     @filtered_query

@@ -1,4 +1,4 @@
-module Matestack::Ui::Bootstrap::Content::Collection::Paginate
+module Matestack::Ui::Bootstrap::Content::SmartCollection::Paginate
 
   def paginate_partial
     div class: "current-pagination-state ps-2" do
@@ -17,7 +17,7 @@ module Matestack::Ui::Bootstrap::Content::Collection::Paginate
   def pagination_nav_partial
     nav class: "table-responsive", attributes: { style: "display: -webkit-box;" } do
       ul class: ul_classes do
-        li class: "page-item #{ 'disabled' if current_page == 1 }" do
+        li class: "page-item previous #{ 'disabled' if current_page == 1 }" do
           collection_content_previous class: 'page-link' do
             bs_icon name: "chevron-left", size: 10
           end
@@ -59,7 +59,7 @@ module Matestack::Ui::Bootstrap::Content::Collection::Paginate
             end
           end
         end
-        li class: "page-item #{ 'disabled' if current_page == last_page }" do
+        li class: "page-item next #{ 'disabled' if current_page == last_page }" do
           collection_content_next class: 'page-link' do
             bs_icon name: "chevron-right", size: 10
           end

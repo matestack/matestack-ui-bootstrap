@@ -1,9 +1,9 @@
-module Matestack::Ui::Bootstrap::Content::Collection::Content
+module Matestack::Ui::Bootstrap::Content::SmartCollection::Content
 
   def content
-    bs_row id: 'content' do
+    bs_row class: 'smart-collection-content' do
       bs_col do
-        async id: collection_id, rerender_on: "#{collection_id}-update, #{rerender_on} " do
+        async id: "#{collection_id}-async", rerender_on: "#{collection_id}-update, #{rerender_on} " do
           collection_content collection.config do
             div class: responsive_class do
               if slots && slots[:collection_rendering]
