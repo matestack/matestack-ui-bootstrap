@@ -8,7 +8,8 @@ module Dummy::Components::Registry
 
   Matestack::Ui::Core::Component::Registry.register_components(
     md: Dummy::Components::Md,
-    chart_js: Dummy::Components::ChartJs
+    chart_js: Dummy::Components::ChartJs,
+    form_flatpickr: Dummy::Components::Form::Flatpickr
   )
 
 end
