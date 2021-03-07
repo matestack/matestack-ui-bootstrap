@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Install](README.md)
+* [Work In Progress](README.md)
 * [Integrations](integrations/README.md)
   * [Chart.js](integrations/chartjs.md)
   * [Devise](integrations/devise.md)
