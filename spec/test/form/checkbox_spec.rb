@@ -29,10 +29,11 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     visit example_path
     expect(page).to have_xpath('//form//input[@id="__some_checkbox_input_1" and contains(@class, "form-check-input")]')
 
-    click_button "Submit"
-
     expect_any_instance_of(FormTestController).to receive(:expect_params)
       .with(hash_including(wrapper: { "some_checkbox_input_1"=>nil }))
+
+    click_button "Submit"
+
   end
 
   it 'renders single bootstrap checkbox button, clicking button and submitting sends :true' do
@@ -47,10 +48,11 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     expect(page).to have_xpath('//form//input[@id="__some_checkbox_input_1" and contains(@class, "form-check-input")]')
 
     find('#__some_checkbox_input_1').click
-    click_button "Submit"
 
     expect_any_instance_of(FormTestController).to receive(:expect_params)
       .with(hash_including(wrapper: { "some_checkbox_input_1"=>true }))
+
+    click_button "Submit"
 
   end
 
@@ -67,10 +69,11 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
 
     find('#__some_checkbox_input_1').click
     find('#__some_checkbox_input_1').click
-    click_button "Submit"
 
     expect_any_instance_of(FormTestController).to receive(:expect_params)
       .with(hash_including(wrapper: { "some_checkbox_input_1"=>false }))
+
+    click_button "Submit"
   end
 
   it 'renders bootstrap checkbox button with options as Array' do
@@ -86,10 +89,11 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     expect(page).to have_xpath('//form//input[@id="_2_foo" and contains(@class, "form-check-input")]')
 
     find('#_1_foo').click
-    click_button "Submit"
 
     expect_any_instance_of(FormTestController).to receive(:expect_params)
       .with(hash_including(wrapper: { foo: [1] }))
+
+    click_button "Submit"
 
   end
 
@@ -106,10 +110,11 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     expect(page).to have_xpath('//form//input[@id="_2_foo" and contains(@class, "form-check-input")]')
 
     find('#_1_foo').click
-    click_button "Submit"
 
     expect_any_instance_of(FormTestController).to receive(:expect_params)
       .with(hash_including(wrapper: { foo: ['1'] }))
+
+    click_button "Submit"
 
   end
 
@@ -127,11 +132,11 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
 
     find('#_1_foo').click
     find('#_2_foo').click
-    click_button "Submit"
 
     expect_any_instance_of(FormTestController).to receive(:expect_params)
       .with(hash_including(wrapper: { foo: [1,2] }))
 
+    click_button "Submit"
   end
 
   it 'renders bootstrap checkbox button with options as Hash, clicking multiple options' do
@@ -148,10 +153,11 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
 
     find('#_1_foo').click
     find('#_2_foo').click
-    click_button "Submit"
 
     expect_any_instance_of(FormTestController).to receive(:expect_params)
       .with(hash_including(wrapper: { foo: ['1','2'] }))
+
+    click_button "Submit"
 
   end
 

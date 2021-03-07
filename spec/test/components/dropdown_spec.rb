@@ -122,6 +122,8 @@ describe 'Bootstrap::Components::ListGroup', type: :feature, js: true do
   end
 
   it 'can have action, transition and onclick components as items' do
+    pending "test for correct link, transition, action and onclick behavior"
+    fail
     matestack_render do
       div attributes: { style: "height: 500px;" } do
         bs_dropdown text: "Dropdown", menu: [
@@ -133,8 +135,6 @@ describe 'Bootstrap::Components::ListGroup', type: :feature, js: true do
       end
     end
     visit example_path
-
-    expect(page).to have_selector('button.btn.btn-primary.dropdown-toggle[data-offset="10,22"]')
     expect(page).to have_content('Dropdown')
   end
 
