@@ -1,7 +1,7 @@
 module Matestack
   module Ui
     module Bootstrap
-      VERSION = '1.5.0'
+      VERSION = '1.5.1'
     end
   end
 end
