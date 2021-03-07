@@ -59,5 +59,21 @@ ActiveStorage.start()
 * download latest compatible icons: [https://github.com/twbs/icons/releases/tag/v1.3.0](https://github.com/twbs/icons/releases/tag/v1.3.0)
 * extract the bootstrap-icons.svg to this path: app/assets/images/icons \(server via assets pipeline\)
 
+`app/controllers/application_controller.rb`
+
+```ruby
+class ApplicationController < ActionController::Base
+
+  include Matestack::Ui::Core::ApplicationHelper # described in Core docs
+  include Matestack::Ui::Bootstrap::Registry # add Bootstrap components
+
+end
+
+```
+
+Add now create Matestack apps, pages and components as described in the docs of `matestack-ui-core` and utilize the components described in the API section in order to create your UI:
+
+{% page-ref page="api/" %}
+
 
 
