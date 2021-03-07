@@ -1,4 +1,16 @@
-# Install
+# Welcome
+
+As an extension for `matestack-ui-core`, `matestack-ui-bootstrap`ships all you need to build beautiful, reactive UIs in pure Ruby and smart CRUD components based on Bootstrap v5. Don't think about styling anymore and just create admin or application UIs faster than ever before!
+
+### Live Demo <a id="live-demo"></a>
+
+Based on `matestack-ui-core` and `matestack-ui-bootstrap` this reactive dummy app was created in pure Ruby without writing any JavaScript, ERB/HAML/SLIM and CSS: \([check it out](https://dummy.matestack.io/) \| [source code](https://github.com/matestack/matestack-ui-bootstrap/tree/main/spec/dummy)\)
+
+![https://dummy.matestack.io](https://gblobscdn.gitbook.com/assets%2F-MSlZxQYRyTJNqEznL8o%2F-MTevzmZSIIaZYSkG4fv%2F-MTfYhwWbFzn_uGOlml9%2Fimage.png?alt=media&token=cbf6d7df-7d94-450e-9925-b42eb2cb0a3f)
+
+{% hint style="info" %}
+We do not offer Sprocktes Support in order to include the JavaScript part of `matestack-ui-bootstrap`. Please use something like Webpacker instead! Sprockets support will be dropped soon for `matestack-ui-core` as well!
+{% endhint %}
 
 ### Webpacker Installation
 
@@ -58,6 +70,22 @@ ActiveStorage.start()
 
 * download latest compatible icons: [https://github.com/twbs/icons/releases/tag/v1.3.0](https://github.com/twbs/icons/releases/tag/v1.3.0)
 * extract the bootstrap-icons.svg to this path: app/assets/images/icons \(server via assets pipeline\)
+
+### Usage 
+
+Create Matestack apps, pages and components as described in the docs of `matestack-ui-core` and utilize the components described in the API section in order to create your UI. Just make sure to include the additional Registry in your desired controllers
+
+`app/controllers/application_controller.rb`
+
+```ruby
+class ApplicationController < ActionController::Base
+
+  include Matestack::Ui::Core::ApplicationHelper # described in Core docs
+  include Matestack::Ui::Bootstrap::Registry # add Bootstrap components
+
+end
+
+```
 
 
 
