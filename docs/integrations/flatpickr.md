@@ -1,8 +1,8 @@
-# Flatpickr Integration
+# Flatpickr
 
 [Flatpickr](https://flatpickr.js.org) Datepicker integration, compatible with Bootstrap's design schema. In order to limit the scope of the `matestack-ui-bootstrap` gem, Flatpickr is not part of this gem.
 
-The below shown example should enable you to easily integrate Flatpickr (or any other Datepicker library) according to your needs!
+The below shown example should enable you to easily integrate Flatpickr \(or any other Datepicker library\) according to your needs!
 
 ## Ruby component
 
@@ -55,15 +55,13 @@ module Components::Registry
   )
 
 end
-
 ```
 
 `app/matestack/components/chart_js.js`
 
 ## Vue.js component
 
-**Do not forget to require flatpickr in your package.json**
-**Do not forget to import the following file into you application pack**
+**Do not forget to require flatpickr in your package.json** **Do not forget to import the following file into you application pack**
 
 ```javascript
 import flatpickr from "flatpickr";
@@ -81,12 +79,11 @@ MatestackUiCore.Vue.component('form-flatpickr-component', {
     //all kind of configuration possible for flatpickr may be implemented here according to your needs
   }
 });
-
 ```
 
 ## Usage
 
-### Example 1: Usage in form (e.g. mapped to an Active Record model) with enabled time picker
+### Example 1: Usage in form \(e.g. mapped to an Active Record model\) with enabled time picker
 
 ```ruby
 form some_form_config do
@@ -101,3 +98,4 @@ form some_form_config do
 
 end
 ```
+

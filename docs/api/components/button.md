@@ -1,4 +1,4 @@
-# Matestack Bootstrap Component: Button
+# Button
 
 The Bootstrap `button` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
@@ -13,10 +13,10 @@ Returns a bootstrap button containing text or content specified by a block. Also
 * `:size` - Use `:block, :sm, :md or :lg` to change the size of the button. The default is `nil`.
 * `:type` - Specify the type button tags. By default is set as `button`. You can set is for example as `submit`, `reset`, etc.
 * `:text` - Expects a string with the text that should go inside the button
-* `:link` - Expects a hash with parameters for a link component, button will act as a link (`a` tag with btn css classes)
-* `:transition` - Expects a hash with parameters for a transition component, button will act as a transition (`a` tag with btn css classes)
-* `:action` - Expects a hash with parameters for a action component, button will act as a action (`a` tag with btn css classes)
-* `:onclick` - Expects a hash with parameters for a onclick component, button will act as a onclick (`a` tag with btn css classes)
+* `:link` - Expects a hash with parameters for a link component, button will act as a link \(`a` tag with btn css classes\)
+* `:transition` - Expects a hash with parameters for a transition component, button will act as a transition \(`a` tag with btn css classes\)
+* `:action` - Expects a hash with parameters for a action component, button will act as a action \(`a` tag with btn css classes\)
+* `:onclick` - Expects a hash with parameters for a onclick component, button will act as a onclick \(`a` tag with btn css classes\)
 * Html attributes - all w3c confirm html attributes for div's can be set via options and will be added to the surrounding button div.
 
 ## Examples
@@ -105,3 +105,4 @@ returns
 
 <btn type="button" class="btn btn-secondary btn-lg">Large btn</btn>
 ```
+

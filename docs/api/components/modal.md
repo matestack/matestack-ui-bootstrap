@@ -1,4 +1,4 @@
-# Matestack Bootstrap Component: Modal
+# Modal
 
 The Bootstrap `modal` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
@@ -32,7 +32,6 @@ Returns a bootstrap modal containing header, body, footer or content specified b
 ```ruby
 bs_btn text: "Launch Modal", data: { "bs-toggle": 'modal', "bs-target": '#staticBackdrop' }
 bs_modal id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close", static: true, keyboard: false
-
 ```
 
 ### Example 2: Basic Modal triggered Matestack events
@@ -52,3 +51,4 @@ bs_modal header: { text: "Modal Title", class: "text-center", size: 1 },
 ```
 
 _body and footer hashes are working in similarly_
+

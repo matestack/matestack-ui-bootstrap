@@ -1,4 +1,4 @@
-# Matestack Bootstrap Component: Row
+# Row
 
 The Bootstrap `row` component, implemented in Ruby.
 
