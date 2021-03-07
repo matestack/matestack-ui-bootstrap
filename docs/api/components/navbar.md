@@ -1,4 +1,4 @@
-# Matestack Bootstrap Component: Navbar
+# Navbar
 
 The Bootstrap `navbar` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
@@ -17,8 +17,8 @@ Returns a bootstrap navbar. This component can handle various optional configura
 * `:items_class` - You can add here additional class for navbar-nav list
   * By default the list is set to be on the left of the navbar and align at the center when it collapsed = `me-auto mb-2 mb-lg-0`
 * `:brand` - expect hash or string. Possible keys for hash: `text`, `path`, `img` and `type`.
- * If the argument for brand is a string, navbar will display the given string as Brand text and a transition to the root_path
- * Default `type` is `transition`, you can specify to use a `link` instead using the `type`
+  * If the argument for brand is a string, navbar will display the given string as Brand text and a transition to the root\_path
+  * Default `type` is `transition`, you can specify to use a `link` instead using the `type`
 * `:toggle` - expect hash or a symbol \(`:left` or `:right`\). This parameter determines whether the expand navigation toggle button should be on the left or right
   * possible keys for hash: `position`, `class`. With `class` you can pass on additional class for toggle button
 * `:theme` & `:color` - Specify a theme for navbar. Theme represent bootstraps contextual classes and can have one of the following values: `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class. **Point of attention:** If color parameter is not set, the color will be the same as theme
@@ -150,3 +150,4 @@ returns
   </div>
 </nav>
 ```
+

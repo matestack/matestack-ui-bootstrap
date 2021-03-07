@@ -1,4 +1,4 @@
-# Matestack Bootstrap Component: carousel
+# Carousel
 
 The Bootstrap `carousel` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
@@ -12,7 +12,7 @@ Returns a bootstrap carousel containing a hash of `items` with `path`, `title`, 
 * `:indicators` - If set `true`, the bottom indicators will be visible
 * `:fade` - If set `true`, the animation when switching between items will be faded animation instead of sliding animation
 * `:start` - Set the active item for carousel at the beginning. Counting start at 0.
-* `:variant` - If `:dark`, the dark carousel theme will be applied (using css class carousel-dark)
+* `:variant` - If `:dark`, the dark carousel theme will be applied \(using css class carousel-dark\)
 * `:cycle_on` - Cycles through the carousel items from left to right.
 * `:pause_on` - Stops the carousel from cycling through items.
 * `:prev_on` - Cycles to the previous item.
@@ -146,3 +146,4 @@ onclick emit: "next-carousel" do
   bs_btn text: "Next"
 end
 ```
+

@@ -1,7 +1,6 @@
-# Chart.js Integration
+# Chart.js
 
-Chart.js integration, Bootstrap theming aware. In order to limit the scope of the `matestack-ui-bootstrap` gem, Chart.js components are not part of this gem.
-The below shown example should enable you to easily integrate Chart.js (or any other chart library) according to your needs!
+Chart.js integration, Bootstrap theming aware. In order to limit the scope of the `matestack-ui-bootstrap` gem, Chart.js components are not part of this gem. The below shown example should enable you to easily integrate Chart.js \(or any other chart library\) according to your needs!
 
 ## Ruby component
 
@@ -57,15 +56,13 @@ module Components::Registry
   )
 
 end
-
 ```
 
 `app/matestack/components/chart_js.js`
 
 ## Vue.js component
 
-**Do not forget to require chart.js in your package.json**
-**Do not forget to import the following file into you application pack**
+**Do not forget to require chart.js in your package.json** **Do not forget to import the following file into you application pack**
 
 ```javascript
 import Chart from 'chart.js';
@@ -292,7 +289,6 @@ MatestackUiCore.Vue.component('chart-js-component', {
 
   }
 });
-
 ```
 
 ## Usage
@@ -351,3 +347,4 @@ chart_js type: :pie, datasets: [
   },
 ], labels: ["x", "y", "z"]
 ```
+

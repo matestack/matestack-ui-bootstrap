@@ -1,4 +1,4 @@
-# Matestack Bootstrap Component: Popover
+# Popover
 
 The Bootstrap `popover` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
@@ -25,7 +25,7 @@ Returns a bootstrap component containing text or content specified by a block wh
 * `:html` - Insert HTML into the popover. If false, innerText property will be used to insert content into the DOM.
 * `:template` - Base HTML to use when creating the popover.
 * `:fallback_placement` - Allow to specify which position Popper will use on fallback.
-* `:popper_config` -     To change Bootstrap's default Popper.js config
+* `:popper_config` - To change Bootstrap's default Popper.js config
 
   _Source:_ [https://v5.getbootstrap.com/docs/5.0/components/popovers/\#options](https://v5.getbootstrap.com/docs/5.0/components/popovers/#options)
 
@@ -77,3 +77,4 @@ returns
   Dismissible Popover
 </a>
 ```
+

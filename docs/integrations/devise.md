@@ -1,4 +1,4 @@
-# Devise integration
+# Devise
 
 Please review the general guide on how to integrate `Devise` into Matestack within the docs of `matestack-ui-core`.
 
@@ -59,5 +59,5 @@ class Devise::Pages::SignIn < Matestack::Ui::Page
     end
 
 end
-
 ```
+

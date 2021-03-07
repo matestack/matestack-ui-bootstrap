@@ -1,4 +1,4 @@
-# Matestack Bootstrap Component: Container
+# Container
 
 The Bootstrap `container` component, implemented in Ruby.
 
@@ -29,3 +29,4 @@ returns
   <!-- Content here -->
 </div>
 ```
+

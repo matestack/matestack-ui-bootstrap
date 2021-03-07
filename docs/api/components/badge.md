@@ -1,4 +1,4 @@
-# Matestack Bootstrap Component: Badge
+# Badge
 
 The Bootstrap `badge` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
@@ -60,3 +60,4 @@ Result:
 ```markup
 <span class="badge rounded-pill bg-success">Success</span>
 ```
+

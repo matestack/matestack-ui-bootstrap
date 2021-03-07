@@ -1,9 +1,5 @@
 # Install
 
-{% hint style="danger" %}
-Docs and specs in progress, please wait for official release announcement before using this gem
-{% endhint %}
-
 ### Webpacker Installation
 
 ```text

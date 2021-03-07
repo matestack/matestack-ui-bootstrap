@@ -1,9 +1,8 @@
-# Matestack Bootstrap Component: Tab/Pill Nav
+# Nav
 
 The Bootstrap `nav` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
 ## `bs_tab_nav(*args, &block)`
-
 
 Returns a bootstrap tab nav. Also the nav is customizable with the following options.
 
@@ -34,7 +33,6 @@ Returns a bootstrap tab nav. Also the nav is customizable with the following opt
 **Optional options**
 
 * `active`, set `active` to true, if the current item is the active element
-
 
 ## Examples
 
@@ -68,3 +66,4 @@ def tab_nav_config
   }
 end
 ```
+

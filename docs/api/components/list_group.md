@@ -1,4 +1,4 @@
-# Matestack Bootstrap Component: ListGroup
+# ListGroup
 
 The Bootstrap `List group` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
@@ -13,9 +13,9 @@ Returns a bootstrap listgroup containing series of content. Also the listgroup i
     * `:primary, :secondary, :success, :info, :warning, :info, :light, :dark` or your custom contextual class via `class`.
   * `active` - If set true list item will have an active class
   * `badge` - If given, renders an additional badge
-  * `icon` - Name of desired icon which will prepend the (optionally) given text
+  * `icon` - Name of desired icon which will prepend the \(optionally\) given text
   * `type` - Can be `nil`, `link`, `transition`, `action`, `label` or `tab`
-    * will automatically render the listgroup as a `div` (rather than `ul`) when one of the items is `link`, `transition`, `action` or `tab`
+    * will automatically render the listgroup as a `div` \(rather than `ul`\) when one of the items is `link`, `transition`, `action` or `tab`
 * `horizontal` - to change the layout of list group items from vertical to horizontal across all breakpoints.
 * `horizontal_size` - choose `sm`, `md`, `lg`, `xl`, `xxl` to make a list group horizontal starting at that breakpoint’s min-width
 * `variant` - If set to `:flush`, borders and rounded corners will be removed
@@ -79,3 +79,4 @@ bs_row do
   end
 end
 ```
+

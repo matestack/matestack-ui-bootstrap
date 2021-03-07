@@ -1,4 +1,4 @@
-# Matestack Bootstrap Admin App Template
+# Admin App Template
 
 App Template including a top navbar and sidebar and reactive toasts.
 

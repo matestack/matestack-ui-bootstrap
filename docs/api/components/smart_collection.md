@@ -1,4 +1,4 @@
-# Matestack Bootstrap Component: Smart collection
+# Smart collection
 
 Render a collection in a paginated, filterable table with custom row action slots or with completely customized collection rendering \(e.g. cards per item instead of table rows\)
 
@@ -189,3 +189,4 @@ def product_delete_action_config product
   }
 end
 ```
+

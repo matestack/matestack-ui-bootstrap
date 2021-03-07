@@ -1,4 +1,4 @@
-# Matestack Bootstrap Component: Col
+# Col
 
 The Bootstrap `column` component, implemented in Ruby.
 

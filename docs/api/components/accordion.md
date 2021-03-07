@@ -1,4 +1,4 @@
-# Matestack Bootstrap Component: Accordion
+# Accordion
 
 The Bootstrap `accordion` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
@@ -56,3 +56,4 @@ bs_accordion open: true, items: [
   }
 ]
 ```
+

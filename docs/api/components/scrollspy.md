@@ -1,10 +1,10 @@
-# Matestack Bootstrap Component: Scrollspy
+# Scrollspy
 
 The Bootstrap `scrollspy` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
 ## `bs_scrollspy(*args, &block)`
 
-_use only when you want to apply the scrollspy behavior to a specific element on your UI (other than `body`)_
+_use only when you want to apply the scrollspy behavior to a specific element on your UI \(other than `body`\)_
 
 Returns a `div` with applied bootstrap scrollspy data attributes and `position: relative;` containing content specified by a block. Also the scrollspy is customizable with the following options:
 
@@ -45,3 +45,4 @@ bs_row class: "m-3" do
   end
 end
 ```
+
