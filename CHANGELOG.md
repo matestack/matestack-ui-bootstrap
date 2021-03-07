@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.5.1 Release - 2021-03-07
+
+### Bugfixes
+
+- Fixed wrong dependency specs for matestack-ui-core (Ruby gem and NPM package)
+
 ## v1.5.0 Release - 2021-03-07
 
 ### Changes

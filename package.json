@@ -12,7 +12,7 @@
     "@popperjs/core": "^2.5.4",
     "bootstrap": "^5.0.0-beta2",
     "link-module-alias": "^1.2.0",
-    "matestack-ui-core": "^1.4.1",
+    "matestack-ui-core": "^1.5.0",
     "rails-erb-loader": "^5.5.2"
   },
   "devDependencies": {
