@@ -44,3 +44,5 @@ yarn-debug.log*
 /spec/dummy/tmp
 /spec/dummy/public
 /spec/dummy/log
+
+/vendor/assets/javascripts/packs-test
