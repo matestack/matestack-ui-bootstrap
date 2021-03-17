@@ -1,6 +1,6 @@
 class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::Core::Form::Input::Base
 
-  vue_js_component_name "matestack-ui-core-form-input"
+  vue_name "matestack-ui-core-form-input"
 
   optional :form_text
   optional :disabled
@@ -17,7 +17,7 @@ class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::Core::Form::Input::
       label for: attr_key,  class: "form-label", text: input_label if input_label
       case type
       when :range
-        input html_attributes.merge(attributes: vue_attributes).merge(bootstrap_range_attributes)
+        input options.merge(attributes: vue_attributes).merge(bootstrap_range_attributes)
         if show_value
           div id: attr_key, class: "form-text" do
             plain "{{ data['#{attr_key}'] }}"
@@ -26,7 +26,7 @@ class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::Core::Form::Input::
       when :file
         file_input
       else
-        input html_attributes.merge(attributes: vue_attributes).merge(bootstrap_input_attributes)
+        input options.merge(attributes: vue_attributes).merge(bootstrap_input_attributes)
         render_errors
       end
       render_form_text if form_text
@@ -71,7 +71,7 @@ class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::Core::Form::Input::
 
   def file_input
     div class: form_file_wrapper_class do
-      input html_attributes.merge(attributes: vue_attributes).merge(bootstrap_file_input_attributes)
+      input options.merge(attributes: vue_attributes).merge(bootstrap_file_input_attributes)
       label class: "form-file-label", for: attr_key do
         span class: "form-file-text", attributes: { "v-if": "data['#{attr_key}']" } do
           if multiple

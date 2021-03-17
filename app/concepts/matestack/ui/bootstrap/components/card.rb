@@ -1,6 +1,6 @@
 class Matestack::Ui::Bootstrap::Components::Card < Matestack::Ui::Component
 
-  optional class: { as: :bs_class }
+  optional :class
 
   # header attributes, expects a hash or string
   # possible keys `:class, :text`
@@ -18,21 +18,21 @@ class Matestack::Ui::Bootstrap::Components::Card < Matestack::Ui::Component
 
   def response
     div card_attributes do
-      if header || slots && slots[:header]
+      if context.header || context.slots && context.slots[:header]
         header_partial
       end
 
-      img_partial :top unless img_pos == :bottom
-      div class: content_wrapper_class do
-        body_partial if title || body || slots && slots[:body]
+      img_partial :top unless context.img_pos == :bottom
+      div class: context.content_wrapper_class do
+        body_partial if context.title || context.body || context.slots && context.slots[:body]
 
         # custom body components
         # needed a div otherwise it will be displayed below footer
-        div class: "p-3 pt-1" do yield_components end
+        div class: "p-3 pt-1" do yield end
 
-        img_partial :bottom if img_pos == :bottom
+        img_partial :bottom if context.img_pos == :bottom
 
-        footer_partial if footer || slots && slots[:footer]
+        footer_partial if context.footer || context.slots && context.slots[:footer]
       end
     end
   end
@@ -40,43 +40,47 @@ class Matestack::Ui::Bootstrap::Components::Card < Matestack::Ui::Component
   protected
 
   def header_partial
-    header = self.header.is_a?(Hash) ? self.header : { text: self.header }
-    div class: "card-header #{header[:class]}" do
-      plain header[:text] if header[:text].present?
-      slot slots[:header] if slots && slots[:header]
+    header = self.context.header.is_a?(Hash) ? self.context.header : { text: self.context.header }
+    div class: "card-header #{context.header[:class]}" do
+      plain context.header[:text] if context.header[:text].present?
+      slot context.slots[:header] if context.slots && context.slots[:header]
     end
   end
 
   def body_partial
     div class: "card-body" do
       # title
-      card_title(title, "card-title")
+      card_title(context.title, "card-title")
       # subtitle
-      card_title(subtitle, 6, "card-subtitle text-muted")
+      card_title(context.subtitle, 6, "card-subtitle text-muted")
       # body
-      if body.is_a? Hash
-        paragraph class: "card-text #{body[:class]}", text: body[:text]
-      elsif body
-        paragraph class: "card-text", text: body
+      if context.body.is_a? Hash
+        paragraph class: "card-text #{body[:class]}" do
+          plain context.body[:text]
+        end
+      elsif context.body
+        paragraph class: "card-text" do
+          plain text: body
+        end
       end
-      slot slots[:body] if slots && slots[:body]
+      slot context.slots[:body] if context.slots && context.slots[:body]
     end
   end
 
   def footer_partial
-    footer = self.footer.is_a?(Hash) ? self.footer : { text: self.footer }
-    div class: "card-footer #{footer[:class]}" do
-      plain footer[:text] if footer[:text].present?
-      slot slots[:footer] if slots && slots[:footer]
+    footer = self.context.footer.is_a?(Hash) ? self.context.footer : { text: self.context.footer }
+    div class: "card-footer #{context.footer[:class]}" do
+      plain context.footer[:text] if context.footer[:text].present?
+      slot context.slots[:footer] if context.slots && context.slots[:footer]
     end
   end
 
   def img_partial pos
-    img class: "card-img-#{pos}", path: img_path, alt: alt_text if img_path.present?
+    img class: "card-img-#{pos}", path: context.img_path, alt: context.alt_text if context.img_path.present?
   end
 
   def card_attributes
-    html_attributes.except(:title).merge(
+    options.merge(
       class: card_classes
     )
   end
@@ -84,16 +88,18 @@ class Matestack::Ui::Bootstrap::Components::Card < Matestack::Ui::Component
   def card_classes
     [].tap do |classes|
       classes << 'card'
-      classes << bs_class
+      classes << context.class
     end.join(' ').strip
   end
 
   def card_title(options, default_size = 5, title_class)
     if options.is_a? Hash
-      heading size: (options[:size] || default_size), class: "#{options[:class]} #{title_class}",
-        text: options[:text]
+      heading size: (context.size || default_size), class: "#{context.class} #{title_class}",
+        plain context.text
     elsif options
-      heading size: default_size, class: title_class, text: options
+      heading size: default_size, class: title_class do
+        plain options
+      end
     end
   end
 

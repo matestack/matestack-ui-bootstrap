@@ -15,7 +15,7 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Paginate
   end
 
   def pagination_nav_partial
-    nav class: "table-responsive", attributes: { style: "display: -webkit-box;" } do
+    nav class: "table-responsive"style: "display: -webkit-box;" do
       ul class: ul_classes do
         li class: "page-item previous #{ 'disabled' if current_page == 1 }" do
           collection_content_previous class: 'page-link' do
@@ -78,14 +78,14 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Paginate
 
   def current_page
     current_offset = params["#{bs_id}-offset"].try(:to_i)
-    (current_offset/paginate)+1 if current_offset && paginate.present?
+    (current_offset/context.paginate)+1 if current_offset && context.paginate.present?
   end
 
   def last_page
-    if @collection.filtered_count%paginate == 0
-      (@collection.filtered_count/paginate)
+    if @collection.filtered_count%context.paginate == 0
+      (@collection.filtered_count/context.paginate)
     else
-      (@collection.filtered_count/paginate)+1
+      (@collection.filtered_count/context.paginate)+1
     end
   end
 

@@ -18,15 +18,19 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Filter
 
   def filter_input(key, config)
     attributes = {
+      id: key,
       key: key,
       type: :text,
       placeholder: config[:placeholder] || key.to_s,
+      label: config[:label]
     }
     case config[:type]
     when :select
-      collection_filter_select attributes.merge(id: key, class: 'form-select', options: config[:options])
+      bs_form_select attributes.merge(options: config[:options])
+    when :checkbox
+      bs_form_checkbox attributes.merge(options: config[:options])
     else
-      collection_filter_input attributes.merge(id: key, class: 'form-control smart-collection-filter')
+      bs_form_input attributes.merge(class: 'smart-collection-filter')
     end
   end
 

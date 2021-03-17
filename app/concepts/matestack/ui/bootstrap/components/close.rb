@@ -1,29 +1,28 @@
 class Matestack::Ui::Bootstrap::Components::Close < Matestack::Ui::Component
 
-  optional :dismiss, class: { as: :bs_class }
+  optional :dismiss, :class
   optional :attributes
 
   def response
     button close_attributes do
-      span attributes: { 'aria-hidden': 'true' } do
+      span 'aria-hidden': 'true' do
         # plain "&times;".html_safe
       end
     end
   end
 
   def close_attributes
-    html_attributes.merge(
+    options.merge(
       class: close_classes,
-      data: { "bs-dismiss": "#{dismiss}" },
-      type: 'button',
-      attributes: (attributes || {}).merge({ 'aria-label': 'Close' })
-    )
+      data: { "bs-dismiss": "#{context.dismiss}" },
+      type: 'button'
+    ).merge((context.attributes || {}).merge({ 'aria-label': 'Close' }))
   end
 
   def close_classes
     [].tap do |classes|
       classes << 'btn-close'
-      classes << bs_class
+      classes << context.class
     end.join(' ').strip
   end
 

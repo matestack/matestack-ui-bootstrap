@@ -1,6 +1,6 @@
 class Matestack::Ui::Bootstrap::Form::Radio < Matestack::Ui::Core::Form::Radio::Base
 
-  vue_js_component_name "matestack-ui-core-form-radio"
+  vue_name "matestack-ui-core-form-radio"
 
   optional :form_text
   optional :disabled
@@ -12,7 +12,7 @@ class Matestack::Ui::Bootstrap::Form::Radio < Matestack::Ui::Core::Form::Radio::
 
       radio_options.to_a.each_with_index do |item, index|
         div class: "form-check #{'form-check-inline' if variant == :inline}" do
-          input html_attributes.merge(
+          input options.merge(
             attributes: vue_attributes,
             type: :radio,
             id: "#{id_for_item(item_value(item))}",

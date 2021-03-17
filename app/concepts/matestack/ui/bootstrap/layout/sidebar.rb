@@ -1,6 +1,6 @@
 class Matestack::Ui::Bootstrap::Layout::Sidebar < Matestack::Ui::VueJsComponent
 
-  vue_js_component_name "matestack-ui-bootstrap-sidebar"
+  vue_name "matestack-ui-bootstrap-sidebar"
 
   optional :slots
   optional :sidebar_navigation_items

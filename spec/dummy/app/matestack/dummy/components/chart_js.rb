@@ -1,8 +1,8 @@
 class Dummy::Components::ChartJs < Matestack::Ui::VueJsComponent
-  vue_js_component_name "chart-js-component"
+  vue_name "chart-js-component"
 
-  requires :type
-  requires :datasets
+  required :type
+  required :datasets
   optional :labels
   optional :height
   optional :width
@@ -10,7 +10,7 @@ class Dummy::Components::ChartJs < Matestack::Ui::VueJsComponent
   optional :display_x_axes
   optional :display_y_axes
   optional :cutout_percentage
-  optional class: { as: :bs_class }
+  optional :class
 
   def setup
     # injected into vue.js components
@@ -25,7 +25,7 @@ class Dummy::Components::ChartJs < Matestack::Ui::VueJsComponent
   end
 
   def response
-    div class: "chart-container #{bs_class}", attributes: { style: "width: 100%; height: 100%;" } do
+    div class: "chart-container #{context.class}", attributes: { style: "width: 100%; height: 100%;" } do
       plain "<canvas ref='chart'></canvas>".html_safe
     end
   end

@@ -1,5 +1,5 @@
 class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::VueJsComponent
-  vue_js_component_name 'matestack-ui-bootstrap-modal'
+  vue_name 'matestack-ui-bootstrap-modal'
 
   # header attributes, expects a hash or string
   # possible keys `:class, :text, :size`
@@ -13,7 +13,7 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::VueJsComponen
   optional :fade, :size
   optional :fullscreen # fullscreen attribute, expects boolean or bootstrap breakpoint
   optional :static, :keyboard, :scrollable, :centered
-  optional :modal_dialog_class, class: { as: :bs_class }, id: { as: :bs_id }
+  optional :modal_dialog_class, :class, :id
   # event trigger
   optional :toggle_on, :show_on, :hide_on, :handle_update_on, :dispose_on
 
@@ -23,10 +23,10 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::VueJsComponen
     div modal_attributes do
       div class: dialog_classes do
         div class: "modal-content" do
-          header_partial if header || (slots && slots[:header])
-          body_partial if body || slots && slots[:body]
-          footer_partial if footer || (slots && slots[:footer])
-          yield_components
+          header_partial if context.header || (context.slots && context.slots[:header])
+          body_partial if context.body || context.slots && context.slots[:body]
+          footer_partial if context.footer || (context.slots && context.slots[:footer])
+          yield
         end
       end
     end
@@ -34,37 +34,47 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::VueJsComponen
 
   protected
 
+  def config
+    {}.tap do |props|
+      props.toggle_on = context.toggle_on
+      props.show_on = context.show_on
+      props.hide_on = context.hide_on
+      props.handle_update_on = context.handle_update_on
+      props.dispose_on = context.dispose_on
+    end
+  end
+
   def header_partial
-    header = self.header.is_a?(Hash) ? self.header : { text: self.header }
+    header = context.header.is_a?(Hash) ? context.header : { text: context.header }
     div class: "modal-header" do
-      if slots && slots[:header]
-        slot slots[:header]
+      if context.slots && context.slots[:header]
+        slot context.slots[:header]
       else
-        heading size: (header[:size] || 5), class: "modal-title #{header[:class]}", text: header[:text] if header[:text].present?
+        heading size: (context.header[:size] || 5), class: "modal-title #{context.header[:class]}", text: context.header[:text] if context.header[:text].present?
         bs_close dismiss: 'modal'
       end
     end
   end
 
   def body_partial
-    body = self.body.is_a?(Hash) ? self.body : { text: self.body }
+    body = context.body.is_a?(Hash) ? context.body : { text: context.body }
     div class: "modal-body #{body[:class]}".strip do
-      if slots && slots[:body]
-        slot slots[:body]
+      if context.slots && context.slots[:body]
+        slot context.slots[:body]
       else
-        plain body[:text] if body[:text].present?
+        plain context.body[:text] if context.body[:text].present?
       end
     end
   end
 
   def footer_partial
-    footer = self.footer.is_a?(Hash) ? self.footer : { text: self.footer }
+    footer = context.footer.is_a?(Hash) ? context.footer : { text: context.footer }
     div class: "modal-footer" do
-      slot slots[:footer] if slots && slots[:footer]
-      if footer[:text].present?
-        button class: "btn #{footer[:class].present? ? footer[:class] : 'btn-secondary'}",
-          data: { "bs-dismiss": 'modal' }, attributes: { type: 'button' },
-          text: footer[:text]
+      slot context.slots[:footer] if context.slots && context.slots[:footer]
+      if context.footer[:text].present?
+        button class: "btn #{context.footer[:class].present? ? context.footer[:class] : 'btn-secondary'}",
+          data: { "bs-dismiss": 'modal' }, type: 'button'
+          text: context.footer[:text]
       end
     end
   end
@@ -72,13 +82,13 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::VueJsComponen
   def modal_attributes
     attributes = {}.tap do |hash|
       hash[:class] = modal_classes
-      hash[:attributes] = { 'tabindex': "-1", 'aria-labelledby': "#{bs_id}Label", 'aria-hidden': "true" }
+      hash[:attributes] = { 'tabindex': "-1", 'aria-labelledby': "#{context.id}Label", 'aria-hidden': "true" }
       hash[:data] = {}.tap do |data|
-        data[:backdrop] = "static" if static
-        data[:keyboard] = "false" if keyboard
+        data[:backdrop] = "static" if context.static
+        data[:keyboard] = "false" if context.keyboard
       end
     end
-    html_attributes.merge(
+    options.merge(
       attributes
     )
   end
@@ -86,21 +96,21 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::VueJsComponen
   def modal_classes
     [].tap do |classes|
       classes << 'modal'
-      classes << 'fade' if fade || !fade.present?
-      classes << bs_class
+      classes << 'fade' if context.fade || !context.fade.present?
+      classes << context.class
     end.join(' ').strip
   end
 
   def dialog_classes
     [].tap do |classes|
       classes << 'modal-dialog'
-      classes << 'modal-dialog-centered' if centered
-      classes << 'modal-dialog-scrollable' if scrollable
-      classes << "modal-#{size}" if size
-      if fullscreen.present?
-        classes << (fullscreen == true ? 'modal-fullscreen' : "modal-fullscreen-#{fullscreen}-down")
+      classes << 'modal-dialog-centered' if context.centered
+      classes << 'modal-dialog-scrollable' if context.scrollable
+      classes << "modal-#{context.size}" if scontext.ize
+      if context.fullscreen.present?
+        classes << (context.fullscreen == true ? 'modal-fullscreen' : "modal-fullscreen-#{context.fullscreen}-down")
       end
-      classes << modal_dialog_class
+      classes << context.modal_dialog_class
     end.join(' ').strip
   end
 end

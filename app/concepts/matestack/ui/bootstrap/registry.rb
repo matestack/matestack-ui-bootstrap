@@ -1,5 +1,24 @@
 module Matestack::Ui::Bootstrap::Registry
 
+  def heading(text = nil, options, &block)
+    case options[:size]
+    when 1
+      h1(args)
+    when 2
+      h2(args)
+    when 3
+      h3(args)
+    when 4
+      h4(args)
+    when 5
+      h5(args)
+    when 6
+      h6(args)
+    else
+      h1(args)
+    end
+  end
+
   COMPONENTS = {
     bs_accordion: Matestack::Ui::Bootstrap::Components::Accordion,
     bs_alert: Matestack::Ui::Bootstrap::Components::Alert,

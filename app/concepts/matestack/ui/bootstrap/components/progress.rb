@@ -1,6 +1,6 @@
 class Matestack::Ui::Bootstrap::Components::Progress < Matestack::Ui::Component
 
-  optional class: { as: :bs_class }
+  optional :class
   optional :text, :valuemin, :valuemax
   # progress expects a number or a list containing hashes with at least a :value
   # other options are :text, :class, :variant, :striped, :animated, :aria_valuenow
@@ -10,15 +10,15 @@ class Matestack::Ui::Bootstrap::Components::Progress < Matestack::Ui::Component
 
   def response
     div progress_attributes do
-      progress = self.progress.is_a?(Array) ? self.progress : [{ value: self.progress || value, text: self.text }]
+      progress = context.progress.is_a?(Array) ? context.progress : [{ value: context.progress || value, text: context.text }]
       progress.each do |prog|
-        progress_bar(prog[:value], valuemin, valuemax,
-          text: prog[:text], klass: prog[:class], variant: prog[:variant] || variant,
-          striped: prog[:striped] || striped, animated: prog[:animated] || animated,
+        progress_bar(prog[:value], context.valuemin, context.valuemax,
+          text: prog[:text], klass: prog[:class], variant: prog[:variant] || context.variant,
+          striped: prog[:striped] || context.striped, animated: prog[:animated] || context.animated,
           aria_valuenow: prog[:aria_valuenow]
         )
       end
-      yield_components
+      yield
     end
   end
 
@@ -26,10 +26,10 @@ class Matestack::Ui::Bootstrap::Components::Progress < Matestack::Ui::Component
 
   def progress_attributes
     attributes = {}.tap do |hash|
-      hash[:class] = "progress #{bs_class}".strip
-      hash[:attributes] = { style: "height: #{height}px;" } if height
+      hash[:class] = "progress #{context.class}".strip
+      hash[:style] = "height: #{context.height}px;" if context.height
     end
-    html_attributes.merge(
+    options.merge(
       attributes
     )
   end
@@ -43,13 +43,11 @@ class Matestack::Ui::Bootstrap::Components::Progress < Matestack::Ui::Component
   def progress_bar_attributes(value, klass, variant, striped, animated, aria_valuenow)
     {
       class: progress_bar_classes(klass, variant, striped, animated),
-      attributes: {
-        role: :progressbar,
-        style: "width: #{value.to_i > 0 ? value : 0}%;",
-        'aria-valuenow': aria_valuenow || value || 0,
-        'aria-valuemin': valuemin || 0,
-        'aria-valuemax': valuemax || 100
-      }
+      role: :progressbar,
+      style: "width: #{value.to_i > 0 ? value : 0}%;",
+      'aria-valuenow': aria_valuenow || value || 0,
+      'aria-valuemin': context.valuemin || 0,
+      'aria-valuemax': context.valuemax || 100
     }
   end
 

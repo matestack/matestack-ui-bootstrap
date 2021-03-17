@@ -1,5 +1,5 @@
 class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
-  vue_js_component_name "matestack-ui-bootstrap-toast"
+  vue_name "matestack-ui-bootstrap-toast"
 
   # header attributes, expects a hash or string
   # possible keys `:icon_class, :icon, :title, :subtitle`
@@ -9,8 +9,10 @@ class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::VueJsComponen
   # placement attributes, expects a hash wiht possible keys: position, min-height
   optional :placement # for adding custom css style
   optional :important, :delay, :autohide, :animation
-  optional class: { as: :bs_class }, attributes: { as: :bs_attrs }, data: { as: :bs_data }
+  optional :class, :attributes, :data
   optional :slots
+
+  optional :show_on, :hide_on, :dispose_on
 
   def response
     standard_placement_partial
@@ -20,64 +22,73 @@ class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::VueJsComponen
 
   protected
 
+  def config
+    {}.tap do |props|
+      props.delay = context.delay
+      props.autohide = context.autohide
+      props.show_on = context.show_on
+      props.hide_on = context.hide_on
+      props.dispose_on = context.dispose_on
+    end
+  end
+
   def custom_placement_partial
-    div attributes: placement_attrs do
+    div placement_attrs do
       standard_placement_partial
     end
   end
 
   def standard_placement_partial
     div toast_attributes do
-      header_partial if header || slots && slots[:header]
+      header_partial if context.header || context.slots && context.slots[:header]
       body_partial
     end
   end
 
   def header_partial
-    header = self.header.is_a?(Hash) ? self.header : { title: self.header }
+    header = context.header.is_a?(Hash) ? context.header : { title: context.header }
     div class: "toast-header" do
       img class: "#{'rounded me-2' || header[:icon_class]}", path: header[:icon] if header[:icon].present?
       strong class: "me-auto", text: header[:title] if header[:title].present?
       small text: header[:subtitle] if header[:subtitle].present?
 
-      slot slots[:header] if slots && slots[:header]
-      bs_close dismiss: 'toast', class: "ms-2 mb-1", attributes: { "@click": "hide()"}
+      slot context.slots[:header] if context.slots && context.slots[:header]
+      bs_close dismiss: 'toast', class: "ms-2 mb-1", "@click": "hide()"
     end
 
   end
 
   def body_partial
     div class: "toast-body" do
-      plain body if body
+      plain context.body if context.body
     end
-    unless header || slots && slots[:header]
-      bs_close dismiss: 'toast', class: "ms-auto me-2 btn-close-white", attributes: { "@click": "hide()"}
+    unless context.header || context.slots && context.slots[:header]
+      bs_close dismiss: 'toast', class: "ms-auto me-2 btn-close-white", "@click": "hide()"
     end
   end
 
   def toast_attributes
-    html_attributes.merge(
+    options.merge(
       class: toast_classes,
-      attributes: toast_attrs,
       data: toast_data
-    )
+    ).merge(toast_attrs)
   end
 
   def toast_data
-    (bs_data || {}).tap do |hash|
-      hash["bs-delay"] = delay.nil? ? 5000 : delay
-      hash["bs-autohide"] = autohide.nil? ? "true" : "#{autohide}"
-      hash["bs-animation"] = animation.nil? ? "true" : "#{animation}"
+    (context.data || {}).tap do |hash|
+      hash["bs-delay"] = context.delay.nil? ? 5000 : context.delay
+      hash["bs-autohide"] = context.autohide.nil? ? "true" : "#{context.autohide}"
+      hash["bs-animation"] = context.animation.nil? ? "true" : "#{context.animation}"
     end
   end
 
   def toast_attrs
-    (bs_attrs || {}).tap do |hash|
-      hash[:role] = (important == false ? 'status' : 'alert')
-      hash[:'aria-live'] = (important ? 'assertive' : 'polite') if important.present? && !placement.present?
-      hash[:'aria-live'] = 'assertive' unless important.present?
-      hash[:'aria-atomic'] = 'true' unless placement.present?
-      hash[:style] = "z-index: 10000; position: fixed; #{placement[:position] || 'top: 0; right: 0;' }"  if placement.present?
+    (context.attributes || {}).tap do |hash|
+      hash[:role] = (context.important == false ? 'status' : 'alert')
+      hash[:'aria-live'] = (context.important ? 'assertive' : 'polite') if context.important.present? && !context.placement.present?
+      hash[:'aria-live'] = 'assertive' unless context.important.present?
+      hash[:'aria-atomic'] = 'true' unless context.placement.present?
+      hash[:style] = "z-index: 10000; position: fixed; #{context.placement[:position] || 'top: 0; right: 0;' }"  if context.placement.present?
       hash["v-bind:class"] = "{'show' : showing }"
     end
   end
@@ -85,15 +96,15 @@ class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::VueJsComponen
   def toast_classes
     [].tap do |classes|
       classes << 'toast p-0 fade d-flex align-items-center border-0'
-      classes << bs_class
+      classes << context.class
     end.join(' ').strip
   end
 
   def placement_attrs
     {}.tap do |hash|
-      hash[:'aria-live'] = (important ? 'assertive' : 'polite') if important.present?
+      hash[:'aria-live'] = (context.important ? 'assertive' : 'polite') if context.important.present?
       hash[:'aria-atomic'] = 'true'
-      hash[:style] = "position: relative; min-height: #{placement[:height]};"
+      hash[:style] = "position: relative; min-height: #{context.placement[:height]};"
     end
   end
 end

@@ -9,19 +9,19 @@ class Matestack::Ui::Bootstrap::Layout::Column < Matestack::Ui::Component
   OFFSET_ATTRIBUTES = %i[offset offset_sm offset_md offset_lg offset_xl offset_xxl]
   optional *OFFSET_ATTRIBUTES
 
-  optional class: { as: :bs_class }
+  optional :class
   optional :align_self
 
   def response 
     div col_attributes do
-      yield_components
+      yield
     end
   end
 
   protected
 
   def col_attributes
-    html_attributes.merge(
+    options.merge(
       class: col_classes,
       attributes: options[:attributes]
     )
@@ -41,7 +41,7 @@ class Matestack::Ui::Bootstrap::Layout::Column < Matestack::Ui::Component
     end
     classes << "align-self-#{align_self}" if align_self.present?
     classes << "col" if classes.blank?
-    classes << bs_class
+    classes << context.class
     classes.join(' ').strip
   end
 end

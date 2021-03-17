@@ -1,21 +1,21 @@
 class Matestack::Ui::Bootstrap::Components::ListGroup < Matestack::Ui::Component
-  html_attributes :role
+  options :role
 
   optional :items
   optional :horizontal, :horizontal_size, :checkbox
-  optional :variant, class: { as: :bs_class }
+  optional :variant, :class
 
 
   def response
     if actionable_items?
       div list_group_attributes do
-        yield_components unless items
-        list_partial if items
+        yield unless context.items
+        list_partial if context.items
       end
     else
       ul list_group_attributes do
-        yield_components unless items
-        list_partial if items
+        yield unless context.items
+        list_partial if context.items
       end
     end
   end
@@ -23,23 +23,23 @@ class Matestack::Ui::Bootstrap::Components::ListGroup < Matestack::Ui::Component
   protected
 
   def actionable_items?
-    if items.present?
-      items.any? { |item| [:tab, :transition, :action, :link].include?(item[:type]) }
+    if context.items.present?
+      context.items.any? { |item| [:tab, :transition, :action, :link].include?(item[:type]) }
     else
       false
     end
   end
 
   def tab_nav?
-    if items.present?
-      items.any? { |item| item[:type] == :tab }
+    if context.items.present?
+      context.items.any? { |item| item[:type] == :tab }
     else
       false
     end
   end
 
   def list_partial
-    items.each do |item|
+    context.items.each do |item|
       case item[:type]
       when :link
         link link_attrs(item)  do
@@ -59,11 +59,11 @@ class Matestack::Ui::Bootstrap::Components::ListGroup < Matestack::Ui::Component
         end
       when :label
         label id: item[:id], class: "#{list_classes item, false}" do
-          input class: "form-check-input me-1", attributes: { 'type': "checkbox", 'value': "" } if checkbox
+          input class: "form-check-input me-1", 'type': "checkbox", 'value': ""  if context.checkbox
           text_rendering(item)
         end
       else
-        li id: item[:id], class: "#{list_classes item, false}", attributes: { "aria-disabled": "#{true if item[:disabled]}" } do
+        li id: item[:id], class: "#{list_classes item, false}", "aria-disabled": "#{true if item[:disabled]}" do
           # this implementation is useless, would need to be connected to a form through bs_form_checkbox
           # input class: "form-check-input me-1", attributes: { 'type': "checkbox", 'value': "", 'aria-label': "#{item[:text]}" } if checkbox
           text_rendering(item)
@@ -81,9 +81,9 @@ class Matestack::Ui::Bootstrap::Components::ListGroup < Matestack::Ui::Component
   def list_group_attributes
     attributes = {}.tap do |hash|
       hash[:class] = list_group_classes
-      hash[:attributes] = { role: "tablist" } if tab_nav?
+      hash[:role] = "tablist" } if tab_nav?
     end
-    html_attributes.merge(
+    options.merge(
       attributes
     )
   end
@@ -91,16 +91,16 @@ class Matestack::Ui::Bootstrap::Components::ListGroup < Matestack::Ui::Component
   def list_group_classes
     [].tap do |classes|
       classes << 'list-group'
-      classes << (horizontal_size.present? ? "list-group-horizontal-#{horizontal_size}": "list-group-horizontal") if horizontal
-      classes << 'list-group-flush' if variant == :flush
-      classes << bs_class
+      classes << (context.horizontal_size.present? ? "list-group-horizontal-#{context.horizontal_size}": "list-group-horizontal") if context.horizontal
+      classes << 'list-group-flush' if context.variant == :flush
+      classes << context.class
     end.join(' ').strip
   end
 
   def link_attrs(item)
     attrs = item
     attrs[:class] = "#{list_classes item, true}"
-    attrs[:attributes] = { "aria-disabled": "#{true if item[:disabled]}" } if item[:disabled]
+    attrs["aria-disabled"] = "#{true if item[:disabled]}" if item[:disabled]
     attrs
   end
 
@@ -109,8 +109,9 @@ class Matestack::Ui::Bootstrap::Components::ListGroup < Matestack::Ui::Component
       hash[:id] = "tab-#{item[:id]}" if tab_nav?
       hash[:class] = "#{list_classes item, true}"
       hash[:data] = { "bs-toggle": "list" }
-      hash[:attributes] = { "aria-disabled": "#{true if item[:disabled]}" } if item[:disabled]
-      hash[:attributes] = { 'aria-controls': "#tab-#{item[:id]}-content", role: "tab" }
+      hash["aria-disabled"]=  "#{true if item[:disabled]}" if item[:disabled]
+      hash['aria-controls'] = "#tab-#{item[:id]}-content"
+      hash[:role] "tab"
       hash[:path] = "#tab-#{item[:id]}-content"
       hash[:target] = item[:target]
     end
@@ -119,21 +120,21 @@ class Matestack::Ui::Bootstrap::Components::ListGroup < Matestack::Ui::Component
   def transition_attrs(item)
     attrs = item
     attrs[:class] = "#{list_classes item, true}"
-    attrs[:attributes] = { "aria-disabled": "#{true if item[:disabled]}" } if item[:disabled]
+    attrs["aria-disabled"] = "#{true if item[:disabled]}" if item[:disabled]
     attrs
   end
 
   def action_attrs(item)
     attrs = item
     attrs[:class] = "#{list_classes item, true}"
-    attrs[:attributes] = { "aria-disabled": "#{true if item[:disabled]}" } if item[:disabled]
+    attrs["aria-disabled"] = "#{true if item[:disabled]}" if item[:disabled]
     attrs
   end
 
   def list_classes(item, action)
     [].tap do |classes|
       classes << 'list-group-item'
-      classes << 'list-group-item-action' if action
+      classes << 'list-group-item-action' if context.action
       classes << "list-group-item-#{item[:variant]}" if item[:variant].present?
       classes << 'active' if item[:active]
       classes << 'disabled' if item[:disabled]

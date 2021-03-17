@@ -1,6 +1,6 @@
 class Dummy::Components::Md < Matestack::Ui::StaticComponent
 
-  requires :path
+  required :path
   optional :lang
 
   def response

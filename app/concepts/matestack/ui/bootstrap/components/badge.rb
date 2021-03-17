@@ -1,20 +1,20 @@
 class Matestack::Ui::Bootstrap::Components::Badge < Matestack::Ui::Component
 
-  optional class: { as: :bs_class }
+  optional :class
   optional :text, :variant, :rounded, :visually_hidden
 
   def response
     span badge_attributes do
-      plain text if text
-      yield_components
+      plain context.text if context.text
+      yield
     end
-    span class: "visually-hidden", text: visually_hidden if visually_hidden.present?
+    span class: "visually-hidden", text: context.visually_hidden if context.visually_hidden.present?
   end
 
   protected
 
   def badge_attributes
-    html_attributes.merge(
+    options.merge(
       class: badge_classes
     )
   end
@@ -22,9 +22,9 @@ class Matestack::Ui::Bootstrap::Components::Badge < Matestack::Ui::Component
   def badge_classes
     [].tap do |classes|
       classes << 'badge'
-      classes << (variant.present? ? "bg-#{variant}" : "bg-secondary")
-      classes << "rounded-pill" if rounded
-      classes << bs_class
+      classes << (context.variant.present? ? "bg-#{context.variant}" : "bg-secondary")
+      classes << "rounded-pill" if context.rounded
+      classes << context.class
     end.join(' ').strip
   end
 end

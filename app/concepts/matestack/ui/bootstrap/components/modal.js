@@ -1,6 +1,9 @@
 import * as bootstrap from 'bootstrap'
+import Vue from 'vue/dist/vue.esm'
 
-MatestackUiCore.Vue.component('matestack-ui-bootstrap-modal', {
+import MatestackUiCore from 'matestack-ui-core'
+
+Vue.component('matestack-ui-bootstrap-modal', {
   mixins: [MatestackUiCore.componentMixin],
 
   data() {

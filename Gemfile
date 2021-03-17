@@ -9,9 +9,7 @@ gem 'redcarpet' # for markdown usage
 gem 'rouge' # for syntax highlighting
 
 gem 'bootsnap', require: false
-gem "trailblazer-cells"
-gem "cells-rails"
-gem "cells-haml"
+
 
 # Declare your gem's dependencies in matestack-ui-material.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -24,6 +22,8 @@ gemspec
 # your gem to rubygems.org.
 
 gem 'rails', '6.1.2'
+
+gem 'matestack-ui-core', git: "https://github.com/matestack/matestack-ui-core", branch: "matestack-ui-core-2.0"
 
 gem 'rspec-rails', '~> 4.0.2'
 gem 'capybara'

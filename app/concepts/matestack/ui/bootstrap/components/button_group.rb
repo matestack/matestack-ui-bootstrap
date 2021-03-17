@@ -1,12 +1,12 @@
 class Matestack::Ui::Bootstrap::Components::ButtonGroup < Matestack::Ui::Component
 
-  optional class: { as: :bs_class }
-  optional label: { as: :bs_label }
+  optional :class
+  optional :label
   optional :toolbar, :size, :vertical
 
   def response 
     div buttongroup_attributes do
-      yield_components
+      yield
     end
   end
 
@@ -15,21 +15,19 @@ class Matestack::Ui::Bootstrap::Components::ButtonGroup < Matestack::Ui::Compone
   def buttongroup_attributes
     attributes = {}.tap do |hash|
       hash[:class] = buttongroup_classes
-      hash[:attributes] = { 
-        role: "#{toolbar ? :toolbar : :group}", 
-        'aria-label': bs_label 
-      } 
+      hash[:role] = "#{context.toolbar ? :toolbar : :group}"
+      hash["aria-label"] = 'aria-label': context.label  
     end
-    html_attributes.merge(
+    options.merge(
       attributes
     )
   end
 
   def buttongroup_classes
     [].tap do |classes|
-      classes << ("btn-#{toolbar ? :toolbar : :group}#{'-vertical' if vertical}")
-      classes << "btn-group-#{size}" if size.present?
-      classes << bs_class
+      classes << ("btn-#{context.toolbar ? :toolbar : :group}#{'-vertical' if context.vertical}")
+      classes << "btn-group-#{context.size}" if context.size.present?
+      classes << context.class
     end.join(' ').strip
   end
 

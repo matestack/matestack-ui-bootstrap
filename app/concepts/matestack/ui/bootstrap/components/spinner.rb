@@ -1,31 +1,33 @@
 class Matestack::Ui::Bootstrap::Components::Spinner < Matestack::Ui::Component
 
-  optional class: { as: :bs_class }
+  optional :class
   optional :kind, :variant, :size, :sr_only
 
   def response
     div spinner_attributes do
-      span class: "visually-hidden", text: sr_only
+      span class: "visually-hidden" do
+        plain context.sr_only
+      end
     end
   end
 
   protected
 
   def spinner_attributes
-    html_attributes.merge(
+    options.merge(
       class: spinner_class,
-      attributes: { 'role': "status" }
+      'role': "status"
     )
   end
 
   def spinner_class
     [].tap do |classes|
-      spinner_kind = kind || :border
-      classes << "spinner-#{spinner_kind}"
-      classes << "text-#{variant || 'primary'}"
-      classes << "spinner-#{spinner_kind}-sm" if size
+      spinner_kind = context.kind || :border
+      classes << "spinner-#{context.spinner_kind}"
+      classes << "text-#{context.variant || 'primary'}"
+      classes << "spinner-#{context.spinner_kind}-sm" if context.size
       #optional classes
-      classes << bs_class
+      classes << context.class
     end.join(' ').strip
   end
 end

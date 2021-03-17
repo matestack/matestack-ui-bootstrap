@@ -3,7 +3,7 @@ class Matestack::Ui::Bootstrap::Components::Navbar < Matestack::Ui::Component
   POS_ATTRIBUTES = %i[fixed_top fixed_bottom sticky_top]
   optional *POS_ATTRIBUTES
 
-  optional class: { as: :bs_class }
+  optional :class
   optional :items, :items_class, :theme, :expand_at, :color, :container_size
   optional :collapse_class
   # brand expect hash or string, possible keys for hash: text, path, img
@@ -11,17 +11,18 @@ class Matestack::Ui::Bootstrap::Components::Navbar < Matestack::Ui::Component
   # toogle expect hash or a symbol (:left or :right),
   # possible keys for hash: position, class
   optional :toggle
+  optional :slots
 
   def prepare
-    @toggle = self.toggle.is_a?(Hash) ? self.toggle : { position: self.toggle }
+    @toggle = context.toggle.is_a?(Hash) ? context.toggle : { position: context.toggle }
   end
 
   def response
     nav navbar_attributes do
-      bs_container size: "#{container_size.present? ? container_size : "fluid" }" do
+      bs_container size: "#{context.container_size.present? ? context.container_size : "fluid" }" do
         # custom elements for navbar
-        if options[:slots] && options[:slots][:custom_items]
-          slot options[:slots][:custom_items]
+        if context.slots && context.slots[:custom_items]
+          slot context.slots[:custom_items]
         else
           toggle_button if @toggle[:position] == :left
           brand_partial
@@ -35,7 +36,7 @@ class Matestack::Ui::Bootstrap::Components::Navbar < Matestack::Ui::Component
   protected
 
   def brand_partial
-    brand = self.brand.is_a?(Hash) ? self.brand : { text: self.brand }
+    brand = context.brand.is_a?(Hash) ? context.brand : { text: context.brand }
     path = brand[:path].present? ? brand[:path] : "/"
     brand[:path] = path
     case brand[:type]
@@ -53,33 +54,39 @@ class Matestack::Ui::Bootstrap::Components::Navbar < Matestack::Ui::Component
   end
 
   def navbar_content_partial
-    div class: "collapse navbar-collapse #{collapse_class}", id: 'matestackNavbarContent' do
-      if items.present?
+    div class: "collapse navbar-collapse #{context.collapse_class}", id: 'matestackNavbarContent' do
+      if context.items.present?
         ul class: items_classes do
-          items.each do |item|
+          context.items.each do |item|
             li class: "nav-item" do
               case item[:type]
               when :link
                 link link_config(item)  do
                   bs_icon name: item[:icon], size: 20 if item[:icon]
-                  span class: "ps-3", text: item[:text] if item[:text]
+                  span class: "ps-3" do
+                    plain item[:text] if item[:text]
+                  end
                 end
               when :action
                 action action_config(item) do
                   bs_icon name: item[:icon], size: 20 if item[:icon]
-                  span class: "ps-3", text: item[:text] if item[:text]
+                  span class: "ps-3" do
+                    plain item[:text] if item[:text]
+                  end
                 end
               else
                 transition transition_config(item) do
                   bs_icon name: item[:icon], size: 20 if item[:icon]
-                  span class: "ps-3", text: item[:text] if item[:text]
+                  span class: "ps-3" do
+                    plain item[:text] if item[:text]
+                  end
                 end
               end
             end
           end
         end
       end
-      yield_components
+      yield
     end
   end
 
@@ -102,7 +109,7 @@ class Matestack::Ui::Bootstrap::Components::Navbar < Matestack::Ui::Component
   end
 
   def navbar_attributes
-    html_attributes.merge(
+    options.merge(
       class: navbar_classes
     )
   end
@@ -111,12 +118,12 @@ class Matestack::Ui::Bootstrap::Components::Navbar < Matestack::Ui::Component
     [].tap do |classes|
       classes << "navbar"
       POS_ATTRIBUTES.each do |pos|
-        classes << "#{pos}".gsub('_','-') if self.send("#{pos}")
+        classes << "#{pos}".gsub('_','-') if self.send("context.#{pos}")
       end
-      classes << "navbar-expand-#{ (expand_at.present? ? expand_at : "lg") }"
-      classes << "navbar-#{theme}" if  theme.present?
-      classes << (color.present? ? "bg-#{color}" : "bg-#{theme}") if theme || color
-      classes << bs_class
+      classes << "navbar-expand-#{ (context.expand_at.present? ? context.expand_at : "lg") }"
+      classes << "navbar-#{context.theme}" if  context.theme.present?
+      classes << (context.color.present? ? "bg-#{context.color}" : "bg-#{context.theme}") if context.theme || context.color
+      classes << context.class
     end.join(' ').strip
   end
 
@@ -147,7 +154,7 @@ class Matestack::Ui::Bootstrap::Components::Navbar < Matestack::Ui::Component
   def items_classes
     [].tap do |classes|
       classes << 'navbar-nav'
-      classes << (items_class.present? ? items_class : "ms-auto mb-2 mb-lg-0")
+      classes << (context.items_class.present? ? context.items_class : "ms-auto mb-2 mb-lg-0")
       # classes << "ms-auto" unless items_class.present?
     end.join(' ').strip
   end

@@ -1,6 +1,6 @@
 class Matestack::Ui::Bootstrap::Form::Switch < Matestack::Ui::Bootstrap::Form::Checkbox
 
-  vue_js_component_name "matestack-ui-core-form-checkbox"
+  vue_name "matestack-ui-core-form-checkbox"
 
   optional :form_text
   optional :disabled
@@ -39,7 +39,7 @@ class Matestack::Ui::Bootstrap::Form::Switch < Matestack::Ui::Bootstrap::Form::C
   # def true_false_switch
   #   checkbox_wrapper do
   #     form_input type: :hidden, key: key, value: (false_value || 0), errors: false
-  #     input html_attributes.merge(
+  #     input options.merge(
   #       type: :checkbox,
   #       id: "#{id_for_item(value)}",
   #       # id: "#{key}", alternative to address the visible input field better?
@@ -59,7 +59,7 @@ class Matestack::Ui::Bootstrap::Form::Switch < Matestack::Ui::Bootstrap::Form::C
   # def multiple_switches
   #   checkbox_options.to_a.each do |item|
   #     checkbox_wrapper do
-  #       input html_attributes.merge(
+  #       input options.merge(
   #         type: :checkbox,
   #         id: "#{id_for_item(item_value(item))}",
   #         name: item_name(item),

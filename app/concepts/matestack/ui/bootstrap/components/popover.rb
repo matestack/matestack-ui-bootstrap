@@ -1,5 +1,5 @@
 class Matestack::Ui::Bootstrap::Components::Popover < Matestack::Ui::VueJsComponent
-  vue_js_component_name "matestack-ui-bootstrap-popover"
+  vue_name "matestack-ui-bootstrap-popover"
 
   # How i imagine using a popover
   #
@@ -26,14 +26,14 @@ class Matestack::Ui::Bootstrap::Components::Popover < Matestack::Ui::VueJsCompon
   DATA_ALIAS_ATTRIBUTES = %i[container delay selector html template fallback_placement]
 
   DATA_ALIAS_ATTRIBUTES.each do |attribute|
-    optional "#{attribute}": { as: :"bs_#{attribute}"}
+    optional :"#{attribute}"
   end
 
   # TODO:
   # for security reasons the sanitize, sanitizeFn and whiteList options cannot be supplied using data attributes.
   # sanitize sanitize_fn white_list
 
-  optional class: { as: :bs_class }
+  optional :class
   optional id: { as: :bs_id }
   DATA_ATTRIBUTES = %i[tag content title text variant animation placement tabindex trigger boundary offset popper_config]
   optional *DATA_ATTRIBUTES
@@ -44,7 +44,7 @@ class Matestack::Ui::Bootstrap::Components::Popover < Matestack::Ui::VueJsCompon
   # :placement # placement direction as string
 
   def response
-    if tag.present?
+    if context.tag.present?
       public_send(tag, popover_attributes) do
         content_partial
       end
@@ -58,34 +58,36 @@ class Matestack::Ui::Bootstrap::Components::Popover < Matestack::Ui::VueJsCompon
   protected
 
   def content_partial
-    plain text if text
-    yield_components unless text
+    plain context.text if context.text
+    yield unless context.text
   end
 
   def popover_attributes
     attributes = {}.tap do |hash|
       hash[:class] = popover_classes
-      hash[:attributes] = { role: (text ? 'button': nil), title: "#{title}", tabindex: "#{tabindex}" }
+      hash[:role] = (text ? 'button': nil)
+      hash[:title] = "#{title}"
+      hash[:tabindex] = "#{tabindex}"
       hash[:data] = {}.tap do |data|
         DATA_ALIAS_ATTRIBUTES.each do |attribute|
-          data["bs-#{attribute}"] = self.send(:"bs_#{attribute}") if self.send(:"bs_#{attribute}")
+          data["bs-#{attribute}"] = self.send("context.#{attribute}") if self.send("context.#{attribute}")
         end
         (DATA_ATTRIBUTES - [:tag, :text, :variant]).each do |attribute|
-          data["bs-#{attribute}"] = self.send(:"#{attribute}") if self.send(:"#{attribute}")
+          data["bs-#{attribute}"] = self.send("context.#{attribute}") if self.send("context.#{attribute}")
         end
         data["bs-toggle"] = "popover"
       end
     end
-    html_attributes.merge(
+    options.merge(
       attributes
     )
   end
 
   def popover_classes
     [].tap do |classes|
-      classes << "d-inline-block" unless text
-      classes << "btn btn-#{variant}" if variant
-      classes << bs_class
+      classes << "d-inline-block" unless context.text
+      classes << "btn btn-#{context.variant}" if context.variant
+      classes << context.class
     end.join(' ').strip
   end
 

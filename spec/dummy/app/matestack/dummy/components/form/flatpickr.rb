@@ -5,7 +5,7 @@ class Dummy::Components::Form::Flatpickr < Matestack::Ui::Bootstrap::Form::Input
   optional :enable_time
   optional :type
 
-  vue_js_component_name "form-flatpickr-component"
+  vue_name "form-flatpickr-component"
 
   def setup
     @component_config[:init_value] = init_value

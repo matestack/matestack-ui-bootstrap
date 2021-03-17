@@ -3,12 +3,12 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Content
   def content
     bs_row class: 'smart-collection-content' do
       bs_col do
-        async id: "#{collection_id}-async", rerender_on: "#{collection_id}-update, #{rerender_on} " do
+        async id: "#{collection_id}-async", rerender_on: "#{collection_id}-update, #{context.erender_on} " do
           collection_content collection.config do
             div class: responsive_class do
-              if slots && slots[:collection_rendering]
-                slot slots[:collection_rendering].call(collection.paginated_data)
-              elsif columns
+              if context.slots && context.slots[:collection_rendering]
+                slot context.slots[:collection_rendering].call(collection.paginated_data)
+              elsif context.columns
                 div class: "table-responsive" do
                   table table_attributes do
                     table_head
@@ -18,7 +18,7 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Content
                 end
               end
             end
-            paginate_partial if paginate.present?
+            paginate_partial if context.paginate.present?
           end
         end
       end
@@ -28,10 +28,10 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Content
   def table_head
     thead do
       tr do
-        columns&.each do |key, value|
-          th text: value.is_a?(Hash) ? value[:heading] : value, class: cell_class(value), attributes: { scope: :col }
+        context.columns&.each do |key, value|
+          th text: value.is_a?(Hash) ? value[:heading] : value, class: cell_class(value), scope: :col
         end
-        th if slots && slots[:table_item_actions]
+        th if context.slots && context.slots[:table_item_actions]
       end
     end
   end
@@ -40,12 +40,12 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Content
     tbody do
       collection.paginated_data.each_with_index do |data, index|
         tr class: 'align-middle' do
-          columns.each do |key, value|
+          context.columns.each do |key, value|
             cell(data, key, value)
           end
-          if slots && slots[:table_item_actions]
+          if context.slots && context.slots[:table_item_actions]
             td class: 'text-end' do
-              slot slots[:table_item_actions].call(data)
+              slot context.slots[:table_item_actions].call(data)
             end
           end
         end
@@ -56,11 +56,11 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Content
   def table_footer
     tfoot do
       tr do
-        footer&.each do |value|
+        context.footer&.each do |value|
           td text: value
         end
       end
-    end if footer
+    end if context.footer
   end
 
   private
@@ -84,18 +84,18 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Content
 
   def table_attributes
     klass = ['table'].tap do |classes|
-      classes << "table-#{variant}" if variant
-      classes << "table-striped" if striped
-      classes << "table-hover" if hoverable
-      classes << "table-bordered border-#{border_variant}" if border_variant
-      classes << "table-borderless" if borderless
+      classes << "table-#{context.variant}" if context.variant
+      classes << "table-striped" if context.striped
+      classes << "table-hover" if context.hoverable
+      classes << "table-bordered border-#{context.border_variant}" if context.border_variant
+      classes << "table-borderless" if context.borderless
     end.join(' ').strip
     { id: collection_id, class: klass }
   end
 
   def responsive_class
-    return unless responsive
-    responsive === true ? 'table-responsive' : "table-responsive-#{responsive}"
+    return unless context.responsive
+    responsive === true ? 'table-responsive' : "table-responsive-#{context.responsive}"
   end
 
 end

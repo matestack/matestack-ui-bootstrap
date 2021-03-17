@@ -9,7 +9,7 @@ class Matestack::Ui::Bootstrap::Layout::Row < Matestack::Ui::Component
 
   def response 
     div id: "#{options[:id]}", class: "row #{@row_classes.join(' ')}" do
-      yield_components
+      yield
     end
   end
 end

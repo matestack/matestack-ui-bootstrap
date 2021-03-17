@@ -1,8 +1,15 @@
+GIT
+  remote: https://github.com/matestack/matestack-ui-core
+  revision: 0bbd207c34dea89cc0056e4de563141ceb8aa284
+  branch: matestack-ui-core-2.0
+  specs:
+    matestack-ui-core (2.0.0)
+      rails (>= 5.2)
+
 PATH
   remote: .
   specs:
-    matestack-ui-bootstrap (1.4.0)
-      matestack-ui-core (~> 1.4.0)
+    matestack-ui-bootstrap (1.5.1)
 
 GEM
   remote: https://rubygems.org/
@@ -81,26 +88,12 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
-    cells (4.1.7)
-      declarative-builder (< 0.2.0)
-      declarative-option (< 0.2.0)
-      tilt (>= 1.4, < 3)
-      uber (< 0.2.0)
-    cells-haml (0.0.10)
-      cells (>= 4.0.1, <= 6.0.0)
-      haml (>= 4.1.0.beta.1)
-    cells-rails (0.1.3)
-      actionpack (>= 5.0)
-      cells (>= 4.1.6, < 5.0.0)
     childprocess (3.0.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.8)
     crack (0.4.5)
       rexml
     crass (1.0.6)
-    declarative-builder (0.1.0)
-      declarative-option (< 0.2.0)
-    declarative-option (0.1.0)
     devise (4.7.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -117,9 +110,6 @@ GEM
       railties (>= 3.0.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    haml (5.2.1)
-      temple (>= 0.8.0)
-      tilt
     hashdiff (1.0.1)
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
@@ -130,12 +120,6 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
-    matestack-ui-core (1.4.0)
-      cells-haml (>= 0.0.10)
-      cells-rails (>= 0.1.0)
-      haml (>= 4.1.0.beta.1)
-      rails (>= 5.2)
-      trailblazer-cells (>= 0.0.3)
     method_source (1.0.0)
     mimemagic (0.3.5)
     mini_mime (1.0.2)
@@ -248,14 +232,9 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    temple (0.8.2)
     thor (1.1.0)
-    tilt (2.0.10)
-    trailblazer-cells (0.0.3)
-      cells (>= 4.1.0.rc1, < 5.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    uber (0.1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     webmock (3.11.2)
@@ -281,12 +260,11 @@ DEPENDENCIES
   bootsnap
   byebug
   capybara
-  cells-haml
-  cells-rails
   devise
   faker
   generator_spec
   matestack-ui-bootstrap!
+  matestack-ui-core!
   paper_trail
   pg (>= 0.18, < 2.0)
   pry-byebug
@@ -301,7 +279,6 @@ DEPENDENCIES
   rspec-wait
   selenium-webdriver
   simplecov
-  trailblazer-cells
   webmock
   webpacker (~> 5.0)
 

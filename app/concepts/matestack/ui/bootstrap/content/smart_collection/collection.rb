@@ -1,11 +1,11 @@
 class Matestack::Ui::Bootstrap::Content::SmartCollection::Collection < Matestack::Ui::Component
-  include Matestack::Ui::Core::Collection::Helper
+  include Matestack::Ui::VueJs::Components::Collection::Helper
   include Matestack::Ui::Bootstrap::Content::SmartCollection::Content
   include Matestack::Ui::Bootstrap::Content::SmartCollection::Filter
   include Matestack::Ui::Bootstrap::Content::SmartCollection::Paginate
 
   # html attributes
-  optional id: { as: :bs_id }
+  optional :id
 
   # table configuration
   optional :items
@@ -29,7 +29,7 @@ class Matestack::Ui::Bootstrap::Content::SmartCollection::Collection < Matestack
   attr_accessor :processed_filters
 
   def response
-    div id: bs_id, class: "smart-collection" do
+    div id: context.id, class: "smart-collection" do
       filter_partial
       content
     end
@@ -41,11 +41,11 @@ class Matestack::Ui::Bootstrap::Content::SmartCollection::Collection < Matestack
   def collection
     return @collection if @collection
     settings = {}.tap do |h|
-      h[:id] = bs_id || "smartcollection"
+      h[:id] = context.id || "smartcollection"
       h[:data] = filtered_query
-      h[:base_count] = items.count
-      h[:init_limit] = paginate if paginate
-      h[:filtered_count] = filtered_query.count if paginate
+      h[:base_count] = context.items.count
+      h[:init_limit] = context.paginate if context.paginate
+      h[:filtered_count] = filtered_query.count if context.paginate
     end
     @collection = set_collection(settings)
   end
@@ -56,9 +56,9 @@ class Matestack::Ui::Bootstrap::Content::SmartCollection::Collection < Matestack
 
   def filtered_query
     return @filtered_query if @filtered_query
-    @filtered_query = items
-    unless filters.nil?
-      filters.select { |key, value| '.'.in? key.to_s }.each do |key, value|
+    @filtered_query = context.items
+    unless context.filters.nil?
+      context.filters.select { |key, value| '.'.in? key.to_s }.each do |key, value|
         associated_name = key.to_s.split(".").first
         @filtered_query = @filtered_query.joins(associated_name.to_sym).all
         if value.is_a?(Hash)
@@ -66,7 +66,7 @@ class Matestack::Ui::Bootstrap::Content::SmartCollection::Collection < Matestack
           @filtered_query = add_query_filter(@filtered_query, associated_name, key, value)
         end
       end
-      filters.reject { |key, value| '.'.in? key.to_s }.each do |key, value|
+      context.filters.reject { |key, value| '.'.in? key.to_s }.each do |key, value|
         if value.is_a?(Hash)
           processed_filters[key] = value
           @filtered_query = add_query_filter(@filtered_query, nil, key, value)
@@ -103,7 +103,7 @@ class Matestack::Ui::Bootstrap::Content::SmartCollection::Collection < Matestack
   end
 
   def head_columns
-    columns.map { |key, value| value.is_a?(Hash) ? value[:heading] : value }
+    context.columns.map { |key, value| value.is_a?(Hash) ? value[:heading] : value }
   end
 
   def processed_filters
