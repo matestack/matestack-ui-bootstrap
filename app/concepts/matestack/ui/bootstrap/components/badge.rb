@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Badge < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::Badge < Matestack::Ui::Bootstrap::BaseComponent
 
   optional :class
   optional :text, :variant, :rounded, :visually_hidden
@@ -6,9 +6,9 @@ class Matestack::Ui::Bootstrap::Components::Badge < Matestack::Ui::Component
   def response
     span badge_attributes do
       plain context.text if context.text
-      yield
+      yield if block_given?
     end
-    span class: "visually-hidden", text: context.visually_hidden if context.visually_hidden.present?
+    span context.visually_hidden, class: "visually-hidden" if context.visually_hidden.present?
   end
 
   protected

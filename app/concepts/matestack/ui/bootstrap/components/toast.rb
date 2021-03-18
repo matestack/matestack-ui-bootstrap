@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::VueJsComponent
+class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::Bootstrap::BaseVueJsComponent
   vue_name "matestack-ui-bootstrap-toast"
 
   # header attributes, expects a hash or string
@@ -24,11 +24,11 @@ class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::VueJsComponen
 
   def config
     {}.tap do |props|
-      props.delay = context.delay
-      props.autohide = context.autohide
-      props.show_on = context.show_on
-      props.hide_on = context.hide_on
-      props.dispose_on = context.dispose_on
+      props[:delay] = context.delay
+      props[:autohide] = context.autohide
+      props[:show_on] = context.show_on
+      props[:hide_on] = context.hide_on
+      props[:dispose_on] = context.dispose_on
     end
   end
 
@@ -49,8 +49,8 @@ class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::VueJsComponen
     header = context.header.is_a?(Hash) ? context.header : { title: context.header }
     div class: "toast-header" do
       img class: "#{'rounded me-2' || header[:icon_class]}", path: header[:icon] if header[:icon].present?
-      strong class: "me-auto", text: header[:title] if header[:title].present?
-      small text: header[:subtitle] if header[:subtitle].present?
+      strong header[:title], class: "me-auto" if header[:title].present?
+      small header[:subtitle] if header[:subtitle].present?
 
       slot context.slots[:header] if context.slots && context.slots[:header]
       bs_close dismiss: 'toast', class: "ms-2 mb-1", "@click": "hide()"
@@ -89,7 +89,7 @@ class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::VueJsComponen
       hash[:'aria-live'] = 'assertive' unless context.important.present?
       hash[:'aria-atomic'] = 'true' unless context.placement.present?
       hash[:style] = "z-index: 10000; position: fixed; #{context.placement[:position] || 'top: 0; right: 0;' }"  if context.placement.present?
-      hash["v-bind:class"] = "{'show' : showing }"
+      hash[:"v-bind:class"] = "{'show' : showing }"
     end
   end
 

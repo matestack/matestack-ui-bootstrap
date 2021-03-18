@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Avatar < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::Avatar < Matestack::Ui::Bootstrap::BaseComponent
 
   optional :text, :bg_variant, :text_variant, :img_path, :size, :class
 

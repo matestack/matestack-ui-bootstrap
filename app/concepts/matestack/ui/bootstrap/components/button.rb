@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Button < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::Button < Matestack::Ui::Bootstrap::BaseComponent
 
   optional :text, :type, :variant, :size, :outline
   optional :attributes, :class
@@ -37,16 +37,17 @@ class Matestack::Ui::Bootstrap::Components::Button < Matestack::Ui::Component
 
   def inner_response
     plain text if text
-    yield
+    yield if block_given?
   end
 
   protected
 
   def button_attributes
-    options.merge(
-      type: context.type || 'button',
-      class: button_classes, 
-    ).merge(context.attributes)
+    options.tap do |opts|
+      opts[:type] = context.type || 'button'
+      opts[:class] = button_classes
+      opts.merge(context.attributes || {})
+    end
   end
 
   def button_classes

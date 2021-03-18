@@ -1,80 +1,192 @@
 module Matestack::Ui::Bootstrap::Registry
 
-  def heading(text = nil, options, &block)
+  def heading(text = nil, options=nil, &block)
+    if text.is_a?(Hash)
+      options = text
+    end
+
     case options[:size]
     when 1
-      h1(args)
+      h1(text, options, &block)
     when 2
-      h2(args)
+      h2(text, options, &block)
     when 3
-      h3(args)
+      h3(text, options, &block)
     when 4
-      h4(args)
+      h4(text, options, &block)
     when 5
-      h5(args)
+      h5(text, options, &block)
     when 6
-      h6(args)
+      h6(text, options, &block)
     else
-      h1(args)
+      h1(text, options, &block)
     end
   end
 
-  COMPONENTS = {
-    bs_accordion: Matestack::Ui::Bootstrap::Components::Accordion,
-    bs_alert: Matestack::Ui::Bootstrap::Components::Alert,
-    bs_avatar: Matestack::Ui::Bootstrap::Components::Avatar,
-    bs_badge: Matestack::Ui::Bootstrap::Components::Badge,
-    bs_breadcrumb: Matestack::Ui::Bootstrap::Components::Breadcrumb,
-    bs_btn: Matestack::Ui::Bootstrap::Components::Button,
-    bs_btn_group: Matestack::Ui::Bootstrap::Components::ButtonGroup,
-    bs_card: Matestack::Ui::Bootstrap::Components::Card,
-    bs_carousel: Matestack::Ui::Bootstrap::Components::Carousel,
-    bs_close: Matestack::Ui::Bootstrap::Components::Close,
-    bs_collapse: Matestack::Ui::Bootstrap::Components::Collapse,
-    bs_dropdown: Matestack::Ui::Bootstrap::Components::Dropdown,
-    bs_icon: Matestack::Ui::Bootstrap::Components::Icon,
-    bs_list_group: Matestack::Ui::Bootstrap::Components::ListGroup,
-    bs_modal: Matestack::Ui::Bootstrap::Components::Modal,
-    bs_navbar: Matestack::Ui::Bootstrap::Components::Navbar,
-    bs_pagination: Matestack::Ui::Bootstrap::Components::Pagination,
-    bs_page_heading: Matestack::Ui::Bootstrap::Components::PageHeading,
-    bs_popover: Matestack::Ui::Bootstrap::Components::Popover,
-    bs_progress: Matestack::Ui::Bootstrap::Components::Progress,
-    bs_scrollspy: Matestack::Ui::Bootstrap::Components::Scrollspy,
-    bs_section_card: Matestack::Ui::Bootstrap::Components::SectionCard,
-    bs_spinner: Matestack::Ui::Bootstrap::Components::Spinner,
-    bs_tab_nav: Matestack::Ui::Bootstrap::Components::TabNav,
-    bs_tab_nav_content: Matestack::Ui::Bootstrap::Components::TabNavContent,
-    bs_toast: Matestack::Ui::Bootstrap::Components::Toast,
-    bs_tooltip: Matestack::Ui::Bootstrap::Components::Tooltip,
-  }
+  def bs_accordion(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Accordion.(text, options, &block)
+  end
 
-  FORMS = {
-    bs_form_input: Matestack::Ui::Bootstrap::Form::Input,
-    bs_form_select: Matestack::Ui::Bootstrap::Form::Select,
-    bs_form_checkbox: Matestack::Ui::Bootstrap::Form::Checkbox,
-    bs_form_radio: Matestack::Ui::Bootstrap::Form::Radio,
-    bs_form_switch: Matestack::Ui::Bootstrap::Form::Switch,
-    bs_form_submit: Matestack::Ui::Bootstrap::Form::Submit
-  }
+  def bs_alert(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Alert.(text, options, &block)
+  end
 
-  CONTENT = {
-    bs_figure: Matestack::Ui::Bootstrap::Content::Figure,
-    bs_smart_collection: Matestack::Ui::Bootstrap::Content::SmartCollection::Collection,
-  }
+  def bs_avatar(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Avatar.(text, options, &block)
+  end
 
-  LAYOUTS = {
-    bs_col: Matestack::Ui::Bootstrap::Layout::Column,
-    bs_container: Matestack::Ui::Bootstrap::Layout::Container,
-    bs_row: Matestack::Ui::Bootstrap::Layout::Row,
-    bs_sidebar: Matestack::Ui::Bootstrap::Layout::Sidebar
-  }
+  def bs_badge(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Badge.(text, options, &block)
+  end
 
-  Matestack::Ui::Core::Component::Registry.register_components(
-    **COMPONENTS,
-    **FORMS,
-    **CONTENT,
-    **LAYOUTS
-  )
+  def bs_breadcrumb(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Breadcrumb.(text, options, &block)
+  end
+
+  def bs_btn(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Button.(text, options, &block)
+  end
+
+  def bs_btn_group(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::ButtonGroup.(text, options, &block)
+  end
+
+  def bs_card(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Card.(text, options, &block)
+  end
+
+  def bs_carousel(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Carousel.(text, options, &block)
+  end
+
+  def bs_close(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Close.(text, options, &block)
+  end
+
+  def bs_collapse(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Collapse.(text, options, &block)
+  end
+
+  def bs_dropdown(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Dropdown.(text, options, &block)
+  end
+
+  def bs_icon(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Icon.(text, options, &block)
+  end
+
+  def bs_list_group(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::ListGroup.(text, options, &block)
+  end
+
+  def bs_modal(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Modal.(text, options, &block)
+  end
+
+  def bs_navbar(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Navbar.(text, options, &block)
+  end
+
+  def bs_pagination(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Pagination.(text, options, &block)
+  end
+
+  def bs_page_heading(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::PageHeading.(text, options, &block)
+  end
+
+  def bs_popover(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Popover.(text, options, &block)
+  end
+
+  def bs_progress(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Progress.(text, options, &block)
+  end
+
+  def bs_scrollspy(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Scrollspy.(text, options, &block)
+  end
+
+  def bs_section_card(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::SectionCard.(text, options, &block)
+  end
+
+  def bs_spinner(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Spinner.(text, options, &block)
+  end
+
+  def bs_tab_nav(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::TabNav.(text, options, &block)
+  end
+
+  def bs_tab_nav_content(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::TabNavContent.(text, options, &block)
+  end
+
+  def bs_toast(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Toast.(text, options, &block)
+  end
+
+  def bs_tooltip(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Tooltip.(text, options, &block)
+  end
+
+
+
+  def bs_form_input(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Form::Input.(text, options, &block)
+  end
+
+  def bs_form_select(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Form::Select.(text, options, &block)
+  end
+
+  def bs_form_checkbox(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Form::Checkbox.(text, options, &block)
+  end
+
+  def bs_form_radio(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Form::Radio.(text, options, &block)
+  end
+
+  def bs_form_switch(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Form::Switch.(text, options, &block)
+  end
+
+  def bs_form_submit(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Form::Submit.(text, options, &block)
+  end
+
+
+
+
+  def bs_figure(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Content::Figure.(text, options, &block)
+  end
+
+  def bs_smart_collection(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Content::SmartCollection::Collection.(text, options, &block)
+  end
+
+
+
+
+  def bs_col(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Layout::Column.(text, options, &block)
+  end
+
+  def bs_container(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Layout::Container.(text, options, &block)
+  end
+
+  def bs_row(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Layout::Row.(text, options, &block)
+  end
+
+  def bs_sidebar(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Layout::Sidebar.(text, options, &block)
+  end
+
+
 
 end

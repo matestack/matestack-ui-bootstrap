@@ -1,4 +1,4 @@
-class Dummy::Pages::Customers::Index < Matestack::Ui::Page
+class Dummy::Pages::Customers::Index < ApplicationPage
 
   include Dummy::Pages::Customers::IndexCodeRenderingUtils
 
@@ -51,16 +51,14 @@ class Dummy::Pages::Customers::Index < Matestack::Ui::Page
   end
 
   def table_item_actions customer
-    slot do
-      transition path: edit_dummy_customer_path(customer), delay: 300 do
-        bs_btn outline: true, size: :sm, variant: :primary, class: "m-1" do
-          bs_icon name: 'arrow-right', size: 20
-        end
+    transition path: edit_dummy_customer_path(customer), delay: 300 do
+      bs_btn outline: true, size: :sm, variant: :primary, class: "m-1" do
+        bs_icon name: 'arrow-right', size: 20
       end
-      action customer_delete_action_config(customer) do
-        bs_btn outline: true, size: :sm, variant: :danger, class: "m-1" do
-          bs_icon name: 'trash2', size: 20
-        end
+    end
+    action customer_delete_action_config(customer) do
+      bs_btn outline: true, size: :sm, variant: :danger, class: "m-1" do
+        bs_icon name: 'trash2', size: 20
       end
     end
   end

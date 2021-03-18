@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Dropdown < Matestack::Ui::VueJsComponent
+class Matestack::Ui::Bootstrap::Components::Dropdown < Matestack::Ui::Bootstrap::BaseVueJsComponent
   vue_name "matestack-ui-bootstrap-dropdown"
 
   optional :variant, :text, :btn_class # button attributes
@@ -21,7 +21,7 @@ class Matestack::Ui::Bootstrap::Components::Dropdown < Matestack::Ui::VueJsCompo
 
       ul menu_attributes do
         menu_partial unless @bs_menu[:items].blank?
-        yield
+        yield if block_given?
       end
     end
   end

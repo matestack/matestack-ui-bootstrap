@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Spinner < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::Spinner < Matestack::Ui::Bootstrap::BaseComponent
 
   optional :class
   optional :kind, :variant, :size, :sr_only

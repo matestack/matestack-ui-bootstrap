@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Collapse < Matestack::Ui::VueJsComponent
+class Matestack::Ui::Bootstrap::Components::Collapse < Matestack::Ui::Bootstrap::BaseVueJsComponent
   vue_name "matestack-ui-bootstrap-collapse"
 
   optional :multi, :labelledby, :parent, :class
@@ -9,7 +9,7 @@ class Matestack::Ui::Bootstrap::Components::Collapse < Matestack::Ui::VueJsCompo
   def response
     div collapse_attributes do
       card_partial if card
-      yield
+      yield if block_given?
     end
   end
 
@@ -17,10 +17,10 @@ class Matestack::Ui::Bootstrap::Components::Collapse < Matestack::Ui::VueJsCompo
 
   def config
     {}.tap do |props|
-      props.toggle_on = context.toggle_on
-      props.show_on = context.show_on
-      props.hide_on = context.hide_on
-      props.dispose_on = context.dispose_on
+      props[:toggle_on] = context.toggle_on
+      props[:show_on] = context.show_on
+      props[:hide_on] = context.hide_on
+      props[:dispose_on] = context.dispose_on
     end
   end
 

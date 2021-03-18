@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::ListGroup < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::ListGroup < Matestack::Ui::Bootstrap::BaseComponent
   options :role
 
   optional :items
@@ -9,12 +9,12 @@ class Matestack::Ui::Bootstrap::Components::ListGroup < Matestack::Ui::Component
   def response
     if actionable_items?
       div list_group_attributes do
-        yield unless context.items
+        yield if block_given? unless context.items
         list_partial if context.items
       end
     else
       ul list_group_attributes do
-        yield unless context.items
+        yield if block_given? unless context.items
         list_partial if context.items
       end
     end
@@ -65,7 +65,7 @@ class Matestack::Ui::Bootstrap::Components::ListGroup < Matestack::Ui::Component
       else
         li id: item[:id], class: "#{list_classes item, false}", "aria-disabled": "#{true if item[:disabled]}" do
           # this implementation is useless, would need to be connected to a form through bs_form_checkbox
-          # input class: "form-check-input me-1", attributes: { 'type': "checkbox", 'value': "", 'aria-label': "#{item[:text]}" } if checkbox
+          # input class: "form-check-input me-1", 'type': "checkbox", 'value': "", 'aria-label': "#{item[:text]}" if checkbox
           text_rendering(item)
           bs_badge variant: :primary, rounded: true, text: item[:badge] if item[:badge]
         end

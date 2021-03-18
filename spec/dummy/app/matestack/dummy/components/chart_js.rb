@@ -1,4 +1,4 @@
-class Dummy::Components::ChartJs < Matestack::Ui::VueJsComponent
+class Dummy::Components::ChartJs < ApplicationVueJsComponent
   vue_name "chart-js-component"
 
   required :type
@@ -12,16 +12,18 @@ class Dummy::Components::ChartJs < Matestack::Ui::VueJsComponent
   optional :cutout_percentage
   optional :class
 
-  def setup
+  def config
     # injected into vue.js components
-    @component_config[:type] = type
-    @component_config[:datasets] = datasets
-    @component_config[:labels] = labels
-    @component_config[:display_legend] = !display_legend.nil? ? display_legend : false
-    @component_config[:display_x_axes] = !display_x_axes.nil? ? display_x_axes : true
-    @component_config[:display_y_axes] = !display_y_axes.nil? ? display_y_axes : true
-    @component_config[:display_y_axes] = !display_y_axes.nil? ? display_y_axes : true
-    @component_config[:cutout_percentage] = !cutout_percentage.nil? ? cutout_percentage : 70
+    {}.tap do |props|
+      props[:type] = context.type
+      props[:datasets] = context.datasets
+      props[:labels] = context.labels
+      props[:display_legend] = !context.display_legend.nil? ? context.display_legend : false
+      props[:display_x_axes] = !context.display_x_axes.nil? ? context.display_x_axes : true
+      props[:display_y_axes] = !context.display_y_axes.nil? ? context.display_y_axes : true
+      props[:display_y_axes] = !context.display_y_axes.nil? ? context.display_y_axes : true
+      props[:cutout_percentage] = !context.cutout_percentage.nil? ? context.cutout_percentage : 70
+    end
   end
 
   def response

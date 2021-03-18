@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Pagination < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::Pagination < Matestack::Ui::Bootstrap::BaseComponent
 
   optional :aria_label, :size
   optional :items
@@ -17,7 +17,7 @@ class Matestack::Ui::Bootstrap::Components::Pagination < Matestack::Ui::Componen
             end
           end
         end
-        yield
+        yield if block_given?
       end
     end
   end

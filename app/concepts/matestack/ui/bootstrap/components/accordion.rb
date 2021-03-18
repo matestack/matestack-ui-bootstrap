@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Accordion < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::Accordion < Matestack::Ui::Bootstrap::BaseComponent
 
   # [ {header: { class, id, text, size, btn_variant, btn_class }, body: { class, text, multi } } ]
   optional :items # array with 2 Hashes: header and body
@@ -13,7 +13,7 @@ class Matestack::Ui::Bootstrap::Components::Accordion < Matestack::Ui::Component
   def response
     div accordion_attributes do
       accordion_content_partial if context.items.present?
-      yield
+      yield if block_given?
     end
   end
 
@@ -25,7 +25,7 @@ class Matestack::Ui::Bootstrap::Components::Accordion < Matestack::Ui::Component
         heading class: "accordion-header #{item[:header][:class]}", id: (item[:header][:id] || "header-#{index}"), size: (item[:header][:size] || 2) do
           button class: "accordion-button", text:item[:header][:text],
             data: { "bs-toggle": "collapse", "bs-target": "#collapse-#{(item[:header][:id] || "header-#{index}") }" },
-            attributes: { "aria-expanded": "false", "aria-controls": "collapse-#{(item[:header][:id] || "header-#{index}")}", type: "button" }
+            "aria-expanded": "false", "aria-controls": "collapse-#{(item[:header][:id] || "header-#{index}")}", type: "button"
         end
         bs_collapse class: "accordion-collapse #{ 'show' if context.open || item[:open] }", id: "collapse-#{(item[:header][:id] || "header-#{index}")}", labelledby: (item[:header][:id] || "header-#{index}"),
           parent: @accordion_id, multi: (item[:body][:multi] || false) do
@@ -41,7 +41,7 @@ class Matestack::Ui::Bootstrap::Components::Accordion < Matestack::Ui::Component
     options.merge(
       id: @accordion_id,
       class: accordion_classes
-      ).merge(context.attributes)
+      ).merge(context.attributes || {})
   end
 
   def accordion_classes

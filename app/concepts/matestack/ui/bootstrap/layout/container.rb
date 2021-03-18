@@ -1,8 +1,8 @@
-class Matestack::Ui::Bootstrap::Layout::Container < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Layout::Container < Matestack::Ui::Bootstrap::BaseComponent
 
-  optional :size, :class
+  optional :size
 
-  def response 
+  def response
     div container_attributes do
       yield
     end
@@ -18,8 +18,8 @@ class Matestack::Ui::Bootstrap::Layout::Container < Matestack::Ui::Component
 
   def container_classes
     [].tap do |classes|
-      classes << (size.present? ? "container-#{size}" : "container")
-      classes << context.class
+      classes << (context.size.present? ? "container-#{context.size}" : "container")
+      classes << options[:class]
     end.join(' ').strip
   end
 end

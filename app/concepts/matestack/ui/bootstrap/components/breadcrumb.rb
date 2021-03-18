@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Breadcrumb < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::Breadcrumb < Matestack::Ui::Bootstrap::BaseComponent
 
   optional :items # list of items  with path and text
   optional :class # adding custom class to breadcrumb list
@@ -19,7 +19,7 @@ class Matestack::Ui::Bootstrap::Components::Breadcrumb < Matestack::Ui::Componen
             end
           end
         end
-        yield
+        yield if block_given?
       end
     end
   end
@@ -29,7 +29,7 @@ class Matestack::Ui::Bootstrap::Components::Breadcrumb < Matestack::Ui::Componen
   def link_attrs(last = false)
     {}.tap do |hash|
       hash[:class] = "breadcrumb-item #{'active' if last}"
-      hash["aria-current"] = "page" if last
+      hash[:"aria-current"] = "page" if last
     end
   end
 

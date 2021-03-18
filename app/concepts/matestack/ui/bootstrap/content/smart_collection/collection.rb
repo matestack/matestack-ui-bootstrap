@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Content::SmartCollection::Collection < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Content::SmartCollection::Collection < Matestack::Ui::Bootstrap::BaseComponent
   include Matestack::Ui::VueJs::Components::Collection::Helper
   include Matestack::Ui::Bootstrap::Content::SmartCollection::Content
   include Matestack::Ui::Bootstrap::Content::SmartCollection::Filter

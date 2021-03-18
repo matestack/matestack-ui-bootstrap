@@ -1,4 +1,4 @@
-class Dummy::Pages::Products::Index < Matestack::Ui::Page
+class Dummy::Pages::Products::Index < ApplicationPage
 
   include Dummy::Pages::Products::IndexCodeRenderingUtils
 
@@ -41,12 +41,10 @@ class Dummy::Pages::Products::Index < Matestack::Ui::Page
   end
 
   def collection_rendering products
-    slot do
-      bs_row do
-        products.each do |product|
-          bs_col xl: 4, class: "mb-3" do
-            collection_card product
-          end
+    bs_row do
+      products.each do |product|
+        bs_col xl: 4, class: "mb-3" do
+          collection_card product
         end
       end
     end

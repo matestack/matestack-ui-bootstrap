@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Popover < Matestack::Ui::VueJsComponent
+class Matestack::Ui::Bootstrap::Components::Popover < Matestack::Ui::Bootstrap::BaseVueJsComponent
   vue_name "matestack-ui-bootstrap-popover"
 
   # How i imagine using a popover
@@ -59,7 +59,7 @@ class Matestack::Ui::Bootstrap::Components::Popover < Matestack::Ui::VueJsCompon
 
   def content_partial
     plain context.text if context.text
-    yield unless context.text
+    yield if block_given? unless context.text
   end
 
   def popover_attributes
@@ -70,16 +70,16 @@ class Matestack::Ui::Bootstrap::Components::Popover < Matestack::Ui::VueJsCompon
       hash[:tabindex] = "#{tabindex}"
       hash[:data] = {}.tap do |data|
         DATA_ALIAS_ATTRIBUTES.each do |attribute|
-          data["bs-#{attribute}"] = self.send("context.#{attribute}") if self.send("context.#{attribute}")
+          data["bs-#{attribute}"] = context.send("#{attribute}") if context.send("#{attribute}")
         end
         (DATA_ATTRIBUTES - [:tag, :text, :variant]).each do |attribute|
-          data["bs-#{attribute}"] = self.send("context.#{attribute}") if self.send("context.#{attribute}")
+          data["bs-#{attribute}"] = context.send("#{attribute}") if context.send("#{attribute}")
         end
         data["bs-toggle"] = "popover"
       end
     end
     options.merge(
-      attributes
+      attributes || {}
     )
   end
 

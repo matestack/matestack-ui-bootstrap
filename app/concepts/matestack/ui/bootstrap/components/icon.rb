@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Icon < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::Icon < Matestack::Ui::Bootstrap::BaseComponent
 
   required :name
   optional :size

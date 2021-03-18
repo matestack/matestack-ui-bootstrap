@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Navbar < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::Navbar < Matestack::Ui::Bootstrap::BaseComponent
 
   POS_ATTRIBUTES = %i[fixed_top fixed_bottom sticky_top]
   optional *POS_ATTRIBUTES
@@ -42,12 +42,12 @@ class Matestack::Ui::Bootstrap::Components::Navbar < Matestack::Ui::Component
     case brand[:type]
     when :link
       link brand.except(:text).merge(class: "navbar-brand") do
-        img height: 40, path: brand[:img], attributes: { loading: "lazy" } if brand[:img].present?
+        img height: 40, path: brand[:img], loading: "lazy" if brand[:img].present?
         plain brand[:text]
       end
     else
       transition brand.except(:text).merge(class: "navbar-brand") do
-        img height: 40, path: brand[:img], attributes: { loading: "lazy" } if brand[:img].present?
+        img height: 40, path: brand[:img], loading: "lazy" if brand[:img].present?
         plain brand[:text]
       end
     end
@@ -86,7 +86,7 @@ class Matestack::Ui::Bootstrap::Components::Navbar < Matestack::Ui::Component
           end
         end
       end
-      yield
+      yield if block_given?
     end
   end
 
@@ -118,7 +118,7 @@ class Matestack::Ui::Bootstrap::Components::Navbar < Matestack::Ui::Component
     [].tap do |classes|
       classes << "navbar"
       POS_ATTRIBUTES.each do |pos|
-        classes << "#{pos}".gsub('_','-') if self.send("context.#{pos}")
+        classes << "#{pos}".gsub('_','-') if context.send("#{pos}")
       end
       classes << "navbar-expand-#{ (context.expand_at.present? ? context.expand_at : "lg") }"
       classes << "navbar-#{context.theme}" if  context.theme.present?

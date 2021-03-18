@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::VueJsComponent
+class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::Bootstrap::BaseVueJsComponent
   vue_name 'matestack-ui-bootstrap-modal'
 
   # header attributes, expects a hash or string
@@ -26,7 +26,7 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::VueJsComponen
           header_partial if context.header || (context.slots && context.slots[:header])
           body_partial if context.body || context.slots && context.slots[:body]
           footer_partial if context.footer || (context.slots && context.slots[:footer])
-          yield
+          yield if block_given?
         end
       end
     end
@@ -36,11 +36,11 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::VueJsComponen
 
   def config
     {}.tap do |props|
-      props.toggle_on = context.toggle_on
-      props.show_on = context.show_on
-      props.hide_on = context.hide_on
-      props.handle_update_on = context.handle_update_on
-      props.dispose_on = context.dispose_on
+      props[:toggle_on] = context.toggle_on
+      props[:show_on] = context.show_on
+      props[:hide_on] = context.hide_on
+      props[:handle_update_on] = context.handle_update_on
+      props[:dispose_on] = context.dispose_on
     end
   end
 
@@ -50,7 +50,7 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::VueJsComponen
       if context.slots && context.slots[:header]
         slot context.slots[:header]
       else
-        heading size: (context.header[:size] || 5), class: "modal-title #{context.header[:class]}", text: context.header[:text] if context.header[:text].present?
+        heading context.header[:text], size: (context.header[:size] || 5), class: "modal-title #{context.header[:class]}" if context.header[:text].present?
         bs_close dismiss: 'modal'
       end
     end
@@ -73,8 +73,9 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::VueJsComponen
       slot context.slots[:footer] if context.slots && context.slots[:footer]
       if context.footer[:text].present?
         button class: "btn #{context.footer[:class].present? ? context.footer[:class] : 'btn-secondary'}",
-          data: { "bs-dismiss": 'modal' }, type: 'button'
-          text: context.footer[:text]
+          data: { "bs-dismiss": 'modal' }, type: 'button' do
+            plain context.footer[:text]
+          end
       end
     end
   end

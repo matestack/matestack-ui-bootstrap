@@ -1,5 +1,7 @@
 class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::VueJs::Components::Form::Checkbox
 
+  include Matestack::Ui::Bootstrap::Registry
+
   vue_name "matestack-ui-core-form-checkbox"
 
   optional :form_text
@@ -8,7 +10,7 @@ class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::VueJs::Component
 
   def response
     div class: "matestack-ui-bootstrap-form-checkbox" do
-      label class: "form-label", text: input_label, for: attr_key if input_label && multiple?
+      label input_label, class: "form-label", for: attribute_key if input_label && multiple?
       render_options
       render_errors
       render_form_text unless context.form_text.nil? # otherwise renders empty div
@@ -42,18 +44,18 @@ class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::VueJs::Component
   end
 
   def checkbox_wrapper(options = {}, &block)
-    div class: "form-check #{'form-check-inline' if variant == :inline}", attributes: options[:attributes] do
-      yield
+    div class: "form-check #{'form-check-inline' if variant == :inline}", options[:attributes] do
+      yield if block_given?
     end
   end
 
   def bootstrap_label(text:, for_input:)
-    label text: text, for: for_input, class: 'form-check-label'
+    label text, for: for_input, class: 'form-check-label'
   end
 
   def render_errors
-    unless @included_config[:errors] == false && (errors == false || errors.nil?) || errors == false
-      div class: 'invalid-feedback', attributes: { 'v-for': "error in #{error_key}", style: "display: block;" } do
+    if display_errors?
+      div class: 'invalid-feedback', 'v-for': "error in #{error_key}", style: "display: block;" do
         plain '{{ error }}'
       end
     end
@@ -68,13 +70,13 @@ class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::VueJs::Component
   end
 
   def render_form_text
-    div id: "form_text_for_#{attr_key}", class: "form-text" do
+    div id: "form_text_for_#{attribute_key}", class: "form-text" do
       plain form_text
     end
   end
 
-  # def id_for_item(value)
-  #   "#{options[:id]}_#{value}_#{attr_key}"
+  # def item_id(value)
+  #   "#{options[:id]}_#{value}_#{attribute_key}"
   # end
 
 end

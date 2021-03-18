@@ -1,6 +1,9 @@
-const bootstrap = require('bootstrap')
+import * as bootstrap from 'bootstrap'
+import Vue from 'vue/dist/vue.esm'
 
-MatestackUiCore.Vue.component('matestack-ui-bootstrap-sidebar', {
+import MatestackUiCore from 'matestack-ui-core'
+
+Vue.component('matestack-ui-bootstrap-sidebar', {
   mixins: [MatestackUiCore.componentMixin],
 
   data() {

@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Card < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::Card < Matestack::Ui::Bootstrap::BaseComponent
 
   optional :class
 
@@ -28,7 +28,7 @@ class Matestack::Ui::Bootstrap::Components::Card < Matestack::Ui::Component
 
         # custom body components
         # needed a div otherwise it will be displayed below footer
-        div class: "p-3 pt-1" do yield end
+        div class: "p-3 pt-1" do yield if block_given? end
 
         img_partial :bottom if context.img_pos == :bottom
 
@@ -60,7 +60,7 @@ class Matestack::Ui::Bootstrap::Components::Card < Matestack::Ui::Component
         end
       elsif context.body
         paragraph class: "card-text" do
-          plain text: body
+          plain body
         end
       end
       slot context.slots[:body] if context.slots && context.slots[:body]

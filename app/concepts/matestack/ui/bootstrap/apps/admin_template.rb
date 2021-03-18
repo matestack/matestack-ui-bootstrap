@@ -1,9 +1,35 @@
 class Matestack::Ui::Bootstrap::Apps::AdminTemplate < Matestack::Ui::App
 
   def response
+    html do
+      head do
+        title "Matestack UI Addon Dummy App"
+
+        unescape csrf_meta_tags
+        # unescape csp_meta_tag
+    
+        meta charset: "utf-8"
+        meta name: "viewport", content: "width=device-width, initial-scale=1"
+    
+        # unescape stylesheet_pack_tag("application", media: "all")
+        unescape javascript_pack_tag("application")
+        # unescape Matestack::Ui::Core::Context.controller.view_context.stylesheet_pack_tag(:application)
+        # unescape Matestack::Ui::Core::Context.controller.view_context.javascript_pack_tag(:application)
+      end
+    end
+    body do
+      matestack do
+        body_response do
+          yield
+        end
+      end
+    end
+  end
+
+  def body_response
     div class: "d-flex flex-row" do
       if should_show_sidebar?
-        bs_sidebar sidebar_navigation_items: sidebar_navigation_items, slots: { sidebar_top: sidebar_top_slot }
+        bs_sidebar sidebar_navigation_items: sidebar_navigation_items, slots: { sidebar_top: method(:sidebar_top_slot) }
       end
       div id: "content", class: "content-wrapper w-100 #{content_background_class}" do
         if should_show_navbar?
@@ -16,7 +42,7 @@ class Matestack::Ui::Bootstrap::Apps::AdminTemplate < Matestack::Ui::App
           end
         end
         bs_container class: "my-5 px-4 pt-5" do
-          yield_page slots: { loading_state: loading_state_slot }
+          yield if block_given?
         end
       end
     end
@@ -40,9 +66,7 @@ class Matestack::Ui::Bootstrap::Apps::AdminTemplate < Matestack::Ui::App
   end
 
   def sidebar_top_slot
-    slot do
-      sidebar_top_partial if self.respond_to?(:sidebar_top_partial)
-    end
+    sidebar_top_partial if self.respond_to?(:sidebar_top_partial)
   end
 
   def toasts_partial

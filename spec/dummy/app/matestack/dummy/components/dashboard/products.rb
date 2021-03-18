@@ -1,4 +1,4 @@
-class Dummy::Components::Dashboard::Products < Matestack::Ui::Component
+class Dummy::Components::Dashboard::Products < ApplicationComponent
 
   def response
     bs_section_card title: translate("title"), subtitle: translate("subtitle") do

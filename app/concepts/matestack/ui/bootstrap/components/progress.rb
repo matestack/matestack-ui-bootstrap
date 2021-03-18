@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Progress < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::Progress < Matestack::Ui::Bootstrap::BaseComponent
 
   optional :class
   optional :text, :valuemin, :valuemax
@@ -18,7 +18,7 @@ class Matestack::Ui::Bootstrap::Components::Progress < Matestack::Ui::Component
           aria_valuenow: prog[:aria_valuenow]
         )
       end
-      yield
+      yield if block_given?
     end
   end
 

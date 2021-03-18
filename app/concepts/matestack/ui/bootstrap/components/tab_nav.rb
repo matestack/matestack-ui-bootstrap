@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::TabNav < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::TabNav < Matestack::Ui::Bootstrap::BaseComponent
 
   required :id
 
@@ -12,8 +12,8 @@ class Matestack::Ui::Bootstrap::Components::TabNav < Matestack::Ui::Component
         nav_items_partial
       end
     end
-    div class: "tab-content", id: "#{id}Content" do
-      yield
+    div class: "tab-content", id: "#{context.id}Content" do
+      yield if block_given?
     end
   end
 
@@ -30,9 +30,7 @@ class Matestack::Ui::Bootstrap::Components::TabNav < Matestack::Ui::Component
               "aria-selected": "#{'true' if item[:active]}",
               "data-bs-toggle": "tab" do
                 bs_icon name: item[:icon], size: 20 if item[:icon]
-                span class: "#{'ps-3' if item[:icon]}" do
-                  plain item[:text] if item[:text]
-                end
+                span item[:text], class: "#{'ps-3' if item[:icon]}" if item[:text]
               end
       end
     end
@@ -46,7 +44,6 @@ class Matestack::Ui::Bootstrap::Components::TabNav < Matestack::Ui::Component
       hash[:'aria-disabled'] = 'true' if disabled
       hash[:role] = "tab" if toggle.present?
       hash[:'aria-controls'] = "#{path.gsub('#','')}" if context.toggle.present?
-      end
 
       hash[:data] = { "bs-toggle": "pill" } if context.pills
       hash[:data] = { "bs-toggle": "tab" } if context.tabs

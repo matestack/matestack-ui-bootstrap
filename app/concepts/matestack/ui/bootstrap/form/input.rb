@@ -1,4 +1,6 @@
-class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::Core::Form::Input::Base
+class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::VueJs::Components::Form::Input
+
+  include Matestack::Ui::Bootstrap::Registry
 
   vue_name "matestack-ui-core-form-input"
 
@@ -14,52 +16,52 @@ class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::Core::Form::Input::
 
   def response
     div class: "matestack-ui-bootstrap-input" do
-      label for: attr_key,  class: "form-label", text: input_label if input_label
-      case type
+      label input_label, for: attribute_key,  class: "form-label" if input_label
+      case context.type
       when :range
-        input options.merge(attributes: vue_attributes).merge(bootstrap_range_attributes)
-        if show_value
-          div id: attr_key, class: "form-text" do
-            plain "{{ data['#{attr_key}'] }}"
+        input options.merge(input_attributes).merge(bootstrap_range_attributes)
+        if context.show_value
+          div id: attribute_key, class: "form-text" do
+            plain "{{ data['#{attribute_key}'] }}"
           end
         end
       when :file
         file_input
       else
-        input options.merge(attributes: vue_attributes).merge(bootstrap_input_attributes)
+        input options.merge(input_attributes).merge(bootstrap_input_attributes)
         render_errors
       end
-      render_form_text if form_text
+      render_form_text if context.form_text
     end
   end
 
   def bootstrap_input_attributes
     {
-      id: (options[:id] || attr_key),
+      id: (options[:id] || attribute_key),
       class: (options[:class] || "") << (" form-control"),
-      disabled: disabled
+      disabled: context.disabled
     }
   end
 
   def bootstrap_range_attributes
     {
       class: (options[:class] || "") << (" form-range"),
-      disabled: disabled,
-      min: min,
-      max: max,
-      steps: step
+      disabled: context.disabled,
+      min: context.min,
+      max: context.max,
+      steps: context.step
     }
   end
 
   def bootstrap_file_input_attributes
     {
       class: (options[:class] || "") << (" form-file-input"),
-      disabled: disabled
+      disabled: context.disabled
     }
   end
 
   def form_file_wrapper_class
-    case variant
+    case context.variant
     when :lg
       (options[:class] || "") << (" form-file form-file-lg")
     when :sm
@@ -71,29 +73,31 @@ class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::Core::Form::Input::
 
   def file_input
     div class: form_file_wrapper_class do
-      input options.merge(attributes: vue_attributes).merge(bootstrap_file_input_attributes)
-      label class: "form-file-label", for: attr_key do
-        span class: "form-file-text", attributes: { "v-if": "data['#{attr_key}']" } do
-          if multiple
-            span attributes: { "v-for": "file in data['#{attr_key}']" } do
+      input options.merge(input_attributes).merge(bootstrap_file_input_attributes)
+      label class: "form-file-label", for: attribute_key do
+        span class: "form-file-text", "v-if": "data['#{attribute_key}']" do
+          if context.multiple
+            span "v-for": "file in data['#{attribute_key}']" do
               plain "{{ file['name'] }}"
             end
           else
-            plain "{{ data['#{attr_key}']['name'] }}"
+            plain "{{ data['#{attribute_key}']['name'] }}"
           end
         end
-        span class: "form-file-text", attributes: { "v-if": "!data['#{attr_key}']" } do
-          plain placeholder || "Choose file"
+        span class: "form-file-text", "v-if": "!data['#{attribute_key}']" do
+          plain context.placeholder || "Choose file"
         end
-        span class: "form-file-button", text: browse_button_text || "Browse"
+        span class: "form-file-button" do
+          plain context.browse_button_text || "Browse"
+        end
       end
       render_errors
     end
   end
 
   def render_errors
-    unless @included_config[:errors] == false && (errors == false || errors.nil?) || errors == false
-      div class: 'invalid-feedback', attributes: { 'v-for': "error in #{error_key}" } do
+    if display_errors?
+      div class: 'invalid-feedback', 'v-for': "error in #{error_key}" do
         plain '{{ error }}'
       end
     end
@@ -104,8 +108,8 @@ class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::Core::Form::Input::
   end
 
   def render_form_text
-    div id: "form_text_for_#{attr_key}", class: "form-text" do
-      plain form_text
+    div id: "form_text_for_#{attribute_key}", class: "form-text" do
+      plain context.form_text
     end
   end
 

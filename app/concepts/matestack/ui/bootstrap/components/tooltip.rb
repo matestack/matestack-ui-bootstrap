@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Tooltip < Matestack::Ui::VueJsComponent
+class Matestack::Ui::Bootstrap::Components::Tooltip < Matestack::Ui::Bootstrap::BaseVueJsComponent
   vue_name "matestack-ui-bootstrap-tooltip"
 
   DATA_ALIAS_ATTRIBUTES = %i[container delay selector html template fallback_placement]
@@ -22,11 +22,11 @@ class Matestack::Ui::Bootstrap::Components::Tooltip < Matestack::Ui::VueJsCompon
     case context.tag
     when :div
       div tooltip_attributes do
-        yield
+        yield if block_given?
       end
     else
       span tooltip_attributes do
-        yield
+        yield if block_given?
       end
     end
   end
@@ -39,10 +39,10 @@ class Matestack::Ui::Bootstrap::Components::Tooltip < Matestack::Ui::VueJsCompon
       hash[:text] = context.text if context.text.present?
       hash[:data] = {}.tap do |hash|
         DATA_ALIAS_ATTRIBUTES.each do |attribute|
-          hash["bs-#{attribute}"] = self.send("context.#{attribute}") if self.send("context.#{attribute}")
+          hash["bs-#{attribute}"] = context.send("#{attribute}") if context.send("#{attribute}")
         end
         DATA_ATTRIBUTES.each do |attribute|
-          hash["bs-#{attribute}"] = self.send("context.#{attribute}") if self.send("context.#{attribute}")
+          hash["bs-#{attribute}"] = context.send("#{attribute}") if context.send("#{attribute}")
         end
         hash["bs-toggle"] = "tooltip"
         hash["bs-type"] = context.tag
@@ -51,7 +51,7 @@ class Matestack::Ui::Bootstrap::Components::Tooltip < Matestack::Ui::VueJsCompon
       end
     end
     options.merge(
-      attributes
+      attributes || {}
     )
   end
 

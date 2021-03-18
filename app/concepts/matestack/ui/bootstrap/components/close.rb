@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Close < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::Close < Matestack::Ui::Bootstrap::BaseComponent
 
   optional :dismiss, :class
   optional :attributes

@@ -1,19 +1,19 @@
-class Dummy::Components::Md < Matestack::Ui::StaticComponent
+class Dummy::Components::Md < ApplicationComponent
 
   required :path
   optional :lang
 
   def response
-    div class: "markdown-content bg-white", attributes: { "v-pre": true } do
+    div class: "markdown-content bg-white", "v-pre": true do
       plain parsed_markdown.html_safe
     end
   end
 
   def parsed_markdown
-    _file = File.read("#{::Rails.root}/#{path}")
+    _file = File.read("#{::Rails.root}/#{context.path}")
     begin
       if lang.present?
-        _file.prepend("```#{lang} \n")
+        _file.prepend("```#{context.lang} \n")
         _file.concat("\n ```")
       end
     rescue => e

@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::TabNavContent < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::TabNavContent < Matestack::Ui::Bootstrap::BaseComponent
 
   required :id
 
@@ -6,7 +6,7 @@ class Matestack::Ui::Bootstrap::Components::TabNavContent < Matestack::Ui::Compo
 
   def response
     div tab_content_attributes do
-      yield
+      yield if block_given?
     end
   end
 
@@ -17,7 +17,7 @@ class Matestack::Ui::Bootstrap::Components::TabNavContent < Matestack::Ui::Compo
       id: "tab-#{context.id}-content",
       class: tab_content_classes,
       role: "tabpanel",
-      "aria-labelledby": "tab-#{id}"
+      "aria-labelledby": "tab-#{context.id}"
     )
   end
 

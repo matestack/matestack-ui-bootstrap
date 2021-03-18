@@ -1,6 +1,10 @@
 import Chart from 'chart.js';
+import Vue from 'vue/dist/vue.esm'
 
-MatestackUiCore.Vue.component('chart-js-component', {
+
+import MatestackUiCore from 'matestack-ui-core'
+
+Vue.component('chart-js-component', {
   mixins: [MatestackUiCore.componentMixin],
 
   data() {

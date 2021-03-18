@@ -1,4 +1,4 @@
-class Dummy::Pages::Dashboard::Show < Matestack::Ui::Page
+class Dummy::Pages::Dashboard::Show < ApplicationPage
 
   include Dummy::Pages::Dashboard::CodeRenderingUtils
 

@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::ButtonGroup < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::ButtonGroup < Matestack::Ui::Bootstrap::BaseComponent
 
   optional :class
   optional :label
@@ -6,7 +6,7 @@ class Matestack::Ui::Bootstrap::Components::ButtonGroup < Matestack::Ui::Compone
 
   def response 
     div buttongroup_attributes do
-      yield
+      yield if block_given?
     end
   end
 
@@ -16,7 +16,7 @@ class Matestack::Ui::Bootstrap::Components::ButtonGroup < Matestack::Ui::Compone
     attributes = {}.tap do |hash|
       hash[:class] = buttongroup_classes
       hash[:role] = "#{context.toolbar ? :toolbar : :group}"
-      hash["aria-label"] = 'aria-label': context.label  
+      hash[:"aria-label"] = 'aria-label': context.label  
     end
     options.merge(
       attributes

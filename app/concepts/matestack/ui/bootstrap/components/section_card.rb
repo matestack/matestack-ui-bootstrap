@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::SectionCard < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::SectionCard < Matestack::Ui::Bootstrap::BaseComponent
 
   optional :id, :title, :subtitle, :icon, :slots, :content_padding
 
@@ -23,7 +23,7 @@ class Matestack::Ui::Bootstrap::Components::SectionCard < Matestack::Ui::Compone
         end
       end
       div class: "section-card-content #{'p-4' unless context.content_padding == false} #{'pt-1' if context.title || context.subtitle}" do
-        yield
+        yield if block_given?
       end
     end
   end

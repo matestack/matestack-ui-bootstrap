@@ -1,4 +1,4 @@
-class Dummy::Components::Form::Flatpickr < Matestack::Ui::Bootstrap::Form::Input
+class Dummy::Components::Form::Flatpickr < ApplicationVueJsComponent
 
   optional :form_text
   optional :disabled
@@ -7,9 +7,11 @@ class Dummy::Components::Form::Flatpickr < Matestack::Ui::Bootstrap::Form::Input
 
   vue_name "form-flatpickr-component"
 
-  def setup
-    @component_config[:init_value] = init_value
-    @component_config[:enable_time] = enable_time
+  def config
+    {
+      init_value: init_value,
+      enable_time: context.enable_time
+    }
   end
 
   def response
@@ -26,7 +28,7 @@ class Dummy::Components::Form::Flatpickr < Matestack::Ui::Bootstrap::Form::Input
     bootstrap_input_attributes.merge({
       type: :text,
       class: (options[:class] || "") << (" form-control flatpickr"),
-      disabled: disabled
+      disabled:  context.disabled
     })
   end
 

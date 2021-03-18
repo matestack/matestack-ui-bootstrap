@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Scrollspy < Matestack::Ui::Component
+class Matestack::Ui::Bootstrap::Components::Scrollspy < Matestack::Ui::Bootstrap::BaseComponent
 
   required :height
   
@@ -9,18 +9,23 @@ class Matestack::Ui::Bootstrap::Components::Scrollspy < Matestack::Ui::Component
 
   def response
     div scrollspy_attributes do
-      yield
+      yield if block_given?
     end
   end
 
   protected
+
+  # context.method cannot be used due to ruby default method on objects
+  def context_method
+    @context_method || = options.delete(:method)
+  end
 
   def scrollspy_attributes
     attributes = {}.tap do |hash|
       hash[:class] = scrollspy_classes
       hash[:data] = { "bs-spy": "scroll", "bs-target": "#{context.target}" }
       hash[:data].merge!("bs-offset": context.offset) if context.offset.present?
-      hash[:data].merge!("bs-method": :"#{context.method}") if context.method.present?
+      hash[:data].merge!("bs-method": :"#{context_method}") if context_method.present?
       hash[:style] = "overflow-y: scroll; position: relative;"
       hash[:style] << "height: #{parsed_height};"
       hash[:tabindex] = 0

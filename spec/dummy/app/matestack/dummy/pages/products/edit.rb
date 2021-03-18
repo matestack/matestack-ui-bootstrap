@@ -1,4 +1,4 @@
-class Dummy::Pages::Products::Edit < Matestack::Ui::Page
+class Dummy::Pages::Products::Edit < ApplicationPage
 
   include Dummy::Pages::Products::EditCodeRenderingUtils
 

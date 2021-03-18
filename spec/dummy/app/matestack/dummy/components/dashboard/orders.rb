@@ -1,4 +1,4 @@
-class Dummy::Components::Dashboard::Orders < Matestack::Ui::Component
+class Dummy::Components::Dashboard::Orders < ApplicationComponent
 
   def response
     bs_card title: "Orders", class: "shadow-sm mb-3 border-0 h-100" do

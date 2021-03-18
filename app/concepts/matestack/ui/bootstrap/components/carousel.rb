@@ -1,4 +1,4 @@
-class Matestack::Ui::Bootstrap::Components::Carousel < Matestack::Ui::VueJsComponent
+class Matestack::Ui::Bootstrap::Components::Carousel < Matestack::Ui::Bootstrap::BaseVueJsComponent
   vue_name "matestack-ui-bootstrap-carousel"
 
   optional :start, :controls, :indicators, :fade, :interval, :variant
@@ -13,7 +13,7 @@ class Matestack::Ui::Bootstrap::Components::Carousel < Matestack::Ui::VueJsCompo
       indicator_partial if context.indicators.present?
       # carousel content
       div class: "carousel-inner" do
-        yield
+        yield if block_given?
         carousel_partial if context.items
       end
       controls_partial if context.controls
@@ -25,11 +25,11 @@ class Matestack::Ui::Bootstrap::Components::Carousel < Matestack::Ui::VueJsCompo
   def config
     {}.tap do |props|
       props["carousel-id"] = carousel_id
-      props.interval = context.interval
-      props.cycle_on = context.cycle_on
-      props.pause_on = context.pause_on
-      props.prev_on = context.prev_on
-      props.next_on = context.next_on
+      props[:interval] = context.interval
+      props[:cycle_on] = context.cycle_on
+      props[:pause_on] = context.pause_on
+      props[:prev_on] = context.prev_on
+      props[:next_on] = context.next_on
     end
   end
 

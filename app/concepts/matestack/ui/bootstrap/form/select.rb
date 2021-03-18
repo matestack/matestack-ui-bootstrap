@@ -1,4 +1,6 @@
-class Matestack::Ui::Bootstrap::Form::Select < Matestack::Ui::Core::Form::Select::Base
+class Matestack::Ui::Bootstrap::Form::Select < Matestack::Ui::VueJs::Components::Form::Select
+
+  include Matestack::Ui::Bootstrap::Registry
 
   vue_name "matestack-ui-core-form-select"
 
@@ -8,8 +10,8 @@ class Matestack::Ui::Bootstrap::Form::Select < Matestack::Ui::Core::Form::Select
 
   def response
     div class: "matestack-ui-bootstrap-form-select" do
-      label for: attr_key,  class: "form-label", text: input_label if input_label
-      select select_attributes.merge({ id: (options[:id] || attr_key), class: form_select_class, size: size_class }) do
+      label input_label, for: attribute_key,  class: "form-label" if input_label
+      select select_attributes.merge(bootstrap_select_attributes)) do
         render_options
       end
       render_errors
@@ -17,8 +19,16 @@ class Matestack::Ui::Bootstrap::Form::Select < Matestack::Ui::Core::Form::Select
     end
   end
 
+  def bootstrap_select_attributes
+    {
+      class: form_select_class,
+      size: size_class,
+      disabled: context.disabled
+    }
+  end
+
   def form_select_class
-    case variant
+    case context.variant
     when :lg
       (options[:class] || "") << (" form-select form-select-lg")
     when :sm
@@ -29,12 +39,12 @@ class Matestack::Ui::Bootstrap::Form::Select < Matestack::Ui::Core::Form::Select
   end
 
   def size_class
-    size
+    context.size
   end
 
   def render_errors
-    unless @included_config[:errors] == false && (errors == false || errors.nil?) || errors == false
-      div class: 'invalid-feedback', attributes: { 'v-for': "error in #{error_key}" } do
+    unless display_errors?
+      div class: 'invalid-feedback', 'v-for': "error in #{error_key}" do
         plain '{{ error }}'
       end
     end
@@ -45,8 +55,8 @@ class Matestack::Ui::Bootstrap::Form::Select < Matestack::Ui::Core::Form::Select
   end
 
   def render_form_text
-    div id: "form_text_for_#{attr_key}", class: "form-text" do
-      plain form_text
+    div id: "form_text_for_#{attribute_key}", class: "form-text" do
+      plain context.form_text
     end
   end
 

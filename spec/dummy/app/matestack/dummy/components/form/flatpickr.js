@@ -1,6 +1,9 @@
 import flatpickr from "flatpickr";
+import Vue from 'vue/dist/vue.esm'
 
-MatestackUiCore.Vue.component('form-flatpickr-component', {
+import MatestackUiCore from 'matestack-ui-core'
+
+Vue.component('form-flatpickr-component', {
   mixins: [MatestackUiCore.componentMixin, MatestackUiCore.formInputMixin],
   data() {
     return {};

@@ -29,7 +29,9 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Content
     thead do
       tr do
         context.columns&.each do |key, value|
-          th text: value.is_a?(Hash) ? value[:heading] : value, class: cell_class(value), scope: :col
+          th class: cell_class(value), scope: :col do
+            plain value.is_a?(Hash) ? value[:heading] : value
+          end
         end
         th if context.slots && context.slots[:table_item_actions]
       end
@@ -57,7 +59,7 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Content
     tfoot do
       tr do
         context.footer&.each do |value|
-          td text: value
+          td value
         end
       end
     end if context.footer
@@ -66,7 +68,9 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Content
   private
 
   def cell(data, key, value)
-    td text: cell_text(data, key, value), class: cell_class(value)
+    td class: cell_class(value) do
+      plain cell_text(data, key, value)
+    end
   end
 
   def cell_class(value)

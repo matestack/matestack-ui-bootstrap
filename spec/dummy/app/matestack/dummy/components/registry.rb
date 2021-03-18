@@ -1,15 +1,27 @@
 module Dummy::Components::Registry
 
-  Matestack::Ui::Core::Component::Registry.register_components(
-    dashboard_revenue: Dummy::Components::Dashboard::Revenue,
-    dashboard_products: Dummy::Components::Dashboard::Products,
-    dashboard_activity: Dummy::Components::Dashboard::Activity,
-  )
+  def dashboard_revenue(text=nil, options=nil, &block)
+    Dummy::Components::Dashboard::Revenue
+  end
 
-  Matestack::Ui::Core::Component::Registry.register_components(
-    md: Dummy::Components::Md,
-    chart_js: Dummy::Components::ChartJs,
-    form_flatpickr: Dummy::Components::Form::Flatpickr
-  )
+  def dashboard_products(text=nil, options=nil, &block)
+    Dummy::Components::Dashboard::Products
+  end
+
+  def dashboard_activity(text=nil, options=nil, &block)
+    Dummy::Components::Dashboard::Activity
+  end
+  
+  def md(text=nil, options=nil, &block)
+    Dummy::Components::Md
+  end
+
+  def chart_js(text=nil, options=nil, &block)
+    Dummy::Components::ChartJs
+  end
+
+  def form_flatpickr(text=nil, options=nil, &block)
+    Dummy::Components::Form::Flatpick
+  end
 
 end

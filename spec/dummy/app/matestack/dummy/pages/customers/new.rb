@@ -1,4 +1,4 @@
-class Dummy::Pages::Customers::New < Matestack::Ui::Page
+class Dummy::Pages::Customers::New < ApplicationPage
 
   include Dummy::Pages::Customers::NewCodeRenderingUtils
 
