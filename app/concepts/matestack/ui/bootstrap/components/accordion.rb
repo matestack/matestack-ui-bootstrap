@@ -4,7 +4,8 @@ class Matestack::Ui::Bootstrap::Components::Accordion < Matestack::Ui::Bootstrap
   optional :items # array with 2 Hashes: header and body
   optional :open
   optional :variant
-  optional :attributes, :class, :id
+  optional :attributes, class: { as:  :bs_class }
+  optional :id
 
   def prepare
     @accordion_id = (context.id.present? ? context.id : "matestack-accordion-#{SecureRandom.hex(3)}")
@@ -49,7 +50,7 @@ class Matestack::Ui::Bootstrap::Components::Accordion < Matestack::Ui::Bootstrap
       classes << 'accordion'
       classes << 'open' if context.open
       classes << 'accordion-flush' if context.variant == :flush
-      classes << context.class
+      classes << context.bs_class
     end.join(' ').strip
   end
 end

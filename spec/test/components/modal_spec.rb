@@ -64,17 +64,20 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
   end
 
   it 'has custom header and footer using slots' do
+    ExamplePage.define_method(:header_slot) do |*args|
+      heading size: 1, text: "Title Header", class: "modal-title"
+    end
+    ExamplePage.define_method(:footer_slot) do |*args|
+      paragraph class: "text-center", text: "2 days ago"
+                  bs_btn text: "OK"
+    end
     matestack_render do
       bs_btn text: "Launch Modal", data: { "bs-toggle": 'modal', "bs-target": '#staticBackdrop' }
       bs_modal id: 'staticBackdrop', body: "Modal Messages",
-            slots: {
-              header: slot {
-                  heading size: 1, text: "Title Header", class: "modal-title"
-              },
-              footer: slot {
-                  paragraph class: "text-center", text: "2 days ago"
-                  bs_btn text: "OK"
-              } }
+        slots: {
+          header: method(:header_slot),
+          footer: method(:footer_slot)
+        }
     end
     visit example_path
     expect(page).not_to have_content 'Title Header'

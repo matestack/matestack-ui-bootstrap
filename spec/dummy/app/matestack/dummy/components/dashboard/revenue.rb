@@ -24,13 +24,13 @@ class Dummy::Components::Dashboard::Revenue < ApplicationComponent
   end
 
   def text_kpis_partial
-    b text: "#{translate("total")}:"
+    b "#{translate("total")}:"
     plain "#{Dummy::RevenueKpiService.total} €"
     br
     br
     kpis.each do |kpi|
-      small text: "#{translate(kpi)}: "
-      small text: "#{Dummy::RevenueKpiService.send(kpi)} €"
+      small "#{translate(kpi)}: "
+      small "#{Dummy::RevenueKpiService.send(kpi)} €"
       br
     end
   end

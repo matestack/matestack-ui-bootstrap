@@ -5,7 +5,7 @@ class Matestack::Ui::Bootstrap::Components::SectionCard < Matestack::Ui::Bootstr
   def response
     section id: context.id, class: "section-card rounded shadow-sm mb-4 bg-white #{options[:class]}" do
       div class: "d-flex flex-row justify-content-between" do
-        if title.present? || subtitle.present?
+        if context.title.present? || context.subtitle.present?
           div class: "section-card-heading p-4" do
             heading size: 5, class: "mb-0" do
               bs_icon name: context.icon, size: "35" if context.icon.present?
@@ -16,9 +16,9 @@ class Matestack::Ui::Bootstrap::Components::SectionCard < Matestack::Ui::Bootstr
             end
           end
         end
-        if context.slots.present? && context.slots[:actions].present?
+        if slots.present? && slots[:actions].present?
           div class: "section-card-actions p-4" do
-            slot context.slots[:actions]
+            slot :actions
           end
         end
       end

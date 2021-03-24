@@ -2,7 +2,7 @@ class Matestack::Ui::Bootstrap::Components::TabNavContent < Matestack::Ui::Boots
 
   required :id
 
-  optional :active, :class
+  optional :active, class: { as:  :bs_class }
 
   def response
     div tab_content_attributes do
@@ -27,7 +27,7 @@ class Matestack::Ui::Bootstrap::Components::TabNavContent < Matestack::Ui::Boots
       classes << 'fade'
       classes << 'show ' if context.active
       classes << 'active' if context.active
-      classes << context.class
+      classes << context.bs_class
     end.join(' ').strip
   end
 end

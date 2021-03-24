@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/matestack/matestack-ui-core
-  revision: 0bbd207c34dea89cc0056e4de563141ceb8aa284
+  revision: fc89a8a8dd61b88a764aac41d90b228951d28288
   branch: matestack-ui-core-2.0
   specs:
     matestack-ui-core (2.0.0)
@@ -124,10 +124,10 @@ GEM
     mimemagic (0.3.5)
     mini_mime (1.0.2)
     mini_portile2 (2.5.0)
-    minitest (5.14.3)
+    minitest (5.14.4)
     msgpack (1.4.2)
-    nio4r (2.5.5)
-    nokogiri (1.11.1)
+    nio4r (2.5.7)
+    nokogiri (1.11.2)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     orm_adapter (0.5.0)

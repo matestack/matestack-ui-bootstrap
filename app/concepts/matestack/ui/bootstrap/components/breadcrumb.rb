@@ -1,7 +1,7 @@
 class Matestack::Ui::Bootstrap::Components::Breadcrumb < Matestack::Ui::Bootstrap::BaseComponent
 
   optional :items # list of items  with path and text
-  optional :class # adding custom class to breadcrumb list
+  optional class: { as:  :bs_class } # adding custom class to breadcrumb list
   optional :nav_class
 
   def response
@@ -11,7 +11,7 @@ class Matestack::Ui::Bootstrap::Components::Breadcrumb < Matestack::Ui::Bootstra
           li link_attrs((context.items.size - 1) == index) do
             case item[:type]
             when :link
-              link item
+              a item
             when :transition
               transition item
             else
@@ -42,7 +42,7 @@ class Matestack::Ui::Bootstrap::Components::Breadcrumb < Matestack::Ui::Bootstra
   def breadcrumb_classes
     [].tap do |classes|
       classes << "breadcrumb"
-      classes << context.class
+      classes << context.bs_class
     end.join(' ').strip
   end
 end

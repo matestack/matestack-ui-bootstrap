@@ -6,8 +6,9 @@ class Matestack::Ui::Bootstrap::Components::Dropdown < Matestack::Ui::Bootstrap:
   # dropdown menu attributes, expects an array of items with possible keys: type, path, text
   # or hash with possible keys: items, class
   optional :menu
-  optional :class, :id, :data
-  optional :slots
+  optional class: { as:  :bs_class }
+  optional :id, :data
+  
   optional :size
 
   def prepare
@@ -16,8 +17,8 @@ class Matestack::Ui::Bootstrap::Components::Dropdown < Matestack::Ui::Bootstrap:
 
   def response
     div dropdown_attributes do
-      split_btn_partial if context.slots && context.slots[:split_btn]
-      bs_btn btn_attributes unless context.slots && context.slots[:split_btn]
+      split_btn_partial if slots && slots[:split_btn]
+      bs_btn btn_attributes unless slots && slots[:split_btn]
 
       ul menu_attributes do
         menu_partial unless @bs_menu[:items].blank?
@@ -29,7 +30,7 @@ class Matestack::Ui::Bootstrap::Components::Dropdown < Matestack::Ui::Bootstrap:
   protected
 
   def split_btn_partial
-    slot context.slots[:split_btn]
+    slot :split_btn
     bs_btn btn_attributes do
       span class:"visually-hidden" do plain "Toggle Dropdown" end
     end
@@ -43,7 +44,7 @@ class Matestack::Ui::Bootstrap::Components::Dropdown < Matestack::Ui::Bootstrap:
       when :divider
         li do hr class: "dropdown-divider" end
       when :link
-        li do link item.merge(class: "dropdown-item #{item[:class]}") end
+        li do a item.merge(class: "dropdown-item #{item[:class]}") end
       when :transition
         li do transition item.merge(class: "dropdown-item #{item[:class]}") end
       when :action
@@ -64,18 +65,18 @@ class Matestack::Ui::Bootstrap::Components::Dropdown < Matestack::Ui::Bootstrap:
 
   def dropdown_classes
     [].tap do |classes|
-      classes << ((context.slots && context.slots[:split_btn]) ? 'btn-group' : 'dropdown')
+      classes << ((slots && slots[:split_btn]) ? 'btn-group' : 'dropdown')
       classes << "drop#{context.direction}" if context.direction.present?
-      classes << context.class
+      classes << context.bs_class
     end.join(' ').strip
   end
 
   def btn_attributes
     {
       id: context.id,
-      text: "#{context.text unless (context.slots && context.slots[:split_btn])}",
+      text: "#{context.text unless (slots && slots[:split_btn])}",
       variant: (context.variant || :primary),
-      class: context.btn_classes,
+      class: btn_classes,
       data: btn_data,
       size: context.size,
       'aria-expanded': "false"
@@ -83,7 +84,7 @@ class Matestack::Ui::Bootstrap::Components::Dropdown < Matestack::Ui::Bootstrap:
   end
 
   def btn_data
-    context.data || {}).tap do |hash|
+    (context.data || {}).tap do |hash|
       hash["bs-toggle"] = 'dropdown'
       hash[:offset] = context.offset if context.offset.present?
       hash[:reference] = context.reference if context.reference.present?
@@ -95,7 +96,7 @@ class Matestack::Ui::Bootstrap::Components::Dropdown < Matestack::Ui::Bootstrap:
       classes << 'dropdown-toggle'
       classes << 'dropdown-toggle-split' if slots && slots[:split_btn]
       #custom classes
-      classes << btn_class
+      classes << context.btn_class
     end.join(' ').strip
   end
 

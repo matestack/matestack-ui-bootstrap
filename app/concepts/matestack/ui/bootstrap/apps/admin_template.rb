@@ -1,32 +1,12 @@
 class Matestack::Ui::Bootstrap::Apps::AdminTemplate < Matestack::Ui::App
 
-  def response
-    html do
-      head do
-        title "Matestack UI Addon Dummy App"
-
-        unescape csrf_meta_tags
-        # unescape csp_meta_tag
-    
-        meta charset: "utf-8"
-        meta name: "viewport", content: "width=device-width, initial-scale=1"
-    
-        # unescape stylesheet_pack_tag("application", media: "all")
-        unescape javascript_pack_tag("application")
-        # unescape Matestack::Ui::Core::Context.controller.view_context.stylesheet_pack_tag(:application)
-        # unescape Matestack::Ui::Core::Context.controller.view_context.javascript_pack_tag(:application)
-      end
-    end
-    body do
-      matestack do
-        body_response do
-          yield
-        end
-      end
+  def response(&block)
+    matestack do
+      body_response(&block)
     end
   end
 
-  def body_response
+  def body_response(&block)
     div class: "d-flex flex-row" do
       if should_show_sidebar?
         bs_sidebar sidebar_navigation_items: sidebar_navigation_items, slots: { sidebar_top: method(:sidebar_top_slot) }

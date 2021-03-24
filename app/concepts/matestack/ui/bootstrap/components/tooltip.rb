@@ -13,7 +13,7 @@ class Matestack::Ui::Bootstrap::Components::Tooltip < Matestack::Ui::Bootstrap::
   # optional :content
   required :tooltip_title
   optional :tag
-  optional :class
+  optional class: { as:  :bs_class }
   optional :id
   DATA_ATTRIBUTES = %i[text variant animation placement tabindex trigger boundary offset popper_config]
   optional *DATA_ATTRIBUTES
@@ -57,7 +57,7 @@ class Matestack::Ui::Bootstrap::Components::Tooltip < Matestack::Ui::Bootstrap::
 
   def tooltip_classes
     [].tap do |classes|
-      classes << context.class
+      classes << context.bs_class
     end.join(' ').strip
   end
 

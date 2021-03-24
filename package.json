@@ -8,8 +8,8 @@
     "LICENSE"
   ],
   "dependencies": {
-    "@rails/webpacker": "5.2.1",
     "@popperjs/core": "^2.5.4",
+    "@rails/webpacker": "5.2.1",
     "bootstrap": "^5.0.0-beta2",
     "link-module-alias": "^1.2.0",
     "matestack-ui-core": "https://github.com/matestack/matestack-ui-core#matestack-ui-core-2.0",

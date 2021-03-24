@@ -1,14 +1,14 @@
 class Matestack::Ui::Bootstrap::Components::Collapse < Matestack::Ui::Bootstrap::BaseVueJsComponent
   vue_name "matestack-ui-bootstrap-collapse"
 
-  optional :multi, :labelledby, :parent, :class
+  optional :multi, :labelledby, :parent, class: { as:  :bs_class }
   optional :card # possible keys: class, text
   # event trigger
   optional :toggle_on, :show_on, :hide_on, :dispose_on
 
   def response
     div collapse_attributes do
-      card_partial if card
+      card_partial if context.card
       yield if block_given?
     end
   end
@@ -45,7 +45,7 @@ class Matestack::Ui::Bootstrap::Components::Collapse < Matestack::Ui::Bootstrap:
       # mulit target
       classes << 'multi-collapse' if context.multi
       #custom classes
-      classes << context.class
+      classes << context.bs_class
     end.join(' ').strip
   end
 

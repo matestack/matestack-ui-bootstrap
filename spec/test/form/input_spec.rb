@@ -21,7 +21,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders basic bootstrap input field' do
     form_config = get_form_config(path: input_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_input key: :foo, type: :text
         bs_form_submit text: "Submit"
       end
@@ -40,7 +40,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders basic bootstrap input field with server errors' do
     form_config = get_form_config(path: input_failure_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_input key: :foo, type: :text
         bs_form_submit text: "Submit"
       end
@@ -58,7 +58,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders basic bootstrap input field with additional custom class' do
     form_config = get_form_config(path: input_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_input key: :foo, type: :text, class: "some-class"
         bs_form_submit text: "Submit"
       end
@@ -70,7 +70,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders basic bootstrap input field with label' do
     form_config = get_form_config(path: input_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_input key: :foo, type: :text, label: "Some label"
         bs_form_submit text: "Submit"
       end
@@ -82,7 +82,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders basic bootstrap input field with placeholder' do
     form_config = get_form_config(path: input_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_input key: :foo, type: :text, placeholder: "fill!"
         bs_form_submit text: "Submit"
       end
@@ -94,7 +94,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders basic bootstrap input field with form text' do
     form_config = get_form_config(path: input_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_input key: :foo, type: :text, form_text: "some notes"
         bs_form_submit text: "Submit"
       end
@@ -106,12 +106,13 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders basic bootstrap range input' do
     form_config = get_form_config(path: input_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_input key: :foo, type: :range, min: 5, max: 11, step: 2, form_text: "some notes"
         bs_form_submit text: "Submit"
       end
     end
     visit example_path
+
     expect(page).to have_selector('form > div.matestack-ui-bootstrap-input > input[type="range"][min="5"][max="11"][step="2"]')
     expect(page).to have_xpath('//form//div[@id="form_text_for_foo" and contains(@class, "form-text") and contains(text(), "some notes")]')
   end

@@ -1,7 +1,6 @@
 class Admins::SessionsController < Devise::SessionsController
   # include your component registry in order to use custom components
-  include Matestack::Ui::Core::ApplicationHelper
-  include Matestack::Ui::Bootstrap::Registry
+  include Matestack::Ui::Core::Helper
 
   # matestack_app Profile::App # specify the corresponding app to wrap pages in
 

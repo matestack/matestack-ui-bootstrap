@@ -11,7 +11,7 @@ class Matestack::Ui::Bootstrap::Form::Select < Matestack::Ui::VueJs::Components:
   def response
     div class: "matestack-ui-bootstrap-form-select" do
       label input_label, for: attribute_key,  class: "form-label" if input_label
-      select select_attributes.merge(bootstrap_select_attributes)) do
+      select select_attributes.merge(bootstrap_select_attributes) do
         render_options
       end
       render_errors
@@ -43,7 +43,7 @@ class Matestack::Ui::Bootstrap::Form::Select < Matestack::Ui::VueJs::Components:
   end
 
   def render_errors
-    unless display_errors?
+    if display_errors?
       div class: 'invalid-feedback', 'v-for': "error in #{error_key}" do
         plain '{{ error }}'
       end

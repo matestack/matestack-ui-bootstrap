@@ -4,7 +4,7 @@ class Matestack::Ui::Bootstrap::Components::TabNav < Matestack::Ui::Bootstrap::B
 
   optional  :items, :variant, :fill, :justified, :vertical, :vertical_up_to_sm,
             :vertical_up_to_md, :vertical_up_to_xl, :horizontal,
-            :class
+            class: { as:  :bs_class }
 
   def response
     if context.items.present?
@@ -22,7 +22,7 @@ class Matestack::Ui::Bootstrap::Components::TabNav < Matestack::Ui::Bootstrap::B
   def nav_items_partial
     context.items.each do |item|
       li class: "nav-item", role: "presentation" do
-        link  class: "nav-link #{'active' if item[:active]}",
+        a  class: "nav-link #{'active' if item[:active]}",
               id: "tab-#{item[:id]}",
               path: "#tab-#{item[:id]}-content",
               role: "tab",
@@ -71,7 +71,7 @@ class Matestack::Ui::Bootstrap::Components::TabNav < Matestack::Ui::Bootstrap::B
       classes << 'flex-column flex-sm-column flex-md-column flex-lg-row' if context.vertical_up_to_md
       classes << 'flex-column flex-sm-column flex-md-column flex-lg-column flex-xl-row' if context.vertical_up_to_xl
       classes << "justify-content-#{context.horizontal}" if context.horizontal.present?
-      classes << context.class
+      classes << context.bs_class
     end.join(' ').strip
   end
 end

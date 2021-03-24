@@ -10,7 +10,7 @@ class Matestack::Ui::Bootstrap::Components::Pagination < Matestack::Ui::Bootstra
           context.items.each do |item|
             li class: "page-item #{ 'active' if item[:active] }" do
               if item[:type] == :link
-                link item.merge({ class: 'page-link' })
+                a item.merge({ class: 'page-link' })
               else
                 transition item.merge({ class: 'page-link' })
               end

@@ -1,16 +1,16 @@
 class Matestack::Ui::Bootstrap::Components::Progress < Matestack::Ui::Bootstrap::BaseComponent
 
-  optional :class
+  optional class: { as:  :bs_class }
   optional :text, :valuemin, :valuemax
   # progress expects a number or a list containing hashes with at least a :value
-  # other options are :text, :class, :variant, :striped, :animated, :aria_valuenow
+  # other options are :text, class: { as:  :bs_class }, :variant, :striped, :animated, :aria_valuenow
   optional :progress
   optional :value
   optional :variant, :striped, :animated, :height
 
   def response
     div progress_attributes do
-      progress = context.progress.is_a?(Array) ? context.progress : [{ value: context.progress || value, text: context.text }]
+      progress = context.progress.is_a?(Array) ? context.progress : [{ value: context.progress || context.value, text: context.text }]
       progress.each do |prog|
         progress_bar(prog[:value], context.valuemin, context.valuemax,
           text: prog[:text], klass: prog[:class], variant: prog[:variant] || context.variant,
@@ -26,7 +26,7 @@ class Matestack::Ui::Bootstrap::Components::Progress < Matestack::Ui::Bootstrap:
 
   def progress_attributes
     attributes = {}.tap do |hash|
-      hash[:class] = "progress #{context.class}".strip
+      hash[:class] = "progress #{context.bs_class}".strip
       hash[:style] = "height: #{context.height}px;" if context.height
     end
     options.merge(

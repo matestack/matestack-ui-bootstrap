@@ -2,7 +2,7 @@ class Matestack::Ui::Bootstrap::Layout::Sidebar < Matestack::Ui::Bootstrap::Base
 
   vue_name "matestack-ui-bootstrap-sidebar"
 
-  optional :slots
+  
   optional :sidebar_navigation_items
 
   def response
@@ -14,7 +14,7 @@ class Matestack::Ui::Bootstrap::Layout::Sidebar < Matestack::Ui::Bootstrap::Base
           end
         end
         div class: "sidebar-top mb-3" do
-          slot context.slots[:sidebar_top] if context.slots[:sidebar_top].present?
+          slot :sidebar_top if slots && slots[:sidebar_top].present?
         end
         div class: "sidebar-navigation my-3" do
           sidebar_navigation_partial
@@ -27,7 +27,7 @@ class Matestack::Ui::Bootstrap::Layout::Sidebar < Matestack::Ui::Bootstrap::Base
     div class: "list-group" do
       context.sidebar_navigation_items.each do |item|
         if item[:type] == :link
-          link class: "list-group-item list-group-item-action border-0 rounded", path: item[:path] do
+          a class: "list-group-item list-group-item-action border-0 rounded", href: item[:path] do
             bs_icon name: item[:icon], size: 20 if item[:icon]
             span item[:text], class: "ps-3" if item[:text]
           end

@@ -28,8 +28,8 @@ class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::VueJs::Component
     if multiple?
      checkbox_options.to_a.each do |item|
         checkbox_wrapper do
-          input options.merge(checkbox_attributes(item)).merge(class: 'form-check-input'))
-          bootstrap_label text: item_name(item), for_input: item_id(item)
+          input options.merge(checkbox_attributes(item)).merge(class: 'form-check-input')
+          bootstrap_label text: item_label(item), for_input: item_id(item)
         end
       end
     # checked/unchecked checkbox (true/false checkbox)
@@ -44,7 +44,10 @@ class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::VueJs::Component
   end
 
   def checkbox_wrapper(options = {}, &block)
-    div class: "form-check #{'form-check-inline' if variant == :inline}", options[:attributes] do
+    wrapper_attributes = (options[:attributes] || {}).merge({
+      class: "form-check #{'form-check-inline' if context.variant == :inline}"
+    })
+    div wrapper_attributes do
       yield if block_given?
     end
   end
@@ -61,7 +64,7 @@ class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::VueJs::Component
     end
   end
 
-  def input_error_class
+  def error_class
     'is-invalid'
   end
 
@@ -71,12 +74,8 @@ class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::VueJs::Component
 
   def render_form_text
     div id: "form_text_for_#{attribute_key}", class: "form-text" do
-      plain form_text
+      plain context.form_text
     end
   end
-
-  # def item_id(value)
-  #   "#{options[:id]}_#{value}_#{attribute_key}"
-  # end
 
 end

@@ -12,7 +12,7 @@ class Dummy::Components::Md < ApplicationComponent
   def parsed_markdown
     _file = File.read("#{::Rails.root}/#{context.path}")
     begin
-      if lang.present?
+      if context.lang.present?
         _file.prepend("```#{context.lang} \n")
         _file.concat("\n ```")
       end

@@ -21,7 +21,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders bootstrap radio buttons with options as Array' do
     form_config = get_form_config(path: radio_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_radio key: :foo, options: [1, 2]
         bs_form_submit text: "Submit"
       end
@@ -43,7 +43,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders bootstrap radio buttons with options as Hash' do
     form_config = get_form_config(path: radio_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_radio key: :foo, options: { "Option 1": 1, "Option 2": 2 }
         bs_form_submit text: "Submit"
       end
@@ -66,7 +66,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders bootstrap radio buttons with options as Array, clicking multiple options but still sends a single value (was an error once)' do
     form_config = get_form_config(path: radio_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_radio key: :foo, options: [1, 2]
         bs_form_submit text: "Submit"
       end
@@ -87,7 +87,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders bootstrap radio buttons with options as Hash, clicking multiple options but still sends a single value (was an error once)' do
     form_config = get_form_config(path: radio_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_radio key: :foo, options: { "Option 1": 1, "Option 2": 2 }
         bs_form_submit text: "Submit"
       end
@@ -108,7 +108,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders bootstrap radio buttons with server errors (e.g. required and not clicked)' do
     form_config = get_form_config(path: radio_failure_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_radio key: :foo, options: [1, 2]
         bs_form_submit text: "Submit"
       end
@@ -126,7 +126,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders bootstrap radio buttons with options as Array with init value' do
     form_config = get_form_config(path: radio_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_radio key: :foo, options: [1, 2], init: 1
         bs_form_submit text: "Submit"
       end
@@ -144,7 +144,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders bootstrap radio buttons with additional custom class' do
     form_config = get_form_config(path: radio_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_radio key: :foo, options: [1, 2], class: "some-class"
         bs_form_submit text: "Submit"
       end
@@ -157,7 +157,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders bootstrap radio buttons with label' do
     form_config = get_form_config(path: radio_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_radio key: :foo, options: [1, 2], label: "Some label"
         bs_form_submit text: "Submit"
       end
@@ -169,7 +169,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders bootstrap radio buttons with form text' do
     form_config = get_form_config(path: radio_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_radio key: :foo, options: [1, 2], form_text: "some notes"
         bs_form_submit text: "Submit"
       end
@@ -181,7 +181,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders bootstrap radio buttons as inline variant' do
     form_config = get_form_config(path: radio_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_radio key: :foo, options: [1, 2], variant: :inline
         bs_form_submit text: "Submit"
       end
@@ -195,7 +195,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders disabled radio buttons' do
     form_config = get_form_config(path: radio_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_radio key: :foo, options: [1, 2], disabled: true
         bs_form_submit text: "Submit"
       end

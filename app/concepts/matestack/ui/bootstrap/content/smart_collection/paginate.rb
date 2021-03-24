@@ -3,9 +3,9 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Paginate
   def paginate_partial
     div class: "current-pagination-state ps-2" do
       small do
-        plain "showing #{@collection.from}"
-        plain "to #{@collection.to}"
-        plain "of #{@collection.filtered_count}"
+        plain "showing #{@collection.from} "
+        plain "to #{@collection.to} "
+        plain "of #{@collection.filtered_count} "
         if (@collection.base_count - @collection.filtered_count) > 0
           plain "(#{@collection.base_count - @collection.filtered_count} hidden by filter)"
         end
@@ -15,7 +15,7 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Paginate
   end
 
   def pagination_nav_partial
-    nav class: "table-responsive"style: "display: -webkit-box;" do
+    nav class: "table-responsive", style: "display: -webkit-box;" do
       ul class: ul_classes do
         li class: "page-item previous #{ 'disabled' if current_page == 1 }" do
           collection_content_previous class: 'page-link' do
@@ -30,7 +30,7 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Paginate
           end
           unless current_page == 6
             li class: "page-item disabled" do
-              link class: 'page-link', path: "#" do
+              a class: 'page-link', path: "#" do
                 plain "..."
               end
             end
@@ -48,7 +48,7 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Paginate
         if @collection.pages.count >= 9 && last_page-current_page > 4
           unless current_page == last_page-5
             li class: "page-item disabled" do
-              link class: 'page-link', path: "#" do
+              a class: 'page-link', path: "#" do
                 plain "..."
               end
             end
@@ -77,9 +77,14 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Paginate
   end
 
   def current_page
-    current_offset = params["#{bs_id}-offset"].try(:to_i)
-    (current_offset/context.paginate)+1 if current_offset && context.paginate.present?
+    current_offset = params["#{context.id}-offset"].try(:to_i)
+    if current_offset && context.paginate.present?
+      (current_offset/context.paginate)+1 
+    elsif context.paginate.present?
+      1
+    end
   end
+    
 
   def last_page
     if @collection.filtered_count%context.paginate == 0

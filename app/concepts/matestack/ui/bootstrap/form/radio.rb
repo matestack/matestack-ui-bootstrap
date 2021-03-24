@@ -13,9 +13,9 @@ class Matestack::Ui::Bootstrap::Form::Radio < Matestack::Ui::VueJs::Components::
       label input_label, class: "form-label" if input_label
 
       radio_options.to_a.each_with_index do |item, index|
-        div class: "form-check #{'form-check-inline' if variant == :inline}" do
-          input options.merge(radio_attributes).merge(bootstrap_radio_attributes)
-          label item_label(item), class: "form-check-label" for: item_id(item_value(item))
+        div class: "form-check #{'form-check-inline' if context.variant == :inline}" do
+          input options.merge(radio_attributes(item)).merge(bootstrap_radio_attributes)
+          label item_label(item), class: "form-check-label", for: item_id(item_value(item))
           if index == radio_options.to_a.size - 1
             render_errors
           end
@@ -41,8 +41,8 @@ class Matestack::Ui::Bootstrap::Form::Radio < Matestack::Ui::VueJs::Components::
   end
 
   def render_errors
-    unless display_errors?
-      div class: 'invalid-feedback', 'v-for': "error in #{error_key}" do
+    if display_errors?
+      div class: 'invalid-feedback', 'v-for': "error in #{error_key}", style: "display: block;" do
         plain '{{ error }}'
       end
     end

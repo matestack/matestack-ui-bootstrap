@@ -9,8 +9,9 @@ class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::Bootstrap::Ba
   # placement attributes, expects a hash wiht possible keys: position, min-height
   optional :placement # for adding custom css style
   optional :important, :delay, :autohide, :animation
-  optional :class, :attributes, :data
-  optional :slots
+  optional class: { as:  :bs_class }
+  optional :attributes, :data
+  
 
   optional :show_on, :hide_on, :dispose_on
 
@@ -40,7 +41,7 @@ class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::Bootstrap::Ba
 
   def standard_placement_partial
     div toast_attributes do
-      header_partial if context.header || context.slots && context.slots[:header]
+      header_partial if context.header || slots && slots[:header]
       body_partial
     end
   end
@@ -52,7 +53,7 @@ class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::Bootstrap::Ba
       strong header[:title], class: "me-auto" if header[:title].present?
       small header[:subtitle] if header[:subtitle].present?
 
-      slot context.slots[:header] if context.slots && context.slots[:header]
+      slot :header if slots && slots[:header]
       bs_close dismiss: 'toast', class: "ms-2 mb-1", "@click": "hide()"
     end
 
@@ -62,7 +63,7 @@ class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::Bootstrap::Ba
     div class: "toast-body" do
       plain context.body if context.body
     end
-    unless context.header || context.slots && context.slots[:header]
+    unless context.header || slots && slots[:header]
       bs_close dismiss: 'toast', class: "ms-auto me-2 btn-close-white", "@click": "hide()"
     end
   end
@@ -96,7 +97,7 @@ class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::Bootstrap::Ba
   def toast_classes
     [].tap do |classes|
       classes << 'toast p-0 fade d-flex align-items-center border-0'
-      classes << context.class
+      classes << context.bs_class
     end.join(' ').strip
   end
 

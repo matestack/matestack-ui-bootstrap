@@ -2,7 +2,7 @@ class Matestack::Ui::Bootstrap::Components::Carousel < Matestack::Ui::Bootstrap:
   vue_name "matestack-ui-bootstrap-carousel"
 
   optional :start, :controls, :indicators, :fade, :interval, :variant
-  optional :items, :class
+  optional :items, class: { as:  :bs_class }
   # possible keys for items: path, title, text, interval
   # event trigger
   optional :cycle_on, :pause_on, :prev_on, :next_on
@@ -62,13 +62,13 @@ class Matestack::Ui::Bootstrap::Components::Carousel < Matestack::Ui::Bootstrap:
   end
 
   def controls_partial
-    link class: "carousel-control-prev", data: { "bs-target": "##{carousel_id}", "bs-slide": :prev }, 'role': "button" do
+    a class: "carousel-control-prev", data: { "bs-target": "##{carousel_id}", "bs-slide": :prev }, 'role': "button" do
       span class: "carousel-control-prev-icon", 'aria-hidden': "true"
       span class: "visually-hidden" do
         plain "Previous"
       end
     end
-    link class: "carousel-control-next", data: { "bs-target": "##{carousel_id}", "bs-slide": :next }, 'role': "button" do
+    a class: "carousel-control-next", data: { "bs-target": "##{carousel_id}", "bs-slide": :next }, 'role': "button" do
       span class: "carousel-control-next-icon", 'aria-hidden': "true"
       span class: "visually-hidden" do
         plain "Next"
@@ -90,7 +90,7 @@ class Matestack::Ui::Bootstrap::Components::Carousel < Matestack::Ui::Bootstrap:
       classes << 'carousel-fade' if context.fade
       classes << 'carousel-dark' if context.variant == :dark
       #custom classes
-      classes << context.class
+      classes << context.bs_class
     end.join(' ').strip
   end
 

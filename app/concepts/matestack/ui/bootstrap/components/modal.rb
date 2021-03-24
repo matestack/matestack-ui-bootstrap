@@ -13,19 +13,20 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::Bootstrap::Ba
   optional :fade, :size
   optional :fullscreen # fullscreen attribute, expects boolean or bootstrap breakpoint
   optional :static, :keyboard, :scrollable, :centered
-  optional :modal_dialog_class, :class, :id
+  optional :modal_dialog_class 
+  optional :id
   # event trigger
   optional :toggle_on, :show_on, :hide_on, :handle_update_on, :dispose_on
 
-  optional :slots
+  
 
   def response
     div modal_attributes do
       div class: dialog_classes do
         div class: "modal-content" do
-          header_partial if context.header || (context.slots && context.slots[:header])
-          body_partial if context.body || context.slots && context.slots[:body]
-          footer_partial if context.footer || (context.slots && context.slots[:footer])
+          header_partial if context.header || (slots && slots[:header])
+          body_partial if context.body || slots && slots[:body]
+          footer_partial if context.footer || (slots && slots[:footer])
           yield if block_given?
         end
       end
@@ -47,10 +48,10 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::Bootstrap::Ba
   def header_partial
     header = context.header.is_a?(Hash) ? context.header : { text: context.header }
     div class: "modal-header" do
-      if context.slots && context.slots[:header]
-        slot context.slots[:header]
+      if slots && slots[:header]
+        slot :header
       else
-        heading context.header[:text], size: (context.header[:size] || 5), class: "modal-title #{context.header[:class]}" if context.header[:text].present?
+        heading header[:text], size: (header[:size] || 5), class: "modal-title #{header[:class]}" if header[:text].present?
         bs_close dismiss: 'modal'
       end
     end
@@ -59,10 +60,10 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::Bootstrap::Ba
   def body_partial
     body = context.body.is_a?(Hash) ? context.body : { text: context.body }
     div class: "modal-body #{body[:class]}".strip do
-      if context.slots && context.slots[:body]
-        slot context.slots[:body]
+      if slots && slots[:body]
+        slot :body
       else
-        plain context.body[:text] if context.body[:text].present?
+        plain body[:text] if body[:text].present?
       end
     end
   end
@@ -70,11 +71,11 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::Bootstrap::Ba
   def footer_partial
     footer = context.footer.is_a?(Hash) ? context.footer : { text: context.footer }
     div class: "modal-footer" do
-      slot context.slots[:footer] if context.slots && context.slots[:footer]
-      if context.footer[:text].present?
-        button class: "btn #{context.footer[:class].present? ? context.footer[:class] : 'btn-secondary'}",
+      slot :footer if slots && slots[:footer]
+      if footer[:text].present?
+        button class: "btn #{footer[:class].present? ? footer[:class] : 'btn-secondary'}",
           data: { "bs-dismiss": 'modal' }, type: 'button' do
-            plain context.footer[:text]
+            plain footer[:text]
           end
       end
     end
@@ -82,6 +83,7 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::Bootstrap::Ba
 
   def modal_attributes
     attributes = {}.tap do |hash|
+      hash[:id] = context.id
       hash[:class] = modal_classes
       hash[:attributes] = { 'tabindex': "-1", 'aria-labelledby': "#{context.id}Label", 'aria-hidden': "true" }
       hash[:data] = {}.tap do |data|
@@ -98,7 +100,7 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::Bootstrap::Ba
     [].tap do |classes|
       classes << 'modal'
       classes << 'fade' if context.fade || !context.fade.present?
-      classes << context.class
+      classes << context.bs_class
     end.join(' ').strip
   end
 
@@ -107,7 +109,7 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::Bootstrap::Ba
       classes << 'modal-dialog'
       classes << 'modal-dialog-centered' if context.centered
       classes << 'modal-dialog-scrollable' if context.scrollable
-      classes << "modal-#{context.size}" if scontext.ize
+      classes << "modal-#{context.size}" if context.size
       if context.fullscreen.present?
         classes << (context.fullscreen == true ? 'modal-fullscreen' : "modal-fullscreen-#{context.fullscreen}-down")
       end

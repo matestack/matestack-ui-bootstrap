@@ -1,6 +1,6 @@
 class Matestack::Ui::Bootstrap::Components::Close < Matestack::Ui::Bootstrap::BaseComponent
 
-  optional :dismiss, :class
+  optional :dismiss, class: { as:  :bs_class }
   optional :attributes
 
   def response
@@ -22,7 +22,7 @@ class Matestack::Ui::Bootstrap::Components::Close < Matestack::Ui::Bootstrap::Ba
   def close_classes
     [].tap do |classes|
       classes << 'btn-close'
-      classes << context.class
+      classes << context.bs_class
     end.join(' ').strip
   end
 

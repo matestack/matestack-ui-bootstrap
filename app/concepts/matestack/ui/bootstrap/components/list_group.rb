@@ -1,9 +1,9 @@
 class Matestack::Ui::Bootstrap::Components::ListGroup < Matestack::Ui::Bootstrap::BaseComponent
-  options :role
+  optional :role
 
   optional :items
   optional :horizontal, :horizontal_size, :checkbox
-  optional :variant, :class
+  optional :variant, class: { as:  :bs_class }
 
 
   def response
@@ -42,19 +42,19 @@ class Matestack::Ui::Bootstrap::Components::ListGroup < Matestack::Ui::Bootstrap
     context.items.each do |item|
       case item[:type]
       when :link
-        link link_attrs(item)  do
+        a link_attrs(item) do
           text_rendering(item)
         end
       when :tab
-        link tab_attrs(item)  do
+        a tab_attrs(item) do
           text_rendering(item)
         end
       when :transition
-        transition transition_attrs(item)  do
+        transition transition_attrs(item) do
           text_rendering(item)
         end
       when :action
-        action action_attrs(item)  do
+        action action_attrs(item) do
           text_rendering(item)
         end
       when :label
@@ -81,7 +81,7 @@ class Matestack::Ui::Bootstrap::Components::ListGroup < Matestack::Ui::Bootstrap
   def list_group_attributes
     attributes = {}.tap do |hash|
       hash[:class] = list_group_classes
-      hash[:role] = "tablist" } if tab_nav?
+      hash[:role] = "tablist" if tab_nav?
     end
     options.merge(
       attributes
@@ -93,7 +93,7 @@ class Matestack::Ui::Bootstrap::Components::ListGroup < Matestack::Ui::Bootstrap
       classes << 'list-group'
       classes << (context.horizontal_size.present? ? "list-group-horizontal-#{context.horizontal_size}": "list-group-horizontal") if context.horizontal
       classes << 'list-group-flush' if context.variant == :flush
-      classes << context.class
+      classes << context.bs_class
     end.join(' ').strip
   end
 
@@ -109,9 +109,9 @@ class Matestack::Ui::Bootstrap::Components::ListGroup < Matestack::Ui::Bootstrap
       hash[:id] = "tab-#{item[:id]}" if tab_nav?
       hash[:class] = "#{list_classes item, true}"
       hash[:data] = { "bs-toggle": "list" }
-      hash["aria-disabled"]=  "#{true if item[:disabled]}" if item[:disabled]
+      hash["aria-disabled"] = "#{true if item[:disabled]}" if item[:disabled]
       hash['aria-controls'] = "#tab-#{item[:id]}-content"
-      hash[:role] "tab"
+      hash[:role] = "tab"
       hash[:path] = "#tab-#{item[:id]}-content"
       hash[:target] = item[:target]
     end
@@ -134,7 +134,7 @@ class Matestack::Ui::Bootstrap::Components::ListGroup < Matestack::Ui::Bootstrap
   def list_classes(item, action)
     [].tap do |classes|
       classes << 'list-group-item'
-      classes << 'list-group-item-action' if context.action
+      classes << 'list-group-item-action' if action
       classes << "list-group-item-#{item[:variant]}" if item[:variant].present?
       classes << 'active' if item[:active]
       classes << 'disabled' if item[:disabled]

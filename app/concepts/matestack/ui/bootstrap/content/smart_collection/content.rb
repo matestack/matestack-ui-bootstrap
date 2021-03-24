@@ -3,11 +3,11 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Content
   def content
     bs_row class: 'smart-collection-content' do
       bs_col do
-        async id: "#{collection_id}-async", rerender_on: "#{collection_id}-update, #{context.erender_on} " do
+        async id: "#{collection_id}-async", rerender_on: "#{collection_id}-update, #{context.rerender_on} " do
           collection_content collection.config do
             div class: responsive_class do
-              if context.slots && context.slots[:collection_rendering]
-                slot context.slots[:collection_rendering].call(collection.paginated_data)
+              if slots && slots[:collection_rendering]
+                slot :collection_rendering, collection.paginated_data
               elsif context.columns
                 div class: "table-responsive" do
                   table table_attributes do
@@ -33,7 +33,7 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Content
             plain value.is_a?(Hash) ? value[:heading] : value
           end
         end
-        th if context.slots && context.slots[:table_item_actions]
+        th if slots && slots[:table_item_actions]
       end
     end
   end
@@ -45,9 +45,9 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Content
           context.columns.each do |key, value|
             cell(data, key, value)
           end
-          if context.slots && context.slots[:table_item_actions]
+          if slots && slots[:table_item_actions]
             td class: 'text-end' do
-              slot context.slots[:table_item_actions].call(data)
+              slot :table_item_actions, data
             end
           end
         end

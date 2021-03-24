@@ -49,7 +49,7 @@ class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::VueJs::Components::
       disabled: context.disabled,
       min: context.min,
       max: context.max,
-      steps: context.step
+      step: context.step
     }
   end
 

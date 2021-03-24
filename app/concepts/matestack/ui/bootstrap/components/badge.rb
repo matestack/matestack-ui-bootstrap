@@ -1,6 +1,6 @@
 class Matestack::Ui::Bootstrap::Components::Badge < Matestack::Ui::Bootstrap::BaseComponent
 
-  optional :class
+  optional class: { as:  :bs_class }
   optional :text, :variant, :rounded, :visually_hidden
 
   def response
@@ -24,7 +24,7 @@ class Matestack::Ui::Bootstrap::Components::Badge < Matestack::Ui::Bootstrap::Ba
       classes << 'badge'
       classes << (context.variant.present? ? "bg-#{context.variant}" : "bg-secondary")
       classes << "rounded-pill" if context.rounded
-      classes << context.class
+      classes << context.bs_class
     end.join(' ').strip
   end
 end

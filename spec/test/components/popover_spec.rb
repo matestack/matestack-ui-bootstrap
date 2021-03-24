@@ -23,7 +23,7 @@ RSpec.describe "Bootstrap::Components::Pagination", type: :feature, js: true do
 
   it 'has different tag' do
     matestack_render {
-      [:link, :span, :div].each do |type|
+      [:a, :span, :div].each do |type|
         bs_popover text: "Popover", content: "Pop Content", tag: type
       end
     }

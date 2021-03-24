@@ -10,7 +10,7 @@ class Dummy::Components::ChartJs < ApplicationVueJsComponent
   optional :display_x_axes
   optional :display_y_axes
   optional :cutout_percentage
-  optional :class
+  optional class: { as:  :bs_class }
 
   def config
     # injected into vue.js components
@@ -27,7 +27,7 @@ class Dummy::Components::ChartJs < ApplicationVueJsComponent
   end
 
   def response
-    div class: "chart-container #{context.class}", attributes: { style: "width: 100%; height: 100%;" } do
+    div class: "chart-container #{context.bs_class}", attributes: { style: "width: 100%; height: 100%;" } do
       plain "<canvas ref='chart'></canvas>".html_safe
     end
   end

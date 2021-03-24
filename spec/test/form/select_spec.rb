@@ -21,7 +21,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders bootstrap select field with options as Array' do
     form_config = get_form_config(path: select_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_select key: :foo, options: [1, 2, 3]
         bs_form_submit text: "Submit"
       end
@@ -40,7 +40,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders bootstrap select field with options as Hash' do
     form_config = get_form_config(path: select_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_select key: :foo, options: { "Option 1": 1, "Option 2": 2, "Option 3": 3 }
         bs_form_submit text: "Submit"
       end
@@ -59,7 +59,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders bootstrap select field with server errors' do
     form_config = get_form_config(path: select_failure_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_select key: :foo, options: [1, 2, 3]
         bs_form_submit text: "Submit"
       end
@@ -77,7 +77,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders bootstrap select field with additional custom class' do
     form_config = get_form_config(path: select_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_select key: :foo, options: [1, 2, 3], class: "some-class"
         bs_form_submit text: "Submit"
       end
@@ -89,7 +89,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders bootstrap select field with label' do
     form_config = get_form_config(path: select_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_select key: :foo, options: [1, 2, 3], label: "Some label"
         bs_form_submit text: "Submit"
       end
@@ -101,7 +101,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders bootstrap select field with disabled placeholder option' do
     form_config = get_form_config(path: select_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_select key: :foo, options: [1, 2, 3], placeholder: "select!"
         bs_form_submit text: "Submit"
       end
@@ -113,7 +113,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   it 'renders basic bootstrap input field with form text' do
     form_config = get_form_config(path: select_success_form_test_path)
     matestack_render do
-      form form_config do
+      matestack_form form_config do
         bs_form_select key: :foo, options: [1, 2, 3], form_text: "some notes"
         bs_form_submit text: "Submit"
       end

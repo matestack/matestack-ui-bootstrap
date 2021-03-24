@@ -15,6 +15,9 @@ import Vuex from 'vuex'
 import MatestackUiCore from 'matestack-ui-core';
 import MatestackUiBootstrap from 'matestack-ui-bootstrap';
 
+window.MatestackUiCore = MatestackUiCore // making MatestackUiCore globally available for test compatability
+MatestackUiCore.Vue = Vue // test compatability
+
 
 let matestackUiApp = undefined
 

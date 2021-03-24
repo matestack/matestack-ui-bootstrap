@@ -1,6 +1,6 @@
 class Matestack::Ui::Bootstrap::Components::Spinner < Matestack::Ui::Bootstrap::BaseComponent
 
-  optional :class
+  optional class: { as:  :bs_class }
   optional :kind, :variant, :size, :sr_only
 
   def response
@@ -23,11 +23,11 @@ class Matestack::Ui::Bootstrap::Components::Spinner < Matestack::Ui::Bootstrap::
   def spinner_class
     [].tap do |classes|
       spinner_kind = context.kind || :border
-      classes << "spinner-#{context.spinner_kind}"
+      classes << "spinner-#{spinner_kind}"
       classes << "text-#{context.variant || 'primary'}"
-      classes << "spinner-#{context.spinner_kind}-sm" if context.size
+      classes << "spinner-#{spinner_kind}-sm" if context.size
       #optional classes
-      classes << context.class
+      classes << context.bs_class
     end.join(' ').strip
   end
 end

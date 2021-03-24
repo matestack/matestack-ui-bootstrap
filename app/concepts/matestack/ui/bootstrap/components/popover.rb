@@ -33,7 +33,7 @@ class Matestack::Ui::Bootstrap::Components::Popover < Matestack::Ui::Bootstrap::
   # for security reasons the sanitize, sanitizeFn and whiteList options cannot be supplied using data attributes.
   # sanitize sanitize_fn white_list
 
-  optional :class
+  optional class: { as:  :bs_class }
   optional id: { as: :bs_id }
   DATA_ATTRIBUTES = %i[tag content title text variant animation placement tabindex trigger boundary offset popper_config]
   optional *DATA_ATTRIBUTES
@@ -43,21 +43,21 @@ class Matestack::Ui::Bootstrap::Components::Popover < Matestack::Ui::Bootstrap::
   # :variant, :text # button styling & text
   # :placement # placement direction as string
 
-  def response
+  def response(&block)
     if context.tag.present?
-      public_send(tag, popover_attributes) do
-        content_partial
+      public_send(context.tag, popover_attributes) do
+        content_partial(&block)
       end
     else
       bs_btn popover_attributes do
-        content_partial
+        content_partial(&block)
       end
     end
   end
 
   protected
 
-  def content_partial
+  def content_partial(&block)
     plain context.text if context.text
     yield if block_given? unless context.text
   end
@@ -65,9 +65,9 @@ class Matestack::Ui::Bootstrap::Components::Popover < Matestack::Ui::Bootstrap::
   def popover_attributes
     attributes = {}.tap do |hash|
       hash[:class] = popover_classes
-      hash[:role] = (text ? 'button': nil)
-      hash[:title] = "#{title}"
-      hash[:tabindex] = "#{tabindex}"
+      hash[:role] = (context.text ? 'button': nil)
+      hash[:title] = "#{context.title}"
+      hash[:tabindex] = "#{context.tabindex}"
       hash[:data] = {}.tap do |data|
         DATA_ALIAS_ATTRIBUTES.each do |attribute|
           data["bs-#{attribute}"] = context.send("#{attribute}") if context.send("#{attribute}")
@@ -87,7 +87,7 @@ class Matestack::Ui::Bootstrap::Components::Popover < Matestack::Ui::Bootstrap::
     [].tap do |classes|
       classes << "d-inline-block" unless context.text
       classes << "btn btn-#{context.variant}" if context.variant
-      classes << context.class
+      classes << context.bs_class
     end.join(' ').strip
   end
 

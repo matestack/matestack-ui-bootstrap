@@ -1,4 +1,4 @@
-class Devise::Pages::SignIn < Matestack::Ui::Page
+class Devise::Pages::SignIn < ApplicationPage
 
   def response
     bs_container class: "mt-5" do
@@ -14,8 +14,8 @@ class Devise::Pages::SignIn < Matestack::Ui::Page
 
     def login_form_partial
       section class: "mt-5 rounded shadow-sm p-4 mb-4" do
-        heading size: 2, text: 'Sign in'
-        form form_config do
+        heading 'Sign in', size: 2
+        matestack_form form_config do
           div class: "mb-3 mt-4" do
             bs_form_input label: 'Email', key: :email, type: :email
           end
@@ -30,9 +30,9 @@ class Devise::Pages::SignIn < Matestack::Ui::Page
           plain 'Your email or password is not valid.'
         end
         br
-        small text: "Dummy user: admin@matestack.io"
+        small "Dummy user: admin@matestack.io"
         br
-        small text: "Dummy password: password"
+        small "Dummy password: password"
       end
     end
 

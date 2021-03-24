@@ -16,7 +16,7 @@ class Matestack::Ui::Bootstrap::Content::SmartCollection::Collection < Matestack
   optional :rerender_on
   optional :item_actions_proc
   optional :collection_rendering_proc
-  optional :slots
+  
 
   # bootstrap settings
   optional :responsive
@@ -80,10 +80,10 @@ class Matestack::Ui::Bootstrap::Content::SmartCollection::Collection < Matestack
     value = get_collection_filter(collection_id)[key.to_sym]
     if value.present?
       if associated_name.present?
-        table_name = items.klass.reflections[associated_name].table_name
+        table_name = context.items.klass.reflections[associated_name].table_name
         key = key.to_s.gsub(associated_name, table_name)
       else
-        table_name = items.klass.table_name
+        table_name = context.items.klass.table_name
         key = key.to_s
       end
       case filter_config[:match]

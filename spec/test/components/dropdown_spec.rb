@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Bootstrap::Components::ListGroup', type: :feature, js: true do
+describe 'Bootstrap::Components::Dropdown', type: :feature, js: true do
   include Utils
 
   it 'renders basic dropdown' do
@@ -77,10 +77,11 @@ describe 'Bootstrap::Components::ListGroup', type: :feature, js: true do
   end
 
   it 'can have a  split button using slot' do
+    ExamplePage.define_method(:split_btn) do |*args|
+      bs_btn text: "Split Button"
+    end
     matestack_render do
-      bs_dropdown slots: { split_btn: slot {
-        bs_btn text: "Split Button"
-      } }
+      bs_dropdown slots: { split_btn: method(:split_btn) }
     end
     visit example_path
     expect(page).to have_content('Split Button')

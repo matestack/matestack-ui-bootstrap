@@ -10,17 +10,21 @@ class Matestack::Ui::Bootstrap::Form::Switch < Matestack::Ui::Bootstrap::Form::C
 
   def response
     div class: "matestack-ui-bootstrap-switch" do
-      label input_label, class: "form-label", for: attribute_key if input_label && context.multiple?
+      label input_label, class: "form-label", for: attribute_key if input_label && multiple?
       render_options
       render_errors
-      render_form_text unless context.form_text.nil? # otherwise renders empty div
+      plain context.form_text
+      render_form_text if context.form_text
     end
   end
 
   private
 
   def checkbox_wrapper(options = {}, &block)
-    div class: "form-check form-switch #{'form-check-inline' if context.variant == :inline}", options[:attributes] do
+    wrapper_attributes = (options[:attributes] || {}).merge({
+      class: "form-check form-switch #{'form-check-inline' if context.variant == :inline}"
+    })
+    div wrapper_attributes do
       yield if block_given?
     end
   end

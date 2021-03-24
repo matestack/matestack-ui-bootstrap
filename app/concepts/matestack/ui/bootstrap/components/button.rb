@@ -1,42 +1,42 @@
 class Matestack::Ui::Bootstrap::Components::Button < Matestack::Ui::Bootstrap::BaseComponent
 
   optional :text, :type, :variant, :size, :outline
-  optional :attributes, :class
+  optional :attributes, class: { as:  :bs_class }
   optional :transition 
   optional :action 
   optional :onclick 
   optional :link
 
-  def response
+  def response(&block)
     if context.transition.present? && context.transition.is_a?(Hash)
       transition button_attributes.merge(context.transition.merge({role: "button"})) do
-        inner_response
+        inner_response(&block)
       end
     elsif context.action.present? && context.action.is_a?(Hash)
       action button_attributes.merge(context.action.merge({role: "button"})) do
-        inner_response
+        inner_response(&block)
       end
     elsif context.onclick.present? && context.onclick.is_a?(Hash)
       onclick button_attributes.merge(context.onclick.merge({role: "button"})) do
-        inner_response
+        inner_response(&block)
       end
     elsif context.link.present? && context.link.is_a?(Hash)
-      link button_attributes.merge(context.link.merge({role: "button"})) do
-        inner_response
+      a button_attributes.merge(context.link.merge({role: "button"})) do
+        inner_response(&block)
       end
     else
-      button_response
+      button_response(&block)
     end
   end
 
-  def button_response
+  def button_response(&block)
     button button_attributes do
-      inner_response
+      inner_response(&block)
     end
   end
 
-  def inner_response
-    plain text if text
+  def inner_response(&block)
+    plain context.text if context.text
     yield if block_given?
   end
 
@@ -62,7 +62,7 @@ class Matestack::Ui::Bootstrap::Components::Button < Matestack::Ui::Bootstrap::B
       # btn size
       classes << "btn-#{context.size}" if context.size
       # custom classes
-      classes << context.class
+      classes << context.bs_class
     end.join(' ').strip
   end
 

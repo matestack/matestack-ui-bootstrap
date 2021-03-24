@@ -9,7 +9,7 @@ class Matestack::Ui::Bootstrap::Layout::Column < Matestack::Ui::Bootstrap::BaseC
   OFFSET_ATTRIBUTES = %i[offset offset_sm offset_md offset_lg offset_xl offset_xxl]
   optional *OFFSET_ATTRIBUTES
 
-  optional :class
+  optional class: { as:  :bs_class }
   optional :align_self
 
   def response 
@@ -40,7 +40,7 @@ class Matestack::Ui::Bootstrap::Layout::Column < Matestack::Ui::Bootstrap::BaseC
     end
     classes << "align-self-#{context.align_self}" if context.align_self.present?
     classes << "col" if classes.blank?
-    classes << context.class
+    classes << context.bs_class
     classes.join(' ').strip
   end
 end

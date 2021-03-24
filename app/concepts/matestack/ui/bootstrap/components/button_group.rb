@@ -1,6 +1,6 @@
 class Matestack::Ui::Bootstrap::Components::ButtonGroup < Matestack::Ui::Bootstrap::BaseComponent
 
-  optional :class
+  optional class: { as:  :bs_class }
   optional :label
   optional :toolbar, :size, :vertical
 
@@ -16,7 +16,7 @@ class Matestack::Ui::Bootstrap::Components::ButtonGroup < Matestack::Ui::Bootstr
     attributes = {}.tap do |hash|
       hash[:class] = buttongroup_classes
       hash[:role] = "#{context.toolbar ? :toolbar : :group}"
-      hash[:"aria-label"] = 'aria-label': context.label  
+      hash[:"aria-label"] = context.label  
     end
     options.merge(
       attributes
@@ -27,7 +27,7 @@ class Matestack::Ui::Bootstrap::Components::ButtonGroup < Matestack::Ui::Bootstr
     [].tap do |classes|
       classes << ("btn-#{context.toolbar ? :toolbar : :group}#{'-vertical' if context.vertical}")
       classes << "btn-group-#{context.size}" if context.size.present?
-      classes << context.class
+      classes << context.bs_class
     end.join(' ').strip
   end
 
