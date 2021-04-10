@@ -1,7 +1,14 @@
 # Welcome
 
 {% hint style="info" %}
-Version 2.0.0 will be released on the 12th of April and proudly presented at RailsConf. Click here for a sneak peek: [https://docs.matestack.io/v/2.0.0/](https://docs.matestack.io/v/2.0.0/)
+Version 2.0.0 will be released on the 12th of April and proudly presented at RailsConf. Click here for a sneak peek: [https://docs.matestack.io/v/2.0.0/](https://docs.matestack.io/v/2.0.0/)\*\*\*\*
+
+**Most important changes:**
+
+* Change to MIT License
+* 5 to 12 times better rendering performance \(depending on the context\)
+* Removed Trailblazer dependency
+* Improved core code readability/maintainability
 {% endhint %}
 
 As an extension for `matestack-ui-core`, `matestack-ui-bootstrap`ships all you need to build beautiful, reactive UIs in pure Ruby and smart CRUD components based on Bootstrap v5. Don't think about styling anymore and just create admin or application UIs faster than ever before!
