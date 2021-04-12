@@ -10,8 +10,8 @@ Vue.component('form-flatpickr-component', {
   },
   mounted: function(){
     flatpickr(this.$el.querySelector('.flatpickr'), {
-      defaultDate: this.componentConfig["init_value"],
-      enableTime: (this.componentConfig["enable_time"] == true)
+      defaultDate: this.props["init_value"],
+      enableTime: (this.props["enable_time"] == true)
     });
   }
 });

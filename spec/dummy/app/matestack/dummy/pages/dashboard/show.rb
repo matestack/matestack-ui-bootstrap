@@ -8,7 +8,6 @@ class Dummy::Pages::Dashboard::Show < ApplicationPage
 
   def dummy_tab_content
     bs_page_heading title: t("dashboard.title"), subtitle: t("dashboard.subtitle")
-    # bs_icon name: "x"
     bs_row do
       bs_col md: 6 do
         analytics_partial

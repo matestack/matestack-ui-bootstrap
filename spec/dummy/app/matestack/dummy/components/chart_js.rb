@@ -12,7 +12,7 @@ class Dummy::Components::ChartJs < ApplicationVueJsComponent
   optional :cutout_percentage
   optional class: { as:  :bs_class }
 
-  def config
+  def vue_props
     # injected into vue.js components
     {}.tap do |props|
       props[:type] = context.type

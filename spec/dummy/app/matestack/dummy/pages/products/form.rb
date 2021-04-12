@@ -4,7 +4,7 @@ module Dummy::Pages::Products::Form
     matestack_form form_config do
 
       div class: "mb-3" do
-        bs_form_input key: :name, label: "Name", type: :text, required: true
+        bs_form_input key: :name, label: "Name", type: :text
       end
       div class: "mb-3" do
         bs_form_input key: :description, label: "Description", type: :text

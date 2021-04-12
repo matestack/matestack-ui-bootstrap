@@ -31,7 +31,7 @@ Vue.component('chart-js-component', {
     },
     drawBarChart: function(chartElement){
       const self = this;
-      this.componentConfig["datasets"].forEach(function(item){
+      this.props["datasets"].forEach(function(item){
         if (item["backgroundColor"] === undefined){
           item["backgroundColor"] = self.getThemeColor("primary")
         }else{
@@ -49,16 +49,16 @@ Vue.component('chart-js-component', {
       this.chartJsInstance = new Chart(chartElement, {
         type: 'bar',
         data: {
-            labels: this.componentConfig["labels"],
-            datasets: this.componentConfig["datasets"]
+            labels: this.props["labels"],
+            datasets: this.props["datasets"]
         },
         options: {
             legend: {
-              display: this.componentConfig["display_legend"],
+              display: this.props["display_legend"],
             },
             scales: {
                 yAxes: [{
-                    display: this.componentConfig["display_y_axes"],
+                    display: this.props["display_y_axes"],
                     gridLines: {
                       display: false,
                     },
@@ -67,7 +67,7 @@ Vue.component('chart-js-component', {
                     }
                 }],
                 xAxes: [{
-                    display: this.componentConfig["display_x_axes"],
+                    display: this.props["display_x_axes"],
                     gridLines: {
                       display: false,
                     },
@@ -81,7 +81,7 @@ Vue.component('chart-js-component', {
     },
     drawLineChart: function(chartElement){
       const self = this;
-      this.componentConfig["datasets"].forEach(function(item){
+      this.props["datasets"].forEach(function(item){
         if (item["borderColor"] === undefined){
           item["borderColor"] = self.getThemeColor("primary")
         }else{
@@ -95,16 +95,16 @@ Vue.component('chart-js-component', {
       this.chartJsInstance = new Chart(chartElement, {
         type: 'line',
         data: {
-            labels: this.componentConfig["labels"],
-            datasets: this.componentConfig["datasets"]
+            labels: this.props["labels"],
+            datasets: this.props["datasets"]
         },
         options: {
             legend: {
-              display: this.componentConfig["display_legend"],
+              display: this.props["display_legend"],
             },
             scales: {
                 yAxes: [{
-                    display: this.componentConfig["display_y_axes"],
+                    display: this.props["display_y_axes"],
                     gridLines: {
                       display: false,
                     },
@@ -113,7 +113,7 @@ Vue.component('chart-js-component', {
                     }
                 }],
                 xAxes: [{
-                    display: this.componentConfig["display_x_axes"],
+                    display: this.props["display_x_axes"],
                     gridLines: {
                       display: false,
                     },
@@ -127,7 +127,7 @@ Vue.component('chart-js-component', {
     },
     drawDoughnutChart: function(chartElement){
       const self = this;
-      this.componentConfig["datasets"].forEach(function(item){
+      this.props["datasets"].forEach(function(item){
         if (item["backgroundColor"] === undefined){
           item["backgroundColor"] = self.getThemeColor("primary")
         }else{
@@ -158,20 +158,20 @@ Vue.component('chart-js-component', {
       this.chartJsInstance = new Chart(chartElement, {
         type: 'doughnut',
         data: {
-            labels: this.componentConfig["labels"],
-            datasets: this.componentConfig["datasets"]
+            labels: this.props["labels"],
+            datasets: this.props["datasets"]
         },
         options: {
             legend: {
-              display: this.componentConfig["display_legend"],
+              display: this.props["display_legend"],
             },
-            cutoutPercentage: this.componentConfig["cutout_percentage"]
+            cutoutPercentage: this.props["cutout_percentage"]
         }
       });
     },
     drawPieChart: function(chartElement){
       const self = this;
-      this.componentConfig["datasets"].forEach(function(item){
+      this.props["datasets"].forEach(function(item){
         if (item["backgroundColor"] === undefined){
           item["backgroundColor"] = self.getThemeColor("primary")
         }else{
@@ -186,12 +186,12 @@ Vue.component('chart-js-component', {
       this.chartJsInstance = new Chart(chartElement, {
         type: 'pie',
         data: {
-            labels: this.componentConfig["labels"],
-            datasets: this.componentConfig["datasets"]
+            labels: this.props["labels"],
+            datasets: this.props["datasets"]
         },
         options: {
             legend: {
-              display: this.componentConfig["display_legend"],
+              display: this.props["display_legend"],
             }
         }
       });
@@ -211,16 +211,16 @@ Vue.component('chart-js-component', {
 
     const chartElement = this.$refs.chart
 
-    if(this.componentConfig["type"] == "bar"){
+    if(this.props["type"] == "bar"){
       this.drawBarChart(chartElement);
     }
-    if(this.componentConfig["type"] == "line"){
+    if(this.props["type"] == "line"){
       this.drawLineChart(chartElement);
     }
-    if(this.componentConfig["type"] == "doughnut"){
+    if(this.props["type"] == "doughnut"){
       this.drawDoughnutChart(chartElement);
     }
-    if(this.componentConfig["type"] == "pie"){
+    if(this.props["type"] == "pie"){
       this.drawPieChart(chartElement);
     }
 

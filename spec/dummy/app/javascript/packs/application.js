@@ -19,6 +19,7 @@ window.MatestackUiCore = MatestackUiCore // making MatestackUiCore globally avai
 MatestackUiCore.Vue = Vue // test compatability
 
 
+console.log("fooo")
 let matestackUiApp = undefined
 
 document.addEventListener('DOMContentLoaded', () => {
