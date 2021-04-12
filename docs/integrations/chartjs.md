@@ -335,3 +335,4 @@ Components::ChartJs.(type: :pie, datasets: [
   },
 ], labels: ["x", "y", "z"])
 ```
+

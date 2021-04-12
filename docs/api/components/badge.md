@@ -60,3 +60,4 @@ Result:
 ```markup
 <span class="badge rounded-pill bg-success">Success</span>
 ```
+

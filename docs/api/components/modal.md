@@ -51,3 +51,4 @@ bs_modal header: { text: "Modal Title", class: "text-center", size: 1 },
 ```
 
 _body and footer hashes are working in similarly_
+

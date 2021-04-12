@@ -60,3 +60,4 @@ class Devise::Pages::SignIn < Matestack::Ui::Page
 
 end
 ```
+

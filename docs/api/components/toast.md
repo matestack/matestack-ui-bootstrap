@@ -81,3 +81,4 @@ onclick emit: "hideToast" do
   bs_btn "Hide Toasts"
 end
 ```
+
