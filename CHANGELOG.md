@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.1 Release - 2021-04-12
+
+### Bugfixes
+
+- Fixe publishing missing scss files
+
 ## v2.0.0 Release - 2021-04-12
 
 ### Changes

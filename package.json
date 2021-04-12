@@ -1,10 +1,11 @@
 {
   "name": "matestack-ui-bootstrap",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "license": "MIT",
   "main": "./lib/matestack/ui/bootstrap/index.js",
   "files": [
     "lib/**/*.js",
+    "lib/**/*.scss",
     "LICENSE"
   ],
   "dependencies": {
