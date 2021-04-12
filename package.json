@@ -2,9 +2,9 @@
   "name": "matestack-ui-bootstrap",
   "version": "2.0.0",
   "license": "LGPLv3",
-  "main": "app/javascript/matestack-ui-bootstrap/index.js",
+  "main": "./lib/matestack/ui/bootstrap/index.js",
   "files": [
-    "app",
+    "lib/**/*.js",
     "LICENSE"
   ],
   "dependencies": {
@@ -19,6 +19,6 @@
     "webpack-dev-server": "^3.11.0"
   },
   "exports": {
-    ".": "./app/javascript/matestack-ui-bootstrap"
+    ".": "./lib/matestack/ui/bootstrap/index.js"
   }
 }
