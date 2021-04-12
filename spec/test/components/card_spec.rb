@@ -25,14 +25,17 @@ describe 'Bootstrap::Components::Card', type: :feature, js: true do
   end
 
   it 'has a custom header and footer implemented with slots option' do
+    ExamplePage.define_method(:header_slot) do |*args|
+      bs_btn text: "Title Button"
+    end
+    ExamplePage.define_method(:footer_slot) do |*args|
+      paragraph class: "text-center", text: "2 days ago"
+    end
     matestack_render do
       bs_card slots: {
-            header: slot {
-              bs_btn text: "Title Button"
-            },
-            footer: slot {
-              paragraph class: "text-center", text: "2 days ago"
-            } }
+        header: method(:header_slot),
+        footer: method(:footer_slot)
+      }
     end
     visit example_path
     expect(page).to have_selector('div.card-header')
@@ -71,16 +74,18 @@ describe 'Bootstrap::Components::Card', type: :feature, js: true do
   end
 
   it 'has a custom body implemented with slots option' do
+    ExamplePage.define_method(:body_slot) do |*args|
+      ul class: 'list-group list-group-flush' do
+        li class: "list-group-item" do plain "Item 1" end
+        li class: "list-group-item" do plain "Item 2" end
+      end
+      a class: 'btn btn-link', text: "Card link", path: "#"
+      a class: 'btn btn-link', text: "Another link", path: "#"
+    end
     matestack_render do
       bs_card slots: {
-            body: slot {
-              ul class: 'list-group list-group-flush' do
-                li class: "list-group-item" do plain "Item 1" end
-                li class: "list-group-item" do plain "Item 2" end
-              end
-              link class: 'btn btn-link', text: "Card link", path: "#"
-              link class: 'btn btn-link', text: "Another link", path: "#"
-            }}
+        body: method(:body_slot) 
+      }
     end
     visit example_path
     expect(page).to have_selector('div.card-body')

@@ -26,18 +26,18 @@ Returns a bootstrap button containing text or content specified by a block. Also
 The btn implemented in ruby has by default primary as styling
 
 ```ruby
-bs_btn text: "Primary"
-bs_btn variant: :secondary, text: "Secondary"
-bs_btn variant: :success, text: "Success"
-bs_btn variant: :danger, text: "Danger"
-bs_btn variant: :warning, text: "Warning"
-bs_btn variant: :info, text: "Info"
-bs_btn variant: :light, text: "Light"
-bs_btn variant: :dark, text: "Dark"
-bs_btn variant: :link, text: "Link"
+bs_btn "Primary"
+bs_btn "Secondary", variant: :secondary
+bs_btn "Success", variant: :success
+bs_btn "Danger", variant: :danger
+bs_btn "Warning", variant: :warning
+bs_btn "Info", variant: :info
+bs_btn "Light", variant: :light
+bs_btn "Dark", variant: :dark
+bs_btn "Link", variant: :link
 
-bs_btn variant: :primary, outline: true, text: "Outline Primary"
-bs_btn variant: :secondary, outline: true, text: "Outline Secondary"
+bs_btn "Outline Primary", variant: :primary, outline: true
+bs_btn "Outline Secondary", variant: :secondary, outline: true
 ...
 ```
 
@@ -94,8 +94,8 @@ returns
 ### Example 4: Using btn size parameter
 
 ```ruby
-bs_btn variant: :success, size: :sm, text: "Small btn"
-bs_btn variant: :secondary, size: :lg, text: "Large btn"
+bs_btn "Small btn", variant: :success, size: :sm
+bs_btn "Large btn", variant: :secondary, size: :lg
 ```
 
 returns
@@ -105,4 +105,3 @@ returns
 
 <btn type="button" class="btn btn-secondary btn-lg">Large btn</btn>
 ```
-

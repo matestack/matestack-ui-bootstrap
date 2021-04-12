@@ -9,8 +9,25 @@ require("channels")
 
 import "./stylesheets/application.scss";
 
+import Vue from 'vue/dist/vue.esm'
+import Vuex from 'vuex'
+
 import MatestackUiCore from 'matestack-ui-core';
 import MatestackUiBootstrap from 'matestack-ui-bootstrap';
+
+window.MatestackUiCore = MatestackUiCore // making MatestackUiCore globally available for test compatability
+MatestackUiCore.Vue = Vue // test compatability
+
+
+console.log("fooo")
+let matestackUiApp = undefined
+
+document.addEventListener('DOMContentLoaded', () => {
+  matestackUiApp = new Vue({
+    el: "#matestack-ui",
+    store: MatestackUiCore.store
+  })
+})
 
 import '../../matestack/dummy/components/chart_js.js'
 import '../../matestack/dummy/components/form/flatpickr.js'

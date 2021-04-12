@@ -1,14 +1,17 @@
 import flatpickr from "flatpickr";
+import Vue from 'vue/dist/vue.esm'
 
-MatestackUiCore.Vue.component('form-flatpickr-component', {
+import MatestackUiCore from 'matestack-ui-core'
+
+Vue.component('form-flatpickr-component', {
   mixins: [MatestackUiCore.componentMixin, MatestackUiCore.formInputMixin],
   data() {
     return {};
   },
   mounted: function(){
     flatpickr(this.$el.querySelector('.flatpickr'), {
-      defaultDate: this.componentConfig["init_value"],
-      enableTime: (this.componentConfig["enable_time"] == true)
+      defaultDate: this.props["init_value"],
+      enableTime: (this.props["enable_time"] == true)
     });
   }
 });

@@ -70,18 +70,16 @@ returns
 ### Example 3: Using Slots for customize card body
 
 ```ruby
-bs_card slots: { body: my_card_body }
+bs_card slots: { body: method(:my_card_body) }
 
 def my_card_body
-  slot {
-    ul class: 'list-group list-group-flush' do
-      li class: "list-group-item" do plain "Item 1" end
-      li class: "list-group-item" do plain "Item 2" end
-      li class: "list-group-item" do plain "Item 3" end
-    end
-    link class: 'btn btn-link', text: "Card link", path: "#"
-    link class: 'btn btn-link', text: "Another link", path: "#"
-  }
+  ul class: 'list-group list-group-flush' do
+    li class: "list-group-item" do plain "Item 1" end
+    li class: "list-group-item" do plain "Item 2" end
+    li class: "list-group-item" do plain "Item 3" end
+  end
+  a "Card link", class: 'btn btn-link', path: "#"
+  a "Another link", class: 'btn btn-link', path: "#"
 end
 ```
 
@@ -110,25 +108,21 @@ returns
 
 ```ruby
 bs_card body: "With supporting text below.", title: "Special title treatment",
-    slots: { header: my_card_header, footer: my_card_footer }, class: "text-center"
+    slots: { header: method(:my_card_header), footer: method(:my_card_footer) }, class: "text-center"
 
 def my_card_header
-  slot {
-    ul class: "nav nav-tabs card-header-tabs" do
-      li class: "nav-item" do
-        link class: "nav-link", path: "#", text: "Tab 1"  
-      end
-      li class: "nav-item" do
-        link class: "nav-link", path: "#", text: "Tab 2"  
-      end
+  ul class: "nav nav-tabs card-header-tabs" do
+    li class: "nav-item" do
+      a "Tab 1", class: "nav-link", path: "#"
     end
-  }
+    li class: "nav-item" do
+      a "Tab 2", class: "nav-link", path: "#"
+    end
+  end
 end
 
 def my_card_footer
-  slot {
-    plain "2 days ago"
-  }
+  plain "2 days ago"
 end
 ```
 
@@ -163,8 +157,8 @@ returns
 ```ruby
 bs_card title: "Card title", body: "Some quick example text" do
   div class: "p-3" do
-    bs_btn text: "Card Button"
-    bs_btn text: "Another Button"
+    bs_btn "Card Button"
+    bs_btn "Another Button"
   end
 end
 ```
@@ -183,4 +177,3 @@ returns
   </div>
 </div>
 ```
-

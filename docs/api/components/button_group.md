@@ -20,9 +20,9 @@ Returns a bootstrap button-group containing content specified by a block. Also t
 
 ```ruby
 bs_btn_group label: "Basic example" do
-  bs_btn variant: :secondary, text: "Left"
-  bs_btn variant: :secondary, text: "Middle"
-  bs_btn variant: :secondary, text: "Right"
+  bs_btn "Left", variant: :secondary
+  bs_btn "Middle", variant: :secondary
+  bs_btn "Right", variant: :secondary
 end
 ```
 
@@ -57,14 +57,14 @@ returns
 ```ruby
 bs_btn_group toolbar: true, label: "Toolbar with button groups" do
   bs_btn_group label: "First group" do
-    btn variant: :secondary, text: "1"
-    btn variant: :secondary, text: "2"
-    btn variant: :secondary, text: "3"
+    bs_btn "1", variant: :secondary
+    bs_btn "2", variant: :secondary
+    bs_btn "3", variant: :secondary
   end
-  bs_btn_group label: "Second group" do 
-    btn variant: :secondary, text: "1"
-    btn variant: :secondary, text: "2"
-    btn variant: :secondary, text: "3"
+  bs_btn_group label: "Second group" do
+    bs_btn "1", variant: :secondary
+    bs_btn "2", variant: :secondary
+    bs_btn "3", variant: :secondary
   end
 end
 ```
@@ -85,4 +85,3 @@ returns
   </div>
 </div>
 ```
-

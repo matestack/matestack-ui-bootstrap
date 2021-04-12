@@ -198,7 +198,7 @@ RSpec.describe "Bootstrap::Content::SmartCollection", type: :feature, js: true d
     end
     visit example_path
 
-    expect(page).to have_selector('.row > .col > input.form-control.smart-collection-filter[id="last_name"]')
+    expect(page).to have_selector('.row > .col > .matestack-ui-bootstrap-input > input.form-control.smart-collection-filter#last_name')
 
     fill_in 'last_name', with: '12'
 
@@ -233,7 +233,7 @@ RSpec.describe "Bootstrap::Content::SmartCollection", type: :feature, js: true d
     end
     visit example_path
 
-    expect(page).to have_selector('.row > .col > input.form-control.smart-collection-filter[id="last_name"]')
+    expect(page).to have_selector('.row > .col > .matestack-ui-bootstrap-input > input.form-control.smart-collection-filter[id="last_name"]')
 
     fill_in 'last_name', with: '12'
 
@@ -246,16 +246,14 @@ RSpec.describe "Bootstrap::Content::SmartCollection", type: :feature, js: true d
 
   it 'paginated, filterable ActiveRecord collection rendered as table actions provided by slot' do
     ExamplePage.define_method(:table_item_actions) do |customer|
-      slot do
-        transition path: edit_dummy_customer_path(customer), delay: 300 do
-          bs_btn outline: true, size: :sm, variant: :primary, class: "m-1" do
-            bs_icon name: 'arrow-right', size: 20
-          end
+      transition path: edit_dummy_customer_path(customer), delay: 300 do
+        bs_btn outline: true, size: :sm, variant: :primary, class: "m-1" do
+          bs_icon name: 'arrow-right', size: 20
         end
-        action customer_delete_action_config(customer) do
-          bs_btn outline: true, size: :sm, variant: :danger, class: "m-1" do
-            bs_icon name: 'trash2', size: 20
-          end
+      end
+      action customer_delete_action_config(customer) do
+        bs_btn outline: true, size: :sm, variant: :danger, class: "m-1" do
+          bs_icon name: 'trash2', size: 20
         end
       end
     end
@@ -349,12 +347,10 @@ RSpec.describe "Bootstrap::Content::SmartCollection", type: :feature, js: true d
 
   it 'paginated, filterable ActiveRecord collection rendered via custom method provided by slot' do
     ExamplePage.define_method(:collection_rendering) do |customers|
-      slot do
-        bs_row do
-          customers.each do |customer|
-            bs_col xl: 4, class: "mb-3" do
-              collection_card customer
-            end
+      bs_row do
+        customers.each do |customer|
+          bs_col xl: 4, class: "mb-3" do
+            collection_card customer
           end
         end
       end
@@ -406,7 +402,7 @@ RSpec.describe "Bootstrap::Content::SmartCollection", type: :feature, js: true d
 
     expect(page).to have_selector('.card.h-100', count: 10)
 
-    expect(page).to have_selector('.row > .col > input.form-control.smart-collection-filter[id="last_name"]')
+    expect(page).to have_selector('.row > .col > .matestack-ui-bootstrap-input > input.form-control.smart-collection-filter[id="last_name"]')
 
     fill_in 'last_name', with: '12'
 

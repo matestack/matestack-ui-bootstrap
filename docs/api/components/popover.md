@@ -36,7 +36,7 @@ Returns a bootstrap component containing text or content specified by a block wh
 ### Example 1: Basic Popover
 
 ```ruby
-bs_popover text: "Click to toggle popover",
+bs_popover "Click to toggle popover",
         content: "And here's some amazing content. It's very engaging. Right?",
         title: "Popover title",
         variant: :danger
@@ -53,7 +53,7 @@ returns
 ### Example 2: Popover with HTML tag inside
 
 ```ruby
-bs_popover text: "Popover", html: 'true', content: "<p>this paragraph in popover</p>"
+bs_popover "Popover", html: 'true', content: "<p>this paragraph in popover</p>"
 ```
 
 returns
@@ -67,7 +67,7 @@ returns
 ### Example 3:
 
 ```ruby
-bs_popover tag: :link, placement: :top, tabindex: "0", variant: :danger, trigger: "focus", title: "Dismissible popover", content: "And here's some amazing content. It's very engaging. Right?", text: "Dismissible Popover"
+bs_popover "Dismissible Popover", tag: :link, placement: :top, tabindex: "0", variant: :danger, trigger: "focus", title: "Dismissible popover", content: "And here's some amazing content. It's very engaging. Right?"
 ```
 
 returns
@@ -77,4 +77,3 @@ returns
   Dismissible Popover
 </a>
 ```
-

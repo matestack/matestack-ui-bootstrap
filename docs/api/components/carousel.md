@@ -140,10 +140,10 @@ items = [
 bs_carousel prev_on: "prev-carousel", next_on: "next-carousel", items: items
 
 onclick emit: "prev-carousel" do
-  bs_btn text: "Prev"
+  bs_btn "Prev"
 end
 onclick emit: "next-carousel" do
-  bs_btn text: "Next"
+  bs_btn "Next"
 end
 ```
 

@@ -1,10 +1,11 @@
 class Dummy::App < Matestack::Ui::Bootstrap::Apps::AdminTemplate
 
+  include Matestack::Ui::Bootstrap::Registry
 
   def sidebar_top_partial
     div class: "text-center" do
       transition path: root_path, delay: 300 do
-        heading size: 4, text: "Your Rails Backend"
+        heading "Your Rails Backend", size: 4
       end
     end
     div class: "text-center my-5" do

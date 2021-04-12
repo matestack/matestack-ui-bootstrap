@@ -1,4 +1,4 @@
-class Dummy::Pages::Dashboard::Show < Matestack::Ui::Page
+class Dummy::Pages::Dashboard::Show < ApplicationPage
 
   include Dummy::Pages::Dashboard::CodeRenderingUtils
 
@@ -8,7 +8,6 @@ class Dummy::Pages::Dashboard::Show < Matestack::Ui::Page
 
   def dummy_tab_content
     bs_page_heading title: t("dashboard.title"), subtitle: t("dashboard.subtitle")
-    # bs_icon name: "x"
     bs_row do
       bs_col md: 6 do
         analytics_partial
@@ -20,10 +19,10 @@ class Dummy::Pages::Dashboard::Show < Matestack::Ui::Page
   end
 
   def analytics_partial
-    async defer: 300, id: "products-card" do
+    async defer: true, id: "products-card" do
       dashboard_products
     end
-    async defer: 600, id: "revenue-card" do
+    async defer: true, id: "revenue-card" do
       dashboard_revenue
     end
   end
@@ -31,7 +30,7 @@ class Dummy::Pages::Dashboard::Show < Matestack::Ui::Page
   def activity_partial
     bs_row do
       bs_col do
-        async defer: 900, rerender_on: "activity-tracked", id: "activity-card" do
+        async defer: true, rerender_on: "activity-tracked", id: "activity-card" do
           dashboard_activity
         end
       end

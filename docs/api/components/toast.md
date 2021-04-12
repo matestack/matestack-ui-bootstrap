@@ -72,13 +72,12 @@ returns
 
 ```ruby
 bs_toast show_on: "showToast", hide_on: "hideToast",
-      body: "Hello, world! This is a toast message."
+  body: "Hello, world! This is a toast message."
 
 onclick emit: "showToast" do
-  bs_btn text: "Show Toasts"
+  bs_btn "Show Toasts"
 end
 onclick emit: "hideToast" do
-  bs_btn text: "Hide Toasts"
+  bs_btn "Hide Toasts"
 end
 ```
-

@@ -1,4 +1,4 @@
-class Dummy::Components::Dashboard::Products < Matestack::Ui::Component
+class Dummy::Components::Dashboard::Products < ApplicationComponent
 
   def response
     bs_section_card title: translate("title"), subtitle: translate("subtitle") do
@@ -21,7 +21,7 @@ class Dummy::Components::Dashboard::Products < Matestack::Ui::Component
 
   def text_kpis_partial
     Dummy::ProductKpiService.top_5_products.each_with_index do |data, index|
-      small text: "Top #{index+1}: "
+      small "Top #{index+1}: "
       small do
         transition path: edit_dummy_product_path(Product.find(data[0])), delay: 300 do
           plain "#{Product.find(data[0]).name.truncate(20)} "

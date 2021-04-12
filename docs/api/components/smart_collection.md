@@ -48,16 +48,14 @@ def collection_config
 end
 
 def table_item_actions customer
-  slot do
-    transition path: edit_dummy_customer_path(customer), delay: 300 do
-      bs_btn outline: true, size: :sm, variant: :primary, class: "m-1" do
-        bs_icon name: 'arrow-right', size: 20
-      end
+  transition path: edit_dummy_customer_path(customer), delay: 300 do
+    bs_btn outline: true, size: :sm, variant: :primary, class: "m-1" do
+      bs_icon name: 'arrow-right', size: 20
     end
-    action customer_delete_action_config(customer) do
-      bs_btn outline: true, size: :sm, variant: :danger, class: "m-1" do
-        bs_icon name: 'trash2', size: 20
-      end
+  end
+  action customer_delete_action_config(customer) do
+    bs_btn outline: true, size: :sm, variant: :danger, class: "m-1" do
+      bs_icon name: 'trash2', size: 20
     end
   end
 end
@@ -113,11 +111,9 @@ def collection_config
 end
 
 def table_item_actions order
-  slot do
-    transition path: edit_dummy_order_path(order), delay: 300 do
-      bs_btn outline: true, size: :sm, variant: :primary do
-        bs_icon name: 'arrow-right', size: 20
-      end
+  transition path: edit_dummy_order_path(order), delay: 300 do
+    bs_btn outline: true, size: :sm, variant: :primary do
+      bs_icon name: 'arrow-right', size: 20
     end
   end
 end
@@ -151,12 +147,10 @@ def collection_config
 end
 
 def collection_rendering products
-  slot do
-    bs_row do
-      products.each do |product|
-        bs_col xl: 4, class: "mb-3" do
-          collection_card product
-        end
+  bs_row do
+    products.each do |product|
+      bs_col xl: 4, class: "mb-3" do
+        collection_card product
       end
     end
   end
@@ -164,7 +158,7 @@ end
 
 def collection_card product
   bs_card title: product.name, subtitle: "#{product.price_in_euro} €", class: "h-100" do
-    paragraph class: "fw-lighter", text: product.description
+    paragraph product.description, class: "fw-lighter"
     transition path: edit_dummy_product_path(product), delay: 300 do
       bs_btn outline: true, size: :sm, variant: :primary do
         bs_icon name: 'arrow-right', size: 20
@@ -189,4 +183,3 @@ def product_delete_action_config product
   }
 end
 ```
-

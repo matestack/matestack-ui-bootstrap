@@ -1,4 +1,4 @@
-class Dummy::Pages::Customers::Edit < Matestack::Ui::Page
+class Dummy::Pages::Customers::Edit < ApplicationPage
 
   include Dummy::Pages::Customers::EditCodeRenderingUtils
 
@@ -31,10 +31,10 @@ class Dummy::Pages::Customers::Edit < Matestack::Ui::Page
     end
 
     bs_section_card do
-      heading size: 4, text: t("customers.edit.orders.title"), class: "mb-4"
+      heading t("customers.edit.orders.title"), size: 4, class: "mb-4"
       async id: "orders-list", rerender_on: "success" do
         paragraph class: "mb-4" do
-          b text: t("customers.edit.orders.total")
+          b t("customers.edit.orders.total")
           plain "#{customer.orders.count}"
         end
         bs_row do

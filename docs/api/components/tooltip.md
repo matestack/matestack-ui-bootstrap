@@ -38,7 +38,7 @@ Returns a bootstrap tooltip component containing content specified by a block wh
 ```ruby
 bs_tooltip tooltip_title: "Help Message" do
   action method: :post, path: some_path do
-    bs_btn text: "Button"
+    bs_btn "Button"
   end
 end
 ```
@@ -48,7 +48,7 @@ end
 ```ruby
 bs_tooltip tooltip_title: "Help Message", trigger: "click" do
   action method: :post, path: some_path do
-    bs_btn text: "Button"
+    bs_btn "Button"
   end
 end
 ```

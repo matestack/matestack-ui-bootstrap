@@ -1,4 +1,4 @@
-class Dummy::Components::Dashboard::Activity < Matestack::Ui::Component
+class Dummy::Components::Dashboard::Activity < ApplicationComponent
 
   def response
     bs_section_card title: translate("title"), subtitle: translate("subtitle") do
@@ -22,15 +22,15 @@ class Dummy::Components::Dashboard::Activity < Matestack::Ui::Component
     bs_row class: "mb-3" do
       div class: "col-auto pe-0" do
         if version.whodunnit.present?
-          bs_avatar img_path: image_url('avatar-placeholder.png')
+          bs_avatar img_path: asset_path('avatar-placeholder.png')
         end
       end
       bs_col do
-        heading size: 6, class: "mb-1", text: Admin.find(version.whodunnit).email
-        small class: "text-muted mb-0", text: version.event
-        small class: "text-muted mb-0", text: "#{version.item_type} #{version.item_id}"
+        heading Admin.find(version.whodunnit).email, size: 6, class: "mb-1"
+        small version.event, class: "text-muted mb-0"
+        small "#{version.item_type} #{version.item_id}", class: "text-muted mb-0"
         br
-        small class: "text-muted mb-0", text: version.created_at.strftime("%d.%m.%Y %H:%M")
+        small version.created_at.strftime("%d.%m.%Y %H:%M"), class: "text-muted mb-0"
       end
     end
   end

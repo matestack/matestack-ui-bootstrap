@@ -13,17 +13,19 @@ class Components::Form::Flatpickr < Matestack::Ui::Bootstrap::Form::Input
 
   optional :enable_time
 
-  vue_js_component_name "form-flatpickr-component"
+  vue_name "form-flatpickr-component"
 
-  def setup
-    @component_config[:init_value] = init_value
-    @component_config[:enable_time] = enable_time
+  def vue_props
+    {
+      init_value: init_value,
+      enable_time: enable_time
+    }
   end
 
   def response
     # exactly one root element is required since this is a Vue.js component template
     div class: "form-flatpickr-component" do
-      label for: attr_key,  class: "form-label", text: input_label if input_label
+      label input_label, for: attr_key,  class: "form-label" if input_label
       input input_attributes.merge(bootstrap_flatpickr_input_attributes)
       render_errors
       render_form_text
@@ -41,22 +43,6 @@ class Components::Form::Flatpickr < Matestack::Ui::Bootstrap::Form::Input
 end
 ```
 
-`app/matestack/components/registry.rb`
-
-## Registry
-
-```ruby
-module Components::Registry
-
-  Matestack::Ui::Core::Component::Registry.register_components(
-    #...
-    form_flatpickr: Components::Form::Flatpickr
-    #...
-  )
-
-end
-```
-
 `app/matestack/components/chart_js.js`
 
 ## Vue.js component
@@ -66,15 +52,15 @@ end
 ```javascript
 import flatpickr from "flatpickr";
 
-MatestackUiCore.Vue.component('form-flatpickr-component', {
+Vue.component('form-flatpickr-component', {
   mixins: [MatestackUiCore.componentMixin, MatestackUiCore.formInputMixin],
   data() {
     return {};
   },
   mounted: function(){
     flatpickr(this.$el.querySelector('.flatpickr'), {
-      defaultDate: this.componentConfig["init_value"],
-      enableTime: (this.componentConfig["enable_time"] == true)
+      defaultDate: this.props["init_value"],
+      enableTime: (this.props["enable_time"] == true)
     });
     //all kind of configuration possible for flatpickr may be implemented here according to your needs
   }
@@ -86,10 +72,10 @@ MatestackUiCore.Vue.component('form-flatpickr-component', {
 ### Example 1: Usage in form \(e.g. mapped to an Active Record model\) with enabled time picker
 
 ```ruby
-form some_form_config do
+matestack_form some_form_config do
 
   div class: "mb-3" do
-    form_flatpickr key: :shipped_at, label: "Shipped at", enable_time: true, type: :text
+    Components::Form::Flatpickr.(key: :shipped_at, label: "Shipped at", enable_time: true, type: :text)
   end
 
   div class: "mb-3" do
@@ -98,4 +84,3 @@ form some_form_config do
 
 end
 ```
-

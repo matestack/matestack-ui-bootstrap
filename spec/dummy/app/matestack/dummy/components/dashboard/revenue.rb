@@ -1,4 +1,4 @@
-class Dummy::Components::Dashboard::Revenue < Matestack::Ui::Component
+class Dummy::Components::Dashboard::Revenue < ApplicationComponent
 
   def response
     bs_section_card title: translate("title"), subtitle: translate("subtitle") do
@@ -24,13 +24,13 @@ class Dummy::Components::Dashboard::Revenue < Matestack::Ui::Component
   end
 
   def text_kpis_partial
-    b text: "#{translate("total")}:"
+    b "#{translate("total")}:"
     plain "#{Dummy::RevenueKpiService.total} €"
     br
     br
     kpis.each do |kpi|
-      small text: "#{translate(kpi)}: "
-      small text: "#{Dummy::RevenueKpiService.send(kpi)} €"
+      small "#{translate(kpi)}: "
+      small "#{Dummy::RevenueKpiService.send(kpi)} €"
       br
     end
   end

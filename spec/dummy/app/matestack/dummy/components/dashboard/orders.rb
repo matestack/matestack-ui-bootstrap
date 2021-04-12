@@ -1,25 +1,25 @@
-class Dummy::Components::Dashboard::Orders < Matestack::Ui::Component
+class Dummy::Components::Dashboard::Orders < ApplicationComponent
 
   def response
     bs_card title: "Orders", class: "shadow-sm mb-3 border-0 h-100" do
       div class: "p-3" do
         bs_row do
           bs_col xs: 6 do
-            b text: "Total:"
+            b "Total:"
             plain total
             br
             br
-            small text: "Four weeks ago:"
-            small text: four_weeks_ago
+            small "Four weeks ago:"
+            small four_weeks_ago
             br
-            small text: "Three weeks ago:"
-            small text: three_weeks_ago
+            small "Three weeks ago:"
+            small three_weeks_ago
             br
-            small text: "Two weeks ago:"
-            small text: two_weeks_ago
+            small "Two weeks ago:"
+            small two_weeks_ago
             br
-            small text: "Last 7 days:"
-            small text: last_7_days
+            small "Last 7 days:"
+            small last_7_days
           end
           bs_col xs: 6 do
             chart_js type: :line, datasets: [

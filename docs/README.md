@@ -1,16 +1,5 @@
 # Welcome
 
-{% hint style="info" %}
-Version 2.0.0 will be released on the 12th of April and proudly presented at RailsConf. Click here for a sneak peek: [https://docs.matestack.io/v/2.0.0/](https://docs.matestack.io/v/2.0.0/)\*\*\*\*
-
-**Most important changes:**
-
-* Change to MIT License
-* 5 to 12 times better rendering performance \(depending on the context\)
-* Removed Trailblazer dependency
-* Improved core code readability/maintainability
-{% endhint %}
-
 As an extension for `matestack-ui-core`, `matestack-ui-bootstrap`ships all you need to build beautiful, reactive UIs in pure Ruby and smart CRUD components based on Bootstrap v5. Don't think about styling anymore and just create admin or application UIs faster than ever before!
 
 ### Live Demo <a id="live-demo"></a>
@@ -69,8 +58,20 @@ import "channels"
 
 import "./stylesheets/application.scss";
 
-import MatestackUiCore from "matestack-ui-core"
+import Vue from 'vue/dist/vue.esm'
+import Vuex from 'vuex'
+
+import MatestackUiCore from 'matestack-ui-core'
 import MatestackUiBootstrap from "matestack-ui-bootstrap"
+
+let matestackUiApp = undefined
+
+document.addEventListener('DOMContentLoaded', () => {
+  matestackUiApp = new Vue({
+    el: "#matestack-ui",
+    store: MatestackUiCore.store
+  })
+})
 
 Rails.start()
 // Turbolinks.start()
@@ -80,7 +81,7 @@ ActiveStorage.start()
 `app/assets/images/icons`
 
 * download latest compatible icons: [https://github.com/twbs/icons/releases/tag/v1.3.0](https://github.com/twbs/icons/releases/tag/v1.3.0)
-* extract the bootstrap-icons.svg to this path: app/assets/images/icons \(server via assets pipeline\)
+* extract the bootstrap-icons.svg to this path: app/assets/images/icons \(served via assets pipeline\)
 
 ### Usage 
 
@@ -91,12 +92,21 @@ Create Matestack apps, pages and components as described in the docs of `matesta
 ```ruby
 class ApplicationController < ActionController::Base
 
-  include Matestack::Ui::Core::ApplicationHelper # described in Core docs
-  include Matestack::Ui::Bootstrap::Registry # add Bootstrap components
+  include Matestack::Ui::Core::Helper # described in Core docs
 
 end
 
 ```
 
+and include the registry wherever you want to use the components via methods like "bs_btn" instead of calling the namespaced classes
 
+`app/matestack/application_component.rb`
 
+```ruby
+class ApplicationComponent < Matestack::Ui::Bootstrap
+
+  include Matestack::Ui::Bootstrap::Registry # use methods like "bs_btn" instead of calling the namespaced classes
+
+end
+
+```

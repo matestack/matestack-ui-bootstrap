@@ -8,7 +8,7 @@ Chart.js integration, Bootstrap theming aware. In order to limit the scope of th
 
 ```ruby
 class Components::ChartJs < Matestack::Ui::VueJsComponent
-  vue_js_component_name "chart-js-component"
+  vue_name "chart-js-component"
 
   requires :type
   requires :datasets
@@ -21,39 +21,25 @@ class Components::ChartJs < Matestack::Ui::VueJsComponent
   optional :cutout_percentage
   optional class: { as: :bs_class }
 
-  def setup
-    # injected into vue.js components
-    @component_config[:type] = type
-    @component_config[:datasets] = datasets
-    @component_config[:labels] = labels
-    @component_config[:display_legend] = !display_legend.nil? ? display_legend : false
-    @component_config[:display_x_axes] = !display_x_axes.nil? ? display_x_axes : true
-    @component_config[:display_y_axes] = !display_y_axes.nil? ? display_y_axes : true
-    @component_config[:display_y_axes] = !display_y_axes.nil? ? display_y_axes : true
-    @component_config[:cutout_percentage] = !cutout_percentage.nil? ? cutout_percentage : 70
-  end
-
-  def response
-    div class: "chart-container #{bs_class}", attributes: { style: "width: 100%; height: 100%;" } do
-      plain "<canvas ref='chart'></canvas>".html_safe
+  # injected into vue.js components
+  def vue_props
+    {}.tap do |props|
+      props[:type] = type
+      props[:datasets] = datasets
+      props[:labels] = labels
+      props[:display_legend] = !display_legend.nil? ? display_legend : false
+      props[:display_x_axes] = !display_x_axes.nil? ? display_x_axes : true
+      props[:display_y_axes] = !display_y_axes.nil? ? display_y_axes : true
+      props[:display_y_axes] = !display_y_axes.nil? ? display_y_axes : true
+      props[:cutout_percentage] = !cutout_percentage.nil? ? cutout_percentage : 70
     end
   end
 
-end
-```
-
-`app/matestack/components/registry.rb`
-
-## Registry
-
-```ruby
-module Components::Registry
-
-  Matestack::Ui::Core::Component::Registry.register_components(
-    #...
-    chart_js: Components::ChartJs
-    #...
-  )
+  def response
+    div class: "chart-container #{bs_class}",  style: "width: 100%; height: 100%;" do
+      plain "<canvas ref='chart'></canvas>".html_safe
+    end
+  end
 
 end
 ```
@@ -66,8 +52,10 @@ end
 
 ```javascript
 import Chart from 'chart.js';
+import Vue from 'vue/dist/vue.esm'
+import MatestackUiCore from 'matestack-ui-core';
 
-MatestackUiCore.Vue.component('chart-js-component', {
+Vue.component('chart-js-component', {
   mixins: [MatestackUiCore.componentMixin],
 
   data() {
@@ -94,7 +82,7 @@ MatestackUiCore.Vue.component('chart-js-component', {
     },
     drawBarChart: function(chartElement){
       const self = this;
-      this.componentConfig["datasets"].forEach(function(item){
+      this.props["datasets"].forEach(function(item){
         if (item["backgroundColor"] === undefined){
           item["backgroundColor"] = self.getThemeColor("primary")
         }else{
@@ -112,16 +100,16 @@ MatestackUiCore.Vue.component('chart-js-component', {
       this.chartJsInstance = new Chart(chartElement, {
         type: 'bar',
         data: {
-            labels: this.componentConfig["labels"],
-            datasets: this.componentConfig["datasets"]
+            labels: this.props["labels"],
+            datasets: this.props["datasets"]
         },
         options: {
             legend: {
-              display: this.componentConfig["display_legend"],
+              display: this.props["display_legend"],
             },
             scales: {
                 yAxes: [{
-                    display: this.componentConfig["display_y_axes"],
+                    display: this.props["display_y_axes"],
                     gridLines: {
                       display: false,
                     },
@@ -130,7 +118,7 @@ MatestackUiCore.Vue.component('chart-js-component', {
                     }
                 }],
                 xAxes: [{
-                    display: this.componentConfig["display_x_axes"],
+                    display: this.props["display_x_axes"],
                     gridLines: {
                       display: false,
                     },
@@ -144,7 +132,7 @@ MatestackUiCore.Vue.component('chart-js-component', {
     },
     drawLineChart: function(chartElement){
       const self = this;
-      this.componentConfig["datasets"].forEach(function(item){
+      this.props["datasets"].forEach(function(item){
         if (item["borderColor"] === undefined){
           item["borderColor"] = self.getThemeColor("primary")
         }else{
@@ -158,16 +146,16 @@ MatestackUiCore.Vue.component('chart-js-component', {
       this.chartJsInstance = new Chart(chartElement, {
         type: 'line',
         data: {
-            labels: this.componentConfig["labels"],
-            datasets: this.componentConfig["datasets"]
+            labels: this.props["labels"],
+            datasets: this.props["datasets"]
         },
         options: {
             legend: {
-              display: this.componentConfig["display_legend"],
+              display: this.props["display_legend"],
             },
             scales: {
                 yAxes: [{
-                    display: this.componentConfig["display_y_axes"],
+                    display: this.props["display_y_axes"],
                     gridLines: {
                       display: false,
                     },
@@ -176,7 +164,7 @@ MatestackUiCore.Vue.component('chart-js-component', {
                     }
                 }],
                 xAxes: [{
-                    display: this.componentConfig["display_x_axes"],
+                    display: this.props["display_x_axes"],
                     gridLines: {
                       display: false,
                     },
@@ -190,7 +178,7 @@ MatestackUiCore.Vue.component('chart-js-component', {
     },
     drawDoughnutChart: function(chartElement){
       const self = this;
-      this.componentConfig["datasets"].forEach(function(item){
+      this.props["datasets"].forEach(function(item){
         if (item["backgroundColor"] === undefined){
           item["backgroundColor"] = self.getThemeColor("primary")
         }else{
@@ -221,20 +209,20 @@ MatestackUiCore.Vue.component('chart-js-component', {
       this.chartJsInstance = new Chart(chartElement, {
         type: 'doughnut',
         data: {
-            labels: this.componentConfig["labels"],
-            datasets: this.componentConfig["datasets"]
+            labels: this.props["labels"],
+            datasets: this.props["datasets"]
         },
         options: {
             legend: {
-              display: this.componentConfig["display_legend"],
+              display: this.props["display_legend"],
             },
-            cutoutPercentage: this.componentConfig["cutout_percentage"]
+            cutoutPercentage: this.props["cutout_percentage"]
         }
       });
     },
     drawPieChart: function(chartElement){
       const self = this;
-      this.componentConfig["datasets"].forEach(function(item){
+      this.props["datasets"].forEach(function(item){
         if (item["backgroundColor"] === undefined){
           item["backgroundColor"] = self.getThemeColor("primary")
         }else{
@@ -249,12 +237,12 @@ MatestackUiCore.Vue.component('chart-js-component', {
       this.chartJsInstance = new Chart(chartElement, {
         type: 'pie',
         data: {
-            labels: this.componentConfig["labels"],
-            datasets: this.componentConfig["datasets"]
+            labels: this.props["labels"],
+            datasets: this.props["datasets"]
         },
         options: {
             legend: {
-              display: this.componentConfig["display_legend"],
+              display: this.props["display_legend"],
             }
         }
       });
@@ -274,16 +262,16 @@ MatestackUiCore.Vue.component('chart-js-component', {
 
     const chartElement = this.$refs.chart
 
-    if(this.componentConfig["type"] == "bar"){
+    if(this.props["type"] == "bar"){
       this.drawBarChart(chartElement);
     }
-    if(this.componentConfig["type"] == "line"){
+    if(this.props["type"] == "line"){
       this.drawLineChart(chartElement);
     }
-    if(this.componentConfig["type"] == "doughnut"){
+    if(this.props["type"] == "doughnut"){
       this.drawDoughnutChart(chartElement);
     }
-    if(this.componentConfig["type"] == "pie"){
+    if(this.props["type"] == "pie"){
       this.drawPieChart(chartElement);
     }
 
@@ -296,31 +284,31 @@ MatestackUiCore.Vue.component('chart-js-component', {
 ### Example 1: Bar chart
 
 ```ruby
-chart_js class: "w-50", type: :bar, datasets: [
+Components::ChartJs.(class: "w-50", type: :bar, datasets: [
   {
     label: "€",
     data: [x, y, z],
     backgroundColor: :primary
   },
-], labels: ["x", "y", "z"]
+], labels: ["x", "y", "z"])
 ```
 
 ### Example 2: Doughnut chart
 
 ```ruby
-chart_js type: :doughnut, datasets: [
+Components::ChartJs.(type: :doughnut, datasets: [
   {
     label: "€",
     data: [x, y, z],
     backgroundColor: [:orange, :secondary, :primary]
   },
-], labels: ["x", "y", "z"]
+], labels: ["x", "y", "z"])
 ```
 
 ### Example 3: Line chart
 
 ```ruby
-chart_js type: :line, datasets: [
+Components::ChartJs.(type: :line, datasets: [
   {
     label: "€",
     data: [x, y, z],
@@ -333,18 +321,17 @@ chart_js type: :line, datasets: [
     borderColor: :danger,
     fill: false
   },
-], labels: ["x", "y", "z"], display_x_axes: false, display_y_axes: false
+], labels: ["x", "y", "z"], display_x_axes: false, display_y_axes: false)
 ```
 
 ### Example 4: Pie chart
 
 ```ruby
-chart_js type: :pie, datasets: [
+Components::ChartJs.(type: :pie, datasets: [
   {
     label: "€",
     data: [x, y, z],
     backgroundColor: [:orange, :secondary, :primary]
   },
-], labels: ["x", "y", "z"]
+], labels: ["x", "y", "z"])
 ```
-

@@ -71,7 +71,7 @@ returns
 bs_navbar theme: :light, brand: "Navbar", class: "text-center", items: [
         { path: "#", text: "Home"},
         { path: "#", text: "Contact"} ] do
-          bs_btn text: "Login", variant: :outline_success, horizontal: :end
+          bs_btn "Login", variant: :outline_success, horizontal: :end
         end
 ```
 
@@ -104,12 +104,10 @@ returns
 This configuration allows customization inside the navbar container
 
 ```ruby
-bs_navbar slots: { custom_items: my_navbar }, color: :primary, theme: :dark
+bs_navbar slots: { custom_items: method(:my_navbar) }, color: :primary, theme: :dark
 
 def my_navbar
-  slot {
-    span class: "navbar-text", text: "Navbar text with an inline element"
-  }
+  span "Navbar text with an inline element", class: "navbar-text"
 end
 ```
 
@@ -130,12 +128,10 @@ returns
 Using the same navbar as example 3 but adding `sticky-top` option. `fixed-botton` and `sticky-top` can be added in similar way.
 
 ```ruby
-bs_navbar slots: { custom_items: my_navbar }, color: :primary, theme: :dark, stick_top: true
+bs_navbar slots: { custom_items: method(:my_navbar) }, color: :primary, theme: :dark, stick_top: true
 
 def my_navbar
-  slot {
-    span class: "navbar-text", text: "Navbar text with an inline element"
-  }
+  span "Navbar text with an inline element", class: "navbar-text"
 end
 ```
 
@@ -150,4 +146,3 @@ returns
   </div>
 </nav>
 ```
-
