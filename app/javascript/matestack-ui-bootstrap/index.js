@@ -5,17 +5,17 @@
 
 import "./stylesheets/matestack-ui-bootstrap.scss";
 
-import '../../concepts/matestack/ui/bootstrap/components/alert'
-import '../../concepts/matestack/ui/bootstrap/components/carousel'
-import '../../concepts/matestack/ui/bootstrap/components/collapse'
-import '../../concepts/matestack/ui/bootstrap/components/dropdown'
-import '../../concepts/matestack/ui/bootstrap/components/modal'
-import '../../concepts/matestack/ui/bootstrap/components/toast'
-import '../../concepts/matestack/ui/bootstrap/components/popover'
-import '../../concepts/matestack/ui/bootstrap/components/tooltip'
-import '../../concepts/matestack/ui/bootstrap/layout/sidebar'
-import '../../concepts/matestack/ui/bootstrap/layout/sidebar.scss'
-import '../../concepts/matestack/ui/bootstrap/content/smart_collection/collection.scss'
+import '../../../lib/matestack/ui/bootstrap/components/alert'
+import '../../../lib/matestack/ui/bootstrap/components/carousel'
+import '../../../lib/matestack/ui/bootstrap/components/collapse'
+import '../../../lib/matestack/ui/bootstrap/components/dropdown'
+import '../../../lib/matestack/ui/bootstrap/components/modal'
+import '../../../lib/matestack/ui/bootstrap/components/toast'
+import '../../../lib/matestack/ui/bootstrap/components/popover'
+import '../../../lib/matestack/ui/bootstrap/components/tooltip'
+import '../../../lib/matestack/ui/bootstrap/layout/sidebar'
+import '../../../lib/matestack/ui/bootstrap/layout/sidebar.scss'
+import '../../../lib/matestack/ui/bootstrap/content/smart_collection/collection.scss'
 
 const MatestackUiBootstrap = {}
 
