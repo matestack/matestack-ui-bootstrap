@@ -11,7 +11,7 @@ Vue.component('matestack-ui-bootstrap-dropdown', {
     };
   },
   mounted() {
-    // var mydropdown = document.getElementById(this.componentConfig["dropdown-id"])
+    // var mydropdown = document.getElementById(this.props["dropdown-id"])
     // this.dropdownInstance = new bootstrap.Dropdown(mydropdown)
   }
 });

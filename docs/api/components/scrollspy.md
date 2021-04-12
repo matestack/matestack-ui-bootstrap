@@ -33,16 +33,15 @@ bs_row class: "m-3" do
   end
   bs_col lg: 8 do
     bs_scrollspy target: "#list-example", offset: 0, height: 200 do
-      heading size: 2, id: "list-item1", text: "Item 1"
+      h2 "Item 1", id: "list-item1"
       100.times do
-        paragraph text: "Text for item 1"
+        paragraph "Text for item 1"
       end
-      heading size: 2, id: "list-item2", text: "Item 2"
+      h2 "Item 2", id: "list-item2"
       100.times do
-        paragraph text: "Text for item 2"
+        paragraph "Text for item 2"
       end
     end
   end
 end
 ```
-

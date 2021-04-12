@@ -1,28 +1,5 @@
 module Matestack::Ui::Bootstrap::Registry
 
-  def heading(text = nil, options=nil, &block)
-    if text.is_a?(Hash)
-      options = text
-    end
-
-    case options[:size]
-    when 1
-      h1(text, options, &block)
-    when 2
-      h2(text, options, &block)
-    when 3
-      h3(text, options, &block)
-    when 4
-      h4(text, options, &block)
-    when 5
-      h5(text, options, &block)
-    when 6
-      h6(text, options, &block)
-    else
-      h1(text, options, &block)
-    end
-  end
-
   def bs_accordion(text=nil, options=nil, &block)
     Matestack::Ui::Bootstrap::Components::Accordion.(text, options, &block)
   end

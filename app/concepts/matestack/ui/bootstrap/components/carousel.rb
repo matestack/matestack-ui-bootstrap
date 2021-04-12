@@ -22,7 +22,7 @@ class Matestack::Ui::Bootstrap::Components::Carousel < Matestack::Ui::Bootstrap:
 
   protected
 
-  def config
+  def vue_props
     {}.tap do |props|
       props["carousel-id"] = carousel_id
       props[:interval] = context.interval

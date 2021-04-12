@@ -23,7 +23,7 @@ class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::Bootstrap::Ba
 
   protected
 
-  def config
+  def vue_props
     {}.tap do |props|
       props[:delay] = context.delay
       props[:autohide] = context.autohide

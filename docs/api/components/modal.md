@@ -30,7 +30,7 @@ Returns a bootstrap modal containing header, body, footer or content specified b
 ### Example 1: Basic Modal triggered via data attributes
 
 ```ruby
-bs_btn text: "Launch Modal", data: { "bs-toggle": 'modal', "bs-target": '#staticBackdrop' }
+bs_btn "Launch Modal", data: { "bs-toggle": 'modal', "bs-target": '#staticBackdrop' }
 bs_modal id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close", static: true, keyboard: false
 ```
 
@@ -38,7 +38,7 @@ bs_modal id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", fo
 
 ```ruby
 onclick emit: "toggle_modal" do
-  bs_btn text: "Launch Modal"
+  bs_btn "Launch Modal"
 end
 bs_modal toggle_on: "toggle_modal", id: 'staticBackdrop', header: "Modal Title", body: "Modal Messages", footer: "Close", static: true, keyboard: false
 ```
@@ -47,8 +47,7 @@ bs_modal toggle_on: "toggle_modal", id: 'staticBackdrop', header: "Modal Title",
 
 ```ruby
 bs_modal header: { text: "Modal Title", class: "text-center", size: 1 },     
-      body: "Modal Messages", footer: "Close"
+  body: "Modal Messages", footer: "Close"
 ```
 
 _body and footer hashes are working in similarly_
-

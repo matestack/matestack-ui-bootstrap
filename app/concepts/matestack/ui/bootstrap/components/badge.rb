@@ -1,7 +1,7 @@
 class Matestack::Ui::Bootstrap::Components::Badge < Matestack::Ui::Bootstrap::BaseComponent
 
   optional class: { as:  :bs_class }
-  optional :text, :variant, :rounded, :visually_hidden
+  optional :variant, :rounded, :visually_hidden
 
   def response
     span badge_attributes do

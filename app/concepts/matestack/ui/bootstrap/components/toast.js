@@ -16,15 +16,15 @@ Vue.component('matestack-ui-bootstrap-toast', {
   methods: {
     show: function(event){
       const self = this;
-      if(this.componentConfig["autohide"]){
+      if(this.props["autohide"]){
         setTimeout(function () {
           self.showing = false;
         }, 5000);
       }
-      if(this.componentConfig["delay"]){
+      if(this.props["delay"]){
         setTimeout(function () {
           self.showing = true;
-        }, parseInt(self.componentConfig["delay"]));
+        }, parseInt(self.props["delay"]));
       } else {
         self.showing = true
       }
@@ -51,37 +51,37 @@ Vue.component('matestack-ui-bootstrap-toast', {
   created: function() {
     const self = this
 
-    if(this.componentConfig["show_on"] != undefined){
-      var show_events = this.componentConfig["show_on"].split(",")
+    if(this.props["show_on"] != undefined){
+      var show_events = this.props["show_on"].split(",")
       show_events.forEach(show_event => MatestackUiCore.matestackEventHub.$on(show_event.trim(), self.show));
     }
 
-    if(this.componentConfig["hide_on"] != undefined){
-      var show_events = this.componentConfig["hide_on"].split(",")
+    if(this.props["hide_on"] != undefined){
+      var show_events = this.props["hide_on"].split(",")
       show_events.forEach(show_event => MatestackUiCore.matestackEventHub.$on(show_event.trim(), self.hide));
     }
 
-    if(this.componentConfig["dispose_on"] != undefined){
-      var show_events = this.componentConfig["dispose_on"].split(",")
+    if(this.props["dispose_on"] != undefined){
+      var show_events = this.props["dispose_on"].split(",")
       show_events.forEach(show_event => MatestackUiCore.matestackEventHub.$on(show_event.trim(), self.dispose));
     }
   },
 
   beforeDestroy: function() {
     const self = this
-    MatestackUiCore.matestackEventHub.$off(this.componentConfig["show_on"], self.show);
-    MatestackUiCore.matestackEventHub.$off(this.componentConfig["hide_on"], self.hide);
-    MatestackUiCore.matestackEventHub.$off(this.componentConfig["dispose_on"], self.hide);
-    if(this.componentConfig["show_on"] != undefined){
-      var shown_events = this.componentConfig["show_on"].split(",")
+    MatestackUiCore.matestackEventHub.$off(this.props["show_on"], self.show);
+    MatestackUiCore.matestackEventHub.$off(this.props["hide_on"], self.hide);
+    MatestackUiCore.matestackEventHub.$off(this.props["dispose_on"], self.hide);
+    if(this.props["show_on"] != undefined){
+      var shown_events = this.props["show_on"].split(",")
       shown_events.forEach(show_event => MatestackUiCore.matestackEventHub.$off(show_event.trim(), self.show));
     }
-    if(this.componentConfig["hide_on"] != undefined){
-      var hiden_events = this.componentConfig["hide_on"].split(",")
+    if(this.props["hide_on"] != undefined){
+      var hiden_events = this.props["hide_on"].split(",")
       hiden_events.forEach(hide_event => MatestackUiCore.matestackEventHub.$off(hide_event.trim(), self.hide));
     }
-    if(this.componentConfig["dispose_on"] != undefined){
-      var hiden_events = this.componentConfig["dispose_on"].split(",")
+    if(this.props["dispose_on"] != undefined){
+      var hiden_events = this.props["dispose_on"].split(",")
       hiden_events.forEach(hide_event => MatestackUiCore.matestackEventHub.$off(hide_event.trim(), self.dispose));
     }
   },

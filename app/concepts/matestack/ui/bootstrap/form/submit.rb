@@ -2,7 +2,6 @@ class Matestack::Ui::Bootstrap::Form::Submit < Matestack::Ui::Bootstrap::BaseCom
 
   optional :button_variant
   optional :spinner_variant
-  optional :text
   optional :loading_text
   optional :loading_class
   optional :size

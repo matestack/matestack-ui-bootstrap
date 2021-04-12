@@ -25,7 +25,7 @@ Returns a bootstrap collapse containing text or content specified by a block. Al
 
 ```ruby
 onclick emit: "toggleCollapse" do
-  bs_btn text: "Toggle Collapse"
+  bs_btn "Toggle Collapse"
 end
 bs_collapse toggle_on: "toggleCollapse", card: "Random text for card body content"
 ```
@@ -45,7 +45,7 @@ returns
 ### Example 2: Basic Collapse component triggered via data attributes
 
 ```ruby
-bs_btn text: "Toggle both element", data: { "bs-toggle": "collapse",  "bs-target": "#example" }, attributes: { 'aria-expanded': "false", 'aria-controls': "example" }
+bs_btn "Toggle both element", data: { "bs-toggle": "collapse",  "bs-target": "#example" }, 'aria-expanded': "false", 'aria-controls': "example"
 bs_collapse id: "example", card: "Random text for card body content"
 ```
 
@@ -65,9 +65,9 @@ returns
 
 ```ruby
 paragraph do
-  link class: "btn btn-primary", text: "Toggle first element", path: "#multiCollapseExample1", data: { "bs-toggle": "collapse" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample1", 'role': "button" }
-  bs_btn text: "Toggle second element", data: { "bs-toggle": "collapse",  "bs-target": "#multiCollapseExample2" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample2" }
-  bs_btn text: "Toggle both element", data: { "bs-toggle": "collapse",  "bs-target": ".multi-collapse" }, attributes: { 'aria-expanded': "false", 'aria-controls': "multiCollapseExample1 multiCollapseExample2" }
+  a "Toggle first element", class: "btn btn-primary", path: "#multiCollapseExample1", data: { "bs-toggle": "collapse" }, 'aria-expanded': "false", 'aria-controls': "multiCollapseExample1", 'role': "button"
+  bs_btn "Toggle second element", data: { "bs-toggle": "collapse",  "bs-target": "#multiCollapseExample2" }, 'aria-expanded': "false", 'aria-controls': "multiCollapseExample2"
+  bs_btn "Toggle both element", data: { "bs-toggle": "collapse",  "bs-target": ".multi-collapse" }, 'aria-expanded': "false", 'aria-controls': "multiCollapseExample1 multiCollapseExample2"
 end
 
 bs_row do
@@ -103,4 +103,3 @@ end
   </div>
 </div>
 ```
-

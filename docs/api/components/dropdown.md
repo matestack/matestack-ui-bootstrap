@@ -25,10 +25,10 @@ Returns a bootstrap dropdown. Also the dropdown is customizable with the followi
 ### Example 1: Single Button
 
 ```ruby
-bs_dropdown id: "dropdownMenuButton", variant: :secondary, text: "Dropdown button", menu: [
-            { type: :link, path: "#", text: "Action" },
-            { type: :link, path: "#", text: "Another action" }
-          ]
+bs_dropdown "Dropdown button", id: "dropdownMenuButton", variant: :secondary, menu: [
+  { type: :link, path: "#", text: "Action" },
+  { type: :link, path: "#", text: "Another action" }
+]
 ```
 
 returns
@@ -48,13 +48,17 @@ returns
 ### Example 2: Split Button
 
 ```ruby
-bs_dropdown slots: { split_btn: slot { btn text: "Split Button" } }, 
-          menu: [
-            { type: :link, path: "#", text: "Action" },
-            { type: :link, path: "#", text: "Another action" },
-            { type: :divider },
-            { type: :link, path: "#", text: "Separated link" }
-          ]
+bs_dropdown slots: { split_btn: method(:my_slot) },
+  menu: [
+    { type: :link, path: "#", text: "Action" },
+    { type: :link, path: "#", text: "Another action" },
+    { type: :divider },
+    { type: :link, path: "#", text: "Separated link" }
+  ]
+
+def my_slot
+  btn text: "Split Button"
+end
 ```
 
 returns
@@ -73,4 +77,3 @@ returns
   </ul>
 </div>
 ```
-

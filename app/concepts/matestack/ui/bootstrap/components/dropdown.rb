@@ -1,14 +1,14 @@
 class Matestack::Ui::Bootstrap::Components::Dropdown < Matestack::Ui::Bootstrap::BaseVueJsComponent
   vue_name "matestack-ui-bootstrap-dropdown"
 
-  optional :variant, :text, :btn_class # button attributes
+  optional :variant, :btn_class # button attributes
   optional :direction, :align, :offset, :reference
   # dropdown menu attributes, expects an array of items with possible keys: type, path, text
   # or hash with possible keys: items, class
   optional :menu
   optional class: { as:  :bs_class }
   optional :id, :data
-  
+
   optional :size
 
   def prepare

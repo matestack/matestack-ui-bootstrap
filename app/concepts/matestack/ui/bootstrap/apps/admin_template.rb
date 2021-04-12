@@ -1,5 +1,7 @@
 class Matestack::Ui::Bootstrap::Apps::AdminTemplate < Matestack::Ui::App
 
+  include Matestack::Ui::Bootstrap::Registry
+
   def response(&block)
     matestack do
       body_response(&block)

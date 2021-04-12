@@ -1,7 +1,7 @@
 class Matestack::Ui::Bootstrap::Components::Alert < Matestack::Ui::Bootstrap::BaseVueJsComponent
   vue_name "matestack-ui-bootstrap-alert"
 
-  optional :title, :text, :variant, :dismissible, :animate, :title_size, class: { as:  :bs_class }
+  optional :title, :variant, :dismissible, :animate, :title_size, class: { as:  :bs_class }
   optional :close_on, :dispose_on # event names on which occourences we close or dispose the modal
 
   def response
@@ -15,7 +15,7 @@ class Matestack::Ui::Bootstrap::Components::Alert < Matestack::Ui::Bootstrap::Ba
 
   protected
 
-  def config
+  def vue_props
     {}.tap do |props|
       props[:close_on] = context.close_on
       props[:dispose_on] = context.dispose_on

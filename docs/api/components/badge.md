@@ -20,7 +20,7 @@ Returns a bootstrap badge containing text and/or content specified by a block. A
 ### Basic badge
 
 ```ruby
-bs_badge text: 'New'
+bs_badge 'New'
 ```
 
 Result:
@@ -34,7 +34,7 @@ Result:
 ```ruby
 bs_badge variant: :warning do
   div do
-    paragraph text: "Custom inner html"
+    paragraph "Custom inner html"
   end
 end
 ```
@@ -52,7 +52,7 @@ Result:
 ### Rounded success badge
 
 ```ruby
-bs_badge text: "Success", variant: :success, rounded: true
+bs_badge "Success", variant: :success, rounded: true
 ```
 
 Result:
@@ -60,4 +60,3 @@ Result:
 ```markup
 <span class="badge rounded-pill bg-success">Success</span>
 ```
-

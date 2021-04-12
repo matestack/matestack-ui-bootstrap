@@ -23,7 +23,6 @@ gemspec
 
 gem 'rails', '6.1.2'
 
-gem 'matestack-ui-core', git: "https://github.com/matestack/matestack-ui-core", branch: "2.0.0"
 
 gem 'rspec-rails', '~> 4.0.2'
 gem 'capybara'

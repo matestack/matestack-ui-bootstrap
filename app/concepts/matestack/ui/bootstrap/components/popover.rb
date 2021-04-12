@@ -35,7 +35,7 @@ class Matestack::Ui::Bootstrap::Components::Popover < Matestack::Ui::Bootstrap::
 
   optional class: { as:  :bs_class }
   optional id: { as: :bs_id }
-  DATA_ATTRIBUTES = %i[tag content title text variant animation placement tabindex trigger boundary offset popper_config]
+  DATA_ATTRIBUTES = %i[tag content title variant animation placement tabindex trigger boundary offset popper_config]
   optional *DATA_ATTRIBUTES
   # :tag # different element to apply: div, span, links, button, ...
   # :content, :title # popover title and content strings

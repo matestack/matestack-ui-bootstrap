@@ -32,10 +32,10 @@ Returns a bootstrap progress containing text or content specified by a block. Al
 ### Example 1: Basic example
 
 ```ruby
-bs_progress height: 20, variant: :success, progress: 25, valuemin: 0, valuemax: 100, text: "25%"
+bs_progress "25%", height: 20, variant: :success, progress: 25, valuemin: 0, valuemax: 100
 
 # because valuemin and valuemax is set as default. It can be shorten like this:
-bs_progress height: 20, variant: :success, progress: 25, text: "25%"
+bs_progress "25%", height: 20, variant: :success, progress: 25
 ```
 
 returns
@@ -49,7 +49,7 @@ returns
 ### Example 2: Using striped and animated option
 
 ```ruby
-bs_progress progress: 50, text: "50%", valuemin: 0, valuemax: 100, stripped: true, animated: true
+bs_progress "50%", progress: 50, valuemin: 0, valuemax: 100, stripped: true, animated: true
 ```
 
 returns
@@ -78,4 +78,3 @@ returns
   <div class="progress-bar bg-info" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
 </div>
 ```
-

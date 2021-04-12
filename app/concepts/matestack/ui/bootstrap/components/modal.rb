@@ -35,7 +35,7 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::Bootstrap::Ba
 
   protected
 
-  def config
+  def vue_props
     {}.tap do |props|
       props[:toggle_on] = context.toggle_on
       props[:show_on] = context.show_on

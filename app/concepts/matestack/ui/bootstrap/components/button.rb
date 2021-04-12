@@ -1,10 +1,10 @@
 class Matestack::Ui::Bootstrap::Components::Button < Matestack::Ui::Bootstrap::BaseComponent
 
-  optional :text, :type, :variant, :size, :outline
+  optional :type, :variant, :size, :outline
   optional :attributes, class: { as:  :bs_class }
-  optional :transition 
-  optional :action 
-  optional :onclick 
+  optional :transition
+  optional :action
+  optional :onclick
   optional :link
 
   def response(&block)

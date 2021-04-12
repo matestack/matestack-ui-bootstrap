@@ -1,7 +1,7 @@
 class Matestack::Ui::Bootstrap::Components::Progress < Matestack::Ui::Bootstrap::BaseComponent
 
   optional class: { as:  :bs_class }
-  optional :text, :valuemin, :valuemax
+  optional :valuemin, :valuemax
   # progress expects a number or a list containing hashes with at least a :value
   # other options are :text, class: { as:  :bs_class }, :variant, :striped, :animated, :aria_valuenow
   optional :progress

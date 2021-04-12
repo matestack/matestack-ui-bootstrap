@@ -24,7 +24,7 @@ Returns a bootstrap alert containing text and/or content specified by a block. A
 ### Basic alert with title and text
 
 ```ruby
-bs_alert color: :success, heading: "Well done!", text: 'Some alert message'
+bs_alert 'Some alert message', color: :success, heading: "Well done!"
 ```
 
 returns
@@ -40,7 +40,7 @@ returns
 
 ```ruby
 bs_alert color: :warning, animate: true, dismissible: true do
-  strong text: "Holy guacamole!"
+  strong "Holy guacamole!"
   plain "You should check in on some of those fields below."
 end
 ```
@@ -59,9 +59,9 @@ returns
 ### Alert closing on event triggered by button click
 
 ```ruby
-bs_alert close_on: 'close-alert', text: "Closing Alert test"  
+bs_alert "Closing Alert test", close_on: 'close-alert'  
 onclick emit: "close-alert" do
-  bs_btn text: "close alert"
+  bs_btn "close alert"
 end
 ```
 
@@ -71,10 +71,9 @@ _Not intended by Bootstrap but you can use matestack toggle mechanism to trigger
 
 ```ruby
 toggle show_on: "my-event" do        
-  bs_alert heading: "Alert Heading", text: "This is an alert", animate: true, dismissible: true
+  bs_alert "This is an alert", heading: "Alert Heading", animate: true, dismissible: true
 end
 onclick emit: "my-event" do
-  bs_btn text: "Show Alert"
+  bs_btn "Show Alert"
 end
 ```
-
