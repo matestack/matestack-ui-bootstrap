@@ -9,9 +9,10 @@ Gem::Specification.new do |spec|
   spec.version     = Matestack::Ui::Bootstrap::VERSION
   spec.authors     = ["Jonas Jabari","Nils Henning"]
   spec.email       = ["jonas@matestack.io"]
-  spec.homepage    = "https://matestack.org"
+  spec.homepage    = "https://matestack.io"
   spec.summary     = "Bootstrap v5 components for Matestack UI"
   spec.description = "Bootstrap v5 components for Matestack UI"
+  spec.license        = "MIT"
 
   spec.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.md"]
 

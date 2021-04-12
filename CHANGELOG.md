@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.0.0 Release - 2021-04-12
+
+### Changes
+
+- various internal adjustments matching `matestack-ui-core` 2.0.0 changes
+- changed to MIT license like `matestack-ui-core`
+
+
 ## v1.5.1 Release - 2021-03-07
 
 ### Bugfixes
