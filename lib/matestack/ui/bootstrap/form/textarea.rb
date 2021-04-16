@@ -7,7 +7,7 @@ class Matestack::Ui::Bootstrap::Form::Textarea < Matestack::Ui::VueJs::Component
   optional :form_text
   optional :disabled
   optional :placeholder
-  optional :show_value
+  optional :show_value # todo: check if this is relevant
   optional :rows
   optional :cols
 
@@ -38,7 +38,7 @@ class Matestack::Ui::Bootstrap::Form::Textarea < Matestack::Ui::VueJs::Component
     end
   end
 
-  def textarea_error_class
+  def input_error_class
     'is-invalid'
   end
 

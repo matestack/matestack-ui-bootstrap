@@ -8,7 +8,7 @@ RSpec.describe "Bootstrap::Form::Textarea", type: :feature, js: true do
     Rails.application.routes.append do
       scope "form_text_input_spec" do
         post '/textarea_success_form_test', to: 'form_test#success_submit', as: 'textarea_success_form_test'
-        post '/textarea_failure_form_test', to: 'form_test#failure_submit', as: 'itextareafailure_form_test'
+        post '/textarea_failure_form_test', to: 'form_test#failure_submit', as: 'textarea_failure_form_test'
       end
     end
     Rails.application.reload_routes!
@@ -27,7 +27,7 @@ RSpec.describe "Bootstrap::Form::Textarea", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_selector('form > div.matestack-ui-bootstrap-texetarea > input.form-control#foo[type="text"]')
+    expect(page).to have_selector('form > div.matestack-ui-bootstrap-textarea > textarea.form-control#foo')
 
     fill_in "foo", with: "bar"
 
@@ -113,8 +113,10 @@ RSpec.describe "Bootstrap::Form::Textarea", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page.find(:foo1).height).to be < page.find(:foo2).height
-    expect(page.find(:foo1).width).to be < page.find(:foo2).width
+    expect(page.find('textarea#foo1')['rows']).to eq '3'
+    expect(page.find('textarea#foo1')['cols']).to eq '10'
+    expect(page.find('textarea#foo2')['rows']).to eq '10'
+    expect(page.find('textarea#foo2')['cols']).to eq '30'
   end
 
 
