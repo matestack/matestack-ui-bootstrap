@@ -7,7 +7,6 @@ class Matestack::Ui::Bootstrap::Form::Textarea < Matestack::Ui::VueJs::Component
   optional :form_text
   optional :disabled
   optional :placeholder
-  optional :show_value # todo: check if this is relevant
   optional :rows
   optional :cols
 
