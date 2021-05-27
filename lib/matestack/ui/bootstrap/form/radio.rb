@@ -26,10 +26,12 @@ class Matestack::Ui::Bootstrap::Form::Radio < Matestack::Ui::VueJs::Components::
 
   end
 
+  private
 
   def bootstrap_radio_attributes
+    classes = 'form-check-input'
     {
-      class: (options[:class] || "") << (" form-check-input"),
+      class: (options[:class] || "") << classes,
       disabled: context.disabled
     }
   end
