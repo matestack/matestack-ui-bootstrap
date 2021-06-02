@@ -2,7 +2,7 @@
 
 The Bootstrap `button group` component, implemented in Ruby. Use it like any other matestack component in your apps, pages and components. It offers customizable options to simply achieve what is possible in bootstrap with this component. See below for more information about the possible options.
 
-## `btn_group(*args, &block)`
+## `bs_btn_group(*args, &block)`
 
 Returns a bootstrap button-group containing content specified by a block. Also the button\_group is customizable with the following options.
 
