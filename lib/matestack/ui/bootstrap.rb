@@ -98,7 +98,6 @@ module Matestack
 end
 require "#{base_path}/form/checkbox"
 require "#{base_path}/form/input"
-require "#{base_path}/form/textarea"
 require "#{base_path}/form/radio"
 require "#{base_path}/form/select"
 require "#{base_path}/form/submit"
