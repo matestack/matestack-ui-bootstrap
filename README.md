@@ -19,7 +19,7 @@ You end up writing 50% less code while increasing productivity, maintainability 
 
 ----
 
-`matestack-ui-core` does not have an opinion on styling. In contrast, `matestack-ui-bootstap` ships all Bootstrap v5 components as Matestack UI components usable in pure Ruby. Additionally layout and CRUD components help you to build a beautiful web app meeting typical requirements of a data driven web app.
+`matestack-ui-core` does not have an opinion on styling. In contrast, `matestack-ui-bootstrap` ships all Bootstrap v5 components as Matestack UI components usable in pure Ruby. Additionally layout and CRUD components help you to build a beautiful web app meeting typical requirements of a data driven web app.
 
 Don't think about styling anymore and just create admin or application UIs faster than ever before!
 
@@ -40,7 +40,7 @@ Rails versions below 5.2 are not supported.
 
 ### Vue.js
 
-`matestack-ui-core` requires Vue.js and Vuex for its reactivity features. Following version ranges are supported:
+`matestack-ui-bootstrap` requires Vue.js and Vuex for its reactivity features. Following version ranges are supported:
 
 - Vue.js ^2.6.0
 - Vuex ^3.6.0
@@ -49,7 +49,7 @@ Vue 3 / Vuex 4 update is planned for Q2 2021.
 
 ## Documentation/Installation
 
-Documentation can be found [here](https://docs.matestack.io/matestack-ui-bootstap/)
+Documentation can be found [here](https://docs.matestack.io/matestack-ui-bootstrap)
 
 ## Changelog
 
@@ -57,4 +57,4 @@ Changelog can be found [here](./CHANGELOG.md)
 
 ## License
 
-`matestack-ui-bootstap` is an Open Source project licensed under the terms of the [MIT license](./LICENSE)
+`matestack-ui-bootstrap` is an Open Source project licensed under the terms of the [MIT license](./LICENSE)
