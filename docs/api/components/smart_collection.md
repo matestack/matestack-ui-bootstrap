@@ -10,7 +10,7 @@ Docs in progress! Please review the examples.
 
 ## Examples
 
-### Example 1: Table rendering with custom row actions
+### Table rendering with custom row actions
 
 ```ruby
 def response
@@ -72,7 +72,7 @@ def customer_delete_action_config customer
 end
 ```
 
-### Example 2: Table rendering with joined model and formatted col data rendering
+### Table rendering with joined model and formatted col data rendering
 
 ```ruby
 def response
@@ -119,7 +119,109 @@ def table_item_actions order
 end
 ```
 
-### Example 3: Custom collection rendering
+### Table rendering formatted col data rendering access the whole row instance object
+
+```ruby
+def response
+  #...
+  bs_smart_collection collection_config
+  #...
+end
+
+def collection_config
+  {
+    id: 'orders',
+    items: Order.all,
+    paginate: 10,
+    rerender_on: "success",
+    columns: {
+      self: {
+        heading: 'Price in €',
+        format: -> (order){ "#{order.price_in_euro} €" },
+      }
+    }
+  }
+end
+```
+
+### Table rendering formatted col data rendering access the whole row instance object in multiple columns
+
+```ruby
+def response
+  #...
+  bs_smart_collection collection_config
+  #...
+end
+
+def collection_config
+  {
+    id: 'orders',
+    items: Order.all,
+    paginate: 10,
+    rerender_on: "success",
+    # the columns hash can only have a key once, fix by specifying the attribute name
+    columns: {
+      price_in_euro: {
+        heading: 'Price in €',
+        format: -> (column_data){ "#{column_data} €" },
+      },
+      price_in_euro_again: {
+        attribute: :price_in_euro, # fix by specifying the attribute name
+        heading: 'Price in €',
+        format: -> (column_data){ "#{column_data} €" },
+      },
+      self: {
+        heading: 'Price in €',
+        format: -> (order){ "#{order.price_in_euro} €" },
+      },
+      self_again: {
+        attribute: :self, # fix by specifying the attribute name
+        heading: 'Price in €',
+        format: -> (order){ "#{order.price_in_euro} €" },
+      }
+    }
+  }
+end
+```
+
+### Table rendering via slot enabling flexible column content composition
+
+```ruby
+def response
+  #...
+  bs_smart_collection collection_config
+  #...
+end
+
+def collection_config
+  {
+    id: 'orders',
+    items: Order.all,
+    paginate: 10,
+    rerender_on: "success",
+    columns: {
+      price_in_euro: {
+        heading: 'Price in €',
+        slot: method(:price_in_euro_column_slot),
+      },
+      self: {
+        heading: 'Price in € accessed via row object',
+        slot: method(:whole_object_column_slot),
+      }
+    }
+  }
+end
+
+def price_in_euro_column_slot price_in_euro
+  bs_badge price_in_euro # or whatever you want to do with all kinds of components
+end
+
+def whole_object_column_slot order
+  bs_badge order.price_in_euro # or whatever you want to do with all kinds of components
+end
+```
+
+### Custom collection rendering
 
 ```ruby
 def response
@@ -183,4 +285,3 @@ def product_delete_action_config product
   }
 end
 ```
-
