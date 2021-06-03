@@ -39,7 +39,10 @@ class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::VueJs::Components::
     {
       id: (options[:id] || attribute_key),
       class: (options[:class] || "") << (" form-control"),
-      disabled: context.disabled
+      disabled: context.disabled,
+      min: context.min,
+      max: context.max,
+      step: context.step
     }
   end
 
