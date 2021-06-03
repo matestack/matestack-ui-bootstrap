@@ -114,6 +114,10 @@ module Matestack::Ui::Bootstrap::Registry
     Matestack::Ui::Bootstrap::Form::Input.(text, options, &block)
   end
 
+  def bs_form_textarea(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Form::Textarea.(text, options, &block)
+  end
+
   def bs_form_select(text=nil, options=nil, &block)
     Matestack::Ui::Bootstrap::Form::Select.(text, options, &block)
   end
