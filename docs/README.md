@@ -14,37 +14,42 @@ Read about `matestack-ui-core` here: [https://docs.matestack.io/matestack-ui-cor
 
 How much do you enjoy copy&pasting complex DOM structures and giant chains of CSS classes across your APP in order to create a decent looking UI?
 
-With `matestack-ui-core` you're luckily able to build complex DOM structures ONCE in pure Ruby in a Matestack component and reuse it across your app without copy&pasting. So this component may look like this:
+With `matestack-ui-core` you're luckily able to build complex DOM structures ONCE in pure Ruby in a Matestack component and reuse it across your app without copy&pasting. So this component may look like this \(without using `matestack-ui-bootstrap`!\):
 
 {% code title="app/matestack/components/card\_component.rb" %}
 ```ruby
 class Components::CardComponent < Matestack::Ui::Component
-
+​
+  required :title
+  optional :image_path, :content
+​
   def response
     div class: "card shadow-sm border-0 bg-light" do
-      img path: "...", class: "w-100"
-      body_partial # calling the below defined instance method
+      img path: context.image_path, class: "w-100" if context.image_path
+      body_partial
     end
   end
-
+​
   private
-
+​
   def body_partial
     div class: "card-body" do
-      h5 "foo", class: "card-title"
-      paragraph "bar", class: "card-text"
+      h5 context.title, class: "card-title"
+      paragraph context.content, class: "card-text" if context.content
     end
   end
-
+​
 end
 ```
 {% endcode %}
 
-`matestack-ui-core` has no opinion about styling. That's why you need to build a Bootstrap card component \(or whatever CSS approach you prefer\) yourself. In case you're into Bootstrap: Wouldn’t it be cool to have all Bootstrap components available like that in pure Ruby?
+**`matestack-ui-core` has no opinion about styling. That's why you need to build a Bootstrap card component \(or whatever CSS approach you prefer\) yourself.** 
+
+In case you're into Bootstrap: Wouldn’t it be cool to have all Bootstrap components available like that in pure Ruby?
 
 That's at least what we thought and why we've created `matestack-ui-bootstrap`shipping all you need to build beautiful, reactive UIs in pure Ruby and smart CRUD components based on Bootstrap v5.
 
-So a card is already implemented and would be used like that:
+So **the card component is already implemented** and would simply ****be used like that without any need of implementing the component yourself:
 
 ```ruby
 bs_card title: "foo", body: "bar"
