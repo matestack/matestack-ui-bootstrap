@@ -2,6 +2,11 @@
 
 * [Welcome](README.md)
 
+## Getting Started
+
+* [Installation & Update](getting-started/installation-update.md)
+* [Quick Start \[WIP\]](getting-started/quick-start.md)
+
 ## API
 
 * [Templates](api/templates/README.md)

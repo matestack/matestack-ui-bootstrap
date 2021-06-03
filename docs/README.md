@@ -1,6 +1,71 @@
+---
+description: 'Matestack Ui Bootstrap - Beautiful, reactive web UIs, Ruby and you!'
+---
+
 # Welcome
 
 As an extension for `matestack-ui-core`, `matestack-ui-bootstrap`ships all you need to build beautiful, reactive UIs in pure Ruby and smart CRUD components based on Bootstrap v5. Don't think about styling anymore and just create admin or application UIs faster than ever before!
+
+{% hint style="info" %}
+Read about `matestack-ui-core` here: [https://docs.matestack.io/matestack-ui-core](https://docs.matestack.io/matestack-ui-core)
+{% endhint %}
+
+## Why?
+
+How much do you enjoy copy&pasting complex DOM structures and giant chains of CSS classes across your APP in order to create a decent looking UI?
+
+With `matestack-ui-core` you're luckily able to build complex DOM structures ONCE in pure Ruby in a Matestack component and reuse it across your app without copy&pasting. So this component may look like this:
+
+{% code title="app/matestack/components/card\_component.rb" %}
+```ruby
+class Components::CardComponent < Matestack::Ui::Component
+
+  def response
+    div class: "card shadow-sm border-0 bg-light" do
+      img path: "...", class: "w-100"
+      body_partial # calling the below defined instance method
+    end
+  end
+
+  private
+
+  def body_partial
+    div class: "card-body" do
+      h5 "foo", class: "card-title"
+      paragraph "bar", class: "card-text"
+    end
+  end
+
+end
+```
+{% endcode %}
+
+`matestack-ui-core` has no opinion about styling. That's why you need to build a Bootstrap card component \(or whatever CSS approach you prefer\) yourself. In case you're into Bootstrap: Wouldn’t it be cool to have all Bootstrap components available like that in pure Ruby?
+
+That's at least what we thought and why we've created `matestack-ui-bootstrap`shipping all you need to build beautiful, reactive UIs in pure Ruby and smart CRUD components based on Bootstrap v5.
+
+So a card is already implemented and would be used like that:
+
+```ruby
+bs_card title: "foo", body: "bar"
+```
+
+which renders:
+
+```markup
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">foo</h5>
+    <p class="card-text">bar</p>
+  </div>
+</div>
+```
+
+{% page-ref page="api/components/card.md" %}
+
+You can see, how the prebuilt card component save you from writing 6 lines of HTML. And that's just a simple example. When using all kinds prebuilt components, you will stop writing a ton of HTML or copy&pasting DOM structure around. Do you what that makes with the readability and maintainability of your app? Not to speak about developer happiness...
+
+
 
 ## Live Demo <a id="live-demo"></a>
 
@@ -8,104 +73,17 @@ Based on `matestack-ui-core` and `matestack-ui-bootstrap` this reactive dummy ap
 
 ![https://dummy.matestack.io](https://gblobscdn.gitbook.com/assets%2F-MSlZxQYRyTJNqEznL8o%2F-MTevzmZSIIaZYSkG4fv%2F-MTfYhwWbFzn_uGOlml9%2Fimage.png?alt=media&token=cbf6d7df-7d94-450e-9925-b42eb2cb0a3f)
 
-{% hint style="info" %}
-We do not offer Sprocktes Support in order to include the JavaScript part of `matestack-ui-bootstrap`. Please use something like Webpacker instead! Sprockets support will be dropped soon for `matestack-ui-core` as well!
-{% endhint %}
+## Getting Started
 
-## Webpacker Installation
+Before you dive into `matestack-ui-bootstrap`, make sure to have a solid understanding of `matestack-ui-core` first: [https://docs.matestack.io/matestack-ui-core/getting-started/concepts-rails-integration](https://docs.matestack.io/matestack-ui-core/getting-started/concepts-rails-integration)
 
-```text
-bundle add 'matestack-ui-bootstrap'
-yarn add 'matestack-ui-bootstrap'
-```
+After that, it might be a good idea to get into using `matestack-ui-bootstrap` following the quick start guide:
 
-`app/views/layouts/application.html.erb`
+{% page-ref page="getting-started/quick-start.md" %}
 
-```text
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Your App</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+If you know how to use matestack-ui-bootstrap, the API documentation should serve you well:
 
-    <%= stylesheet_link_tag 'application', media: 'all'%>
-    <%= javascript_pack_tag 'application'%>
-  </head>
+## Roadmap
 
-  <body>
-    <div id="matestack-ui">
-      <%= yield %>
-    </div>
-  </body>
-</html>
-```
-
-`app/javascript/packs/stylesheets/application.scss`
-
-```css
-@import "~bootstrap/scss/bootstrap.scss";
-```
-
-`app/javascript/packs/application.js`
-
-```javascript
-import Rails from "@rails/ujs"
-// import Turbolinks from "turbolinks"
-import * as ActiveStorage from "@rails/activestorage"
-import "channels"
-
-import "./stylesheets/application.scss";
-
-import Vue from 'vue/dist/vue.esm'
-import Vuex from 'vuex'
-
-import MatestackUiCore from 'matestack-ui-core'
-import MatestackUiBootstrap from "matestack-ui-bootstrap"
-
-let matestackUiApp = undefined
-
-document.addEventListener('DOMContentLoaded', () => {
-  matestackUiApp = new Vue({
-    el: "#matestack-ui",
-    store: MatestackUiCore.store
-  })
-})
-
-Rails.start()
-// Turbolinks.start()
-ActiveStorage.start()
-```
-
-`app/assets/images/icons`
-
-* download latest compatible icons: [https://github.com/twbs/icons/releases/tag/v1.3.0](https://github.com/twbs/icons/releases/tag/v1.3.0)
-* extract the bootstrap-icons.svg to this path: app/assets/images/icons \(served via assets pipeline\)
-
-## Usage
-
-Create Matestack apps, pages and components as described in the docs of `matestack-ui-core` and utilize the components described in the API section in order to create your UI. Just make sure to include the additional Registry in your desired controllers
-
-`app/controllers/application_controller.rb`
-
-```ruby
-class ApplicationController < ActionController::Base
-
-  include Matestack::Ui::Core::Helper # described in Core docs
-
-end
-```
-
-and include the registry wherever you want to use the components via methods like "bs\_btn" instead of calling the namespaced classes
-
-`app/matestack/application_component.rb`
-
-```ruby
-class ApplicationComponent < Matestack::Ui::Component
-
-  include Matestack::Ui::Bootstrap::Registry # use methods like "bs_btn" instead of calling the namespaced classes
-
-end
-```
+Do you want to know what we're currently working on and what's planned for the next releases? Check out our GitHub Project board: [https://github.com/orgs/matestack/projects/1](https://github.com/orgs/matestack/projects/1)
 
