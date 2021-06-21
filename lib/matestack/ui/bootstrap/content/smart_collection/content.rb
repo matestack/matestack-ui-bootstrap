@@ -72,6 +72,8 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Content
       if value.is_a?(Hash) && value[:slot]
         value[:slot].call(data.instance_eval(key.to_s)) if value[:attribute].nil?
         value[:slot].call(data.instance_eval(value[:attribute].to_s)) if value[:attribute].present?
+      elsif value.is_a?(Hash) && value[:call_back].present? && context.parent
+        context.parent.send value[:call_back], data #, key, value
       else
         plain cell_text(data, key, value)
       end

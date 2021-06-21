@@ -13,6 +13,8 @@ class Matestack::Ui::Bootstrap::Content::SmartCollection::Collection < Matestack
   # html attributes
   optional :id
 
+  optional :parent
+
   # table configuration
   optional :items
   optional :columns
