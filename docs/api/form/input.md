@@ -15,26 +15,32 @@ Renders a Bootstrap input field.
 * `browse_button_text` - Expects a string and sets the text to be displayed in the "browse" button for the `:file` input
 * `placeholder` - Expects a string to be displayed as a placeholder for whatever the user decides to choose for the `:file` input. Defaults to "Choose file"
 * `variant` - Expects a symbol to change the size of the select menu, you can use either `:sm` or `:lg`
-* `min` - Sets the corresponding HTML attribute for the `:range` input type
-* `max` - Sets the corresponding HTML attribute for the `:range` input type
-* `step` - Sets the corresponding HTML attribute for the `:range` input type
+* `min` - Sets the corresponding HTML attribute
+* `max` - Sets the corresponding HTML attribute
+* `step` - Sets the corresponding HTML attribute
 * `show_value` - Expects a boolean. Defaults to `false`, if set to `true` it displays the current value for the corresponding `:range` input type field
 
 ## Examples
 
-### Example 1: Basic usage
+### Basic usage for text input
 
 ```ruby
 bs_form_input key: :foo, type: :text
 ```
 
-### Example 2: Basic usage with label and form text
+### Basic usage for float number input
+
+```ruby
+bs_form_input key: :foo, type: :number, step: 0.01
+```
+
+### Basic usage with label and form text
 
 ```ruby
 bs_form_input key: :foo, type: :text, label: "Input field", form_text: "some notes"
 ```
 
-### Example 3: Basic usage as disabled input
+### Basic usage as disabled input
 
 ```ruby
 bs_form_input key: :foo, type: :text, disabled: true
@@ -42,45 +48,44 @@ bs_form_input key: :foo, type: :text, disabled: true
 
 returns
 
-### Example 4: Basic usage with custom class
+### Basic usage with custom class
 
 ```ruby
 bs_form_input key: :foo, type: :text, class: "some-class"
 ```
 
-### Example 5: Basic usage with placeholder
+### Basic usage with placeholder
 
 ```ruby
 bs_form_input key: :foo, type: :text, placeholder: "fill!"
 ```
 
-### Example 6: Basic usage as range input
+### Basic usage as range input
 
 ```ruby
 bs_form_input key: :some_range_input, type: :range, max: 10
 ```
 
-### Example 7: Using range input with show\_value and non-default steps
+### Using range input with show\_value and non-default steps
 
 ```ruby
 bs_form_input key: :some_range_input, type: :range, step: 2, max: 10, show_value: true
 ```
 
-### Example 8: Basic usage as file input
+### Basic usage as file input
 
 ```ruby
 bs_form_input key: :some_single_file_input, type: :file
 ```
 
-### Example 9: File input with non-default size and optional form\_text
+### File input with non-default size and optional form\_text
 
 ```ruby
 bs_form_input variant: :lg, form_text: "just some notes", key: :some_single_file_input, type: :file
 ```
 
-### Example 10: Multi-file input with placeholder and browse\_button\_text
+### Multi-file input with placeholder and browse\_button\_text
 
 ```ruby
 bs_form_input placeholder: "Select a file", browse_button_text: "Click", key: :some_multi_file_input, type: :file, multiple: true
 ```
-
