@@ -19,6 +19,15 @@ class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::VueJs::Component
 
   private
 
+  def bootstrap_attributes
+    classes = 'form-check-input'
+    classes = [options[:class], classes].join(' ')
+    {
+      class: classes,
+      disabled: context.disabled
+    }
+  end
+
   def multiple?
    checkbox_options.present?
   end
@@ -28,7 +37,7 @@ class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::VueJs::Component
     if multiple?
      checkbox_options.to_a.each do |item|
         checkbox_wrapper do
-          input options.merge(checkbox_attributes(item)).merge(class: 'form-check-input')
+          input options.merge(checkbox_attributes(item)).merge(bootstrap_attributes)
           bootstrap_label text: item_label(item), for_input: item_id(item)
         end
       end
@@ -36,7 +45,7 @@ class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::VueJs::Component
     else
       checkbox_wrapper do
         input true_false_checkbox_attributes.merge(type: :hidden, id: nil, value: 0)
-        input true_false_checkbox_attributes.merge(type: :checkbox, id: item_id(1), class: 'form-check-input')
+        input true_false_checkbox_attributes.merge(type: :checkbox, id: item_id(1)).merge(bootstrap_attributes)
 
         bootstrap_label text: input_label, for_input: item_id(1)
       end
