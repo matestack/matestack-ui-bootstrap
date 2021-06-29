@@ -414,143 +414,141 @@ RSpec.describe "Bootstrap::Content::SmartCollection", type: :feature, js: true d
 
   end
 
-  # it 'appears with content and header' do
-  #   matestack_render do
-  #     smart_table base_query: Person.all,
-  #                 including: [:created_at, :name, :email, :age]
-  #   end
-  #   visit example_path
-  #     expect(page).to have_content('Mark')
-  #     expect(page).to have_selector('thead')
-  #     expect(page).to have_content('Name')
-  #     expect(page).to have_content('Age')
-  # end
-  #
-  # it 'has filter' do
-  #   matestack_render do
-  #     smart_table base_query: Person.all,
-  #               including: [:created_at, :name, :email, :age],
-  #               filter: [:name, :email], filter_option: :like
-  #   end
-  #   visit example_path
-  #     expect(page).to have_selector('input')
-  #     fill_in('name', :with => 'Mark')
-  #     click_button('Filter')
-  #     expect(page).to have_content('Mark')
-  #     expect(page).to_not have_content('Anh')
-  #     click_button('Reset')
-  #     expect(page).to have_content('Anh')
-  # end
-  #
-  # it 'has order option' do
-  #   matestack_render do
-  #     smart_table base_query: Person.all,
-  #               including: [:created_at, :name, :email, :age],
-  #               filter: [:name, :email], filter_option: :like,
-  #               order: [{created_at: :desc}]
-  #   end
-  #   visit example_path
-  #     expect(page).to have_content('sort by:')
-  #     #TODO: maybe there is a better way to test ordering functionality?
-  # end
-  #
-  # it 'has zebra-striping' do
-  #   matestack_render do
-  #     smart_table base_query: Person.all,
-  #                 including: [:created_at, :name, :email, :age],
-  #                 striped: true
-  #   end
-  #   visit example_path
-  #     expect(page).to have_selector(".table-striped")
-  # end
-  #
-  # it 'is hoverable' do
-  #   matestack_render do
-  #     smart_table base_query: Person.all,
-  #                 including: [:created_at, :name, :email, :age],
-  #                 hoverable: true
-  #   end
-  #   visit example_path
-  #     expect(page).to have_selector(".table-hover")
-  # end
-  #
-  # it 'can have different colors / variant ' do
-  #   matestack_render do
-  #     smart_table base_query: Person.all,
-  #                 including: [:created_at, :name, :email, :age],
-  #                 variant: :primary
-  #   end
-  #   visit example_path
-  #     expect(page).to have_selector('.table-primary')
-  # end
-  #
-  # it 'is borderless' do
-  #   matestack_render do
-  #     smart_table base_query: Person.all,
-  #                 including: [:created_at, :name, :email, :age],
-  #                 borderless: true
-  #   end
-  #   visit example_path
-  #     expect(page).to have_selector('.table-borderless')
-  # end
-  #
-  # it 'can have different border colors' do
-  #   matestack_render do
-  #     smart_table base_query: Person.all,
-  #                 including: [:created_at, :name, :email, :age],
-  #                 border_variant: :primary
-  #   end
-  #   visit example_path
-  #     expect(page).to have_selector('.table-bordered.border-primary')
-  # end
-  #
-  # it 'is responsive' do
-  #   matestack_render do
-  #     smart_table base_query: Person.all,
-  #     including: [:created_at, :name, :email, :age],
-  #     responsive: true
-  #   end
-  #   visit example_path
-  #     expect(page).to have_selector(".table-responsive")
-  # end
-  # it 'is responsive from given breakpoint' do
-  #   matestack_render do
-  #     smart_table base_query: Person.all,
-  #                 including: [:created_at, :name, :email, :age],
-  #                 responsive: :md
-  #   end
-  #   visit example_path
-  #     expect(page).to have_selector(".table-responsive-md")
-  # end
-  #
-  # it 'can have custom header class' do
-  #   matestack_render do
-  #     smart_table base_query: Person.all,
-  #                 including: [:created_at, :name, :email, :age],
-  #                 thead_class: "foobar"
-  #   end
-  #   visit example_path
-  #     expect(page).to have_selector('thead.foobar')
-  # end
-  #
-  # it 'can have custom body class' do
-  #   matestack_render do
-  #     smart_table base_query: Person.all,
-  #                 including: [:created_at, :name, :email, :age],
-  #                 tbody_class: "foobar"
-  #   end
-  #   visit example_path
-  #     expect(page).to have_selector('tbody.foobar')
-  # end
-  #
-  # it 'can have footer and custom footer class' do
-  #   matestack_render do
-  #     smart_table base_query: Person.all,
-  #                 including: [:created_at, :name, :email, :age],
-  #                 footer: ["Footer", "Namefoot"], tfoot_class: "foobar"
-  #   end
-  #   visit example_path
-  #     expect(page).to have_selector('tfoot.foobar')
-  #     expect(page).to have_content('Namefoot')
-  # end
+  it 'ActiveRecord collection with custom rendering per column' do
+    ExamplePage.define_method(:collection_config) do
+      {
+        id: 'customer-collection',
+        items: Customer.all,
+        paginate: 10,
+        columns: {
+          id: 'ID',
+          last_name: {
+            heading: 'Last Name via slot',
+            slot: method(:last_name_slot_rendering)
+          }
+        }
+      }
+    end
+
+    ExamplePage.define_method(:last_name_slot_rendering) do |customer|
+      bs_badge customer.last_name
+    end
+
+    matestack_render do
+      bs_smart_collection collection_config
+    end
+
+    visit example_path
+
+    expect(page).to have_selector('tr > td > span.badge', text: "last_name 1")
+
+    expect(page).to have_selector('tr > td > span.badge', count: 10)
+  end
+
+  it 'paginated, filterable ActiveRecord collection with access to row object instance in column format proc' do
+    ExamplePage.define_method(:collection_config) do
+      {
+        id: 'customer-collection',
+        items: Customer.all,
+        paginate: 10,
+        columns: {
+          id: 'ID',
+          self: {
+            heading: 'Row Instance Access via Format',
+            format: -> (customer){ "#{customer.last_name} Access" },
+          }
+        }
+      }
+    end
+
+    matestack_render do
+      bs_smart_collection collection_config
+    end
+
+    visit example_path
+
+    expect(page).to have_selector('tr > td', text: "last_name 1 Access")
+  end
+
+  it 'ActiveRecord collection with custom rendering per column with access to row object instance' do
+    ExamplePage.define_method(:collection_config) do
+      {
+        id: 'customer-collection',
+        items: Customer.all,
+        paginate: 10,
+        columns: {
+          id: 'ID',
+          self: {
+            heading: 'Row Instance Access via Slot',
+            slot: method(:column_slot_rendering_for_whole_object)
+          }
+        }
+      }
+    end
+
+    ExamplePage.define_method(:column_slot_rendering_for_whole_object) do |customer|
+      bs_badge "#{customer.first_name} #{customer.last_name}"
+    end
+
+    matestack_render do
+      bs_smart_collection collection_config
+    end
+
+    visit example_path
+
+    expect(page).to have_selector('tr > td > span.badge', text: "first_name 1 last_name 1")
+
+    expect(page).to have_selector('tr > td > span.badge', count: 10)
+  end
+
+  it 'ActiveRecord collection with access to same row object/attributes in multiple columns' do
+    ExamplePage.define_method(:collection_config) do
+      {
+        id: 'customer-collection',
+        items: Customer.all,
+        paginate: 10,
+        columns: {
+          id: 'ID',
+          self: {
+            heading: 'Row Instance Access via Format',
+            format: -> (customer){ "#{customer.last_name} Access" },
+          },
+          self_2: {
+            attribute: :self,
+            heading: 'Row Instance Access via Slot',
+            slot: method(:column_slot_rendering_for_whole_object)
+          },
+          last_name: {
+            heading: 'Last Name',
+            text: :end
+          },
+          last_name_2: {
+            attribute: :last_name,
+            heading: 'Last Name 2',
+            text: :end
+          }
+        }
+      }
+    end
+
+    ExamplePage.define_method(:column_slot_rendering_for_whole_object) do |customer|
+      bs_badge "#{customer.first_name} #{customer.last_name}"
+    end
+
+    matestack_render do
+      bs_smart_collection collection_config
+    end
+
+    visit example_path
+
+    expect(page).to have_content("Row Instance Access via Format")
+    expect(page).to have_content("Row Instance Access via Slot")
+    expect(page).to have_content("Last Name")
+    expect(page).to have_content("Last Name 2")
+
+    expect(page).to have_selector('tr > td', text: "last_name 1 Access")
+    expect(page).to have_selector('tr > td > span.badge', text: "first_name 1 last_name 1")
+    expect(page).to have_selector('tr > td.text-end', text: "last_name 1", count: 2)
+  end
+
 end

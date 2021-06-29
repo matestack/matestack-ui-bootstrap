@@ -69,7 +69,11 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Content
 
   def cell(data, key, value)
     td class: cell_class(value) do
-      plain cell_text(data, key, value)
+      if value.is_a?(Hash) && value[:slot]
+        value[:slot].call(data)
+      else
+        plain cell_text(data, key, value)
+      end
     end
   end
 
@@ -81,8 +85,17 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Content
   end
 
   def cell_text(data, key, value)
-    text = data.instance_eval(key.to_s)
-    text = value[:format].call(text) if value.is_a?(Hash) && value[:format]
+    if value.is_a?(Hash)
+      if value[:attribute].present?
+        text = data.instance_eval(value[:attribute].to_s)
+      else
+        text = data.instance_eval(key.to_s)
+      end
+      text = value[:format].call(text) if value[:format].present?
+    else
+      text = data.instance_eval(key.to_s)
+    end
+
     text
   end
 
