@@ -4,6 +4,7 @@
 
 ### Improvements
 
+- Added flexible column rendering via slots #17
 - Added nested form support
 - Added textarea component #6
 
@@ -11,7 +12,6 @@
 
 - Enable disabled for select and switch #16
 - use step, min, max option for all input type, enabling float number input #15
-
 
 ## v2.0.1 Release - 2021-04-12
 
