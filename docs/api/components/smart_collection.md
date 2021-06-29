@@ -201,22 +201,14 @@ def collection_config
     rerender_on: "success",
     columns: {
       price_in_euro: {
-        heading: 'Price in €',
-        slot: method(:price_in_euro_column_slot),
-      },
-      self: {
         heading: 'Price in € accessed via row object',
-        slot: method(:whole_object_column_slot),
+        slot: method(:price_in_euro_column_slot) # slots ALWAYS get the whole row object passed in!
       }
     }
   }
 end
 
-def price_in_euro_column_slot price_in_euro
-  bs_badge price_in_euro # or whatever you want to do with all kinds of components
-end
-
-def whole_object_column_slot order
+def price_in_euro_column_slot order
   bs_badge order.price_in_euro # or whatever you want to do with all kinds of components
 end
 ```

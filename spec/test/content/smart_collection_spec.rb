@@ -430,8 +430,8 @@ RSpec.describe "Bootstrap::Content::SmartCollection", type: :feature, js: true d
       }
     end
 
-    ExamplePage.define_method(:last_name_slot_rendering) do |last_name|
-      bs_badge last_name
+    ExamplePage.define_method(:last_name_slot_rendering) do |customer|
+      bs_badge customer.last_name
     end
 
     matestack_render do

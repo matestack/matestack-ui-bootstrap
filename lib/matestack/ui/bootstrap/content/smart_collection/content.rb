@@ -70,8 +70,7 @@ module Matestack::Ui::Bootstrap::Content::SmartCollection::Content
   def cell(data, key, value)
     td class: cell_class(value) do
       if value.is_a?(Hash) && value[:slot]
-        value[:slot].call(data.instance_eval(key.to_s)) if value[:attribute].nil?
-        value[:slot].call(data.instance_eval(value[:attribute].to_s)) if value[:attribute].present?
+        value[:slot].call(data)
       else
         plain cell_text(data, key, value)
       end
