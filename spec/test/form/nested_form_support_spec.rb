@@ -7,8 +7,8 @@ RSpec.describe "Nested Form Support Spec", type: :feature, js: true do
   before :all do
     Rails.application.routes.append do
       scope "nested_form_support_spec" do
-        post '/input_success_form_test', to: 'form_test#success_submit', as: 'input_success_form_test'
-        post '/input_failure_form_test', to: 'form_test#failure_submit', as: 'input_failure_form_test'
+        post '/input_success_form_test', to: 'form_test#success_submit', as: 'nested_form_support_spec_input_success_form_test'
+        post '/input_failure_form_test', to: 'form_test#failure_submit', as: 'nested_form_support_spec_input_failure_form_test'
       end
     end
     Rails.application.reload_routes!
@@ -19,7 +19,7 @@ RSpec.describe "Nested Form Support Spec", type: :feature, js: true do
   end
 
   it 'properly renders all input components with dynamically adjusted IDs' do
-    form_config = get_form_config(path: input_success_form_test_path)
+    form_config = get_form_config(path: nested_form_support_spec_input_success_form_test_path)
 
     ExamplePage.define_method(:order_item_form) do |order_item = OrderItem.new|
       form_fields_for order_item, key: :order_items_attributes do
