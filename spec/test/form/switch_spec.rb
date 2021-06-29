@@ -178,17 +178,19 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
   end
 
   it 'renders bootstrap switch button with additional custom class' do
-# add additional custom class to bootstrap switch
 
-#     form_config = get_form_config(path: switch_success_form_test_path)
-#     matestack_render do
-#       matestack_form form_config do
-#         bs_form_switch key: :foo, options: [1, 2], class: "some-class"
-#         bs_form_submit text: "Submit"
-#       end
-#     end
-#     visit example_path
-#     expect(page).to have_xpath('//form//switch[@id="foo" and contains(@class, "form-switch") and contains(@class, "some-class")]')
+    # add additional custom class to bootstrap switch
+    form_config = get_form_config(path: switch_success_form_test_path)
+    matestack_render do
+      matestack_form form_config do
+        bs_form_switch key: :foo, options: [1, 2], class: "some-class"
+        bs_form_submit text: "Submit"
+      end
+    end
+    visit example_path
+    # expect(page).to have_xpath('//form//switch[@id="foo_1" and contains(@class, "form-switch") and contains(@class, "some-class")]')
+    expect(page).to have_xpath('//form//input[@id="foo_1" and contains(@class, "some-class")]')
+    expect(page).to have_xpath('//form//input[@id="foo_2" and contains(@class, "some-class")]')
   end
 
   it 'renders disabled bootstrap switch buttons' do
@@ -200,8 +202,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    have_xpath('//form//input[@id="_1" and @disabled="disabled" and contains(@class, "is-invalid")]')
-    have_xpath('//form//input[@id="_2" and @disabled="disabled" and contains(@class, "is-invalid")]')
+    expect(page).to have_xpath('//form//input[@id="foo_1" and @disabled="disabled"]')
+    expect(page).to have_xpath('//form//input[@id="foo_2" and @disabled="disabled"]')
   end
 
   it 'renders bootstrap switch button with label' do
@@ -225,7 +227,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_xpath('//form//div[@id="form_text_for_foo" and contains(@class, "form-text") and contains(text(), "some notes")]')
+    expect(page).to have_xpath('//form//div[contains(@class, "form-text-for-foo") and contains(@class, "form-text") and contains(text(), "some notes")]')
   end
 
   it 'renders bootstrap switch button as inline variant' do

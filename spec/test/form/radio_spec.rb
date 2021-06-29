@@ -33,7 +33,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     expect(page).to have_selector('form > div.matestack-ui-bootstrap-radio > .form-check > label.form-check-label[for="foo_2"]')
 
     find('#foo_1').click
-  
+
     expect_any_instance_of(FormTestController).to receive(:expect_params)
       .with(hash_including(wrapper: { foo: 1 }))
 
@@ -175,7 +175,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_xpath('//form//div[@id="form_text_for_foo" and contains(@class, "form-text") and contains(text(), "some notes")]')
+    expect(page).to have_xpath('//form//div[contains(@class, "form-text-for-foo") and contains(@class, "form-text") and contains(text(), "some notes")]')
   end
 
   it 'renders bootstrap radio buttons as inline variant' do
@@ -201,8 +201,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    have_xpath('//form//input[@id="foo_1" and @disabled="disabled" and contains(@class, "is-invalid")]')
-    have_xpath('//form//input[@id="foo_2" and @disabled="disabled" and contains(@class, "is-invalid")]')
+    expect(page).to have_xpath('//form//input[@id="foo_1" and @disabled="disabled"]')
+    expect(page).to have_xpath('//form//input[@id="foo_2" and @disabled="disabled"]')
   end
 
 end

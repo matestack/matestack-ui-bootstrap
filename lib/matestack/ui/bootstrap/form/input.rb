@@ -16,12 +16,12 @@ class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::VueJs::Components::
 
   def response
     div class: "matestack-ui-bootstrap-input" do
-      label input_label, for: attribute_key,  class: "form-label" if input_label
+      label input_label, ":for": id,  class: "form-label" if input_label
       case context.type
       when :range
         input options.merge(input_attributes).merge(bootstrap_range_attributes)
         if context.show_value
-          div id: attribute_key, class: "form-text" do
+          div class: "form-text form-text-for-#{attribute_key}" do
             plain "{{ data['#{attribute_key}'] }}"
           end
         end
@@ -37,9 +37,11 @@ class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::VueJs::Components::
 
   def bootstrap_input_attributes
     {
-      id: (options[:id] || attribute_key),
       class: (options[:class] || "") << (" form-control"),
-      disabled: context.disabled
+      disabled: context.disabled,
+      min: context.min,
+      max: context.max,
+      step: context.step
     }
   end
 
@@ -108,7 +110,7 @@ class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::VueJs::Components::
   end
 
   def render_form_text
-    div id: "form_text_for_#{attribute_key}", class: "form-text" do
+    div class: "form-text form-text-for-#{attribute_key}" do
       plain context.form_text
     end
   end

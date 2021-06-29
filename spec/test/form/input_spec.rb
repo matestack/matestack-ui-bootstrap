@@ -100,7 +100,49 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_xpath('//form//div[@id="form_text_for_foo" and contains(@class, "form-text") and contains(text(), "some notes")]')
+    expect(page).to have_xpath('//form//div[contains(@class, "form-text-for-foo") and contains(@class, "form-text") and contains(text(), "some notes")]')
+  end
+
+  it 'renders basic bootstrap input field accepting float numbers' do
+    form_config = get_form_config(path: input_success_form_test_path)
+    matestack_render do
+      matestack_form form_config do
+        bs_form_input key: :foo, type: :number, step: 0.01
+        bs_form_submit text: "Submit"
+      end
+    end
+    visit example_path
+    fill_in "foo", with: 1.45
+
+    expect_any_instance_of(FormTestController).to receive(:expect_params)
+      .with(hash_including(wrapper: { foo: 1.45 }))
+
+    click_button "Submit"
+  end
+
+  it 'renders basic bootstrap input field accepting float numbers as text with , delimeter via pattern regex' do
+    form_config = get_form_config(path: input_success_form_test_path)
+    matestack_render do
+      matestack_form form_config do
+        bs_form_input key: :foo, type: :text, pattern: "[0-9]+([,][0-9]+)?"
+        bs_form_submit text: "Submit"
+      end
+    end
+    visit example_path
+
+    fill_in "foo", with: "1.45"
+
+    expect_any_instance_of(FormTestController).not_to receive(:expect_params)
+      .with(hash_including(wrapper: { foo: "1.45" }))
+
+    click_button "Submit"
+
+    fill_in "foo", with: "1,45"
+
+    expect_any_instance_of(FormTestController).to receive(:expect_params)
+      .with(hash_including(wrapper: { foo: "1,45" }))
+
+    click_button "Submit"
   end
 
   it 'renders basic bootstrap range input' do
@@ -114,7 +156,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     visit example_path
 
     expect(page).to have_selector('form > div.matestack-ui-bootstrap-input > input[type="range"][min="5"][max="11"][step="2"]')
-    expect(page).to have_xpath('//form//div[@id="form_text_for_foo" and contains(@class, "form-text") and contains(text(), "some notes")]')
+    expect(page).to have_xpath('//form//div[contains(@class, "form-text-for-foo") and contains(@class, "form-text") and contains(text(), "some notes")]')
   end
 
 end

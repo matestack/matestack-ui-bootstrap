@@ -10,7 +10,7 @@ class Matestack::Ui::Bootstrap::Form::Select < Matestack::Ui::VueJs::Components:
 
   def response
     div class: "matestack-ui-bootstrap-form-select" do
-      label input_label, for: attribute_key,  class: "form-label" if input_label
+      label input_label, ":for": id,  class: "form-label" if input_label
       select select_attributes.merge(bootstrap_select_attributes) do
         render_options
       end
@@ -55,7 +55,7 @@ class Matestack::Ui::Bootstrap::Form::Select < Matestack::Ui::VueJs::Components:
   end
 
   def render_form_text
-    div id: "form_text_for_#{attribute_key}", class: "form-text" do
+    div class: "form-text form-text-for-#{attribute_key}" do
       plain context.form_text
     end
   end

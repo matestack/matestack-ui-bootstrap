@@ -10,7 +10,7 @@ class Matestack::Ui::Bootstrap::Form::Switch < Matestack::Ui::Bootstrap::Form::C
 
   def response
     div class: "matestack-ui-bootstrap-switch" do
-      label input_label, class: "form-label", for: attribute_key if input_label && multiple?
+      label input_label, class: "form-label", ":for": id if input_label && multiple?
       render_options
       render_errors
       plain context.form_text

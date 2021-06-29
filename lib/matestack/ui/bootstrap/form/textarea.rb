@@ -12,7 +12,7 @@ class Matestack::Ui::Bootstrap::Form::Textarea < Matestack::Ui::VueJs::Component
 
   def response
     div class: "matestack-ui-bootstrap-textarea" do
-      label input_label, for: attribute_key,  class: "form-label" if input_label
+      label input_label, ":for": id,  class: "form-label" if input_label
       textarea options.merge(textarea_attributes).merge(bootstrap_textarea_attributes)
       render_errors
       render_form_text if context.form_text
@@ -21,7 +21,6 @@ class Matestack::Ui::Bootstrap::Form::Textarea < Matestack::Ui::VueJs::Component
 
   def bootstrap_textarea_attributes
     {
-      id: (options[:id] || attribute_key),
       class: (options[:class] || "") << (" form-control"),
       rows: context.rows,
       cols: context.cols,
@@ -42,7 +41,7 @@ class Matestack::Ui::Bootstrap::Form::Textarea < Matestack::Ui::VueJs::Component
   end
 
   def render_form_text
-    div id: "form_text_for_#{attribute_key}", class: "form-text" do
+    div class: "form-text form-text-for-#{attribute_key}" do
       plain context.form_text
     end
   end

@@ -100,7 +100,7 @@ RSpec.describe "Bootstrap::Form::Textarea", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_xpath('//form//div[@id="form_text_for_foo" and contains(@class, "form-text") and contains(text(), "some notes")]')
+    expect(page).to have_xpath('//form//div[contains(@class, "form-text-for-foo") and contains(@class, "form-text") and contains(text(), "some notes")]')
   end
 
   it 'renders basic bootstrap textarea field with form rows and cols' do

@@ -23,7 +23,6 @@ gemspec
 
 gem 'rails', '6.1.2'
 
-
 gem 'rspec-rails', '~> 4.0.2'
 gem 'capybara'
 gem 'webpacker', '~> 5.0'
