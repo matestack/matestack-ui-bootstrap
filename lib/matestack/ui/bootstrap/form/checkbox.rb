@@ -10,7 +10,7 @@ class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::VueJs::Component
 
   def response
     div class: "matestack-ui-bootstrap-form-checkbox" do
-      label input_label, class: "form-label", for: attribute_key if input_label && multiple?
+      label input_label, class: "form-label", ":for": id if input_label && multiple?
       render_options
       render_errors
       render_form_text unless context.form_text.nil? # otherwise renders empty div
@@ -45,7 +45,7 @@ class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::VueJs::Component
     else
       checkbox_wrapper do
         input true_false_checkbox_attributes.merge(type: :hidden, id: nil, value: 0)
-        input true_false_checkbox_attributes.merge(type: :checkbox, id: item_id(1)).merge(bootstrap_attributes)
+        input true_false_checkbox_attributes.merge(type: :checkbox, ":id": item_id(1)).merge(bootstrap_attributes)
 
         bootstrap_label text: input_label, for_input: item_id(1)
       end
@@ -62,7 +62,7 @@ class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::VueJs::Component
   end
 
   def bootstrap_label(text:, for_input:)
-    label text, for: for_input, class: 'form-check-label'
+    label text, ":for": for_input, class: 'form-check-label'
   end
 
   def render_errors
@@ -82,7 +82,7 @@ class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::VueJs::Component
   end
 
   def render_form_text
-    div id: "form_text_for_#{attribute_key}", class: "form-text" do
+    div class: "form-text form-text-for-#{attribute_key}" do
       plain context.form_text
     end
   end
