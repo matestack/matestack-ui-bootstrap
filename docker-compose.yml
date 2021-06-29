@@ -49,6 +49,8 @@ services:
       RAILS_ENV: test
     links:
       - postgres_test
+    depends_on:
+      - postgres_test
     ports:
       - "33123:33123"
     volumes:
