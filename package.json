@@ -1,6 +1,6 @@
 {
   "name": "matestack-ui-bootstrap",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "license": "MIT",
   "main": "./lib/matestack/ui/bootstrap/index.js",
   "files": [
@@ -13,7 +13,7 @@
     "@rails/webpacker": "5.2.1",
     "bootstrap": "^5.0.0",
     "link-module-alias": "^1.2.0",
-    "matestack-ui-core": "^2.0.0",
+    "matestack-ui-core": "^2.1.0",
     "rails-erb-loader": "^5.5.2"
   },
   "devDependencies": {

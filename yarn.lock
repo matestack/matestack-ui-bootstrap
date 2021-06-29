@@ -4292,10 +4292,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-matestack-ui-core@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/matestack-ui-core/-/matestack-ui-core-2.0.0.tgz#2cc5b10589e1d7d54c075ed1ad397714c7d13923"
-  integrity sha512-VndmLtqzfgD6PpW0zrckAm6MYdY/wcNa3MGwwvVGKYMeB9gB+DELQxh+OxJEggbfZEX00HOhzIGUwKZi/OVYFQ==
+matestack-ui-core@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/matestack-ui-core/-/matestack-ui-core-2.1.0.tgz#fea10748700b8c893697ede03992a67cfd04cb68"
+  integrity sha512-q8Uuq3yoKWIPn2MvGCx8tH3qoC9PSKXZy3Pxiw+BTwWWwDKBXhcdxWxURgz7gL2czhp/VGcx5Yfc5eVbWHg2qw==
   dependencies:
     axios "^0.21.1"
     v-runtime-template "^1.5.2"
