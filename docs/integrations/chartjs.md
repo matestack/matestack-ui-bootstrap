@@ -44,8 +44,6 @@ class Components::ChartJs < Matestack::Ui::VueJsComponent
 end
 ```
 
-`app/matestack/components/chart_js.js`
-
 ## Vue.js component
 
 If not already installed, do:
@@ -55,6 +53,8 @@ yarn add chart.js
 ```
 
 **Do not forget to import the following file into you application pack**
+
+`app/matestack/components/chart_js.js`
 
 ```javascript
 import Chart from 'chart.js';
