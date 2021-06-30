@@ -277,3 +277,4 @@ def product_delete_action_config product
   }
 end
 ```
+

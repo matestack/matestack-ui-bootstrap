@@ -48,7 +48,13 @@ end
 
 ## Vue.js component
 
-**Do not forget to require chart.js in your package.json** **Do not forget to import the following file into you application pack**
+If not already installed, do:
+
+```ruby
+yarn add chart.js
+```
+
+**Do not forget to import the following file into you application pack**
 
 ```javascript
 import Chart from 'chart.js';

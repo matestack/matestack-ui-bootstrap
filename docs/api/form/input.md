@@ -89,3 +89,4 @@ bs_form_input variant: :lg, form_text: "just some notes", key: :some_single_file
 ```ruby
 bs_form_input placeholder: "Select a file", browse_button_text: "Click", key: :some_multi_file_input, type: :file, multiple: true
 ```
+
