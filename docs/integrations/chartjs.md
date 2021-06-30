@@ -24,19 +24,19 @@ class Components::ChartJs < Matestack::Ui::VueJsComponent
   # injected into vue.js components
   def vue_props
     {}.tap do |props|
-      props[:type] = type
-      props[:datasets] = datasets
-      props[:labels] = labels
-      props[:display_legend] = !display_legend.nil? ? display_legend : false
-      props[:display_x_axes] = !display_x_axes.nil? ? display_x_axes : true
-      props[:display_y_axes] = !display_y_axes.nil? ? display_y_axes : true
-      props[:display_y_axes] = !display_y_axes.nil? ? display_y_axes : true
-      props[:cutout_percentage] = !cutout_percentage.nil? ? cutout_percentage : 70
+      props[:type] = context.type
+      props[:datasets] = context.datasets
+      props[:labels] = context.labels
+      props[:display_legend] = !display_legend.nil? ? context.display_legend : false
+      props[:display_x_axes] = !display_x_axes.nil? ? context.display_x_axes : true
+      props[:display_y_axes] = !display_y_axes.nil? ? context.display_y_axes : true
+      props[:display_y_axes] = !display_y_axes.nil? ? context.display_y_axes : true
+      props[:cutout_percentage] = !context.cutout_percentage.nil? ? context.cutout_percentage : 70
     end
   end
 
   def response
-    div class: "chart-container #{bs_class}",  style: "width: 100%; height: 100%;" do
+    div class: "chart-container #{context.bs_class}",  style: "width: 100%; height: 100%;" do
       plain "<canvas ref='chart'></canvas>".html_safe
     end
   end
