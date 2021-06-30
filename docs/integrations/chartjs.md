@@ -49,7 +49,7 @@ end
 If not already installed, do:
 
 ```ruby
-yarn add chart.js
+yarn add chart.js@2.9.4
 ```
 
 **Do not forget to import the following file into you application pack**
