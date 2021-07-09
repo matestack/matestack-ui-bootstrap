@@ -159,4 +159,23 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     expect(page).to have_xpath('//form//div[contains(@class, "form-text-for-foo") and contains(@class, "form-text") and contains(text(), "some notes")]')
   end
 
+  it 'renders bootstrap file input field and uploads file' do
+    form_config = get_form_config(path: input_success_form_test_path).merge(multipart: true)
+    matestack_render do
+      matestack_form form_config do
+        bs_form_input key: :file_upload, type: :file
+        bs_form_submit text: "Submit"
+      end
+    end
+    visit example_path
+    expect(page).to have_selector('form > div.matestack-ui-bootstrap-input > input.form-control#file_upload[type="file"]')
+
+    page.attach_file('file_upload', Rails.root + '../support/file.md', make_visible: true)
+
+    expect_any_instance_of(FormTestController).to receive(:expect_params)
+      .with(hash_including(wrapper: {file_upload: ActionDispatch::Http::UploadedFile}))
+
+    click_button "Submit"
+  end
+
 end
