@@ -22,11 +22,9 @@ class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::VueJs::Components::
         input options.merge(input_attributes).merge(bootstrap_range_attributes)
         if context.show_value
           div class: "form-text form-text-for-#{attribute_key}" do
-            plain "{{ data['#{attribute_key}'] }}"
+            plain "{{ #{input_key} }}"
           end
         end
-      when :file
-        file_input
       else
         input options.merge(input_attributes).merge(bootstrap_input_attributes)
         render_errors
