@@ -17,7 +17,7 @@
   "devDependencies": {
     "webpack-dev-server": "^3.11.0",
     "@rails/webpacker": "5.2.1",
-    "link-module-alias": "^1.2.0",
+    "link-module-alias": "^1.2.0"
   },
   "exports": {
     ".": "./lib/matestack/ui/bootstrap/index.js"
