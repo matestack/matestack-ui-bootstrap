@@ -10,14 +10,14 @@
   ],
   "dependencies": {
     "@popperjs/core": "^2.5.4",
-    "@rails/webpacker": "5.2.1",
     "bootstrap": "^5.0.0",
-    "link-module-alias": "^1.2.0",
     "matestack-ui-core": "^2.1.0",
     "rails-erb-loader": "^5.5.2"
   },
   "devDependencies": {
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "@rails/webpacker": "5.2.1",
+    "link-module-alias": "^1.2.0",
   },
   "exports": {
     ".": "./lib/matestack/ui/bootstrap/index.js"
