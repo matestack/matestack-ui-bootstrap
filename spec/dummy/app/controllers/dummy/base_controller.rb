@@ -11,7 +11,7 @@ class Dummy::BaseController < ApplicationController
   end
 
   def broadcast_activity_tracked
-    ActionCable.server.broadcast('matestack_ui_core', {
+    ActionCable.server.broadcast('matestack_ui_vuejs', {
       event: 'activity-tracked'
     })
   end

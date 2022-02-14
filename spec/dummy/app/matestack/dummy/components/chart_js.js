@@ -1,11 +1,9 @@
 import Chart from 'chart.js';
-import Vue from 'vue/dist/vue.esm'
+import MatestackUiVueJs from 'matestack-ui-vuejs'
 
-
-import MatestackUiCore from 'matestack-ui-core'
-
-Vue.component('chart-js-component', {
-  mixins: [MatestackUiCore.componentMixin],
+const chartJsComponent = {
+  mixins: [MatestackUiVueJs.componentMixin],
+  template: MatestackUiVueJs.componentHelpers.inlineTemplate,
 
   data() {
     return {
@@ -209,7 +207,7 @@ Vue.component('chart-js-component', {
     Chart.defaults.global.defaultFontFamily = this.fontFamily
     Chart.defaults.global.defaultColor = this.fontFamily
 
-    const chartElement = this.$refs.chart
+    const chartElement = this.getRefs().chart
 
     if(this.props["type"] == "bar"){
       this.drawBarChart(chartElement);
@@ -230,7 +228,9 @@ Vue.component('chart-js-component', {
 
   },
 
-  beforeDestroy: function() {
+  beforeUnmount: function() {
 
   },
-});
+}
+
+export default chartJsComponent

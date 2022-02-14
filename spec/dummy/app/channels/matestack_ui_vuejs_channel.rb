@@ -1,6 +1,6 @@
-class MatestackUiCoreChannel < ApplicationCable::Channel
+class MatestackUiVueJsChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "matestack_ui_core"
+    stream_from "matestack_ui_vuejs"
   end
 
   def unsubscribed

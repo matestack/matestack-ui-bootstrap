@@ -9,7 +9,7 @@ Docs in progress. Please review the examples
 ### Example 1: Usage with sidebar
 
 ```ruby
-class Dummy::App < Matestack::Ui::Bootstrap::Apps::AdminTemplate
+class Dummy::Layout < Matestack::Ui::Bootstrap::Layouts::AdminTemplate
 
   def sidebar_top_partial
     div class: "text-center" do
@@ -76,4 +76,3 @@ class Dummy::App < Matestack::Ui::Bootstrap::Apps::AdminTemplate
 
 end
 ```
-

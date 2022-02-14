@@ -1,7 +1,7 @@
 import consumer from "./consumer"
-import MatestackUiCore from 'matestack-ui-core';
+import MatestackUiVueJs from 'matestack-ui-vuejs';
 
-consumer.subscriptions.create("MatestackUiCoreChannel", {
+consumer.subscriptions.create("MatestackUiVueJsChannel", {
   connected() {
     // Called when the subscription is ready for use on the server
   },
@@ -11,6 +11,6 @@ consumer.subscriptions.create("MatestackUiCoreChannel", {
   },
 
   received(data) {
-    MatestackUiCore.matestackEventHub.$emit(data.event, data)
+    MatestackUiVueJs.eventHub.$emit(data.event, data)
   }
 });

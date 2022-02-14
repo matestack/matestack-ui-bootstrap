@@ -1,11 +1,11 @@
 require_relative "../registry"
 
-class Matestack::Ui::Bootstrap::Apps::AdminTemplate < Matestack::Ui::App
+class Matestack::Ui::Bootstrap::Layouts::AdminTemplate < Matestack::Ui::Layout
 
   include Matestack::Ui::Bootstrap::Registry
 
   def response(&block)
-    matestack do
+    matestack_vue_js_app do
       body_response(&block)
     end
   end
@@ -13,20 +13,20 @@ class Matestack::Ui::Bootstrap::Apps::AdminTemplate < Matestack::Ui::App
   def body_response(&block)
     div class: "d-flex flex-row" do
       if should_show_sidebar?
-        bs_sidebar sidebar_navigation_items: sidebar_navigation_items, slots: { sidebar_top: method(:sidebar_top_slot) }
+        div id: "sidebar", class: "sidebar-wrapper" do
+          bs_sidebar sidebar_navigation_items: sidebar_navigation_items, slots: { sidebar_top: method(:sidebar_top_slot) }
+        end
       end
       div id: "content", class: "content-wrapper w-100 #{content_background_class}" do
         if should_show_navbar?
           bs_container do
-            bs_navbar brand: navbar_brand_config, items: navbar_items, class: "pt-4 #{'ps-5' if should_show_sidebar?}", collapse_class: "text-end text-lg-start pe-3" do
-              # div class: "d-flex" do
-              #   navbar_end_partial if self.respond_to?(:navbar_end_partial)
-              # end
-            end
+            bs_navbar brand: navbar_brand_config, items: navbar_items, class: "pt-4 #{'ps-5' if should_show_sidebar?}", collapse_class: "text-end text-lg-start pe-3"
           end
         end
         bs_container class: "my-5 px-4 pt-5" do
-          yield if block_given?
+          page_switch do
+            yield if block_given?
+          end
         end
       end
     end

@@ -1,6 +1,6 @@
 class Dummy::SharedImplementationController < Dummy::BaseController
 
-  matestack_app Dummy::App
+  matestack_layout Dummy::Layout
 
   def show
     render Dummy::Pages::SharedImplementation::Shpw

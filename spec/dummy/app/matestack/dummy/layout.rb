@@ -1,4 +1,4 @@
-class Dummy::App < Matestack::Ui::Bootstrap::Apps::AdminTemplate
+class Dummy::Layout < Matestack::Ui::Bootstrap::Layouts::AdminTemplate
 
   include Matestack::Ui::Bootstrap::Registry
 
@@ -60,7 +60,7 @@ class Dummy::App < Matestack::Ui::Bootstrap::Apps::AdminTemplate
 
   def toasts
     [
-      { show_on: "failure", class: "bg-danger text-white", body: "{{ eventData.message }}".html_safe },
+      { show_on: "failure", class: "bg-danger text-white", body: "{{ vc.eventData.message }}".html_safe },
       { show_on: "success", class: "bg-primary text-white", body: "Performed successfully" },
     ]
   end

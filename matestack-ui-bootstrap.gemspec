@@ -7,14 +7,15 @@ require "matestack/ui/bootstrap/version"
 Gem::Specification.new do |spec|
   spec.name        = "matestack-ui-bootstrap"
   spec.version     = Matestack::Ui::Bootstrap::VERSION
-  spec.authors     = ["Jonas Jabari","Nils Henning"]
+  spec.authors     = ["Jonas Jabari"]
   spec.email       = ["jonas@matestack.io"]
   spec.homepage    = "https://matestack.io"
   spec.summary     = "Bootstrap v5 components for Matestack UI"
   spec.description = "Bootstrap v5 components for Matestack UI"
-  spec.license        = "MIT"
+  spec.license     = "MIT"
 
   spec.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.md"]
 
-  spec.add_dependency "matestack-ui-core", "~> 2.1"
+  spec.add_dependency "matestack-ui-core", "~> 3.0.0.rc1"
+  spec.add_dependency "matestack-ui-vuejs", "~> 3.0.0.rc1"
 end
