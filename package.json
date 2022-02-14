@@ -10,11 +10,8 @@
   ],
   "dependencies": {
     "@popperjs/core": "^2.5.4",
-    "@rails/webpacker": "5.2.1",
     "bootstrap": "^5.0.0",
-    "link-module-alias": "^1.2.0",
-    "matestack-ui-vuejs": "^3.0.0-rc1",
-    "rails-erb-loader": "^5.5.2"
+    "matestack-ui-vuejs": "^3.0.0-rc1"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"
