@@ -1,3 +1,5 @@
+require 'devise'
+
 class JsonFailureApp < Devise::FailureApp
 
   def respond
