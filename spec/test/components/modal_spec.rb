@@ -127,7 +127,7 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
     end
     visit example_path
     expect(page).not_to have_content 'Modal Messages'
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_modal")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("show_modal")')
     sleep 2
     expect(page).to have_content 'Modal Messages'
   end
@@ -138,10 +138,10 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
     end
     visit example_path
     expect(page).not_to have_content 'Modal Messages'
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_modal")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("show_modal")')
     sleep 2
     expect(page).to have_content 'Modal Messages'
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("close_modal")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("close_modal")')
     sleep 2
     expect(page).not_to have_content 'Modal Messages'
   end
@@ -152,10 +152,10 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
     end
     visit example_path
     expect(page).not_to have_content 'Modal Messages'
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("toggle_modal")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("toggle_modal")')
     sleep 2
     expect(page).to have_content 'Modal Messages'
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("toggle_modal")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("toggle_modal")')
     sleep 2
     expect(page).not_to have_content 'Modal Messages'
   end

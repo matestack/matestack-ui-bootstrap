@@ -118,11 +118,11 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
     expect(page).to have_selector('div.carousel-item', count: 2, visible: false)
     expect(page).to have_content('First slide')
     expect(page).to_not have_content('Second slide')
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("next-carousel")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("next-carousel")')
     expect(page).to have_content('Second slide', wait: 2)
     expect(page).to_not have_content('First slide', wait: 2)
     sleep 0.5
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("next-carousel")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("next-carousel")')
     expect(page).to have_content('First slide', wait: 2)
     expect(page).to_not have_content('Second slide', wait: 2)
   end
@@ -142,7 +142,7 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
 
     expect(page).to have_content('First slide')
     expect(page).to_not have_content('Second slide')
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("prev-carousel")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("prev-carousel")')
     expect(page).to have_content('Second slide')
     expect(page).to_not have_content('First slide')
   end
@@ -162,14 +162,14 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
     expect(page).to have_content('First slide')
     expect(page).to_not have_content('Second slide')
     sleep 0.75
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("pause-carousel")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("pause-carousel")')
     expect(page).to_not have_content('First slide')
     expect(page).to have_content('Second slide')
     sleep 0.5
     expect(page).to_not have_content('First slide')
     expect(page).to have_content('Second slide')
 
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("cycle-carousel")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("cycle-carousel")')
     expect(page).to_not have_content('First slide')
     expect(page).to have_content('Second slide')
     expect(page).to have_content('First slide', wait: 2)

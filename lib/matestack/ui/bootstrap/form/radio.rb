@@ -54,4 +54,16 @@ class Matestack::Ui::Bootstrap::Form::Radio < Matestack::Ui::VueJs::Components::
     'is-invalid'
   end
 
+  def id
+    if ctx.id.present?
+      "'#{ctx.id}'"
+    else
+      if form_context.is_nested_form?
+        "'#{key}'+vc.parentNestedFormRuntimeId"
+      else
+        "'#{key}'"
+      end
+    end
+  end
+
 end

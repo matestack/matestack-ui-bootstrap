@@ -203,8 +203,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_xpath('//form//input[@id="foo_1" and @disabled="disabled"]')
-    expect(page).to have_xpath('//form//input[@id="foo_2" and @disabled="disabled"]')
+    expect(page).to have_xpath('//form//input[@id="foo_1" and @disabled]')
+    expect(page).to have_xpath('//form//input[@id="foo_2" and @disabled]')
   end
 
   it 'renders bootstrap checkbox button with label' do

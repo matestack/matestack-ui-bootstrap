@@ -42,13 +42,13 @@ class Matestack::Ui::Bootstrap::Components::Navbar < Matestack::Ui::Bootstrap::B
     path = brand[:path].present? ? brand[:path] : "/"
     brand[:path] = path
     case brand[:type]
-    when :link
-      a brand.except(:text).merge(class: "navbar-brand") do
+    when :transition
+      transition brand.except(:text).merge(class: "navbar-brand") do
         img height: 40, path: brand[:img], loading: "lazy" if brand[:img].present?
         plain brand[:text]
       end
     else
-      transition brand.except(:text).merge(class: "navbar-brand") do
+      a brand.except(:text).merge(class: "navbar-brand") do
         img height: 40, path: brand[:img], loading: "lazy" if brand[:img].present?
         plain brand[:text]
       end

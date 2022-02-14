@@ -87,4 +87,16 @@ class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::VueJs::Component
     end
   end
 
+  def id
+    if ctx.id.present?
+      "'#{ctx.id}'"
+    else
+      if form_context.is_nested_form?
+        "'#{key}'+vc.parentNestedFormRuntimeId"
+      else
+        "'#{key}'"
+      end
+    end
+  end
+
 end
