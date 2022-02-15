@@ -6,8 +6,8 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
   it 'renders a carousel with slides' do
     matestack_render do
       items = [
-        { path: image_url("matestack-teaser.png") },
-        { path: image_url("matestack-teaser.png") }
+        { path: asset_path("matestack-teaser.png") },
+        { path: asset_path("matestack-teaser.png") }
       ]
       bs_carousel items: items
     end
@@ -24,8 +24,8 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
   it 'renders a carousel with slides in dark variant' do
     matestack_render do
       items = [
-        { path: image_url("matestack-teaser.png") },
-        { path: image_url("matestack-teaser.png") }
+        { path: asset_path("matestack-teaser.png") },
+        { path: asset_path("matestack-teaser.png") }
       ]
       bs_carousel items: items, variant: :dark
     end
@@ -36,8 +36,8 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
   it 'can have caption on carousel' do
     matestack_render do
       items = [
-        { path: image_url("matestack-teaser.png"), title: "First slide", text: "Carousel First Text Caption" },
-        { path: image_url("matestack-teaser.png"), title: "Second slide", text: "Carousel Second Text Caption" }
+        { path: asset_path("matestack-teaser.png"), title: "First slide", text: "Carousel First Text Caption" },
+        { path: asset_path("matestack-teaser.png"), title: "Second slide", text: "Carousel Second Text Caption" }
       ]
       bs_carousel items: items
     end
@@ -52,8 +52,8 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
   it 'renders a carousel with faded animation and start at 2nd item' do
     matestack_render do
       items = [
-        { path: image_url("matestack-teaser.png"), title: "First slide", text: "Carousel First Text Caption" },
-        { path: image_url("matestack-teaser.png"), title: "Second slide", text: "Carousel Second Text Caption" }
+        { path: asset_path("matestack-teaser.png"), title: "First slide", text: "Carousel First Text Caption" },
+        { path: asset_path("matestack-teaser.png"), title: "Second slide", text: "Carousel Second Text Caption" }
       ]
       bs_carousel fade: true, start: 1, items: items
     end
@@ -70,8 +70,8 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
     fail
     matestack_render do
       items = [
-        { path: image_url("matestack-teaser.png"), title: "First slide", interval: 2000 },
-        { path: image_url("matestack-teaser.png"), title: "Second slide", interval: 3000 }
+        { path: asset_path("matestack-teaser.png"), title: "First slide", interval: 2000 },
+        { path: asset_path("matestack-teaser.png"), title: "Second slide", interval: 3000 }
       ]
       bs_carousel items: items
     end
@@ -91,8 +91,8 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
   it 'renders a carousel with indicators, controls' do
     matestack_render do
       items = [
-        { path: image_url("matestack-teaser.png") },
-        { path: image_url("matestack-teaser.png") }
+        { path: asset_path("matestack-teaser.png") },
+        { path: asset_path("matestack-teaser.png") }
       ]
       bs_carousel controls: true, indicators: true, items: items, variant: :dark
     end
@@ -107,8 +107,8 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
   it 'can show next item on event' do
     matestack_render do
       items = [
-        { path: image_url("matestack-teaser.png"), title: "First slide", interval: 10000, title_class: 'text-dark'  },
-        { path: image_url("matestack-teaser.png"), title: "Second slide", interval: 10000, title_class: 'text-dark'  }
+        { path: asset_path("matestack-teaser.png"), title: "First slide", interval: 10000, title_class: 'text-dark'  },
+        { path: asset_path("matestack-teaser.png"), title: "Second slide", interval: 10000, title_class: 'text-dark'  }
       ]
       bs_carousel next_on: "next-carousel", pause_on: "pause", items: items, style: "width: 1000px"
     end
@@ -130,8 +130,8 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
   it 'can show previous item on event' do
     matestack_render do
       items = [
-        { path: image_url("matestack-teaser.png"), title: "First slide" },
-        { path: image_url("matestack-teaser.png"), title: "Second slide" }
+        { path: asset_path("matestack-teaser.png"), title: "First slide" },
+        { path: asset_path("matestack-teaser.png"), title: "Second slide" }
       ]
       bs_carousel prev_on: "prev-carousel", items: items
     end
@@ -150,8 +150,8 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
   it 'can pause on event and restarty cycling after event' do
     matestack_render do
       items = [
-        { path: image_url("matestack-teaser.png"), title: "First slide", title_class: 'text-dark' },
-        { path: image_url("matestack-teaser.png"), title: "Second slide", title_class: 'text-dark' }
+        { path: asset_path("matestack-teaser.png"), title: "First slide", title_class: 'text-dark' },
+        { path: asset_path("matestack-teaser.png"), title: "Second slide", title_class: 'text-dark' }
       ]
       bs_carousel cycle_on: "cycle-carousel", pause_on: "pause-carousel", items: items, interval: 500, style: "width: 300px"
     end
@@ -181,8 +181,8 @@ RSpec.describe "Bootstrap::Components::Carousel", type: :feature, js: true do
 
   #   matestack_render do
   #     items = [
-  #       { path: image_url("matestack-teaser.png"), title: "First slide" },
-  #       { path: image_url("matestack-teaser.png"), title: "Second slide" }
+  #       { path: asset_path("matestack-teaser.png"), title: "First slide" },
+  #       { path: asset_path("matestack-teaser.png"), title: "Second slide" }
   #     ]
   #     carousel items: items
   #   end

@@ -49,7 +49,7 @@ describe 'Bootstrap::Components::Card', type: :feature, js: true do
   it 'has an image above the body text' do
     matestack_render do
       bs_card title: "Card title", body: "Some quick example text",
-            img_path: image_url("matestack-teaser.png")
+            img_path: asset_path("matestack-teaser.png")
     end
     visit example_path
     expect(page).to have_selector('img.card-img-top')
