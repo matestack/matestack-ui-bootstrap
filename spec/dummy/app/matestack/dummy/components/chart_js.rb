@@ -28,7 +28,7 @@ class Dummy::Components::ChartJs < ApplicationVueJsComponent
 
   def response
     div class: "chart-container #{context.bs_class}", style: "width: 100%; height: 100%;" do
-      plain "<canvas matestack-ui-core-ref='#{scoped_ref('chart')}'></canvas>".html_safe
+      plain "<canvas matestack-ui-vuejs-ref='#{matestack_ui_vuejs_ref('chart')}'></canvas>".html_safe
     end
   end
 

@@ -13,7 +13,7 @@
   "dependencies": {
     "@popperjs/core": "^2.5.4",
     "bootstrap": "^5.0.0",
-    "matestack-ui-vuejs": "^3.0.0-rc1"
+    "matestack-ui-vuejs": "^3.0.0-rc2"
   },
   "exports": {
     ".": "./lib/matestack/ui/bootstrap/index.js"

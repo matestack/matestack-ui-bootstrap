@@ -60,16 +60,4 @@ class Matestack::Ui::Bootstrap::Form::Select < Matestack::Ui::VueJs::Components:
     end
   end
 
-  def id
-    if ctx.id.present?
-      "'#{ctx.id}'"
-    else
-      if form_context.is_nested_form?
-        "'#{key}'+vc.parentNestedFormRuntimeId"
-      else
-        "'#{key}'"
-      end
-    end
-  end
-
 end

@@ -17,5 +17,5 @@ Gem::Specification.new do |spec|
   spec.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.md"]
 
   spec.add_dependency "matestack-ui-core", "~> 3.0.0.rc2"
-  spec.add_dependency "matestack-ui-vuejs", "~> 3.0.0.rc1"
+  spec.add_dependency "matestack-ui-vuejs", "~> 3.0.0.rc2"
 end
