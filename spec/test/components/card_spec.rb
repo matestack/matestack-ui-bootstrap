@@ -49,11 +49,11 @@ describe 'Bootstrap::Components::Card', type: :feature, js: true do
   it 'has an image above the body text' do
     matestack_render do
       bs_card title: "Card title", body: "Some quick example text",
-            img_path: image_url("matestack-teaser.png")
+            img_path: image_url("https://picsum.photos/200/300"), style: "width: 18rem;"
     end
     visit example_path
     expect(page).to have_selector('img.card-img-top')
-    expect(page).to have_selector("img[src*='matestack-teaser']")
+    expect(page).to have_selector("img[src*='https://picsum.photos/200/300']")
   end
 
   it 'has only custom body component' do
@@ -84,7 +84,7 @@ describe 'Bootstrap::Components::Card', type: :feature, js: true do
     end
     matestack_render do
       bs_card slots: {
-        body: method(:body_slot) 
+        body: method(:body_slot)
       }
     end
     visit example_path

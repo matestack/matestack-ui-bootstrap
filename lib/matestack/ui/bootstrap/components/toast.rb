@@ -56,7 +56,7 @@ class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::Bootstrap::Ba
       small header[:subtitle] if header[:subtitle].present?
 
       slot :header if slots && slots[:header]
-      bs_close dismiss: 'toast', class: "ms-2 mb-1", "@click": "hide()"
+      bs_close dismiss: 'toast', class: "ms-2 mb-1", "@click": "vc.hide()"
     end
 
   end
@@ -66,7 +66,7 @@ class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::Bootstrap::Ba
       plain context.body if context.body
     end
     unless context.header || slots && slots[:header]
-      bs_close dismiss: 'toast', class: "ms-auto me-2 btn-close-white", "@click": "hide()"
+      bs_close dismiss: 'toast', class: "ms-auto me-2 btn-close-white", "@click": "vc.hide()"
     end
   end
 
@@ -92,7 +92,7 @@ class Matestack::Ui::Bootstrap::Components::Toast < Matestack::Ui::Bootstrap::Ba
       hash[:'aria-live'] = 'assertive' unless context.important.present?
       hash[:'aria-atomic'] = 'true' unless context.placement.present?
       hash[:style] = "z-index: 10000; position: fixed; #{context.placement[:position] || 'top: 0; right: 0;' }"  if context.placement.present?
-      hash[:"v-bind:class"] = "{'show' : showing }"
+      hash[:"v-bind:class"] = "{'show' : vc.showing }"
     end
   end
 

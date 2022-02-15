@@ -1,7 +1,5 @@
 class Matestack::Ui::Bootstrap::Form::Input < Matestack::Ui::VueJs::Components::Form::Input
 
-  include Matestack::Ui::Bootstrap::Registry
-
   vue_name "matestack-ui-core-form-input"
 
   optional :form_text

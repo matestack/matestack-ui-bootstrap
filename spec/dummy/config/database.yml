@@ -8,6 +8,7 @@ default: &default
 
 test:
   <<: *default
+  host: postgres_test
   database: test
 
 development:

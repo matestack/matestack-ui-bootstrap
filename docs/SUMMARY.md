@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Welcome](README.md)
+* [Migrate to 3.0](migrate-from-2.x-to-3.0.md)
 
 ## Getting Started
 
@@ -10,8 +11,8 @@
 ## API
 
 * [Templates](api/templates/README.md)
-  * [Apps](api/templates/apps/README.md)
-    * [Admin App Template](api/templates/apps/admin.md)
+  * [Layouts](api/templates/layouts/README.md)
+    * [Admin App Layout](api/templates/layouts/admin.md)
 * [Form](api/form/README.md)
   * [Checkbox](api/form/checkbox.md)
   * [Input](api/form/input.md)
@@ -54,4 +55,3 @@
 * [Chart.js](integrations/chartjs.md)
 * [Flatpickr](integrations/flatpickr.md)
 * [Devise](integrations/devise.md)
-

@@ -2,15 +2,16 @@
   "name": "dummy",
   "private": true,
   "dependencies": {
-    "@rails/actioncable": "^6.0.0",
-    "@rails/activestorage": "^6.0.0",
-    "@rails/ujs": "^6.0.0",
+    "@rails/actioncable": "^6.1.4",
+    "@rails/activestorage": "^6.1.4",
+    "@rails/ujs": "^6.1.4",
     "@rails/webpacker": "5.2.1",
     "chart.js": "^2.9.4",
     "flatpickr": "^4.6.9",
-    "matestack-ui-bootstrap": "../.."
+    "matestack-ui-bootstrap": "../..",
+    "rails-erb-loader": "^5.5.2"
   },
   "devDependencies": {
-    "webpack-dev-server": "^3.10.2"
+    "webpack-dev-server": "^3.11.3"
   }
 }

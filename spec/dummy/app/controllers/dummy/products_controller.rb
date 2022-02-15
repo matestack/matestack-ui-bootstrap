@@ -2,7 +2,7 @@ class Dummy::ProductsController < Dummy::BaseController
 
   after_action :broadcast_activity_tracked, only: [:create, :update, :destroy]
 
-  matestack_app Dummy::App
+  matestack_layout Dummy::Layout
 
   def index
     render Dummy::Pages::Products::Index

@@ -11,19 +11,20 @@ RSpec.describe "Bootstrap::Components::Accordion", type: :feature, js: true do
       ]
     end
     visit example_path
+    # sleep
     expect(page).to have_selector('.accordion > .accordion-item > .accordion-header > .accordion-button', text: "Group Item #1", visible: true)
     expect(page).to have_selector('.accordion > .accordion-item > .accordion-header > .accordion-button', text: "Group Item #2", visible: true)
-    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: false)
-    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: false)
+    expect(page).to have_selector('.accordion > .accordion-item > matestack-component-template > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: false)
+    expect(page).to have_selector('.accordion > .accordion-item > matestack-component-template > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: false)
     click_on('Group Item #1')
-    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: true)
-    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: false)
+    expect(page).to have_selector('.accordion > .accordion-item > matestack-component-template > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: true)
+    expect(page).to have_selector('.accordion > .accordion-item > matestack-component-template > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: false)
     click_on('Group Item #2')
-    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: true)
-    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: true)
+    expect(page).to have_selector('.accordion > .accordion-item > matestack-component-template > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: true)
+    expect(page).to have_selector('.accordion > .accordion-item > matestack-component-template > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: true)
     click_on('Group Item #1')
-    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: false)
-    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: true)
+    expect(page).to have_selector('.accordion > .accordion-item > matestack-component-template > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: false)
+    expect(page).to have_selector('.accordion > .accordion-item > matestack-component-template > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: true)
   end
 
   it 'can expand and collapse with multiple elements, all shown when open true' do
@@ -36,8 +37,8 @@ RSpec.describe "Bootstrap::Components::Accordion", type: :feature, js: true do
     visit example_path
     expect(page).to have_selector('.accordion > .accordion-item > .accordion-header > .accordion-button', text: "Group Item #1", visible: true)
     expect(page).to have_selector('.accordion > .accordion-item > .accordion-header > .accordion-button', text: "Group Item #2", visible: true)
-    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: true)
-    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: true)
+    expect(page).to have_selector('.accordion > .accordion-item > matestack-component-template > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: true)
+    expect(page).to have_selector('.accordion > .accordion-item > matestack-component-template > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: true)
   end
 
   it 'can expand and collapse with multiple elements, only specified items are shown initially' do
@@ -50,8 +51,8 @@ RSpec.describe "Bootstrap::Components::Accordion", type: :feature, js: true do
     visit example_path
     expect(page).to have_selector('.accordion > .accordion-item > .accordion-header > .accordion-button', text: "Group Item #1", visible: true)
     expect(page).to have_selector('.accordion > .accordion-item > .accordion-header > .accordion-button', text: "Group Item #2", visible: true)
-    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: true)
-    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: false)
+    expect(page).to have_selector('.accordion > .accordion-item > matestack-component-template > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #1", visible: true)
+    expect(page).to have_selector('.accordion > .accordion-item > matestack-component-template > .accordion-collapse > .accordion-body', text: "Random Text for Collapse #2", visible: false)
   end
 
   it 'can render in flush variant' do
@@ -82,7 +83,7 @@ RSpec.describe "Bootstrap::Components::Accordion", type: :feature, js: true do
       ]
     end
     visit example_path
-    expect(page).to have_selector('.accordion > .accordion-item > .accordion-collapse > .accordion-body.foobar', text: "Random Text for Collapse #2", visible: false)
+    expect(page).to have_selector('.accordion > .accordion-item > matestack-component-template > .accordion-collapse > .accordion-body.foobar', text: "Random Text for Collapse #2", visible: false)
   end
 
 end

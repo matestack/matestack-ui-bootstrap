@@ -1,17 +1,18 @@
 import flatpickr from "flatpickr";
-import Vue from 'vue/dist/vue.esm'
+import MatestackUiVueJs from 'matestack-ui-vuejs'
 
-import MatestackUiCore from 'matestack-ui-core'
-
-Vue.component('form-flatpickr-component', {
-  mixins: [MatestackUiCore.componentMixin, MatestackUiCore.formInputMixin],
+const formFlatpickrComponent = {
+  mixins: [MatestackUiVueJs.componentMixin, MatestackUiVueJs.formInputMixin],
+  template: MatestackUiVueJs.componentHelpers.inlineTemplate,
   data() {
     return {};
   },
   mounted: function(){
-    flatpickr(this.$el.querySelector('.flatpickr'), {
+    flatpickr(this.getElement().querySelector('.flatpickr'), {
       defaultDate: this.props["init_value"],
       enableTime: (this.props["enable_time"] == true)
     });
   }
-});
+}
+
+export default formFlatpickrComponent

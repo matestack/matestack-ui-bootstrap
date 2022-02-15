@@ -110,10 +110,10 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
     end
     visit example_path
     expect(page).not_to have_content('Random text')
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("toggle")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("toggle")')
     expect(page).to have_content('Random text')
     expect(page).to have_selector('div.collapse.show')
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("toggle")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("toggle")')
     expect(page).not_to have_content('Random text')
     expect(page).to have_selector('div.collapse', visible: false)
   end
@@ -124,7 +124,7 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
     visit example_path
     expect(page).not_to have_content('Random text')
     expect(page).to have_selector('div.collapse', visible: false)
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("show")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("show")')
     expect(page).to have_content('Random text')
     expect(page).to have_selector('div.collapse.show', visible: true)
   end
@@ -136,7 +136,7 @@ describe 'Bootstrap::Components::Carousel', type: :feature, js: true do
     visit example_path
     expect(page).to have_content('Random text')
     expect(page).to have_selector('div.collapse', visible: true)
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("hide")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("hide")')
     expect(page).not_to have_content('Random text')
     expect(page).to have_selector('div.collapse', visible: false)
   end

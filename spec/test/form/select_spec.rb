@@ -107,7 +107,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_xpath('//form//div[@class="matestack-ui-bootstrap-form-select"]//select[@id="foo" and contains(@class, "form-select")]//option[@disabled="disabled" and contains(text(), "select!")]')
+    expect(page).to have_xpath('//form//div[@class="matestack-ui-bootstrap-form-select"]//select[@id="foo" and contains(@class, "form-select")]//option[@disabled and contains(text(), "select!")]')
   end
 
   it 'renders basic bootstrap input field with form text' do

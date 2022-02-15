@@ -27,7 +27,7 @@ RSpec.describe "Bootstrap::Form::Textarea", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_selector('form > div.matestack-ui-bootstrap-textarea > textarea.form-control#foo')
+    expect(page).to have_selector('form > matestack-component-template > div.matestack-ui-bootstrap-textarea > textarea.form-control#foo')
 
     fill_in "foo", with: "bar"
 

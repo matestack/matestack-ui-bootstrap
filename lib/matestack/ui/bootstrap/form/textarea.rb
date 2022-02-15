@@ -1,7 +1,5 @@
 class Matestack::Ui::Bootstrap::Form::Textarea < Matestack::Ui::VueJs::Components::Form::Textarea
 
-  include Matestack::Ui::Bootstrap::Registry
-
   vue_name "matestack-ui-core-form-textarea"
 
   optional :form_text

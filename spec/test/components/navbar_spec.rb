@@ -84,8 +84,8 @@ RSpec.describe "Bootstrap::Components::Navbar", type: :feature, js: true do
     matestack_render do
       bs_navbar expand_at: :sm, items_class: "foobar", class: "text-center",
       items: [
-        { path: "/", text: "Home" },
-        { path: "/", text: "Contact" }
+        { type: :link, path: "/", text: "Home" },
+        { type: :link, path: "/", text: "Contact" }
       ] do
         bs_btn text: "Login"
       end
@@ -99,8 +99,8 @@ RSpec.describe "Bootstrap::Components::Navbar", type: :feature, js: true do
   it 'expands navbar at given breakpoint' do
     matestack_render do
       bs_navbar expand_at: :sm, items: [
-        { type: :transition, path: "/", text: "Home" },
-        { type: :transition, path: "#", text: "Contact" }
+        { type: :link, path: "/", text: "Home" },
+        { type: :link, path: "#", text: "Contact" }
       ] do
         bs_btn text: "Login"
       end
@@ -132,8 +132,8 @@ RSpec.describe "Bootstrap::Components::Navbar", type: :feature, js: true do
   it 'can collapse and expand' do
     matestack_render do
       bs_navbar toggle: :left, theme: :dark, items: [
-        { type: :transition, path: "/", text: "Home" },
-        { type: :transition, path: "#", text: "Contact" } ]
+        { type: :link, path: "/", text: "Home" },
+        { type: :link, path: "#", text: "Contact" } ]
     end
     visit example_path
     expect(page).not_to have_selector('.collapse.navbar-collapse')

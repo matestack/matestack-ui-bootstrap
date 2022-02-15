@@ -7,19 +7,17 @@ class Matestack::Ui::Bootstrap::Layout::Sidebar < Matestack::Ui::Bootstrap::Base
   optional :sidebar_navigation_items
 
   def response
-    div class: "sidebar-wrapper shadow-sm bg-white", id: "sidebar" do
-      nav class: 'sidebar pt-4 px-3' do
-        div class: "sidebar-toggler" do
-          bs_btn variant: :link, "@click": "sidebarToggle" do
-            bs_icon name: "list", size: 25, class: "text-muted"
-          end
+    nav class: 'sidebar pt-4 px-3 shadow-sm bg-white' do
+      div class: "sidebar-toggler" do
+        bs_btn variant: :link, "@click": "vc.sidebarToggle" do
+          bs_icon name: "list", size: 25, class: "text-muted"
         end
-        div class: "sidebar-top mb-3" do
-          slot :sidebar_top if slots && slots[:sidebar_top].present?
-        end
-        div class: "sidebar-navigation my-3" do
-          sidebar_navigation_partial
-        end
+      end
+      div class: "sidebar-top mb-3" do
+        slot :sidebar_top if slots && slots[:sidebar_top].present?
+      end
+      div class: "sidebar-navigation my-3" do
+        sidebar_navigation_partial
       end
     end
   end

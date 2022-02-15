@@ -27,10 +27,10 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_selector('form > div.matestack-ui-bootstrap-radio > .form-check > input.form-check-input#foo_1[type="radio"]')
-    expect(page).to have_selector('form > div.matestack-ui-bootstrap-radio > .form-check > label.form-check-label[for="foo_1"]')
-    expect(page).to have_selector('form > div.matestack-ui-bootstrap-radio > .form-check > input.form-check-input#foo_2[type="radio"]')
-    expect(page).to have_selector('form > div.matestack-ui-bootstrap-radio > .form-check > label.form-check-label[for="foo_2"]')
+    expect(page).to have_selector('form > matestack-component-template > div.matestack-ui-bootstrap-radio > .form-check > input.form-check-input#foo_1[type="radio"]')
+    expect(page).to have_selector('form > matestack-component-template > div.matestack-ui-bootstrap-radio > .form-check > label.form-check-label[for="foo_1"]')
+    expect(page).to have_selector('form > matestack-component-template > div.matestack-ui-bootstrap-radio > .form-check > input.form-check-input#foo_2[type="radio"]')
+    expect(page).to have_selector('form > matestack-component-template > div.matestack-ui-bootstrap-radio > .form-check > label.form-check-label[for="foo_2"]')
 
     find('#foo_1').click
 
@@ -49,10 +49,10 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_selector('form > div.matestack-ui-bootstrap-radio > .form-check > input.form-check-input#foo_1[type="radio"][value="1"]')
-    expect(page).to have_selector('form > div.matestack-ui-bootstrap-radio > .form-check > label.form-check-label[for="foo_1"]', text: "Option 1")
-    expect(page).to have_selector('form > div.matestack-ui-bootstrap-radio > .form-check > input.form-check-input#foo_2[type="radio"][value="2"]')
-    expect(page).to have_selector('form > div.matestack-ui-bootstrap-radio > .form-check > label.form-check-label[for="foo_2"]', text: "Option 2")
+    expect(page).to have_selector('form > matestack-component-template > div.matestack-ui-bootstrap-radio > .form-check > input.form-check-input#foo_1[type="radio"][value="1"]')
+    expect(page).to have_selector('form > matestack-component-template > div.matestack-ui-bootstrap-radio > .form-check > label.form-check-label[for="foo_1"]', text: "Option 1")
+    expect(page).to have_selector('form > matestack-component-template > div.matestack-ui-bootstrap-radio > .form-check > input.form-check-input#foo_2[type="radio"][value="2"]')
+    expect(page).to have_selector('form > matestack-component-template > div.matestack-ui-bootstrap-radio > .form-check > label.form-check-label[for="foo_2"]', text: "Option 2")
 
     find('#foo_1').click
 
@@ -201,8 +201,8 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_xpath('//form//input[@id="foo_1" and @disabled="disabled"]')
-    expect(page).to have_xpath('//form//input[@id="foo_2" and @disabled="disabled"]')
+    expect(page).to have_xpath('//form//input[@id="foo_1" and @disabled]')
+    expect(page).to have_xpath('//form//input[@id="foo_2" and @disabled]')
   end
 
 end

@@ -18,7 +18,7 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
     end
     visit example_path
     expect(page).not_to have_content 'Bootstrap Toast'
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_toast")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("show_toast")')
     expect(page).to have_content 'Bootstrap Toast'
   end
 
@@ -27,9 +27,9 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
       bs_toast header: 'Bootstrap Toast', body: 'I`m a toast', show_on: 'show_toast', hide_on: 'hide_toast'
     end
     visit example_path
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_toast")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("show_toast")')
     expect(page).to have_content 'Bootstrap Toast'
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("hide_toast")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("hide_toast")')
     expect(page).not_to have_content 'Bootstrap Toast'
   end
 
@@ -38,7 +38,7 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
       bs_toast header: { title: 'Bootstrap Toast', subtitle: "11 mins ago" }, body: 'I`m a toast', show_on: 'show_toast'
     end
     visit example_path
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_toast")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("show_toast")')
     expect(page).to have_content 'Bootstrap Toast'
     expect(page).to have_content '11 mins ago'
   end
@@ -48,7 +48,7 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
       bs_toast header: "Bootstrap Toast", body: 'I`m a toast', show_on: 'show_toast', delay: 1000
     end
     visit example_path
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_toast")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("show_toast")')
     expect(page).not_to have_content 'Bootstrap Toast'
     sleep 1
     expect(page).to have_content 'Bootstrap Toast'
@@ -59,7 +59,7 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
       bs_toast header: "Bootstrap Toast", body: 'I`m a toast', show_on: 'show_toast', animation: false
     end
     visit example_path
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_toast")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("show_toast")')
     expect(page).to have_content 'Bootstrap Toast'
     expect(page).to have_selector('[data-bs-animation=false]')
   end
@@ -69,7 +69,7 @@ RSpec.describe "Bootstrap::Components::Toasts", type: :feature, js: true do
       bs_toast header: "Bootstrap Toast", body: 'I`m a toast', show_on: 'show_toast', autohide: false
     end
     visit example_path
-    page.execute_script('MatestackUiCore.matestackEventHub.$emit("show_toast")')
+    page.execute_script('MatestackUiVueJs.eventHub.$emit("show_toast")')
     expect(page).to have_content 'Bootstrap Toast'
     expect(page).to have_selector('div.toast[data-bs-autohide=false]')
   end

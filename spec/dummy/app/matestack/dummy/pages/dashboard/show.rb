@@ -20,10 +20,10 @@ class Dummy::Pages::Dashboard::Show < ApplicationPage
 
   def analytics_partial
     async defer: true, id: "products-card" do
-      dashboard_products
+      Dummy::Components::Dashboard::Products.call()
     end
     async defer: true, id: "revenue-card" do
-      dashboard_revenue
+      Dummy::Components::Dashboard::Revenue.call()
     end
   end
 
@@ -31,7 +31,7 @@ class Dummy::Pages::Dashboard::Show < ApplicationPage
     bs_row do
       bs_col do
         async defer: true, rerender_on: "activity-tracked", id: "activity-card" do
-          dashboard_activity
+          Dummy::Components::Dashboard::Activity.call()
         end
       end
     end

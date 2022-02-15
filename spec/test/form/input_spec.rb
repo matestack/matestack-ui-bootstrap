@@ -27,7 +27,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
       end
     end
     visit example_path
-    expect(page).to have_selector('form > div.matestack-ui-bootstrap-input > input.form-control#foo[type="text"]')
+    expect(page).to have_selector('form > matestack-component-template > div.matestack-ui-bootstrap-input > input.form-control#foo[type="text"]')
 
     fill_in "foo", with: "bar"
 
@@ -155,7 +155,7 @@ RSpec.describe "Bootstrap::Form::Input", type: :feature, js: true do
     end
     visit example_path
 
-    expect(page).to have_selector('form > div.matestack-ui-bootstrap-input > input[type="range"][min="5"][max="11"][step="2"]')
+    expect(page).to have_selector('form > matestack-component-template > div.matestack-ui-bootstrap-input > input[type="range"][min="5"][max="11"][step="2"]')
     expect(page).to have_xpath('//form//div[contains(@class, "form-text-for-foo") and contains(@class, "form-text") and contains(text(), "some notes")]')
   end
 

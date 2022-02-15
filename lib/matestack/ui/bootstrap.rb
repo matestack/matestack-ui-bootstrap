@@ -1,4 +1,5 @@
 require "matestack/ui/core"
+require "matestack/ui/vue_js"
 
 base_path = 'matestack/ui/bootstrap'
 require "#{base_path}/version"
@@ -16,12 +17,12 @@ require "#{base_path}/base_vue_js_component"
 module Matestack
   module Ui
     module Bootstrap
-      module Apps
+      module Layouts
       end
     end
   end
 end
-require "#{base_path}/apps/admin_template"
+require "#{base_path}/layouts/admin_template"
 
 module Matestack
   module Ui
@@ -105,3 +106,4 @@ require "#{base_path}/form/submit"
 require "#{base_path}/form/switch"
 
 require "#{base_path}/registry"
+require "#{base_path}/initialize"
