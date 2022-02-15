@@ -1,5 +1,7 @@
 FROM ruby:2.7-alpine3.12
 
+ENV RAILS_ENV production
+
 RUN gem install bundler:2.1.4
 
 RUN apk update --no-cache && \
