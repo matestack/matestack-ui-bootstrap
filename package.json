@@ -6,15 +6,14 @@
   "files": [
     "lib/**/*.js",
     "lib/**/*.scss",
+    "README",
+    "logo.png",
     "LICENSE"
   ],
   "dependencies": {
     "@popperjs/core": "^2.5.4",
     "bootstrap": "^5.0.0",
     "matestack-ui-vuejs": "^3.0.0-rc1"
-  },
-  "devDependencies": {
-    "webpack-dev-server": "^3.11.0"
   },
   "exports": {
     ".": "./lib/matestack/ui/bootstrap/index.js"
