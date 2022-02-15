@@ -46,6 +46,13 @@ RUN mv _yarn.lock yarn.lock
 WORKDIR /app/spec/dummy
 
 RUN npm install
+
+WORKDIR /app
+
+RUN yarn upgrade # quick fix for vue import issues
+
+WORKDIR /app/spec/dummy
+
 RUN ./bin/webpack
 
 RUN rm ./db/schema.rb
