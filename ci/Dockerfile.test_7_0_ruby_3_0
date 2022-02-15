@@ -1,6 +1,6 @@
 FROM ruby:3.0-alpine3.12
 
-ENV RAILS_ENV production
+ENV RAILS_ENV test
 
 RUN gem install bundler:2.1.4
 
