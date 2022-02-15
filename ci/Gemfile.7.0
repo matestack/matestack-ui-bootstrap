@@ -13,6 +13,13 @@ gemspec
 
 gem 'rails', '7.0.1'
 
+# For dummy application
+gem 'devise'
+gem 'faker'
+gem 'paper_trail'
+gem 'redcarpet' # for markdown usage
+gem 'rouge' # for syntax highlighting
+
 group :development, :test do
   gem 'rspec-rails', '~> 4.0.2'
   gem 'capybara'
