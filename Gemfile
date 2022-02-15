@@ -21,7 +21,7 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-gem 'rails', '6.1.2'
+gem 'rails', '7.0.1'
 
 gem 'rspec-rails', '~> 4.0.2'
 gem 'capybara'
