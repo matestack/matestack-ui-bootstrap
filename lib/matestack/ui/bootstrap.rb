@@ -106,3 +106,4 @@ require "#{base_path}/form/submit"
 require "#{base_path}/form/switch"
 
 require "#{base_path}/registry"
+require "#{base_path}/initialize"

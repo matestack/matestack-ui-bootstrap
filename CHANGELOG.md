@@ -1,5 +1,9 @@
 # Changelog
 
+## v3.0.0.rc1 Release - 2022-02-15
+
+- please read the [migration guide](docs/migrate-from-2.x-to-3.0.md)
+
 ## v2.1.0 Release - 2021-06-29
 
 ### Improvements

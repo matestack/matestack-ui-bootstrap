@@ -1,7 +1,5 @@
 class Matestack::Ui::Bootstrap::Form::Select < Matestack::Ui::VueJs::Components::Form::Select
 
-  include Matestack::Ui::Bootstrap::Registry
-
   vue_name "matestack-ui-core-form-select"
 
   optional :variant

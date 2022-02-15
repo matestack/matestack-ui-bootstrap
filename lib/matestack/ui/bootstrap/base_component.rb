@@ -5,8 +5,6 @@ module Matestack
     module Bootstrap
       class BaseComponent < Matestack::Ui::Component
 
-        include Matestack::Ui::Bootstrap::Registry
-
       end
     end
   end

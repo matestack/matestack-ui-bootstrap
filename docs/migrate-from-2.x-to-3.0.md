@@ -7,3 +7,7 @@
 - `Matestack::Ui::Bootstrap::Apps::AdminTemplate` is now `Matestack::Ui::Bootstrap::Layouts::AdminTemplate`
 
 --> Search & Replace
+
+## Manually including the registry is not longer required
+
+- `include Matestack::Ui::Bootstrap::Registry` can now be removed as it the component will be automatically available when installing `matestack-ui-bootstrap`

@@ -2,8 +2,6 @@ require_relative "../registry"
 
 class Matestack::Ui::Bootstrap::Layouts::AdminTemplate < Matestack::Ui::Layout
 
-  include Matestack::Ui::Bootstrap::Registry
-
   def response(&block)
     matestack_vue_js_app do
       body_response(&block)

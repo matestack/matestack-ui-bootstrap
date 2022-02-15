@@ -1,7 +1,5 @@
 class Matestack::Ui::Bootstrap::Form::Radio < Matestack::Ui::VueJs::Components::Form::Radio
 
-  include Matestack::Ui::Bootstrap::Registry
-
   vue_name "matestack-ui-core-form-radio"
 
   optional :form_text
