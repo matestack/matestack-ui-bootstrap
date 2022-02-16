@@ -7,8 +7,6 @@ Make sure to install and get to know `matestack-ui-core` and `matestack-ui-vuejs
 * [https://docs.matestack.io/matestack-ui-core](https://docs.matestack.io/matestack-ui-core)
 * [https://docs.matestack.io/matestack-ui-vuejs](https://docs.matestack.io/matestack-ui-vuejs)
 
-## Installation
-
 Add 'matestack-ui-bootstrap' to your Gemfile
 
 ```ruby
@@ -78,10 +76,16 @@ will be shipped in `matestack-ui-bootstrap` `3.1`
 
 #### Webpacker > 5.x based JavaScript installation
 
-Add 'matestack-ui-vuejs' to your `package.json` by running:
+Add 'matestack-ui-vuejs' to your `package.json` by adding:
 
 ```
-$ yarn add matestack-ui-bootstrap@3.0.0-rc1
+{
+  "name": "my-app",
+  "dependencies": {
+    "matestack-ui-bootstrap": "^3.0.0-rc1",
+    "..."
+  }
+}
 ```
 
 This adds the npm package that provides the JavaScript corresponding to the matestack-ui-bootstrap Ruby gem. Make sure that the npm package version matches the gem version. To find out what gem version you are using, you may use `bundle info matestack-ui-bootstrap`.
