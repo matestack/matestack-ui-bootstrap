@@ -1,6 +1,6 @@
 # Devise
 
-Please review the general guide on how to integrate `Devise` into Matestack within the docs of `matestack-ui-core`.
+Please review the general guide on how to integrate `Devise` into Matestack within the docs of `matestack-ui-vuejs`.
 
 Below you find examples implementing typical Devise views with `matestack-ui-bootstrap`
 
@@ -60,4 +60,3 @@ class Devise::Pages::SignIn < Matestack::Ui::Page
 
 end
 ```
-

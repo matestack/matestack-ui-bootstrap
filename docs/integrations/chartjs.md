@@ -1,6 +1,8 @@
 # Chart.js
 
-Chart.js integration, Bootstrap theming aware. In order to limit the scope of the `matestack-ui-bootstrap` gem, Chart.js components are not part of this gem. The below shown example should enable you to easily integrate Chart.js \(or any other chart library\) according to your needs!
+Chart.js integration, Bootstrap theming aware. In order to limit the scope of the `matestack-ui-bootstrap` gem, Chart.js components are not part of this gem. The below shown example should enable you to easily integrate Chart.js by copy&paste \(or any other chart library\) and optionally adjust according to your needs!
+
+**Example and docs below are meant to support Chart.js v2, not Chart.js v3**
 
 ## Ruby component
 
@@ -37,7 +39,7 @@ class Components::ChartJs < Matestack::Ui::VueJsComponent
 
   def response
     div class: "chart-container #{context.bs_class}",  style: "width: 100%; height: 100%;" do
-      plain "<canvas ref='chart'></canvas>".html_safe
+      plain "<canvas matestack-ui-vuejs-ref=#{matestack_ui_vuejs_ref('chart')}></canvas>".html_safe
     end
   end
 
@@ -58,11 +60,11 @@ yarn add chart.js@2.9.4
 
 ```javascript
 import Chart from 'chart.js';
-import Vue from 'vue/dist/vue.esm'
-import MatestackUiCore from 'matestack-ui-core';
+import MatestackUiVueJs from 'matestack-ui-vuejs'
 
-Vue.component('chart-js-component', {
-  mixins: [MatestackUiCore.componentMixin],
+const chartJsComponent = {
+  mixins: [MatestackUiVueJs.componentMixin],
+  template: MatestackUiVueJs.componentHelpers.inlineTemplate,
 
   data() {
     return {
@@ -282,7 +284,25 @@ Vue.component('chart-js-component', {
     }
 
   }
-});
+}
+
+export default chartJsComponent
+```
+
+and then in your application.js file:
+
+```javascript
+import chartJsComponent from '../../matestack/components/chart_js.js'// import component definition from source
+
+const appInstance = createApp({})
+
+appInstance.component('chart-js-component', chartJsComponent) // register at appInstance
+
+MatestackUiBootstrap.registerComponents(appInstance)
+
+document.addEventListener('DOMContentLoaded', () => {
+  MatestackUiVueJs.mount(appInstance)
+})
 ```
 
 ## Usage
@@ -290,7 +310,7 @@ Vue.component('chart-js-component', {
 ### Example 1: Bar chart
 
 ```ruby
-Components::ChartJs.(class: "w-50", type: :bar, datasets: [
+Components::ChartJs.call(class: "w-50", type: :bar, datasets: [
   {
     label: "€",
     data: [x, y, z],
@@ -302,7 +322,7 @@ Components::ChartJs.(class: "w-50", type: :bar, datasets: [
 ### Example 2: Doughnut chart
 
 ```ruby
-Components::ChartJs.(type: :doughnut, datasets: [
+Components::ChartJs.call(type: :doughnut, datasets: [
   {
     label: "€",
     data: [x, y, z],
@@ -314,7 +334,7 @@ Components::ChartJs.(type: :doughnut, datasets: [
 ### Example 3: Line chart
 
 ```ruby
-Components::ChartJs.(type: :line, datasets: [
+Components::ChartJs.call(type: :line, datasets: [
   {
     label: "€",
     data: [x, y, z],
@@ -333,7 +353,7 @@ Components::ChartJs.(type: :line, datasets: [
 ### Example 4: Pie chart
 
 ```ruby
-Components::ChartJs.(type: :pie, datasets: [
+Components::ChartJs.call(type: :pie, datasets: [
   {
     label: "€",
     data: [x, y, z],
@@ -341,4 +361,3 @@ Components::ChartJs.(type: :pie, datasets: [
   },
 ], labels: ["x", "y", "z"])
 ```
-

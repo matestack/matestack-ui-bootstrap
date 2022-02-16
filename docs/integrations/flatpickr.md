@@ -43,28 +43,50 @@ class Components::Form::Flatpickr < Matestack::Ui::Bootstrap::Form::Input
 end
 ```
 
-`app/matestack/components/chart_js.js`
 
 ## Vue.js component
 
 **Do not forget to require flatpickr in your package.json** **Do not forget to import the following file into you application pack**
 
+`app/matestack/components/form/flatpickr.js`
+
 ```javascript
 import flatpickr from "flatpickr";
+import MatestackUiVueJs from 'matestack-ui-vuejs'
 
-Vue.component('form-flatpickr-component', {
-  mixins: [MatestackUiCore.componentMixin, MatestackUiCore.formInputMixin],
+const flatpickrComponent = {
+  mixins: [MatestackUiVueJs.componentMixin, MatestackUiVueJs.formInputMixin],
+  template: MatestackUiVueJs.componentHelpers.inlineTemplate,
+
   data() {
     return {};
   },
   mounted: function(){
-    flatpickr(this.$el.querySelector('.flatpickr'), {
+    flatpickr(this.getElement().querySelector('.flatpickr'), {
       defaultDate: this.props["init_value"],
       enableTime: (this.props["enable_time"] == true)
     });
     //all kind of configuration possible for flatpickr may be implemented here according to your needs
   }
-});
+}
+
+export default flatpickrComponent
+```
+
+and then in your application.js file:
+
+```javascript
+import flatpickrComponent from '../../matestack/components/form/flatpickr.js'// import component definition from source
+
+const appInstance = createApp({})
+
+appInstance.component('form-flatpickr-component', flatpickrComponent) // register at appInstance
+
+MatestackUiBootstrap.registerComponents(appInstance)
+
+document.addEventListener('DOMContentLoaded', () => {
+  MatestackUiVueJs.mount(appInstance)
+})
 ```
 
 ## Usage
@@ -75,7 +97,7 @@ Vue.component('form-flatpickr-component', {
 matestack_form some_form_config do
 
   div class: "mb-3" do
-    Components::Form::Flatpickr.(key: :shipped_at, label: "Shipped at", enable_time: true, type: :text)
+    Components::Form::Flatpickr.call(key: :shipped_at, label: "Shipped at", enable_time: true, type: :text)
   end
 
   div class: "mb-3" do
@@ -84,4 +106,3 @@ matestack_form some_form_config do
 
 end
 ```
-

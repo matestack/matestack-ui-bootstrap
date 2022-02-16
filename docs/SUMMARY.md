@@ -6,7 +6,7 @@
 ## Getting Started
 
 * [Installation & Update](getting-started/installation-update.md)
-* [Quick Start \[WIP\]](getting-started/quick-start.md)
+* [Hello world](getting-started/hello-world.md)
 
 ## API
 
