@@ -4,8 +4,8 @@
 
 Make sure to install and get to know `matestack-ui-core` and `matestack-ui-vuejs` first!
 
-- [https://docs.matestack.io/matestack-ui-core](https://docs.matestack.io/matestack-ui-core)
-- [https://docs.matestack.io/matestack-ui-vuejs](https://docs.matestack.io/matestack-ui-vuejs)
+* [https://docs.matestack.io/matestack-ui-core](https://docs.matestack.io/matestack-ui-core)
+* [https://docs.matestack.io/matestack-ui-vuejs](https://docs.matestack.io/matestack-ui-vuejs)
 
 ## Installation
 
@@ -56,9 +56,6 @@ For Example, your `app/views/layouts/application.html.erb` should look like this
 
     <!-- if you are using webpacker: -->
     <%= javascript_pack_tag 'application' %>
-
-    <!-- if you are using the asset pipeline: -->
-    <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
@@ -199,11 +196,11 @@ Download and import Bootstraps icons:
 `app/assets/images/icons`
 
 * download latest compatible icons: [https://github.com/twbs/icons/releases/tag/v1.8.1](https://github.com/twbs/icons/releases/tag/v1.8.1)
-* extract the bootstrap-icons.svg to this path: app/assets/images/icons \(currently served via assets pipeline, we had issues serving the icons via Webpack\)
+* extract the bootstrap-icons.svg to this path: app/assets/images/icons (currently served via assets pipeline, we had issues serving the icons via Webpack)
 
 and finally compile the code with webpack:
 
-```text
+```
 $ bin/webpack --watch
 ```
 
