@@ -22,6 +22,7 @@ gemspec
 # your gem to rubygems.org.
 
 gem 'rails', '7.0.1'
+gem 'sprockets-rails', '~>3.4.2'
 
 gem 'rspec-rails', '~> 4.0.2'
 gem 'capybara'
