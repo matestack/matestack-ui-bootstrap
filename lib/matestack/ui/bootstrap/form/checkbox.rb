@@ -42,7 +42,7 @@ class Matestack::Ui::Bootstrap::Form::Checkbox < Matestack::Ui::VueJs::Component
     # checked/unchecked checkbox (true/false checkbox)
     else
       checkbox_wrapper do
-        input true_false_checkbox_attributes.merge(type: :hidden, id: nil, value: 0)
+        input true_false_checkbox_attributes.merge(type: :hidden, id: nil)
         input true_false_checkbox_attributes.merge(type: :checkbox, ":id": item_id(1)).merge(bootstrap_attributes)
 
         bootstrap_label text: input_label, for_input: item_id(1)
