@@ -12,6 +12,7 @@ gemspec
 # your gem to rubygems.org.
 
 gem 'rails', '7.0.1'
+gem 'sprockets-rails', '~> 3.4.2'
 
 # For dummy application
 gem 'devise'
