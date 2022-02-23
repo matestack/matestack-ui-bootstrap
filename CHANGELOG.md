@@ -1,5 +1,9 @@
 # Changelog
 
+## v3.0.0.rc2 Release - 2022-02-23
+
+- fixing vue warnings about unneccessary value binding on checkbox components
+
 ## v3.0.0.rc1 Release - 2022-02-15
 
 - please read the [migration guide](docs/migrate-from-2.x-to-3.0.md)
