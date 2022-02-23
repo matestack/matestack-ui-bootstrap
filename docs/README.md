@@ -5,7 +5,17 @@ description: Matestack Ui Bootstrap - Beautiful, reactive web UIs, Ruby and you!
 # Welcome
 
 {% hint style="info" %}
-You're reading the docs for 3.0 which are WIP currently. Switch to 2.1 on the left to read the docs for 2.1
+Version 3 was released on in February 2022. Click here for more [details](migrate-from-2.x-to-3.0.md)
+
+**Most important changes:**
+
+* Split `matestack-ui-core` into `matestack-ui-core` and `matestack-ui-vuejs`
+* Rails 7 support
+* Vue 3 support in `matestack-ui-vuejs`
+
+****
+
+You're reading the docs for 3.0 --> If you want to see the docs for Version 2.1, click [here](https://docs.matestack.io/matestack-ui-bootstrap/v/2.1/)
 {% endhint %}
 
 `matestack-ui-bootstrap` ships all you need to build **reactive AND styled** UIs in **pure Ruby** orchestrating styled components (based on Bootstrap v5) with a simple Ruby DSL. Additionally smart CRUD components helps you building beautiful data-driven admin and application UIs.
@@ -20,7 +30,7 @@ All features of `matestack-ui-core` and `matestack-ui-vuejs` can be mixed in whi
 
 * Rails 7.0.1 + Ruby 3.0.0 + Vue.js 3.2.26
 * Rails 6.1.1 + Ruby 3.0.0 + Vue.js 3.2.26
-* Rails 6.1.1 + Ruby 2.7.2 + Vue.js 3.2.26 &#x20;
+* Rails 6.1.1 + Ruby 2.7.2 + Vue.js 3.2.26
 * Rails 6.0.3.4 + Ruby 2.6.6 + Vue.js 3.2.26
 * Rails 5.2.4.4 + Ruby 2.6.6 + Vue.js 3.2.26
 
@@ -44,7 +54,7 @@ You might want to have a look at the dummy app in oder to better understand what
 
 Alongside smart components, `matestack-ui-boostrap` ships all Bootstrap v5 components enabling you to use them in pure Ruby.
 
-Imagine adding a Bootstrap \`card\` component within one line of Ruby, skipping recreating the required DOM structures again and again?&#x20;
+Imagine adding a Bootstrap \`card\` component within one line of Ruby, skipping recreating the required DOM structures again and again?
 
 ```ruby
 bs_card title: "foo", body: "bar" #bs_card is shipped within matestack-ui-bootstrap
@@ -101,7 +111,6 @@ class MyAdmin::Pages::Customer::Index < Matestack::Ui::Page
   end
 
 end
-
 ```
 
 #### Flexible, responsive, prebuilt app layouts
@@ -465,7 +474,6 @@ class MyAdmin::Pages::Products::Index < Matestack::Ui::Page
 
 
 end
-
 ```
 
 which then looks like this -->
