@@ -10,7 +10,7 @@ Make sure to install and get to know `matestack-ui-core` and `matestack-ui-vuejs
 Add 'matestack-ui-bootstrap' to your Gemfile
 
 ```ruby
-gem 'matestack-ui-bootstrap', "~> 3.0.0.rc1"
+gem 'matestack-ui-bootstrap', "~> 3.0.0.rc2"
 ```
 
 and run
@@ -82,7 +82,7 @@ Add 'matestack-ui-vuejs' to your `package.json` by adding:
 {
   "name": "my-app",
   "dependencies": {
-    "matestack-ui-bootstrap": "^3.0.0-rc1",
+    "matestack-ui-bootstrap": "^3.0.0-rc2",
     "..."
   }
 }
