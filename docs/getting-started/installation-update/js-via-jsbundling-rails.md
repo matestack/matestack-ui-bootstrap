@@ -1,0 +1,2 @@
+# JS via JSBundling-Rails
+

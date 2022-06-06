@@ -6,7 +6,10 @@
 
 ## Getting Started
 
-* [Installation & Update](getting-started/installation-update.md)
+* [Installation & Update](getting-started/installation-update/README.md)
+  * [JS via Webpacker](getting-started/installation-update/js-via-webpacker.md)
+  * [JS via JSBundling-Rails](getting-started/installation-update/js-via-jsbundling-rails.md)
+  * [JS via Importmap](getting-started/installation-update/js-via-importmap.md)
 * [Hello world](getting-started/hello-world.md)
 
 ## API
