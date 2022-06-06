@@ -1,5 +1,9 @@
 # Changelog
 
+## v3.1.0 Release - 2022-06-06
+
+- supporting Rails 7 importmap
+
 ## v3.0.0 Release - 2022-03-04
 
 - same as v3.0.0.rc2

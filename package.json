@@ -1,11 +1,13 @@
 {
   "name": "matestack-ui-bootstrap",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "license": "MIT",
-  "main": "./lib/matestack/ui/bootstrap/index.js",
+  "module": "./dist/matestack-ui-bootstrap.esm.js",
   "files": [
     "lib/**/*.js",
     "lib/**/*.scss",
+    "dist/**/*.js",
+    "dist/**/*.css",
     "README",
     "logo.png",
     "LICENSE"
@@ -13,7 +15,19 @@
   "dependencies": {
     "@popperjs/core": "^2.5.4",
     "bootstrap": "^5.0.0",
-    "matestack-ui-vuejs": "^3.0.0-rc2"
+    "matestack-ui-vuejs": "^3.1.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.3",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^11.0.1",
+    "rollup": "^2.35.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-scss": "3",
+    "sass": "^1.52.2"
+  },
+  "scripts": {
+    "build": "rollup --config rollup.config.js"
   },
   "exports": {
     ".": "./lib/matestack/ui/bootstrap/index.js"
