@@ -1,5 +1,10 @@
 # Changelog
 
+## v3.1.1 Release - 2022-06-08
+
+- fixing stylesheet export path in order to support Sprockets & SassC without any node driven sass compiler
+--> this might break css import paths introduced in the 3.1.0 release, please refer to the css setup docs for required adjustments
+
 ## v3.1.0 Release - 2022-06-06
 
 - supporting Rails 7 importmap
