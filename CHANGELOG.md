@@ -1,5 +1,9 @@
 # Changelog
 
+## v3.1.2 Release - 2022-06-08
+
+- fixing missing dist folder export in gemspec
+
 ## v3.1.1 Release - 2022-06-08
 
 - fixing stylesheet export path in order to support Sprockets & SassC without any node driven sass compiler
