@@ -70,16 +70,16 @@ Don't apply the "matestack-ui" id to the body tag.
 
 ### JavaScript installation
 
-#### Rails 7 importmap based installation
-
-{% content-ref url="js-via-importmap.md" %}
-[js-via-importmap.md](js-via-importmap.md)
-{% endcontent-ref %}
-
 #### Webpacker > 5.x based JavaScript installation
 
 {% content-ref url="js-via-webpacker.md" %}
 [js-via-webpacker.md](js-via-webpacker.md)
+{% endcontent-ref %}
+
+#### Rails 7 importmap based installation
+
+{% content-ref url="js-via-importmap.md" %}
+[js-via-importmap.md](js-via-importmap.md)
 {% endcontent-ref %}
 
 #### JSBundling-Rails based installation
@@ -138,6 +138,12 @@ Like documented here: [https://github.com/rails/cssbundling-rails](https://githu
 ./bin/rails css:install:bootstrap
 ```
 
+And then add `matestack-ui-bootstrap`:
+
+```bash
+yarn add matestack-ui-bootstrap
+```
+
 Afterwards make sure your package.json looks something like that:
 
 `package.json`
@@ -150,7 +156,8 @@ Afterwards make sure your package.json looks something like that:
     "@popperjs/core": "^2.11.5",
     "bootstrap": "^5.2.0-beta1",
     "bootstrap-icons": "^1.8.3",
-    "sass": "^1.52.2"
+    "sass": "^1.52.2",
+    "matestack-ui-bootstrap": "^3.1.0"
   },
   "scripts": {
     "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules"
@@ -159,14 +166,20 @@ Afterwards make sure your package.json looks something like that:
 
 ```
 
-Even if you use the importmap approach, this package.json will install the JavaScript packages into the node\_modules folder. They will not be used when following the importmap approach. Only the SCSS files will be used in this case.
+Even if you use the importmap approach, this package.json will install the JavaScript packages into the node\_modules folder. They will not be used when following the importmap approach. Only the (S)CSS files will be used in this case.
 
-And finally add the `matestack-ui-bootstrap.css` file to your layout via CDN. Alternatively you can download this file and let it be served via Sprockets.
+And finally adjust the `app/assets/stylesheets/application.bootstrap.scss` to look like:
 
-`app/views/layout.html.erb`
+```scss
+@import 'bootstrap/scss/bootstrap';
+@import 'matestack-ui-bootstrap/dist/matestack-ui-bootstrap';
 
-```markup
-<link href="https://cdn.jsdelivr.net/npm/matestack-ui-bootstrap@3.1.0/dist/matestack-ui-bootstrap.css" rel="stylesheet" >
+```
+
+and run your server and css builder with
+
+```bash
+./bin/dev
 ```
 
 #### Option 2b : JSBundling-Rails + CSSBundling-Rails
