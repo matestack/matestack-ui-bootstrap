@@ -113,14 +113,40 @@ This option makes sense if you're using the importmap approach for the JS setup 
 
 ```markup
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/matestack-ui-bootstrap@3.1.0/dist/matestack-ui-bootstrap.css" rel="stylesheet" >
+<link href="https://cdn.jsdelivr.net/npm/matestack-ui-bootstrap@3.1.2/dist/stylesheets/matestack-ui-bootstrap.css" rel="stylesheet" >
 
 <%= javascript_importmap_tags %>
 ```
 
 Please adjust the version numbers to your needs. They should match the JavaScript package versions used in the importmap config.
 
-#### Option 2a : Importmap + CSSBundling-Rails
+#### Option 2a : Importmap + Sprockets/SassC (SCSS without node and yarn)
+
+{% hint style="info" %}
+This option makes sense if you're using the importmap approach for the JS setup and are looking for a minimal setup without node and yarn involved in order to pull in the required styles and use SCSS features.
+{% endhint %}
+
+Install the `bootstrap gem`
+
+```bash
+bundle add bootstrap
+```
+
+Add the asset path to `config/initializers/assets.rb`
+
+```ruby
+Rails.application.config.assets.paths << Rails.root.join("app/matestack")
+Rails.application.config.assets.paths << File.join(Gem::Specification.find_by_name("matestack-ui-bootstrap").gem_dir, 'dist/stylesheets')
+```
+
+Import the scss files in your `app/assets/stylesheets/application.scss`
+
+```scss
+@import "bootstrap";
+@import "matestack-ui-bootstrap";
+```
+
+#### Option 2b : Importmap + CSSBundling-Rails
 
 {% hint style="info" %}
 Use this option if you have installed the JavaScript packages via Importmap and want to use SCSS features like Bootstrap theming
@@ -172,7 +198,7 @@ And finally adjust the `app/assets/stylesheets/application.bootstrap.scss` to lo
 
 ```scss
 @import 'bootstrap/scss/bootstrap';
-@import 'matestack-ui-bootstrap/dist/matestack-ui-bootstrap';
+@import 'matestack-ui-bootstrap/dist/stylesheets/matestack-ui-bootstrap';
 
 ```
 
@@ -182,11 +208,13 @@ and run your server and css builder with
 ./bin/dev
 ```
 
-#### Option 2b : JSBundling-Rails + CSSBundling-Rails
+#### Option 2c : JSBundling-Rails + CSSBundling-Rails
 
 {% hint style="info" %}
 Use this option if you have installed the JavaScript packages via JSBundling-Rails and want to use SCSS features like Bootstrap theming
 {% endhint %}
+
+not tested yet
 
 #### Option 3: Via Webpacker (SCSS)
 
