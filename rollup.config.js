@@ -26,8 +26,7 @@ export default [
       json(),
       commonjs(),
       scss({ output: function (styles, styleNodes) {
-        writeFileSync('./dist/matestack-ui-bootstrap.css', styles)
-        writeFileSync('./assets/stylesheets/_matestack-ui-bootstrap.css', styles)
+        writeFileSync('./dist/stylesheets/matestack-ui-bootstrap.css', styles)
       }}),
       terser(terserOptions)
     ]
