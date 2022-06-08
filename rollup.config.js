@@ -3,6 +3,7 @@ import commonjs from "@rollup/plugin-commonjs"
 import json from '@rollup/plugin-json';
 import { terser } from "rollup-plugin-terser"
 import scss from 'rollup-plugin-scss'
+import { writeFileSync } from 'fs'
 
 const terserOptions = {
   mangle: true,
@@ -24,7 +25,10 @@ export default [
       resolve({ browser: true }),
       json(),
       commonjs(),
-      scss({ output: './dist/matestack-ui-bootstrap.css' }),
+      scss({ output: function (styles, styleNodes) {
+        writeFileSync('./dist/matestack-ui-bootstrap.css', styles)
+        writeFileSync('./assets/stylesheets/_matestack-ui-bootstrap.css', styles)
+      }}),
       terser(terserOptions)
     ]
   }
