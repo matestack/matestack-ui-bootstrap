@@ -64,8 +64,8 @@ module Matestack::Ui::Bootstrap::Registry
     Matestack::Ui::Bootstrap::Components::Navbar.(text, options, &block)
   end
 
-  def bs_pagination(text=nil, options=nil, &block)
-    Matestack::Ui::Bootstrap::Components::Pagination.(text, options, &block)
+  def bs_offcanvas(text=nil, options=nil, &block)
+    Matestack::Ui::Bootstrap::Components::Offcanvas.(text, options, &block)
   end
 
   def bs_page_heading(text=nil, options=nil, &block)

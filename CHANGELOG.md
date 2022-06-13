@@ -1,5 +1,12 @@
 # Changelog
 
+## v3.2.0.beta-1 Release - 2022-06-13
+
+- added Bootstrap Offcanvas as component (specs and docs missing)
+- testing new Draggable and DropZone components from matestack-ui-vuejs 3.2.0.beta-1 in styled dummy application (order index)
+- fixing z-index of admin layout template
+- fixing modal css class API
+
 ## v3.1.2 Release - 2022-06-08
 
 - fixing missing dist folder export in gemspec

@@ -36,6 +36,31 @@ class Dummy::OrdersController < Dummy::BaseController
     end
   end
 
+  def change_status_by_drag_and_drop
+    order = Order.find(drop_params[:draggable_id])
+
+    saved = true
+    
+    if order.status != drop_params[:status]
+      saved = order.update(status: drop_params[:status])
+    end
+
+    if saved && drop_params[:position].present?
+      saved = order.insert_at(drop_params[:position])
+    end
+
+    if saved
+      render json: {
+        message: 'Order was successfully moved.'
+      }, status: :ok
+    else
+      render json: {
+        errors: order.errors,
+        message: 'Order could not be moved.'
+      }, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     order = Order.find(params[:id])
 
@@ -52,6 +77,10 @@ class Dummy::OrdersController < Dummy::BaseController
     params.require(:order).permit(
       :shipped_at
     )
+  end
+
+  def drop_params
+    params.permit(:draggable_id, :status, :position)
   end
 
 end

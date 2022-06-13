@@ -42,3 +42,5 @@ group :test do
   gem "rspec-retry" # repeating flaky tests
   gem "rspec-wait"
 end
+
+gem "acts_as_list", "~> 1.0"

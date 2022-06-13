@@ -17,6 +17,7 @@ class Matestack::Ui::Bootstrap::Components::Modal < Matestack::Ui::Bootstrap::Ba
   optional :static, :keyboard, :scrollable, :centered
   optional :modal_dialog_class
   optional :id
+  optional class: { as:  :bs_class }
   # event trigger
   optional :toggle_on, :show_on, :hide_on, :handle_update_on, :dispose_on
 

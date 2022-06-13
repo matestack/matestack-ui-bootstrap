@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    matestack-ui-bootstrap (3.0.0.rc1)
-      matestack-ui-core (~> 3.0.0.rc2)
-      matestack-ui-vuejs (~> 3.0.0.rc2)
+    matestack-ui-bootstrap (3.2.0.beta1)
+      matestack-ui-core (~> 3.0.0)
+      matestack-ui-vuejs (~> 3.2.0.beta.pre.1)
 
 GEM
   remote: https://rubygems.org/
@@ -73,6 +73,8 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    acts_as_list (1.0.4)
+      activerecord (>= 4.2)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     bcrypt (3.1.16)
@@ -122,9 +124,9 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
-    matestack-ui-core (3.0.0.rc2)
+    matestack-ui-core (3.0.1)
       rails (>= 5.2)
-    matestack-ui-vuejs (3.0.0.rc2)
+    matestack-ui-vuejs (3.2.0.beta1)
       matestack-ui-core (~> 3.0.0.rc1)
       rails (>= 5.2)
     matrix (0.4.2)
@@ -280,6 +282,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  acts_as_list (~> 1.0)
   bootsnap
   byebug
   capybara

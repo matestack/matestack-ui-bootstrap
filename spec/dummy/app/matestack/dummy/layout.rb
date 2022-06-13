@@ -1,7 +1,7 @@
 class Dummy::Layout < Matestack::Ui::Bootstrap::Layouts::AdminTemplate
 
   # include Matestack::Ui::Bootstrap::Registry
-
+  
   def sidebar_top_partial
     div class: "text-center" do
       transition path: root_path, delay: 300 do

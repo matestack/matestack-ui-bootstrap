@@ -72,6 +72,7 @@ require "#{base_path}/components/popover"
 require "#{base_path}/components/badge"
 require "#{base_path}/components/button_group"
 require "#{base_path}/components/icon"
+require "#{base_path}/components/offcanvas"
 
 module Matestack
   module Ui

@@ -19,3 +19,36 @@
 // $box-shadow-sm: 0;
 
 @import "~bootstrap/scss/bootstrap.scss";
+
+.bg-light-darker {
+  background-color: $gray-200
+}
+
+.dropzone {
+  min-height: 10px;
+  transition: min-height 0.2s ease;
+  &.dropzone-highlight {
+    // background-color: $blue-100;
+    &.dropzone-hover {
+      min-height: 50px;
+      // background-color: $blue-400;
+    }
+  }
+}
+
+matestack-component-template {
+  height: inherit
+}
+
+.matestack-async-component-container {
+  height: inherit;
+  .matestack-async-component-wrapper {
+    height: inherit;
+    .matestack-async-component-root{
+      height: inherit;
+    }
+  }
+}
+// matestack-component-template * {
+//   min-height:inherit
+// }

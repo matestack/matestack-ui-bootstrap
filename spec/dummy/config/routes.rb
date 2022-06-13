@@ -11,9 +11,13 @@ Rails.application.routes.draw do
     get :dashboard, to: 'dashboard#show'
     resources :customers
     resources :products
-    resources :orders
+    resources :orders do
+      collection do
+        put :change_status_by_drag_and_drop
+      end
+    end
     resources :order_items
-    
+
     get :shared_implementation, to: 'shared_implementation#show'
   end
 
