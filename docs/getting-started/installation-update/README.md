@@ -57,7 +57,7 @@ For Example, your `app/views/layouts/application.html.erb` should look like this
   </head>
 
   <body>
-    <div id="matestack-ui">
+    <div id="matestack-ui" v-cloak>
       <%= yield %>
     </div>
   </body>
@@ -66,6 +66,20 @@ For Example, your `app/views/layouts/application.html.erb` should look like this
 
 {% hint style="warning" %}
 Don't apply the "matestack-ui" id to the body tag.
+{% endhint %}
+
+{% hint style="success" %}
+`v-cloak` is used to avoid to hide un-compiled Vuejs templates until they are ready when using a CSS rule like:
+
+```css
+[v-cloak] {
+  display: none;
+}
+```
+
+
+
+This is optional but highly recommended for a better UI experience. More info here: [https://vuejs.org/api/built-in-directives.html#v-cloak](https://vuejs.org/api/built-in-directives.html#v-cloak)
 {% endhint %}
 
 ### JavaScript installation
