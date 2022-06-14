@@ -35,7 +35,6 @@
 
 .content-wrapper {
   position: relative;
-  z-index: 1;
   min-height: 101vh;
   transition: 0.5s;
 }
