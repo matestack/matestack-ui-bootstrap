@@ -206,3 +206,52 @@ class Devise::Pages::Registration < Matestack::Ui::Page
 end
 
 ```
+
+### Registration Update
+
+Approaching a registration update for a logged in user somewhere within your app could be approached like that:
+
+```ruby
+password_change_config = {
+  for: current_user, # or whatever you're using
+  method: :put,
+  path: user_registration_path(format: :json), # or whatever you're using
+  delay: 500,
+  success: {
+    emit: 'success--user-settings-form',
+    reset: true
+  },
+  failure: {
+    emit: 'failure--user-settings-form'
+  }
+}
+    
+matestack_form password_change_config do
+    div class: "mb-2" do
+      bs_form_input key: :email,
+        type: :email,
+        label: "Email"
+    end
+    div class: "mb-2" do
+      bs_form_input key: :password,
+        type: :password,
+        label: "New password",
+        form_text: "leave blank if you don't want to change the password"
+    end
+    div class: "mb-2" do
+      bs_form_input key: :password_confirmation,
+        type: :password,
+        label: "New password confirmation",
+        form_text: "leave blank if you don't want to change the password"
+    end
+    div class: "mb-4" do
+      bs_form_input key: :current_password,
+        type: :password,
+        label: "Current password",
+        form_text: "we need your current password to confirm your changes"
+    end
+    div class: "mb-2" do
+      bs_form_submit
+    end
+  end
+```
