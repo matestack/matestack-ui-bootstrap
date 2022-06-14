@@ -1,5 +1,9 @@
 # Changelog
 
+## v3.2.0.beta-2 Release - 2022-06-14
+
+- added missing dist assets
+
 ## v3.2.0.beta-1 Release - 2022-06-13
 
 - added Bootstrap Offcanvas as component (specs and docs missing)
