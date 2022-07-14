@@ -6,16 +6,16 @@ Make sure to install and get to know `matestack-ui-core` first! [https://docs.ma
 
 Add the Ruby gem and NPM package:
 
-```text
+```
 bundle add 'matestack-ui-bootstrap'
 yarn add 'matestack-ui-bootstrap'
 ```
 
 Adjust the relevant application layout and add a div with the ID `matestack-ui`
 
- `app/views/layouts/application.html.erb`
+`app/views/layouts/application.html.erb`
 
-```text
+```
 <!DOCTYPE html>
 <html>
   <head>
@@ -81,11 +81,11 @@ Download and import Bootstraps icons:
 `app/assets/images/icons`
 
 * download latest compatible icons: [https://github.com/twbs/icons/releases/tag/v1.3.0](https://github.com/twbs/icons/releases/tag/v1.3.0)
-* extract the bootstrap-icons.svg to this path: app/assets/images/icons \(currently served via assets pipeline, we had issues serving the icons via Webpack\)
+* extract the bootstrap-icons.svg to this path: app/assets/images/icons (currently served via assets pipeline, we had issues serving the icons via Webpack)
 
 and finally compile the code with webpack:
 
-```text
+```
 $ bin/webpack --watch
 ```
 
@@ -114,8 +114,14 @@ bundle info matestack-ui-bootstrap
 If you've installed the JavaScript dependecies via Yarn/Webpacker you need to update the JavaScript assets via yarn:
 
 ```bash
-yarn update matestack-ui-bootstrap
+yarn upgrade matestack-ui-bootstrap
 ```
+
+{% hint style="info" %}
+No need to specify a version in your package.json.\
+\
+matestack-ui-bootstrap's version is automatically picked up to be compatible with the installed matestack-ui-core version.
+{% endhint %}
 
 and finally check if the correct version is installed:
 
@@ -126,4 +132,3 @@ yarn list --pattern "matestack-ui-bootstrap"
 {% hint style="warning" %}
 The Ruby gem version and the NPM package version should match!
 {% endhint %}
-
