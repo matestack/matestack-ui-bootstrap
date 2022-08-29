@@ -20,7 +20,7 @@ pin "matestack-ui-vuejs", to: "https://cdn.jsdelivr.net/npm/matestack-ui-vuejs@3
 # below pins for matestack-ui-boostrap
 pin "@popperjs/core", to: "https://unpkg.com/@popperjs/core@2/dist/esm/popper.js"
 pin "bootstrap", to: "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.esm.min.js"
-pin "matestack-ui-bootstrap", to: "https://cdn.jsdelivr.net/npm/matestack-ui-bootstrap@3.1.0/dist/matestack-ui-bootstrap.esm.js"
+pin "matestack-ui-bootstrap", to: "https://cdn.jsdelivr.net/npm/matestack-ui-bootstrap@3.1.2/dist/matestack-ui-bootstrap.esm.js"
 ```
 
 ### Usage

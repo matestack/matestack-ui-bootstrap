@@ -186,7 +186,7 @@ end
 
 ## Register Page
 
-`app/matestack/devise/pages/register.rb`
+`app/matestack/devise/pages/registration.rb`
 
 ```ruby
 class Devise::Pages::Registration < Matestack::Ui::Page
@@ -325,7 +325,7 @@ class Devise::Pages::Passwords::Forgot < Matestack::Ui::Page
     def form_partial
     section class: "mt-5 rounded p-4 mb-4" do
       div class: "d-flex justify-content-between" do
-        heading size: 2, text: 'Mately - Password'
+        heading size: 2, text: 'YourAppName - Password'
         transition path: user_session_path, delay: 300 do
           bs_btn outline: true, variant: :primary, text: "Sign in"
         end
