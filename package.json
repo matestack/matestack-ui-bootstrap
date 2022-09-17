@@ -29,6 +29,7 @@
   "scripts": {
     "build": "rollup --config rollup.config.js"
   },
+  "module": "./lib/matestack/ui/bootstrap/index.js",
   "exports": {
     ".": "./lib/matestack/ui/bootstrap/index.js"
   },
