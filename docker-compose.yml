@@ -47,6 +47,7 @@ services:
       dockerfile: ./Dockerfile.test
     environment:
       RAILS_ENV: test
+      HISTFILE: /root/hist/.bash_history
     links:
       - postgres_test
     depends_on:
@@ -56,6 +57,7 @@ services:
     volumes:
       - ./:/app
       - gem-volume:/usr/local/bundle
+      - bashhistory:/root/hist
     command: "bundle exec rspec spec/test"
     user: ${CURRENT_UID}
 
@@ -83,3 +85,4 @@ volumes:
   dummy-node-volume:
   redis-volume:
   builder-node-volume:
+  bashhistory:
