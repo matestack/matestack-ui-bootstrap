@@ -49,31 +49,3 @@ jobs:
           path: |
             ./ci/artifacts/yarn.lock
             ./ci/artifacts/Gemfile.lock
-  test_6_0_ruby_2_6:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run tests
-        run: |
-          docker-compose -f ./ci/docker-compose.ci.yml run --rm test_6_0_ruby_2_6
-      - name: Upload lock files
-        uses: actions/upload-artifact@v2
-        with:
-          name: lockfiles_test_6_0_ruby_2_6
-          path: |
-            ./ci/artifacts/yarn.lock
-            ./ci/artifacts/Gemfile.lock
-  test_5_2_ruby_2_6:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run tests
-        run: |
-          docker-compose -f ./ci/docker-compose.ci.yml run --rm test_5_2_ruby_2_6
-      - name: Upload lock files
-        uses: actions/upload-artifact@v2
-        with:
-          name: lockfiles_test_5_2_ruby_2_6
-          path: |
-            ./ci/artifacts/yarn.lock
-            ./ci/artifacts/Gemfile.lock
