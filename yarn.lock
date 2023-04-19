@@ -519,10 +519,10 @@ magic-string@^0.25.7:
   dependencies:
     sourcemap-codec "^1.4.4"
 
-matestack-ui-vuejs@^3.0.0-rc2:
-  version "3.0.0-rc2"
-  resolved "https://registry.yarnpkg.com/matestack-ui-vuejs/-/matestack-ui-vuejs-3.0.0-rc2.tgz#469ae856ffeac722222377c07506c3c180345ac4"
-  integrity sha512-/WDDYWRP3uL8YJ0mIyyQTjREcIUuokeBqzOIJIwZW2EQiseNM4NINRxduXhtUw4OLJoPopnFOUkmXPoz7cwqrQ==
+matestack-ui-vuejs@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/matestack-ui-vuejs/-/matestack-ui-vuejs-3.1.0.tgz#75da761f6eabd2bf31b3b402ea5496a2ca24a21e"
+  integrity sha512-KUBxEEs7yqOq0lg5Yrvv7NEo0l4BNRyHJEH1a0oI4DmlJukenkfPnOo2Dci9pYfbbJtKo2JL814n5tEBvqqMbQ==
   dependencies:
     axios "^0.21.1"
     mitt "^3.0.0"
